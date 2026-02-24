@@ -21,35 +21,34 @@ export const Header = () => {
 
     const navLinks = [
         { name: 'Home', path: '/' },
-         { name: 'About', path: '/about' },
+        { name: 'About', path: '/about' },
         { name: 'Services', path: '/services' },
         { name: 'WhatsApp Automation', path: '/whatsapp-automation' },
-       
+
         { name: 'Contact', path: '/contact' },
     ];
 
     return (
         <header
-  className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-    scrolled
-      ? "bg-white/90 backdrop-blur-md shadow-sm py-4"
-      : "bg-transparent py-9"
-  }`}
->
+            className={` fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled
+                ? "bg-white backdrop-blur-md shadow-sm py-4"
+                : "bg-transparent py-9"
+                }`}
+        >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center">
-                   <Link href="/" className="flex items-center gap-3">
-  <Image
-    src="/softclinch.jpeg"
-    alt="SoftClinch Logo"
-    width={190}
-    height={60}
-    className="object-contain"
-    priority
-  />
+                    <Link href="/" className="flex items-center gap-3">
+                        <Image
+                            src="/softclinch.jpeg"
+                            alt="SoftClinch Logo"
+                            width={220}
+                            height={80}
+                            className="object-contain"
+                            priority
+                        />
 
- 
-</Link>
+
+                    </Link>
 
                     {/* Desktop Navigation */}
                     <nav className="hidden md:flex items-center gap-8">

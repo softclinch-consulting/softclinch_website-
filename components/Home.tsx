@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { ChevronRight, MessageSquare, Globe, Cpu, Database, BarChart3, CheckCircle2 } from 'lucide-react';
 
 const Hero = () => (
-  <section className="relative py-24 lg:py-32 overflow-hidden">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+  <section className=" relative  py-24 lg:py-32 overflow-hidden">
+    <div className=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
       <div className="max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -241,19 +241,26 @@ const FAQ = () => {
 };
 
 const Stats = () => (
-  <section className="py-20 bg-brand-navy text-white">
+  <section className="py-24 bg-brand-navy">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
         {[
           { label: 'Years of Engineering', value: '10+' },
           { label: 'Enterprise Projects', value: '150+' },
           { label: 'Inaiwazhi Uptime', value: '99.9%' },
           { label: 'Expert Consultants', value: '45+' }
         ].map((stat, i) => (
-          <div key={i}>
-            <div className="text-4xl lg:text-5xl font-display font-bold text-brand-terracotta mb-2">{stat.value}</div>
-            <div className="text-slate-400 text-sm uppercase tracking-widest font-semibold">{stat.label}</div>
-          </div>
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1 }}
+            className="bg-white p-10 rounded-[2.5rem] shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+          >
+            <div className="text-4xl lg:text-5xl font-display font-bold text-brand-navy mb-2">{stat.value}</div>
+            <div className="text-slate-500 text-xs uppercase tracking-widest font-bold">{stat.label}</div>
+          </motion.div>
         ))}
       </div>
     </div>
