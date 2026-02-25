@@ -117,13 +117,13 @@ export const WhatsAppAutomation = () => {
                 ))}
               </div>
             </div>
-            <div className="bg-slate-900 rounded-3xl p-10 text-white flex flex-col justify-center">
+            <div className="bg-brand-navy rounded-3xl p-10 text-white flex flex-col justify-center">
               <h3 className="text-2xl font-bold mb-4">AEO & GEO Optimized Communication</h3>
               <p className="text-slate-400 mb-6">
                 Our platform doesn't just send messages; it structures data so that your business interactions are recognized by AI answer engines, improving your brand's authority in the digital ecosystem.
               </p>
               <div className="p-6 bg-white/5 rounded-2xl border border-white/10">
-                <code className="text-xs text-brand-terracotta">
+                <code className="text-white text-brand-terracotta">
                   // Enterprise Workflow Example<br />
                   POST /api/v1/inaiwazhi/workflow<br />
                   {"{"}<br />
@@ -138,16 +138,39 @@ export const WhatsAppAutomation = () => {
         </div>
 
         {/* Use Cases */}
-        <div className="mb-32">
-          <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900 mb-16 text-center">Industry Use Cases</h2>
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-            {['E-commerce', 'Education', 'Healthcare', 'Real Estate', 'Enterprise Sales'].map((useCase) => (
-              <div key={useCase} className="bg-slate-900 text-white p-6 rounded-2xl text-center font-bold">
-                {useCase}
-              </div>
+        <div className="mb-32 bg-brand-navy rounded-[3rem] overflow-hidden">
+          <div className="px-10 pt-16 pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/10">
+            <div>
+              <span className="text-xs font-black uppercase tracking-[0.2em] text-[#A23B2A]">— Who We Serve</span>
+              <h2 className="text-3xl lg:text-4xl font-display font-bold text-white mt-2">Industry Use Cases</h2>
+            </div>
+            <p className="text-slate-200 text-sm max-w-xs pb-1">Inaiwazhi powers enterprise communication across key sectors.</p>
+          </div>
+          <div className="divide-y divide-white/5">
+            {[
+              { num: '01', label: 'Enterprise Sales', desc: 'Automate lead follow-ups, pipeline nudges, and deal closing workflows at scale.' },
+              { num: '02', label: 'E-commerce', desc: 'Order confirmations, cart recovery, flash sale broadcasts and post-purchase support.' },
+              { num: '03', label: 'Education', desc: 'Admissions alerts, fee reminders, class schedules and parent engagement flows.' },
+              { num: '04', label: 'Healthcare', desc: 'Appointment reminders, lab report delivery and secure patient communication.' },
+              { num: '05', label: 'Real Estate', desc: 'Lead nurturing, site visit scheduling and instant property info on WhatsApp.' },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.07, duration: 0.4 }}
+                className="group flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-10 px-10 py-8 hover:bg-white/5 transition-colors duration-200 cursor-default"
+              >
+                <span className="font-display font-black text-4xl text-[#A23B2A] group-hover:text-[#A23B2A] transition-colors duration-300 w-12 flex-shrink-0">{item.num}</span>
+                <h3 className="text-xl lg:text-2xl font-display font-bold text-white flex-1">{item.label}</h3>
+                <p className="text-slate-200 text-sm leading-relaxed sm:max-w-xs group-hover:text-slate-100 transition-colors">{item.desc}</p>
+                <ChevronRight size={18} className="text-white/10 group-hover:text-[#A23B2A] transition-colors flex-shrink-0 hidden sm:block" />
+              </motion.div>
             ))}
           </div>
         </div>
+
 
         {/* FAQ */}
         <div className="max-w-3xl mx-auto">

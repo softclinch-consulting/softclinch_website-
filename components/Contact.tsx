@@ -51,7 +51,7 @@ export const Contact = () => {
             </div>
           </div>
 
-          <div className="bg-white p-8 lg:p-12 rounded-[2.5rem] border border-slate-200 shadow-xl">
+          <div className="bg-brand-navy p-8 lg:p-12 rounded-[2.5rem] border border-slate-200 shadow-xl">
             {submitted ? (
               <div className="text-center py-20">
                 <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -70,7 +70,7 @@ export const Contact = () => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-semibold text-slate-900 mb-2">Name</label>
+                    <label className="black text-sm font-semibold text-white mb-2">Name</label>
                     <input 
                       type="text" 
                       required
@@ -79,7 +79,7 @@ export const Contact = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-slate-900 mb-2">Company</label>
+                    <label className="block text-sm font-semibold text-white mb-2">Company</label>
                     <input 
                       type="text" 
                       required
@@ -90,7 +90,7 @@ export const Contact = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-semibold text-slate-900 mb-2">Email</label>
+                    <label className="block text-sm font-semibold text-white mb-2">Email</label>
                     <input 
                       type="email" 
                       required
@@ -99,7 +99,7 @@ export const Contact = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-slate-900 mb-2">Phone</label>
+                    <label className="block text-sm font-semibold text-white mb-2">Phone</label>
                     <input 
                       type="tel" 
                       required
@@ -109,7 +109,7 @@ export const Contact = () => {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-slate-900 mb-2">Message</label>
+                  <label className="block text-sm font-semibold text-white mb-2">Message</label>
                   <textarea 
                     rows={4}
                     required
