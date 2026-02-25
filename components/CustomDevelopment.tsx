@@ -35,7 +35,7 @@ export const CustomDevelopment = () => {
                 transition={{ duration: 0.3 }}
                 className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-lg border-b border-gray-200 z-[60] shadow-sm"
             >
-                
+
             </motion.div>
 
             {/* Hero Section */}
@@ -458,7 +458,7 @@ export const CustomDevelopment = () => {
                     }}
                 />
 
-               
+
             </section>
         </div>
     );
