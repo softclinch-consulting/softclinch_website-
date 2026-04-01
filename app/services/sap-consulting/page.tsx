@@ -3,6 +3,7 @@ import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { buildMetadata } from "@/lib/seo";
 import { faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 import { SITE_NAME } from "@/lib/site";
+import { sapConsultingFaq } from "@/lib/faqs";
 
 const canonicalPath = "/services/sap-consulting";
 const title = "SAP Consulting Services";
@@ -15,24 +16,6 @@ export const metadata = buildMetadata({
   canonicalPath,
 });
 
-const faq = [
-  {
-    question: "Do you support SAP S/4HANA migration?",
-    answer:
-      "Yes. We assist with assessment, readiness planning, data strategy, migration execution, and post-go-live stabilization.",
-  },
-  {
-    question: "Can you provide AMS and ongoing support?",
-    answer:
-      "Yes. We offer AMS support, performance tuning, incident management, enhancements, and integration maintenance.",
-  },
-  {
-    question: "Do you work with integrations (SAP ↔ CRM/BI)?",
-    answer:
-      "Yes. We design and implement integrations to CRM, data platforms, middleware, and custom APIs with governance and monitoring.",
-  },
-];
-
 export default function SAPConsultingPage() {
   return (
     <>
@@ -43,7 +26,7 @@ export default function SAPConsultingPage() {
             title: `${title} | ${SITE_NAME}`,
           }),
           serviceJsonLd({ canonicalPath, name: title, description }),
-          faqJsonLd(faq),
+          faqJsonLd(sapConsultingFaq),
         ]}
       />
       <SAPConsulting />

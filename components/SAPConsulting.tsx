@@ -6,6 +6,8 @@ import {
   CheckCircle2, Check, ChevronDown, Wrench, Settings,
   ArrowRight, Activity
 } from 'lucide-react';
+import { FaqSection } from "@/components/FaqSection";
+import { sapConsultingFaq } from "@/lib/faqs";
 
 const Button = ({ children, className, variant, ...props }: any) => {
   return (
@@ -423,6 +425,8 @@ export const SAPConsulting = () => {
           </div>
         </div>
       </section>
+
+      <FaqSection title="SAP Consulting FAQs" items={sapConsultingFaq} />
 
     </div>
   );

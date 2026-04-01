@@ -2,6 +2,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'motion/react';
 import { TrendingUp, Target, Search, BarChart, Mail, Zap, Check, ArrowRight } from 'lucide-react';
+import { FaqSection } from "@/components/FaqSection";
+import { digitalMarketingFaq } from "@/lib/faqs";
 
 const Button = ({ children, className, variant, ...props }: any) => {
   return (
@@ -328,6 +330,7 @@ export const DigitalMarketing = () => {
         </div>
       </section>
 
+      <FaqSection title="Digital Marketing FAQs" items={digitalMarketingFaq} />
 
     </div>
   );
