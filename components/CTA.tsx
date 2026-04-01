@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import Link from 'next/link';
-import { motion } from 'motion/react-client';
+import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 
 export const CTA = () => {

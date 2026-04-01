@@ -1,5 +1,5 @@
 "use client";
-import { motion } from 'motion/react-client';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Globe, Cpu, Database, ChevronRight } from 'lucide-react';
 

@@ -1,5 +1,5 @@
 "use client";
-import { motion } from 'motion/react-client';
+import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import React, { useState } from 'react';
 import { CONTACT } from "@/lib/contact";

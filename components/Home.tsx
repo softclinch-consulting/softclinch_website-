@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react-client';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { ChevronDown, ChevronRight, MessageSquare, Globe, Cpu, Database, BarChart3, CheckCircle2, Star } from 'lucide-react';
 import { assetPath } from "@/lib/asset";

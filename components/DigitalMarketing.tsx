@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'motion/react-client';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { TrendingUp, Target, Search, BarChart, Mail, Zap, Check, ArrowRight, Star } from 'lucide-react';
 import { FaqSection } from "@/components/FaqSection";
 import { digitalMarketingFaq } from "@/lib/faqs";
