@@ -1,3 +1,4 @@
+"use client";
 import { motion } from 'motion/react';
 import { MessageSquare, CheckCircle2, Zap, Shield, BarChart3, Users, Link as LinkIcon, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
