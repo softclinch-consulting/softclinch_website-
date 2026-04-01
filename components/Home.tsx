@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Link from 'next/link';
 import { ChevronDown, ChevronLeft, ChevronRight, MessageSquare, Globe, Cpu, Database, BarChart3, CheckCircle2 } from 'lucide-react';
-import { assetPath } from "@/lib/asset";
 
 const Hero = () => {
   const slides = [
@@ -13,7 +12,7 @@ const Hero = () => {
       title: 'SAP Consulting',
       description: 'S/4HANA migration, AMS, integrations, and enterprise architecture.',
       href: '/services/sap-consulting',
-      image: assetPath('/hero/sap-consulting.svg'),
+      image: '/hero/sap-consulting.svg',
       imageAlt: 'SAP Consulting',
     },
     {
@@ -21,7 +20,7 @@ const Hero = () => {
       title: 'Digital Marketing',
       description: 'SEO, PPC, analytics, and automation for predictable growth.',
       href: '/services/digital-marketing',
-      image: assetPath('/hero/digital-marketing.svg'),
+      image: '/hero/digital-marketing.svg',
       imageAlt: 'Digital Marketing',
     },
     {
@@ -29,7 +28,7 @@ const Hero = () => {
       title: 'Custom Applications',
       description: 'Secure web apps, SaaS platforms, mobile apps, and API integrations.',
       href: '/services/custom-development',
-      image: assetPath('/hero/custom-applications.svg'),
+      image: '/hero/custom-applications.svg',
       imageAlt: 'Custom Application Development',
     },
   ] as const;
@@ -362,11 +361,14 @@ const ProductAuthority = () => {
                 transition={{ duration: 0.6 }}
                 className="relative w-full flex items-center justify-end"
               >
-                <img
-                  src={assetPath("/WhatsApp_Image_2026-02-17_at_4.11.44_PM-removebg-preview.png")}
+                <Image
+                  src="/WhatsApp_Image_2026-02-17_at_4.11.44_PM-removebg-preview.png"
                   alt="Inaiwazhi WhatsApp Automation"
+                  width={1600}
+                  height={680}
                   className="drop-shadow-2xl"
                   style={{ width: '400%', height: '680px', objectFit: 'cover', objectPosition: 'Right center' }}
+                  priority
                 />
                 {/* Subtle glow behind image */}
                 <div className="absolute inset-0 -z-10 flex items-center justify-center">
