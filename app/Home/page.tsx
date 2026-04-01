@@ -1,15 +1,7 @@
-"use client";
+import { redirect } from "next/navigation";
 
-import { Home } from "../../components/Home";
+export const dynamic = "force-static";
 
-
-const Page = () => {
-  return (
-    <div>
-      <Home />
-
-    </div>
-  );
-};
-
-export default Page;
+export default function Page() {
+  redirect("/");
+}

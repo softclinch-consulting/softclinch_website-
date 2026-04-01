@@ -4,6 +4,9 @@ import "./globals.css";
 import { Header } from "../components/Header";
 import { Footer } from "@/components/Footer";
 import { CTA } from "@/components/CTA";
+import { SeoJsonLd } from "@/components/SeoJsonLd";
+import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, SITE_NAME, getSiteUrl } from "@/lib/site";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/schema";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,9 +19,38 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SoftClinch – Enterprise Technology Consulting",
-  description:
-    "SoftClinch is an engineering-led consulting firm specializing in scalable digital systems, SAP consulting, custom SaaS platforms, and WhatsApp automation (Inaiwazhi).",
+  metadataBase: new URL(getSiteUrl()),
+  title: {
+    default: `${DEFAULT_TITLE} | ${SITE_NAME}`,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: DEFAULT_DESCRIPTION,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: `${DEFAULT_TITLE} | ${SITE_NAME}`,
+    description: DEFAULT_DESCRIPTION,
+    siteName: SITE_NAME,
+    url: "/",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${DEFAULT_TITLE} | ${SITE_NAME}`,
+    description: DEFAULT_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -29,6 +61,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <SeoJsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
         <div className="min-h-screen flex flex-col">
           <Header />
           <main className="flex-grow pt-[132px] md:pt-[132px]">{children}</main>
@@ -39,3 +72,4 @@ export default function RootLayout({
     </html>
   );
 }
+
