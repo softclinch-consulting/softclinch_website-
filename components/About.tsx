@@ -1,3 +1,4 @@
+"use client";
 import { motion } from 'motion/react';
 import { Shield, Cpu, Database, MessageSquare, CheckCircle2 } from 'lucide-react';
 

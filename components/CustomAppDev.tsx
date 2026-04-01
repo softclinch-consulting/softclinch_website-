@@ -1,3 +1,4 @@
+"use client";
 import { motion } from 'motion/react';
 import { Cpu, Server, Smartphone, Layers, Code2, CheckCircle2 } from 'lucide-react';
 
