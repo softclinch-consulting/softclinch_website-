@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ChevronDown } from 'lucide-react';
+import { assetPath } from "@/lib/asset";
 
 export const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -48,7 +49,7 @@ export const Header = () => {
                 <div className="flex justify-between items-center">
                     <Link href="/" className="flex items-center gap-3">
                         <Image
-                            src="/softclinch.jpeg"
+                            src={assetPath("/softclinch.jpeg")}
                             alt="SoftClinch Logo"
                             width={220}
                             height={80}
