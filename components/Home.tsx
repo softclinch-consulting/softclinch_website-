@@ -1,10 +1,178 @@
 "use client";
-import { useState } from 'react';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Link from 'next/link';
-import { ChevronDown, ChevronRight, MessageSquare, Globe, Cpu, Database, BarChart3, CheckCircle2 } from 'lucide-react';
+import { ChevronDown, ChevronLeft, ChevronRight, MessageSquare, Globe, Cpu, Database, BarChart3, CheckCircle2 } from 'lucide-react';
 
-const Hero = () => (
+const Hero = () => {
+  const slides = [
+    {
+      key: 'sap',
+      title: 'SAP Consulting',
+      description: 'S/4HANA migration, AMS, integrations, and enterprise architecture.',
+      href: '/services/sap-consulting',
+      image: '/hero/sap-consulting.svg',
+      imageAlt: 'SAP Consulting',
+    },
+    {
+      key: 'dm',
+      title: 'Digital Marketing',
+      description: 'SEO, PPC, analytics, and automation for predictable growth.',
+      href: '/services/digital-marketing',
+      image: '/hero/digital-marketing.svg',
+      imageAlt: 'Digital Marketing',
+    },
+    {
+      key: 'custom',
+      title: 'Custom Applications',
+      description: 'Secure web apps, SaaS platforms, mobile apps, and API integrations.',
+      href: '/services/custom-development',
+      image: '/hero/custom-applications.svg',
+      imageAlt: 'Custom Application Development',
+    },
+  ] as const;
+
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((current) => (current + 1) % slides.length);
+    }, 6500);
+    return () => clearInterval(interval);
+  }, [slides.length]);
+
+  const activeSlide = slides[activeIndex];
+
+  return (
+    <section className="relative py-24 lg:py-32 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="max-w-3xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <span className="inline-block px-4 py-1.5 rounded-full bg-slate-100 text-slate-900 text-sm font-semibold mb-6">
+                Engineering Scalable Digital Systems
+              </span>
+              <h1 className="font-bold text-slate-900 mb-10" style={{ fontSize: "clamp(2rem, 5.5vw, 5rem)", lineHeight: 1.12, letterSpacing: "-0.03em" }}>
+                Enterprise Technology<br />
+                Consulting &amp;<br />
+                WhatsApp Automation<br />
+                Solutions
+              </h1>
+
+              <p className="text-lg text-slate-500 mb-10 leading-relaxed" style={{ maxWidth: "560px" }}>
+                SoftClinch is an engineering-led consulting firm â€” from SAP implementation to custom SaaS platforms and our
+                proprietary WhatsApp automation tool, <strong style={{ fontWeight: 700 }}>Inaiwazhi</strong>.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  href="/contact"
+                  className="bg-brand-navy text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-gradient-to-r hover:from-brand-navy hover:to-[#A23B2A] transition-all duration-300 text-center"
+                >
+                  Request Consultation
+                </Link>
+                <Link
+                  href="/services"
+                  className="bg-[#A23B2A] text-white border border-[#A23B2A] px-8 py-4 rounded-full text-lg font-semibold text-center transition-all duration-300 hover:bg-gradient-to-r hover:from-[#A23B2A]/90 hover:to-brand-navy/90 hover:border-transparent"
+                >
+                  Explore Services
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+
+          <div className="relative">
+            <div className="relative rounded-[2.5rem] overflow-hidden border border-slate-200 bg-white shadow-xl">
+              <div className="p-6 sm:p-8 border-b border-slate-100 flex items-center justify-between gap-4">
+                <div className="min-w-0">
+                  <div className="text-xs uppercase tracking-[0.2em] font-bold text-slate-500">Featured Service</div>
+                  <div className="text-xl sm:text-2xl font-display font-bold text-slate-900 truncate">
+                    {activeSlide.title}
+                  </div>
+                  <div className="text-sm text-slate-600 mt-1">{activeSlide.description}</div>
+                </div>
+                <Link
+                  href={activeSlide.href}
+                  className="shrink-0 inline-flex items-center gap-2 rounded-full px-4 py-2 bg-slate-900 text-white text-sm font-semibold hover:bg-brand-navy transition-colors"
+                >
+                  View
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+              </div>
+
+              <div className="relative p-6 sm:p-8 bg-slate-50">
+                <div className="relative aspect-[16/10] w-full">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeSlide.key}
+                      initial={{ opacity: 0, x: 12 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -12 }}
+                      transition={{ duration: 0.25 }}
+                      className="absolute inset-0"
+                    >
+                      <Image
+                        src={activeSlide.image}
+                        alt={activeSlide.imageAlt}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        className="object-contain"
+                        priority
+                      />
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+
+                <div className="mt-6 flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-2">
+                    {slides.map((s, index) => (
+                      <button
+                        key={s.key}
+                        type="button"
+                        onClick={() => setActiveIndex(index)}
+                        className={`h-2.5 rounded-full transition-all ${index === activeIndex ? 'w-10 bg-brand-navy' : 'w-2.5 bg-slate-300 hover:bg-slate-400'}`}
+                        aria-label={`Go to ${s.title}`}
+                      />
+                    ))}
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setActiveIndex((current) => (current - 1 + slides.length) % slides.length)}
+                      className="w-10 h-10 rounded-full border border-slate-200 bg-white hover:bg-slate-50 flex items-center justify-center transition-colors"
+                      aria-label="Previous slide"
+                    >
+                      <ChevronLeft className="w-5 h-5 text-slate-700" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setActiveIndex((current) => (current + 1) % slides.length)}
+                      className="w-10 h-10 rounded-full border border-slate-200 bg-white hover:bg-slate-50 flex items-center justify-center transition-colors"
+                      aria-label="Next slide"
+                    >
+                      <ChevronRight className="w-5 h-5 text-slate-700" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="absolute -top-8 -right-10 w-40 h-40 bg-brand-navy/10 blur-2xl rounded-full -z-10" />
+            <div className="absolute -bottom-10 -left-10 w-56 h-56 bg-brand-terracotta/10 blur-2xl rounded-full -z-10" />
+          </div>
+        </div>
+      </div>
+      <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[800px] h-[800px] bg-slate-50 rounded-full blur-3xl -z-10 opacity-50" />
+    </section>
+  );
+};
+
+const HeroOld = () => (
   <section className=" relative  py-24 lg:py-32 overflow-hidden">
     <div className=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
       <div className="max-w-3xl">
@@ -69,12 +237,12 @@ const CoreServices = () => {
       icon: <Globe className="text-slate-900" size={24} />,
       path: '/services/digital-marketing'
     },
-    {
-      title: 'Custom Application Development',
-      description: 'SaaS platforms, web apps, mobile apps, and complex API integrations.',
-      icon: <Cpu className="text-slate-900" size={24} />,
-      path: '/services/custom-app-dev'
-    },
+      {
+        title: 'Custom Application Development',
+        description: 'SaaS platforms, web apps, mobile apps, and complex API integrations.',
+        icon: <Cpu className="text-slate-900" size={24} />,
+        path: '/services/custom-development'
+      },
     {
       title: 'SAP Consulting',
       description: 'SAP implementation, AMS support, and enterprise system architecture.',
