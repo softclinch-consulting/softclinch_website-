@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { Mail, Phone, MapPin, Linkedin, Twitter, Github, ChevronRight } from "lucide-react";
 import { CONTACT } from "@/lib/contact";
+import { assetPath } from "@/lib/asset";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -15,7 +16,7 @@ export const Footer = () => {
           <div className="col-span-1 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-8">
               <Image
-                src="/softclinch.jpeg"
+                src={assetPath("/softclinch.jpeg")}
                 alt="SoftClinch Logo"
                 width={150}
                 height={60}

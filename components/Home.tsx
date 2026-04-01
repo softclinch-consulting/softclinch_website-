@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Link from 'next/link';
 import { ChevronDown, ChevronLeft, ChevronRight, MessageSquare, Globe, Cpu, Database, BarChart3, CheckCircle2 } from 'lucide-react';
+import { assetPath } from "@/lib/asset";
 
 const Hero = () => {
   const slides = [
@@ -12,7 +13,7 @@ const Hero = () => {
       title: 'SAP Consulting',
       description: 'S/4HANA migration, AMS, integrations, and enterprise architecture.',
       href: '/services/sap-consulting',
-      image: '/hero/sap-consulting.svg',
+      image: assetPath('/hero/sap-consulting.svg'),
       imageAlt: 'SAP Consulting',
     },
     {
@@ -20,7 +21,7 @@ const Hero = () => {
       title: 'Digital Marketing',
       description: 'SEO, PPC, analytics, and automation for predictable growth.',
       href: '/services/digital-marketing',
-      image: '/hero/digital-marketing.svg',
+      image: assetPath('/hero/digital-marketing.svg'),
       imageAlt: 'Digital Marketing',
     },
     {
@@ -28,7 +29,7 @@ const Hero = () => {
       title: 'Custom Applications',
       description: 'Secure web apps, SaaS platforms, mobile apps, and API integrations.',
       href: '/services/custom-development',
-      image: '/hero/custom-applications.svg',
+      image: assetPath('/hero/custom-applications.svg'),
       imageAlt: 'Custom Application Development',
     },
   ] as const;
@@ -362,7 +363,7 @@ const ProductAuthority = () => {
                 className="relative w-full flex items-center justify-end"
               >
                 <Image
-                  src="/WhatsApp_Image_2026-02-17_at_4.11.44_PM-removebg-preview.png"
+                  src={assetPath("/WhatsApp_Image_2026-02-17_at_4.11.44_PM-removebg-preview.png")}
                   alt="Inaiwazhi WhatsApp Automation"
                   width={1600}
                   height={680}
