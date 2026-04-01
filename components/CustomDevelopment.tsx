@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useInView } from 'motion/react';
+import { motion, useInView } from 'motion/react-client';
 import { Code, Smartphone, Cloud, Lock, Zap, Layers, Database, Globe, GitBranch, Palette, ArrowRight, Check } from 'lucide-react';
 import { FaqSection } from "@/components/FaqSection";
 import { customDevelopmentFaq } from "@/lib/faqs";

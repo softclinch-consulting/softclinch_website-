@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef } from 'react';
-import { motion, useInView, AnimatePresence } from 'motion/react';
+import { motion, useInView, AnimatePresence } from 'motion/react-client';
 import {
   Server, ShieldCheck, HeartHandshake, Users, Zap,
   CheckCircle2, Check, ChevronDown, Wrench, Settings,

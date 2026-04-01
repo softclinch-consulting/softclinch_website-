@@ -1,5 +1,5 @@
 "use client";
-import { motion } from 'motion/react';
+import { motion } from 'motion/react-client';
 import { Cpu, Server, Smartphone, Layers, Code2, CheckCircle2 } from 'lucide-react';
 
 export const CustomAppDev = () => {

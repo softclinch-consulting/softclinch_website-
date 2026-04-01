@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react-client';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { assetPath } from "@/lib/asset";
 

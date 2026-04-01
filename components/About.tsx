@@ -1,5 +1,5 @@
 "use client";
-import { motion } from 'motion/react';
+import { motion } from 'motion/react-client';
 import { Shield, Cpu, Database, MessageSquare, CheckCircle2 } from 'lucide-react';
 
 const MissionVision = () => (
