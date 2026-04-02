@@ -14,7 +14,9 @@ const basePath = normalizeBasePath(configuredBasePath || inferredBasePath);
 
 const nextConfig: NextConfig = {
   output: "export",
-  trailingSlash: false,
+  // Static export on platforms like Cloudflare Pages works best with per-route
+  // `index.html` files so `/about` resolves without special rewrites.
+  trailingSlash: true,
   images: {
     unoptimized: true,
   },
