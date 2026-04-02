@@ -1,64 +1,167 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Link from 'next/link';
-import { ChevronDown, ChevronRight, MessageSquare, Globe, Cpu, Database, BarChart3, CheckCircle2 } from 'lucide-react';
+import { ChevronDown, ChevronRight, MessageSquare, Globe, Cpu, Database, BarChart3, CheckCircle2, Star } from 'lucide-react';
 
-const Hero = () => (
-  <section className=" relative  py-24 lg:py-32 overflow-hidden">
-    <div className=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-      <div className="max-w-3xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-slate-100 text-slate-900 text-sm font-semibold mb-6">
-            Engineering Scalable Digital Systems
-          </span>
-          <h1 className="font-bold text-slate-900 mb-10" style={{ fontSize: "clamp(2rem, 5.5vw, 5rem)", lineHeight: 1.12, letterSpacing: "-0.03em" }}>
-            Enterprise Technology<br />
-            Consulting &amp;<br />
-            WhatsApp Automation<br />
-            Solutions
-          </h1>
+const Hero = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-          {/* Subtext */}
-          <p className="text-lg text-slate-500 mb-10 leading-relaxed" style={{ maxWidth: "560px" }}>
-            SoftClinch is an engineering-led consulting firm — from SAP implementation to custom SaaS platforms and our
-            proprietary WhatsApp automation tool, <strong style={{ fontWeight: 700 }}>Inaiwazhi</strong>.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link
-              href="/contact"
-              className="bg-brand-navy text-white px-8 py-4 rounded-full text-lg font-semibold
-  hover:bg-gradient-to-r hover:from-brand-navy hover:to-[#A23B2A]
-  transition-all duration-300 text-center"
-            >
-              Request Consultation
-            </Link>
-            <Link
-              href="/services"
-              className="
-  bg-[#A23B2A] text-white border border-[#A23B2A]
-  px-8 py-4 rounded-full text-lg font-semibold text-center
-  transition-all duration-300
+  const slides = [
+    {
+      title: (
+        <>
+          Enterprise Technology<br />
+          Consulting &amp;<br />
+          SAP Solutions
+        </>
+      ),
+      subtitle: "SoftClinch is an engineering-led consulting firm — from SAP implementation to custom SaaS platforms.",
+      image: "/sap_consulting_hero_v2.png",
+      tag: "Engineering Scalable Systems",
+      accent: "#A23B2A"
+    },
+    {
+      title: (
+        <>
+          Digital Marketing<br />
+          &amp; Performance<br />
+          Growth
+        </>
+      ),
+      subtitle: "SEO, GEO, AEO, PPC & performance analytics optimized for modern search landscapes.",
+      image: "/digital_marketing_hero_v2.png",
+      tag: "Digital Strategy & Growth",
+      accent: "#0f172a"
+    },
+    {
+      title: (
+        <>
+          WhatsApp API<br />
+          Automation<br />
+          with Inaiwazhi
+        </>
+      ),
+      subtitle: "Enterprise WhatsApp API automation for high-scale sales and support workflows.",
+      image: "/whatsapp_automation_hero_v2.png",
+      tag: "Product Authority",
+      accent: "#22c55e"
+    },
+    {
+      title: (
+        <>
+          Custom Application<br />
+          Development &amp;<br />
+          SaaS Platforms
+        </>
+      ),
+      subtitle: "Engineering scalable, high-performance web and mobile applications tailored to your business goals.",
+      image: "/custom_app_dev_hero.png",
+      tag: "Software Engineering",
+      accent: "#3b82f6"
+    }
+  ];
 
-  hover:bg-gradient-to-r
-  hover:from-[#A23B2A]/90
-  hover:to-brand-navy/90
-  hover:border-transparent
-  "
-            >
-              Explore Services
-            </Link>
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [slides.length]);
+
+  return (
+    <section className="relative py-12 lg:py-24 overflow-hidden border-b border-slate-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[500px]">
+          {/* Left Column: Content */}
+          <div className="relative z-10">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentSlide}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+              >
+                <span className="inline-block px-4 py-1.5 rounded-full bg-slate-100 text-slate-900 text-sm font-semibold mb-6">
+                  {slides[currentSlide].tag}
+                </span>
+                <h1 className="font-bold text-slate-900 mb-8" style={{ fontSize: "clamp(2rem, 5.5vw, 4.5rem)", lineHeight: 1.1, letterSpacing: "-0.03em" }}>
+                  {slides[currentSlide].title}
+                </h1>
+
+                <p className="text-lg text-slate-500 mb-10 leading-relaxed max-w-xl">
+                  {slides[currentSlide].subtitle}
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Link
+                    href="/contact"
+                    className="bg-brand-navy text-white px-8 py-4 rounded-full text-lg font-semibold
+                    hover:bg-gradient-to-r hover:from-brand-navy hover:to-[#A23B2A]
+                    transition-all duration-300 text-center"
+                  >
+                    Request Consultation
+                  </Link>
+                  <Link
+                    href="/services"
+                    className="bg-[#A23B2A] text-white border border-[#A23B2A]
+                    px-8 py-4 rounded-full text-lg font-semibold text-center
+                    transition-all duration-300
+                    hover:bg-gradient-to-r
+                    hover:from-[#A23B2A]/90
+                    hover:to-brand-navy/90
+                    hover:border-transparent"
+                  >
+                    Explore Services
+                  </Link>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
-        </motion.div>
+
+          {/* Right Column: Dynamic Image */}
+          <div className="relative flex items-center justify-center">
+            <div className="absolute inset-0 bg-slate-50 rounded-[3rem] -z-10 blur-3xl opacity-50 transition-colors duration-1000" />
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentSlide}
+                initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                exit={{ opacity: 0, scale: 1.1, rotate: 2 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="relative w-full max-w-[600px] aspect-square lg:aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl border border-white/20"
+              >
+                <img
+                  src={slides[currentSlide].image}
+                  alt={slides[currentSlide].tag}
+                  className="w-full h-full object-cover"
+                />
+
+                {/* Subtle Floating Elements or Accents */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+
+                {/* Visual Status Indicator */}
+                <div className="absolute bottom-6 left-6 flex gap-2">
+                  {slides.map((_, i) => (
+                    <div
+                      key={i}
+                      className={`h-1.5 rounded-full transition-all duration-500 ${currentSlide === i ? "w-8 bg-white" : "w-2 bg-white/40"
+                        }`}
+                    />
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Decorative background visual */}
+            <div className={`absolute -top-10 -right-10 w-40 h-40 rounded-full blur-[80px] opacity-20 transition-colors duration-1000`} style={{ backgroundColor: slides[currentSlide].accent }} />
+          </div>
+        </div>
       </div>
-    </div>
-    {/* Decorative background element */}
-    <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[800px] h-[800px] bg-slate-50 rounded-full blur-3xl -z-10 opacity-50" />
-  </section>
-);
+    </section>
+  );
+};
 
 const CoreServices = () => {
   const services = [
@@ -514,31 +617,104 @@ const Industries = () => (
   </section>
 );
 
-const Testimonials = () => (
-  <section className="py-24 bg-white">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="text-center mb-20">
-        <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900 mb-4">Client Success Stories</h2>
-        <p className="text-slate-600">Trusted by leading enterprises across the globe.</p>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {[
-          { quote: "SoftClinch transformed our customer support with Inaiwazhi. Our response time dropped by 70%.", author: "Director of Ops, Global Retail", role: "Retail Sector" },
-          { quote: "Their SAP consulting expertise was instrumental in our S/4HANA migration. Seamless and professional.", author: "CTO, Manufacturing Corp", role: "Industrial Sector" },
-          { quote: "The custom SaaS platform they built for us is now handling over 1 million requests daily without a hitch.", author: "Founder, TechScale SaaS", role: "Technology Sector" }
-        ].map((t, i) => (
-          <div key={i} className="bg-slate-50 p-10 rounded-3xl border border-slate-200 italic">
-            <p className="text-slate-700 mb-8 leading-relaxed">"{t.quote}"</p>
-            <div className="not-italic">
-              <div className="font-bold text-slate-900">{t.author}</div>
-              <div className="text-brand-terracotta text-sm font-medium">{t.role}</div>
-            </div>
+const Testimonials = () => {
+  const testimonials = [
+    {
+      initial: "D",
+      quote: "Excellent experience.",
+      author: "Verified Customer",
+      color: "bg-teal-600"
+    },
+    {
+      initial: "A",
+      quote: "We needed help setting up our online store, and SoftClinch was a huge help.",
+      author: "AKM",
+      color: "bg-emerald-700"
+    },
+    {
+      initial: "b",
+      quote: "Softclinch Consulting did an excellent job developing and launching our website.",
+      author: "Verified Professional",
+      color: "bg-rose-600"
+    }
+  ];
+
+  return (
+    <section className="py-24 bg-white overflow-hidden relative">
+      {/* Background patterns */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-slate-50 rounded-full blur-3xl opacity-50 -z-0" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-xs font-bold uppercase tracking-widest mb-4">
+            <Globe size={14} />
+            Google Reviews
           </div>
-        ))}
+          <h2 className="text-3xl lg:text-5xl font-display font-bold text-slate-900 mb-4">What Our Clients Say</h2>
+          <div className="flex items-center justify-center gap-1 text-amber-400 mb-6 font-bold">
+            <span className="text-slate-900 mr-2">5.0</span>
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} size={18} fill="currentColor" />
+            ))}
+            <span className="text-slate-500 ml-2 font-normal text-sm">based on verified reviews</span>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {testimonials.map((t, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="bg-slate-50 p-8 rounded-[2rem] border border-slate-100 hover:shadow-xl transition-all duration-300 group"
+            >
+              {/* Header: Initial & Stars */}
+              <div className="flex items-center justify-between mb-6">
+                <div className={`w-12 h-12 rounded-full ${t.color} flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-slate-200 group-hover:scale-110 transition-transform`}>
+                  {t.initial}
+                </div>
+                <div className="flex gap-0.5 text-amber-400">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={14} fill="currentColor" />
+                  ))}
+                </div>
+              </div>
+
+              {/* Quote */}
+              <div className="relative mb-6">
+                <div className="absolute -top-4 -left-2 text-slate-200 text-6xl font-serif select-none pointer-events-none opacity-50">"</div>
+                <p className="text-slate-700 leading-relaxed relative z-10 font-medium">
+                  {t.quote}
+                </p>
+              </div>
+
+              {/* Footer: Author */}
+              <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
+                <div className="font-bold text-slate-900">{t.author}</div>
+                <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+                <div className="text-blue-600 text-xs font-bold uppercase tracking-wider flex items-center gap-1">
+                  Google <CheckCircle2 size={12} />
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="mt-16 text-center">
+          <Link
+            href="https://www.google.com/search?q=softclinch+consulting+reviews"
+            target="_blank"
+            className="inline-flex items-center gap-2 text-slate-500 hover:text-brand-navy font-bold text-sm transition-colors"
+          >
+            Read all customer reviews <ChevronRight size={16} />
+          </Link>
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export const Home = () => {
   return (

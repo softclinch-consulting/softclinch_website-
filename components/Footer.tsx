@@ -92,7 +92,7 @@ export const Footer = () => {
                             <div className="flex gap-4 items-start">
                                 <MapPin size={20} className="text-brand-terracotta flex-shrink-0" />
                                 <p className="text-slate-400 text-sm">
-                                    Tech Park, IT Corridor, Bangalore, KA, India.
+                                    No: 30, 53rd St, opposite to Anjaneyar Temple, Ashok Nagar, Chennai, Tamil Nadu 600083
                                 </p>
                             </div>
                             <div className="flex gap-4 items-center">
@@ -101,7 +101,7 @@ export const Footer = () => {
                             </div>
                             <div className="flex gap-4 items-center">
                                 <Phone size={20} className="text-brand-terracotta flex-shrink-0" />
-                                <p className="text-slate-400 text-sm">+91 (800) 123-4567</p>
+                                <p className="text-slate-400 text-sm">+91 094451 79931</p>
                             </div>
                         </div>
                     </div>

@@ -45,7 +45,7 @@ export const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-slate-900">Visit Us</h4>
-                  <p className="text-slate-600">Tech Park, Bangalore, India</p>
+                  <p className="text-slate-600"> No: 30, 53rd St, opposite to Anjaneyar Temple, Ashok Nagar, Chennai, Tamil Nadu 600083</p>
                 </div>
               </div>
             </div>
