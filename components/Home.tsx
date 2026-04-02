@@ -1,7 +1,9 @@
+"use client"
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Link from 'next/link';
 import { ChevronDown, ChevronRight, MessageSquare, Globe, Cpu, Database, BarChart3, CheckCircle2, Star } from 'lucide-react';
+import { assetPath } from '@/lib/asset';
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -133,7 +135,7 @@ const Hero = () => {
                 className="relative w-full max-w-[600px] aspect-square lg:aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl border border-white/20"
               >
                 <img
-                  src={slides[currentSlide].image}
+                  src={assetPath(slides[currentSlide].image)}
                   alt={slides[currentSlide].tag}
                   className="w-full h-full object-cover"
                 />
@@ -648,6 +650,7 @@ const Testimonials = () => {
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-xs font-bold uppercase tracking-widest mb-4">
             <Globe size={14} />
+
             Google Reviews
           </div>
           <h2 className="text-3xl lg:text-5xl font-display font-bold text-slate-900 mb-4">What Our Clients Say</h2>
