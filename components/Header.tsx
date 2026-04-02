@@ -1,10 +1,10 @@
 "use client";
-import Image from "next/image";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
+import { assetPath } from "@/lib/asset";
 
 export const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -47,13 +47,12 @@ export const Header = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center">
                     <Link href="/" className="flex items-center gap-3">
-                        <Image
-                            src="/softclinch.jpeg"
+                        <img
+                            src={assetPath("/softclinch.jpeg")}
                             alt="SoftClinch Logo"
                             width={220}
                             height={80}
                             className="object-contain"
-                            priority
                         />
 
 

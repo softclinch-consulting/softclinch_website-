@@ -1,6 +1,8 @@
-import { motion } from 'motion/react';
+"use client";
+import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import React, { useState } from 'react';
+import { CONTACT } from "@/lib/contact";
 
 export const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -27,7 +29,7 @@ export const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-slate-900">Email Us</h4>
-                  <p className="text-slate-600">softclinch@gmail.com</p>
+                  <p className="text-slate-600">{CONTACT.email}</p>
                 </div>
               </div>
               <div className="flex gap-6">
@@ -36,7 +38,7 @@ export const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-slate-900">Call Us</h4>
-                  <p className="text-slate-600">+91 094451 79931</p>
+                  <p className="text-slate-600">{CONTACT.phone}</p>
                 </div>
               </div>
               <div className="flex gap-6">

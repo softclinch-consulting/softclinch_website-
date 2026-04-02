@@ -1,7 +1,10 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'motion/react';
-import { TrendingUp, Target, Search, BarChart, Mail, Zap, Check, ArrowRight } from 'lucide-react';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import { TrendingUp, Target, Search, BarChart, Mail, Zap, Check, ArrowRight, Star } from 'lucide-react';
+import { FaqSection } from "@/components/FaqSection";
+import { digitalMarketingFaq } from "@/lib/faqs";
+import { reviews } from "@/lib/reviews";
 
 const Button = ({ children, className, variant, ...props }: any) => {
   return (
@@ -19,6 +22,10 @@ export const DigitalMarketing = () => {
   const heroRef = useRef(null);
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 300], [0, 50]);
+
+  const featuredReviews = reviews.filter((review) =>
+    ["Tamil Today", "Ajaykumar M", "Dharshini"].includes(review.name)
+  );
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] overflow-hidden font-sans pt-20">
@@ -94,6 +101,7 @@ export const DigitalMarketing = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               className="relative"
+              style={{ y }}
             >
               {/* Gradient Blob Behind */}
               <div className="absolute inset-0 bg-gradient-to-br from-brand-navy/20 via-brand-terracotta/10 to-brand-navy/5 rounded-[20px] blur-3xl transform scale-110" />
@@ -123,6 +131,44 @@ export const DigitalMarketing = () => {
                 </motion.div>
               </motion.div>
             </motion.div>
+          </div>
+
+          {/* Hero Service Cards */}
+          <div className="mt-12 lg:mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                icon: Search,
+                title: "SEO & Content",
+                description: "Technical SEO + content strategy to win high-intent organic traffic."
+              },
+              {
+                icon: Target,
+                title: "Paid Performance",
+                description: "Google/Meta campaigns with testing, tracking, and ROI-first optimization."
+              },
+              {
+                icon: BarChart,
+                title: "Analytics & Attribution",
+                description: "Clean measurement, dashboards, and insights to scale what works."
+              }
+            ].map((item, index) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 + index * 0.1, duration: 0.6 }}
+                whileHover={{ y: -6, scale: 1.01 }}
+                className="h-full"
+              >
+                <div className="h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-lg transition-all">
+                  <div className="w-12 h-12 rounded-xl bg-brand-navy/5 flex items-center justify-center mb-4">
+                    <item.icon className="w-6 h-6 text-brand-terracotta" />
+                  </div>
+                  <div className="text-lg font-bold text-slate-900 mb-2">{item.title}</div>
+                  <div className="text-sm text-slate-600 leading-relaxed">{item.description}</div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
 
@@ -328,6 +374,40 @@ export const DigitalMarketing = () => {
         </div>
       </section>
 
+      {/* Reviews */}
+      <section className="bg-white py-20">
+        <div className="max-w-[1200px] mx-auto px-8">
+          <FadeInSection>
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-slate-900 mb-4">
+                Client Reviews
+              </h2>
+              <p className="text-xl text-slate-600">
+                Trusted for delivery, clarity, and measurable results.
+              </p>
+            </div>
+          </FadeInSection>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {featuredReviews.map((review, i) => (
+              <FadeInSection key={`${review.name}-${i}`} delay={i * 0.1}>
+                <div className="bg-slate-50 p-10 rounded-3xl border border-slate-200 h-full">
+                  <div className="flex items-center gap-2 text-amber-500">
+                    {[0, 1, 2, 3, 4].map((star) => (
+                      <Star key={star} className="w-4 h-4 fill-current" />
+                    ))}
+                    <span className="text-xs font-semibold text-slate-600 ml-1">{review.rating}.0</span>
+                  </div>
+                  <p className="text-slate-700 mt-5 leading-relaxed">â€œ{review.text}â€</p>
+                  <div className="mt-6 font-bold text-slate-900">{review.name}</div>
+                </div>
+              </FadeInSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <FaqSection title="Digital Marketing FAQs" items={digitalMarketingFaq} />
 
     </div>
   );

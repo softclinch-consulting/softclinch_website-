@@ -1,7 +1,9 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useInView } from 'motion/react';
+import { motion, useInView } from 'framer-motion';
 import { Code, Smartphone, Cloud, Lock, Zap, Layers, Database, Globe, GitBranch, Palette, ArrowRight, Check } from 'lucide-react';
+import { FaqSection } from "@/components/FaqSection";
+import { customDevelopmentFaq } from "@/lib/faqs";
 
 const Button = ({ children, className, variant, ...props }: any) => {
     return (
@@ -460,6 +462,8 @@ export const CustomDevelopment = () => {
 
 
             </section>
+
+            <FaqSection title="Custom Development FAQs" items={customDevelopmentFaq} />
         </div>
     );
 };

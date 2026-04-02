@@ -171,12 +171,12 @@ const CoreServices = () => {
       icon: <Globe className="text-slate-900" size={24} />,
       path: '/services/digital-marketing'
     },
-    {
-      title: 'Custom Application Development',
-      description: 'SaaS platforms, web apps, mobile apps, and complex API integrations.',
-      icon: <Cpu className="text-slate-900" size={24} />,
-      path: '/services/custom-app-dev'
-    },
+      {
+        title: 'Custom Application Development',
+        description: 'SaaS platforms, web apps, mobile apps, and complex API integrations.',
+        icon: <Cpu className="text-slate-900" size={24} />,
+        path: '/services/custom-development'
+      },
     {
       title: 'SAP Consulting',
       description: 'SAP implementation, AMS support, and enterprise system architecture.',
@@ -296,7 +296,7 @@ const ProductAuthority = () => {
                 className="relative w-full flex items-center justify-end"
               >
                 <img
-                  src="/WhatsApp_Image_2026-02-17_at_4.11.44_PM-removebg-preview.png"
+                  src={assetPath("/WhatsApp_Image_2026-02-17_at_4.11.44_PM-removebg-preview.png")}
                   alt="Inaiwazhi WhatsApp Automation"
                   className="drop-shadow-2xl"
                   style={{ width: '400%', height: '680px', objectFit: 'cover', objectPosition: 'Right center' }}

@@ -1,11 +1,12 @@
 "use client";
-import Image from "next/image";
-import React from 'react';
-import Link from 'next/link';
-import { Mail, Phone, MapPin, Linkedin, Twitter, Github, ChevronRight } from 'lucide-react';
+import React from "react";
+import Link from "next/link";
+import { Mail, Phone, MapPin, Linkedin, Twitter, Github, ChevronRight } from "lucide-react";
+import { CONTACT } from "@/lib/contact";
+import { assetPath } from "@/lib/asset";
 
 export const Footer = () => {
-    const currentYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear();
 
     return (
         <footer className="bg-brand-navy text-white pt-20 pb-12">
@@ -115,6 +116,89 @@ export const Footer = () => {
                     </div>
                 </div>
             </div>
-        </footer>
-    );
+          </div>
+
+          <div>
+            <h4 className="text-lg font-bold mb-8">Solutions</h4>
+            <ul className="space-y-4">
+              {[
+                { name: "WhatsApp Automation", path: "/whatsapp-automation" },
+                { name: "Digital Marketing", path: "/services/digital-marketing" },
+                { name: "Custom Development", path: "/services/custom-development" },
+                { name: "SAP Consulting", path: "/services/sap-consulting" },
+              ].map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.path}
+                    className="text-slate-400 hover:text-white transition-colors flex items-center gap-2 group"
+                  >
+                    <ChevronRight
+                      size={14}
+                      className="opacity-0 group-hover:opacity-100 transition-all -ml-4 group-hover:ml-0"
+                    />
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-lg font-bold mb-8">Company</h4>
+            <ul className="space-y-4">
+              {[
+                { name: "About Us", path: "/about" },
+                { name: "Services", path: "/services" },
+                { name: "WhatsApp Automation", path: "/whatsapp-automation" },
+                { name: "Contact", path: "/contact" },
+              ].map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.path}
+                    className="text-slate-400 hover:text-white transition-colors flex items-center gap-2 group"
+                  >
+                    <ChevronRight
+                      size={14}
+                      className="opacity-0 group-hover:opacity-100 transition-all -ml-4 group-hover:ml-0"
+                    />
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-lg font-bold mb-8">Get in Touch</h4>
+            <div className="space-y-6">
+              <div className="flex gap-4 items-start">
+                <MapPin size={20} className="text-brand-terracotta flex-shrink-0" />
+                <p className="text-slate-400 text-sm">{CONTACT.address}</p>
+              </div>
+              <div className="flex gap-4 items-center">
+                <Mail size={20} className="text-brand-terracotta flex-shrink-0" />
+                <p className="text-slate-400 text-sm">{CONTACT.email}</p>
+              </div>
+              <div className="flex gap-4 items-center">
+                <Phone size={20} className="text-brand-terracotta flex-shrink-0" />
+                <p className="text-slate-400 text-sm">{CONTACT.phone}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-500">
+          <p>© {currentYear} SoftClinch Consulting Services. All rights reserved.</p>
+          <div className="flex gap-8">
+            <a href="#" className="hover:text-white transition-colors">
+              Privacy Policy
+            </a>
+            <a href="#" className="hover:text-white transition-colors">
+              Terms of Service
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 };

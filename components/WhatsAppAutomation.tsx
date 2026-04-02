@@ -1,6 +1,9 @@
-import { motion } from 'motion/react';
+"use client";
+import { motion } from 'framer-motion';
 import { MessageSquare, CheckCircle2, Zap, Shield, BarChart3, Users, Link as LinkIcon, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import { FaqSection } from "@/components/FaqSection";
+import { whatsappAutomationFaq } from "@/lib/faqs";
 
 export const WhatsAppAutomation = () => {
   return (
@@ -189,6 +192,8 @@ export const WhatsAppAutomation = () => {
           </div>
         </div>
       </div>
+
+      <FaqSection title="WhatsApp Automation FAQs" items={whatsappAutomationFaq} />
     </div>
   );
 };
