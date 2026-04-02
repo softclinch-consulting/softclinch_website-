@@ -14,7 +14,11 @@ const basePath = normalizeBasePath(configuredBasePath || inferredBasePath);
 
 const nextConfig: NextConfig = {
   output: "export",
+<<<<<<< HEAD
   trailingSlash: true,
+=======
+  trailingSlash: false,
+>>>>>>> f8a5688 (SEO: canonical URLs + SEO-friendly slugs)
   images: {
     unoptimized: true,
   },

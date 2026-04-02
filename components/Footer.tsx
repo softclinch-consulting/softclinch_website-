@@ -46,10 +46,17 @@ export const Footer = () => {
                         <h4 className="text-lg font-bold mb-8">Solutions</h4>
                         <ul className="space-y-4">
                             {[
+<<<<<<< HEAD
                                 { name: 'WhatsApp Automation', path: '/whatsapp-automation' },
                                 { name: 'Digital Marketing', path: '/services/digital-marketing' },
                                 { name: 'Custom App Dev', path: '/services/custom-app-dev' },
                                 { name: 'SAP Consulting', path: '/services/sap-consulting' },
+=======
+                                { name: 'Inaiwazhi WhatsApp Automation', path: '/inaiwazhi-whatsapp-automation' },
+                                { name: 'Digital Marketing', path: '/digital-marketing' },
+                                { name: 'Custom App Development', path: '/custom-application-development' },
+                                { name: 'SAP AMS Support', path: '/sap-ams-support' },
+>>>>>>> f8a5688 (SEO: canonical URLs + SEO-friendly slugs)
                             ].map((link) => (
                                 <li key={link.name}>
                                     <Link

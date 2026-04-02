@@ -34,12 +34,17 @@ export const Services = () => {
             title="Digital Marketing"
             description="Data-driven performance marketing focused on measurable ROI, SEO, GEO, and AEO strategies for modern search landscapes."
             icon={Globe}
+<<<<<<< HEAD
             path="/services/digital-marketing"
+=======
+            path="/digital-marketing"
+>>>>>>> f8a5688 (SEO: canonical URLs + SEO-friendly slugs)
           />
           <ServiceCard
             title="Custom App Development"
             description="Engineering robust, scalable software solutions including SaaS platforms, web apps, and mobile applications."
             icon={Cpu}
+<<<<<<< HEAD
             path="/services/custom-app-dev"
           />
           <ServiceCard
@@ -47,10 +52,22 @@ export const Services = () => {
             description="Expert guidance and operational support for SAP implementation, migration, and application management services."
             icon={Database}
             path="/services/sap-consulting"
+=======
+            path="/custom-application-development"
+          />
+          <ServiceCard
+            title="SAP AMS Support"
+            description="Expert guidance and operational support for SAP implementation, migration, and application management services."
+            icon={Database}
+            path="/sap-ams-support"
+>>>>>>> f8a5688 (SEO: canonical URLs + SEO-friendly slugs)
           />
         </div>
       </div>
     </div>
   );
 };
+<<<<<<< HEAD
 
+=======
+>>>>>>> f8a5688 (SEO: canonical URLs + SEO-friendly slugs)
