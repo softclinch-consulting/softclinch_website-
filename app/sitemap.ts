@@ -11,17 +11,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/",
     "/about",
     "/services",
-<<<<<<< HEAD
-    "/services/digital-marketing",
-    "/services/sap-consulting",
-    "/services/custom-development",
-    "/whatsapp-automation",
-=======
     "/digital-marketing",
     "/custom-application-development",
     "/sap-ams-support",
     "/inaiwazhi-whatsapp-automation",
->>>>>>> f8a5688 (SEO: canonical URLs + SEO-friendly slugs)
     "/contact",
   ];
 

@@ -171,41 +171,25 @@ const CoreServices = () => {
       title: 'Digital Marketing',
       description: 'SEO, GEO, AEO, PPC & performance analytics for modern search landscapes.',
       icon: <Globe className="text-slate-900" size={24} />,
-<<<<<<< HEAD
-      path: '/services/digital-marketing'
-=======
       path: '/digital-marketing'
->>>>>>> f8a5688 (SEO: canonical URLs + SEO-friendly slugs)
     },
       {
         title: 'Custom Application Development',
         description: 'SaaS platforms, web apps, mobile apps, and complex API integrations.',
         icon: <Cpu className="text-slate-900" size={24} />,
-<<<<<<< HEAD
-        path: '/services/custom-development'
-=======
         path: '/custom-application-development'
->>>>>>> f8a5688 (SEO: canonical URLs + SEO-friendly slugs)
       },
     {
       title: 'SAP Consulting',
       description: 'SAP implementation, AMS support, and enterprise system architecture.',
       icon: <Database className="text-slate-900" size={24} />,
-<<<<<<< HEAD
-      path: '/services/sap-consulting'
-=======
       path: '/sap-ams-support'
->>>>>>> f8a5688 (SEO: canonical URLs + SEO-friendly slugs)
     },
     {
       title: 'WhatsApp Automation',
       description: 'Enterprise WhatsApp API automation for high-scale sales and support.',
       icon: <MessageSquare className="text-slate-900" size={24} />,
-<<<<<<< HEAD
-      path: '/whatsapp-automation'
-=======
       path: '/inaiwazhi-whatsapp-automation'
->>>>>>> f8a5688 (SEO: canonical URLs + SEO-friendly slugs)
     },
   ];
 

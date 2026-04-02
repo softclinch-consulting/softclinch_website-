@@ -27,21 +27,12 @@ export const Header = () => {
             name: 'Services',
             path: '/services',
             subLinks: [
-<<<<<<< HEAD
-                { name: 'Digital Marketing', path: '/services/digital-marketing' },
-                { name: 'SAP Consulting', path: '/services/sap-consulting' },
-                { name: 'Custom Development', path: '/services/custom-development' },
-            ]
-        },
-        { name: 'WhatsApp Automation', path: '/whatsapp-automation' },
-=======
                 { name: 'Digital Marketing', path: '/digital-marketing' },
                 { name: 'SAP AMS Support', path: '/sap-ams-support' },
                 { name: 'Custom App Development', path: '/custom-application-development' },
             ]
         },
         { name: 'Inaiwazhi WhatsApp Automation', path: '/inaiwazhi-whatsapp-automation' },
->>>>>>> f8a5688 (SEO: canonical URLs + SEO-friendly slugs)
 
         { name: 'Contact', path: '/contact' },
     ];

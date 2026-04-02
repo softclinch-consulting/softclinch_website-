@@ -5,11 +5,6 @@ import { webpageJsonLd } from "@/lib/schema";
 import { SITE_NAME } from "@/lib/site";
 
 export const metadata = buildMetadata({
-<<<<<<< HEAD
-  title: "Contact",
-  description:
-    "Contact SoftClinch for SAP consulting, custom application development, digital marketing, and enterprise automation.",
-=======
   title: "Contact SoftClinch | Get in Touch for Business Solutions",
   description: "Contact SoftClinch for digital marketing, software development and automation services.",
   keywords: [
@@ -17,7 +12,6 @@ export const metadata = buildMetadata({
     "digital marketing consultation",
     "software development company contact",
   ],
->>>>>>> f8a5688 (SEO: canonical URLs + SEO-friendly slugs)
   canonicalPath: "/contact",
 });
 

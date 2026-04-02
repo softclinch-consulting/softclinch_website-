@@ -21,20 +21,6 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: {
-<<<<<<< HEAD
-    default: `${DEFAULT_TITLE} | ${SITE_NAME}`,
-    template: `%s | ${SITE_NAME}`,
-  },
-  description: DEFAULT_DESCRIPTION,
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    title: `${DEFAULT_TITLE} | ${SITE_NAME}`,
-    description: DEFAULT_DESCRIPTION,
-    siteName: SITE_NAME,
-    url: "/",
-=======
     default: DEFAULT_TITLE,
     template: "%s",
   },
@@ -44,16 +30,11 @@ export const metadata: Metadata = {
     description: DEFAULT_DESCRIPTION,
     siteName: SITE_NAME,
     url: getSiteUrl(),
->>>>>>> f8a5688 (SEO: canonical URLs + SEO-friendly slugs)
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-<<<<<<< HEAD
-    title: `${DEFAULT_TITLE} | ${SITE_NAME}`,
-=======
     title: DEFAULT_TITLE,
->>>>>>> f8a5688 (SEO: canonical URLs + SEO-friendly slugs)
     description: DEFAULT_DESCRIPTION,
   },
   robots: {
@@ -88,7 +69,3 @@ export default function RootLayout({
     </html>
   );
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> f8a5688 (SEO: canonical URLs + SEO-friendly slugs)
