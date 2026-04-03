@@ -75,36 +75,158 @@ const Values = () => (
 );
 
 const Timeline = () => (
-  <section className="py-10 mb-32 border-t border-slate-100">
+  <section className="py-24 mb-32 border-t border-slate-100">
     <div className="text-center mb-20">
-      <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900 mb-4">Our Journey</h2>
-      <p className="text-slate-600">From SAP Consulting to Product Innovation</p>
+      <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900 mb-4">Our Roadmap & Journey</h2>
+      <p className="text-slate-600 max-w-2xl mx-auto">Evolution from consulting to product innovation, following industry trends and market demands</p>
     </div>
-    <div className="space-y-12 max-w-4xl mx-auto">
-      {[
-        { year: '2016', title: 'SAP Implementation & Consulting', desc: 'SoftClinch was founded as a specialized SAP consulting boutique, delivering enterprise-grade implementations.', icon: '🏢' },
-        { year: '2021', title: 'Digital Marketing Expansion', desc: 'Expanded into comprehensive digital marketing solutions for global enterprises.', icon: '📊' },
-        { year: '2024', title: 'Custom Software & Application Development', desc: 'Launched custom software development services, offering bespoke SaaS and web applications.', icon: '💻' },
-        { year: '2025', title: 'Inaiwazhi WhatsApp Automation Product Launch', desc: 'Launched Inaiwazhi, our proprietary WhatsApp automation platform for enterprises.', icon: '🚀', highlight: true }
-      ].map((item, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: i * 0.1 }}
-          viewport={{ once: true }}
-          className={`flex gap-12 items-start ${item.highlight ? 'bg-gradient-to-r from-[#A23B2A]/10 to-transparent p-8 rounded-2xl' : ''}`}
-        >
-          <div className="text-2xl font-display font-bold flex-shrink-0 w-24">
-            <span className={`${item.highlight ? 'text-[#A23B2A]' : 'text-brand-navy'}`}>{item.year}</span>
+
+    <div className="max-w-6xl mx-auto px-4">
+      {/* Horizontal Roadmap */}
+      <div className="relative">
+        {/* Progress Line */}
+        <div className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-brand-navy via-brand-navy to-[#A23B2A] transform -translate-y-1/2 z-0" />
+
+        {/* Roadmap Items */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
+          {[
+            {
+              year: '2016',
+              title: 'SAP Implementation & Consulting',
+              desc: 'Founded as specialized SAP consulting boutique delivering enterprise-grade implementations.',
+              status: 'completed',
+              icon: '🏢',
+              trend: 'Enterprise Transformation'
+            },
+            {
+              year: '2021',
+              title: 'Digital Marketing Expansion',
+              desc: 'Expanded into comprehensive digital marketing solutions for global enterprises and SMBs.',
+              status: 'completed',
+              icon: '📊',
+              trend: 'Digital-First Strategy'
+            },
+            {
+              year: '2024',
+              title: 'Custom Software Development',
+              desc: 'Launched custom software development services with bespoke SaaS and web applications.',
+              status: 'completed',
+              icon: '💻',
+              trend: 'Cloud-Native Solutions'
+            },
+            {
+              year: '2025',
+              title: 'Inaiwazhi Product Launch',
+              desc: 'Launched proprietary WhatsApp automation platform for enterprise communication.',
+              status: 'active',
+              icon: '🚀',
+              trend: 'AI-Powered Automation',
+              highlight: true
+            }
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className="flex flex-col items-center"
+            >
+              {/* Dot Marker */}
+              <div className={`w-16 h-16 rounded-full flex items-center justify-center text-3xl mb-6 relative z-20 border-4 transition-all duration-300 ${
+                item.highlight
+                  ? 'bg-[#A23B2A] border-[#A23B2A] shadow-lg shadow-[#A23B2A]/50 scale-110'
+                  : 'bg-brand-navy border-brand-navy'
+              }`}>
+                {item.icon}
+              </div>
+
+              {/* Card */}
+              <div className={`w-full p-6 rounded-2xl text-center transition-all duration-300 ${
+                item.highlight
+                  ? 'bg-gradient-to-b from-[#A23B2A]/10 to-[#A23B2A]/5 border-2 border-[#A23B2A]/30 shadow-lg'
+                  : 'bg-white border border-slate-200 hover:border-brand-navy/30 hover:shadow-md'
+              }`}>
+                <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold mb-3 ${
+                  item.highlight
+                    ? 'bg-[#A23B2A]/20 text-[#A23B2A]'
+                    : 'bg-brand-navy/10 text-brand-navy'
+                }`}>
+                  {item.year}
+                </span>
+
+                <h3 className={`text-lg font-display font-bold mb-2 ${
+                  item.highlight ? 'text-[#A23B2A]' : 'text-slate-900'
+                }`}>
+                  {item.title}
+                </h3>
+
+                <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                  {item.desc}
+                </p>
+
+                {/* Trend Tag */}
+                <div className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
+                  item.highlight
+                    ? 'bg-[#A23B2A] text-white'
+                    : 'bg-brand-navy/5 text-brand-navy'
+                }`}>
+                  📈 {item.trend}
+                </div>
+
+                {/* Status Badge */}
+                {item.status === 'active' && (
+                  <div className="mt-4 pt-4 border-t border-[#A23B2A]/20">
+                    <span className="inline-flex items-center gap-2 text-[#A23B2A] font-bold text-xs">
+                      <span className="w-2 h-2 bg-[#A23B2A] rounded-full animate-pulse" />
+                      Current Phase
+                    </span>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* Current Phase Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+        viewport={{ once: true }}
+        className="mt-20 p-8 bg-gradient-to-r from-[#A23B2A]/5 to-brand-navy/5 border-2 border-[#A23B2A]/20 rounded-3xl"
+      >
+        <div className="flex items-start gap-6">
+          <div className="flex-shrink-0">
+            <div className="w-12 h-12 rounded-full bg-[#A23B2A] text-white flex items-center justify-center font-bold text-xl">
+              ✓
+            </div>
           </div>
-          <div className={`pb-12 ${item.highlight ? 'border-l-2 border-[#A23B2A]' : 'border-l border-slate-200'} pl-12 relative`}>
-            <div className={`w-4 h-4 ${item.highlight ? 'bg-[#A23B2A] shadow-lg shadow-[#A23B2A]/50' : 'bg-brand-navy'} rounded-full absolute ${item.highlight ? '-left-2.5' : '-left-2'} top-2`} />
-            <h4 className={`text-xl font-bold mb-2 ${item.highlight ? 'text-[#A23B2A]' : 'text-slate-900'}`}>{item.title}</h4>
-            <p className="text-slate-600 leading-relaxed">{item.desc}</p>
+          <div className="flex-grow">
+            <h3 className="text-2xl font-display font-bold text-slate-900 mb-3">
+              2025: Accelerating AI-Powered Innovation
+            </h3>
+            <p className="text-slate-600 leading-relaxed mb-4">
+              We're doubling down on automation, AI integration, and enterprise-grade WhatsApp solutions. Our focus is on helping enterprises streamline communication, reduce operational costs, and improve customer engagement through intelligent automation platforms.
+            </p>
+            <ul className="space-y-2">
+              <li className="flex items-center gap-3 text-slate-700">
+                <span className="w-2 h-2 bg-[#A23B2A] rounded-full" />
+                Enterprise WhatsApp automation at scale
+              </li>
+              <li className="flex items-center gap-3 text-slate-700">
+                <span className="w-2 h-2 bg-[#A23B2A] rounded-full" />
+                AI-driven customer engagement tools
+              </li>
+              <li className="flex items-center gap-3 text-slate-700">
+                <span className="w-2 h-2 bg-[#A23B2A] rounded-full" />
+                Seamless integration with existing systems
+              </li>
+            </ul>
           </div>
-        </motion.div>
-      ))}
+        </div>
+      </motion.div>
     </div>
   </section>
 );
