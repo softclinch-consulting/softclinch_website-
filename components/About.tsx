@@ -85,7 +85,7 @@ const Timeline = () => (
       {/* Horizontal Roadmap */}
       <div className="relative">
         {/* Progress Line */}
-        <div className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-brand-navy via-brand-navy to-[#A23B2A] transform -translate-y-1/2 z-0" />
+        <div className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-brand-navy via-brand-navy to-[#A23B2A] transform -translate-y-1/2 -z-10 pointer-events-none" />
 
         {/* Roadmap Items */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
