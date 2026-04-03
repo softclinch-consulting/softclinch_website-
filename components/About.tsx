@@ -176,7 +176,7 @@ const OfficeSection = () => (
           className="rounded-3xl overflow-hidden shadow-lg border border-slate-200 h-96"
         >
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.4628452819376!2d80.22183902520142!3d13.09062168735046!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525d8a7b7b7b7b%3A0x1a2b3c4d5e6f7g8h!2sNo.%2030%2C%2053rd%20St%2C%20Opposite%20Anjaneyar%20Temple%2C%20Ashok%20Nagar%2C%20Chennai%2C%20Tamil%20Nadu%20600083!5e0!3m2!1sen!2sin!4v1680000000000"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.9738482159647!2d80.22097912520157!3d13.088837287227457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5254d44d44d44d%3A0x5f6e7a8b9c0d1e2f!2sAshok%20Nagar%2C%20Chennai%2C%20Tamil%20Nadu%20600083!5e0!3m2!1sen!2sin!4v1704067200000"
             width="100%"
             height="100%"
             style={{ border: 0 }}
