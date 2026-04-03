@@ -1,6 +1,6 @@
 "use client";
 import { motion } from 'framer-motion';
-import { Shield, Cpu, Database, MessageSquare, CheckCircle2 } from 'lucide-react';
+import { Shield, Cpu, Database, MessageSquare, CheckCircle2, Plug, TrendingUp, Settings, Zap } from 'lucide-react';
 
 const MissionVision = () => (
   <section className="relative py-24 bg-brand-navy rounded-[3rem] mb-32 overflow-hidden">
@@ -95,7 +95,7 @@ const Timeline = () => (
               title: 'SAP Implementation & Consulting',
               desc: 'Founded as specialized SAP consulting boutique delivering enterprise-grade implementations.',
               status: 'completed',
-              icon: '🔌',
+              Icon: Plug,
               trend: 'Enterprise Transformation'
             },
             {
@@ -103,7 +103,7 @@ const Timeline = () => (
               title: 'Digital Marketing Expansion',
               desc: 'Expanded into comprehensive digital marketing solutions for global enterprises and SMBs.',
               status: 'completed',
-              icon: '📈',
+              Icon: TrendingUp,
               trend: 'Digital-First Strategy'
             },
             {
@@ -111,7 +111,7 @@ const Timeline = () => (
               title: 'Custom Software Development',
               desc: 'Launched custom software development services with bespoke SaaS and web applications.',
               status: 'completed',
-              icon: '⚙️',
+              Icon: Settings,
               trend: 'Cloud-Native Solutions'
             },
             {
@@ -119,7 +119,7 @@ const Timeline = () => (
               title: 'Inaiwazhi Product Launch',
               desc: 'Launched proprietary WhatsApp automation platform for enterprise communication.',
               status: 'active',
-              icon: '⚡',
+              Icon: Zap,
               trend: 'AI-Powered Automation',
               highlight: true
             }
@@ -133,12 +133,12 @@ const Timeline = () => (
               className="flex flex-col items-center"
             >
               {/* Dot Marker */}
-              <div className={`w-20 h-20 rounded-full flex items-center justify-center text-5xl mb-6 relative z-20 border-4 transition-all duration-300 ${
+              <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-6 relative z-20 border-4 transition-all duration-300 ${
                 item.highlight
                   ? 'bg-[#A23B2A] border-[#A23B2A] shadow-lg shadow-[#A23B2A]/50 scale-110'
                   : 'bg-brand-navy border-brand-navy'
               }`}>
-                {item.icon}
+                <item.Icon size={48} className="text-white" strokeWidth={1.5} />
               </div>
 
               {/* Card */}
@@ -166,12 +166,13 @@ const Timeline = () => (
                 </p>
 
                 {/* Trend Tag */}
-                <div className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
+                <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold ${
                   item.highlight
                     ? 'bg-[#A23B2A] text-white'
                     : 'bg-brand-navy/5 text-brand-navy'
                 }`}>
-                  📈 {item.trend}
+                  <TrendingUp size={14} />
+                  {item.trend}
                 </div>
 
                 {/* Status Badge */}
