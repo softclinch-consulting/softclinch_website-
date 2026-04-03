@@ -32,8 +32,8 @@ export const Header = () => {
                 { name: 'Custom App Development', path: '/custom-application-development' },
             ]
         },
-        { name: 'Inaiwazhi WhatsApp Automation', path: '/inaiwazhi-whatsapp-automation' },
-
+        { name: 'Inaiwazhi', path: '/inaiwazhi-whatsapp-automation' },
+        { name: 'Blog', path: '/blog' },
         { name: 'Contact', path: '/contact' },
     ];
 
@@ -73,10 +73,16 @@ export const Header = () => {
                                 ) : (
                                     <Link
                                         href={link.path}
-                                        className={`flex items-center gap-1 text-sm font-semibold transition-colors ${pathname === link.path ? 'text-brand-navy' : 'text-slate-600 hover:text-brand-navy'
+                                        className={`relative flex items-center gap-1 text-sm font-semibold transition-colors ${pathname === link.path ? 'text-brand-navy' : 'text-slate-600 hover:text-brand-navy'
                                             }`}
                                     >
                                         {link.name}
+                                        {pathname === link.path && (
+                                            <motion.div
+                                                layoutId="underline"
+                                                className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-navy"
+                                            />
+                                        )}
                                     </Link>
                                 )}
 
