@@ -95,7 +95,7 @@ const Timeline = () => (
               title: 'SAP Implementation & Consulting',
               desc: 'Founded as specialized SAP consulting boutique delivering enterprise-grade implementations.',
               status: 'completed',
-              icon: '🏢',
+              icon: '🔌',
               trend: 'Enterprise Transformation'
             },
             {
@@ -103,7 +103,7 @@ const Timeline = () => (
               title: 'Digital Marketing Expansion',
               desc: 'Expanded into comprehensive digital marketing solutions for global enterprises and SMBs.',
               status: 'completed',
-              icon: '📊',
+              icon: '📈',
               trend: 'Digital-First Strategy'
             },
             {
@@ -111,7 +111,7 @@ const Timeline = () => (
               title: 'Custom Software Development',
               desc: 'Launched custom software development services with bespoke SaaS and web applications.',
               status: 'completed',
-              icon: '💻',
+              icon: '⚙️',
               trend: 'Cloud-Native Solutions'
             },
             {
@@ -119,7 +119,7 @@ const Timeline = () => (
               title: 'Inaiwazhi Product Launch',
               desc: 'Launched proprietary WhatsApp automation platform for enterprise communication.',
               status: 'active',
-              icon: '🚀',
+              icon: '⚡',
               trend: 'AI-Powered Automation',
               highlight: true
             }
@@ -133,7 +133,7 @@ const Timeline = () => (
               className="flex flex-col items-center"
             >
               {/* Dot Marker */}
-              <div className={`w-16 h-16 rounded-full flex items-center justify-center text-3xl mb-6 relative z-20 border-4 transition-all duration-300 ${
+              <div className={`w-20 h-20 rounded-full flex items-center justify-center text-5xl mb-6 relative z-20 border-4 transition-all duration-300 ${
                 item.highlight
                   ? 'bg-[#A23B2A] border-[#A23B2A] shadow-lg shadow-[#A23B2A]/50 scale-110'
                   : 'bg-brand-navy border-brand-navy'
@@ -147,7 +147,7 @@ const Timeline = () => (
                   ? 'bg-gradient-to-b from-[#A23B2A]/10 to-[#A23B2A]/5 border-2 border-[#A23B2A]/30 shadow-lg'
                   : 'bg-white border border-slate-200 hover:border-brand-navy/30 hover:shadow-md'
               }`}>
-                <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold mb-3 ${
+                <span className={`inline-block px-4 py-2 rounded-full text-lg font-bold mb-4 font-display ${
                   item.highlight
                     ? 'bg-[#A23B2A]/20 text-[#A23B2A]'
                     : 'bg-brand-navy/10 text-brand-navy'
