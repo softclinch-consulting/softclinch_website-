@@ -132,15 +132,25 @@ const OfficeSection = () => (
             <span className="text-brand-navy font-bold text-xl">📍</span>
           </div>
 
-          <h3 className="text-2xl font-display font-bold text-slate-900 mb-2">Headquarters</h3>
-          <p className="text-slate-600 mb-6">Chennai, Tamil Nadu, India</p>
+          <h3 className="text-2xl font-display font-bold text-slate-900 mb-4">Headquarters</h3>
+          
+          <div className="mb-6">
+            <p className="text-sm text-slate-500 uppercase tracking-wider font-semibold mb-2">Address</p>
+            <p className="text-lg font-semibold text-slate-900 leading-relaxed">
+              No. 30, 53rd St<br />
+              Opposite to Anjaneyar Temple<br />
+              Ashok Nagar<br />
+              Chennai, Tamil Nadu 600083<br />
+              India
+            </p>
+          </div>
 
           <p className="text-slate-600 leading-relaxed mb-8">
             Softclinch operates from Chennai, delivering cutting-edge SAP consulting, digital marketing, and custom software solutions across India and globally.
           </p>
 
           <div className="space-y-3 mb-8">
-            <a href="https://maps.google.com/?q=Chennai,Tamil%20Nadu,India" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-brand-navy font-semibold hover:gap-3 transition-all">
+            <a href="https://maps.google.com/?q=No.+30,+53rd+St,+Ashok+Nagar,+Chennai,+Tamil+Nadu+600083,+India" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-brand-navy font-semibold hover:gap-3 transition-all">
               View on Google Maps →
             </a>
           </div>
@@ -166,7 +176,7 @@ const OfficeSection = () => (
           className="rounded-3xl overflow-hidden shadow-lg border border-slate-200 h-96"
         >
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.9206471919827!2d80.27053342346899!3d13.067439287241368!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a526f7c0d0d0d0d%3A0x0!2sChennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1234567890"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.4628452819376!2d80.22183902520142!3d13.09062168735046!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525d8a7b7b7b7b%3A0x1a2b3c4d5e6f7g8h!2sNo.%2030%2C%2053rd%20St%2C%20Opposite%20Anjaneyar%20Temple%2C%20Ashok%20Nagar%2C%20Chennai%2C%20Tamil%20Nadu%20600083!5e0!3m2!1sen!2sin!4v1680000000000"
             width="100%"
             height="100%"
             style={{ border: 0 }}
