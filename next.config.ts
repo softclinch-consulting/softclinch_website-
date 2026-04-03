@@ -1,34 +1,6 @@
-import type { NextConfig } from "next";
-
-function normalizeBasePath(value: string) {
-  const trimmed = value.trim().replace(/^\/+|\/+$/g, "");
-  return trimmed ? `/${trimmed}` : "";
-}
-
-const configuredBasePath = process.env.NEXT_PUBLIC_BASE_PATH?.trim() ?? "";
-const repoName = process.env.GITHUB_REPOSITORY?.split("/")?.[1] ?? "";
-const inferredBasePath =
-  process.env.GITHUB_ACTIONS && !configuredBasePath ? repoName : "";
-
-const basePath = normalizeBasePath(configuredBasePath || inferredBasePath);
-
-const nextConfig: NextConfig = {
-  output: "export",
-  // Static export on platforms like Cloudflare Pages works best with per-route
-  // `index.html` files so `/about` resolves without special rewrites.
-  trailingSlash: true,
-  images: {
-    unoptimized: true,
-  },
-  env: {
-    NEXT_PUBLIC_BASE_PATH: basePath,
-  },
-  ...(basePath
-    ? {
-        basePath,
-        assetPrefix: basePath,
-      }
-    : {}),
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'standalone',
 };
 
-export default nextConfig;
+module.exports = nextConfig;
