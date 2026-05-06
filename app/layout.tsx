@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-<<<<<<< HEAD
-=======
 import Script from "next/script";
->>>>>>> 0447571 (Add Google Analytics tag)
 import "./globals.css";
 import { Header } from "../components/Header";
 import { Footer } from "@/components/Footer";
@@ -29,12 +26,9 @@ export const metadata: Metadata = {
     template: "%s",
   },
   description: DEFAULT_DESCRIPTION,
-<<<<<<< HEAD
-=======
   verification: {
     google: "HH9wAKOxxeKPnKdd6bFt2WQzP7BgLV4wZsLLCz-Vwzc",
   },
->>>>>>> 0447571 (Add Google Analytics tag)
   openGraph: {
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
@@ -68,8 +62,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-<<<<<<< HEAD
-=======
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-LWBC6JQ9XS"
           strategy="afterInteractive"
@@ -82,7 +74,6 @@ export default function RootLayout({
             gtag('config', 'G-LWBC6JQ9XS');
           `}
         </Script>
->>>>>>> 0447571 (Add Google Analytics tag)
         <SeoJsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
         <div className="min-h-screen flex flex-col">
           <Header />
