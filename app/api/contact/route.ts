@@ -201,7 +201,15 @@ function buildAutoReplyEmail(payload: Required<ContactPayload>) {
 
 export async function POST(request: Request) {
   try {
-    const body = (await request.json()) as ContactPayload;
+    let body: ContactPayload;
+    try {
+      body = (await request.json()) as ContactPayload;
+    } catch {
+      return NextResponse.json(
+        { error: "Invalid request payload." },
+        { status: 400 }
+      );
+    }
 
     const payload = {
       name: sanitize(body.name ?? ""),

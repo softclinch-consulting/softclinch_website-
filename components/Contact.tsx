@@ -28,7 +28,7 @@ export const Contact = () => {
     setError(null);
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("/api/contact/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -36,7 +36,13 @@ export const Contact = () => {
         body: JSON.stringify(formData),
       });
 
-      const data = (await response.json()) as { error?: string };
+      const contentType = response.headers.get("content-type") || "";
+      const data = contentType.includes("application/json")
+        ? ((await response.json()) as { error?: string })
+        : {
+            error:
+              "The server returned an unexpected response. Please check the contact API configuration and try again.",
+          };
 
       if (!response.ok) {
         throw new Error(data.error || "Unable to submit your request right now.");

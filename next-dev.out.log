@@ -4,72 +4,12 @@
 
 ▲ Next.js 16.2.2 (Turbopack)
 - Local:         http://localhost:3000
-- Network:       http://192.168.1.7:3000
-✓ Ready in 8.9s
+- Network:       http://192.168.1.2:3000
+✓ Ready in 3.5s
 Creating turbopack project {
   dir: 'C:\\Users\\Ashwin\\Downloads\\softclinch_website--main\\softclinch_website--main',
   testMode: true
 }
 
-○ Compiling /services/ai-powered-business-systems ...
- GET /services/ai-powered-business-systems/ 200 in 14.9s (next.js: 12.1s, application-code: 2.8s)
-○ Compiling /custom-application-development ...
- GET /custom-application-development/ 200 in 17.5s (next.js: 14.2s, application-code: 3.3s)
- GET /custom-application-development/ 200 in 1060ms (next.js: 164ms, application-code: 896ms)
- GET /custom-application-development/ 200 in 645ms (next.js: 28ms, application-code: 617ms)
- GET /custom-application-development/ 200 in 348ms (next.js: 40ms, application-code: 309ms)
- GET / 200 in 3.1s (next.js: 2.3s, application-code: 754ms)
- GET / 200 in 499ms (next.js: 86ms, application-code: 413ms)
- GET / 200 in 184ms (next.js: 46ms, application-code: 138ms)
- GET /services/ai-powered-business-systems/ 200 in 553ms (next.js: 26ms, application-code: 527ms)
-✓ Compiled in 3.2s
-✓ Compiled in 2.4s
-✓ Compiled in 1698ms
- GET /services/ai-powered-business-systems/ 200 in 4.6s (next.js: 1392ms, application-code: 3.2s)
- GET /services/ai-powered-business-systems/ 200 in 2.3s (next.js: 24ms, application-code: 2.3s)
- GET /services/ai-powered-business-systems/ 200 in 2.4s (next.js: 20ms, application-code: 2.3s)
- GET /services/ai-powered-business-systems/ 200 in 2.2s (next.js: 21ms, application-code: 2.2s)
- GET /services/ai-powered-business-systems/ 200 in 2.3s (next.js: 14ms, application-code: 2.2s)
- GET /services/ai-powered-business-systems/ 200 in 1960ms (next.js: 16ms, application-code: 1945ms)
- GET /services/ai-powered-business-systems/ 200 in 2.1s (next.js: 28ms, application-code: 2.1s)
- GET /services/ai-powered-business-systems/ 200 in 1904ms (next.js: 12ms, application-code: 1892ms)
- GET /services/ai-powered-business-systems/ 200 in 1810ms (next.js: 15ms, application-code: 1796ms)
- GET /services/ai-powered-business-systems/ 200 in 1562ms (next.js: 20ms, application-code: 1542ms)
- GET /services/ai-powered-business-systems/ 200 in 1787ms (next.js: 16ms, application-code: 1771ms)
- GET /services/ai-powered-business-systems/ 200 in 1773ms (next.js: 14ms, application-code: 1759ms)
- GET /services/ai-powered-business-systems/ 200 in 1832ms (next.js: 14ms, application-code: 1819ms)
- GET /services/ai-powered-business-systems/ 200 in 1987ms (next.js: 13ms, application-code: 1973ms)
- GET /services/ai-powered-business-systems/ 200 in 2.1s (next.js: 16ms, application-code: 2.0s)
- GET /services/ai-powered-business-systems/ 200 in 2.1s (next.js: 12ms, application-code: 2.1s)
- GET /services/ai-powered-business-systems/ 200 in 1826ms (next.js: 14ms, application-code: 1813ms)
- GET /services/ai-powered-business-systems/ 200 in 2.3s (next.js: 16ms, application-code: 2.3s)
- GET /services/ai-powered-business-systems/ 200 in 2.3s (next.js: 14ms, application-code: 2.3s)
- GET /services/ai-powered-business-systems/ 200 in 2.3s (next.js: 17ms, application-code: 2.3s)
- GET /services/ai-powered-business-systems/ 200 in 2.3s (next.js: 15ms, application-code: 2.3s)
- GET /services/ai-powered-business-systems/ 200 in 1980ms (next.js: 18ms, application-code: 1962ms)
- GET /services/ai-powered-business-systems/ 200 in 1922ms (next.js: 16ms, application-code: 1905ms)
- GET /services/ai-powered-business-systems/ 200 in 2.0s (next.js: 18ms, application-code: 2.0s)
- GET /services/ai-powered-business-systems/ 200 in 1947ms (next.js: 16ms, application-code: 1931ms)
- GET /services/ai-powered-business-systems/ 200 in 1770ms (next.js: 20ms, application-code: 1750ms)
- GET /services/ai-powered-business-systems/ 200 in 1815ms (next.js: 19ms, application-code: 1796ms)
- GET /services/ai-powered-business-systems/ 200 in 1513ms (next.js: 21ms, application-code: 1492ms)
- GET /services/ai-powered-business-systems/ 200 in 1609ms (next.js: 14ms, application-code: 1594ms)
- GET /services/ai-powered-business-systems/ 200 in 2.0s (next.js: 20ms, application-code: 2.0s)
- GET /services/ai-powered-business-systems/ 200 in 2.0s (next.js: 13ms, application-code: 2.0s)
- GET /services/ai-powered-business-systems/ 200 in 2.1s (next.js: 24ms, application-code: 2.1s)
- GET /services/ai-powered-business-systems/ 200 in 1999ms (next.js: 13ms, application-code: 1986ms)
- GET /services/ai-powered-business-systems/ 200 in 1654ms (next.js: 11ms, application-code: 1643ms)
- GET /services/ai-powered-business-systems/ 200 in 1576ms (next.js: 15ms, application-code: 1561ms)
- GET /services/ai-powered-business-systems/ 200 in 1490ms (next.js: 15ms, application-code: 1475ms)
- GET /services/ai-powered-business-systems/ 200 in 1708ms (next.js: 13ms, application-code: 1695ms)
- GET /services/ai-powered-business-systems/ 200 in 1410ms (next.js: 13ms, application-code: 1397ms)
- GET /services/ai-powered-business-systems/ 200 in 1102ms (next.js: 14ms, application-code: 1088ms)
- GET /services/ai-powered-business-systems/ 200 in 839ms (next.js: 12ms, application-code: 827ms)
- GET /services/ai-powered-business-systems/ 200 in 580ms (next.js: 13ms, application-code: 567ms)
- GET /services/ai-powered-business-systems/ 200 in 325ms (next.js: 12ms, application-code: 313ms)
-✓ Compiled in 5.1s
-✓ Compiled in 8.8s
- GET /services/ai-powered-business-systems/ 200 in 6.6s (next.js: 845ms, application-code: 5.7s)
- GET /services/ai-powered-business-systems/ 200 in 2.1s (next.js: 158ms, application-code: 1962ms)
- GET /custom-application-development/ 200 in 2.2s (next.js: 1750ms, application-code: 443ms)
- GET /services/ai-powered-business-systems/ 200 in 811ms (next.js: 51ms, application-code: 760ms)
+○ Compiling /api/contact ...
+ POST /api/contact/ 500 in 5.8s (next.js: 5.2s, application-code: 581ms)
