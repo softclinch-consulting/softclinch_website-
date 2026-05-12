@@ -46,6 +46,7 @@ export const Footer = () => {
                         <h4 className="text-lg font-bold mb-8">Solutions</h4>
                         <ul className="space-y-4">
                             {[
+                                { name: 'AI-Powered Business Systems', path: '/services/ai-powered-business-systems' },
                                 { name: 'Inaiwazhi WhatsApp Automation', path: '/inaiwazhi-whatsapp-automation' },
                                 { name: 'Digital Marketing', path: '/digital-marketing' },
                                 { name: 'Custom App Development', path: '/custom-application-development' },
@@ -71,7 +72,6 @@ export const Footer = () => {
                             {[
                                 { name: 'About Us', path: '/about' },
                                 { name: 'Case Studies', path: '/case-studies' },
-                                { name: 'Resources', path: '/resources' },
                                 { name: 'Contact', path: '/contact' },
                             ].map((link) => (
                                 <li key={link.name}>

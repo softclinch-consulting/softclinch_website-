@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/",
     "/about",
     "/services",
+    "/services/ai-powered-business-systems",
     "/digital-marketing",
     "/custom-application-development",
     "/sap-ams-support",

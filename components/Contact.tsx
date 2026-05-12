@@ -1,15 +1,64 @@
 "use client";
-import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import React, { useState } from 'react';
 import { CONTACT } from "@/lib/contact";
 
 export const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    company: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((current) => ({ ...current, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        throw new Error(data.error || "Unable to submit your request right now.");
+      }
+
+      setSubmitted(true);
+      setFormData({
+        name: "",
+        company: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Unable to submit your request right now."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -60,7 +109,9 @@ export const Contact = () => {
                   <Send size={32} />
                 </div>
                 <h3 className="text-2xl font-display font-bold text-slate-900 mb-4">Request Received</h3>
-                <p className="text-slate-600">Thank you for your interest. Our consulting team will contact you within 24 hours.</p>
+                <p className="text-slate-600">
+                  Thank you for contacting SoftClinch. Our team has received your request, and a confirmation email has been sent to you. We will get in touch shortly.
+                </p>
                 <button 
                   onClick={() => setSubmitted(false)}
                   className="mt-8 text-slate-900 font-semibold underline"
@@ -74,8 +125,11 @@ export const Contact = () => {
                   <div>
                     <label className="black text-sm font-semibold text-white mb-2">Name</label>
                     <input 
+                      name="name"
                       type="text" 
                       required
+                      value={formData.name}
+                      onChange={handleChange}
                       className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-900 transition-all"
                       placeholder="John Doe"
                     />
@@ -83,8 +137,11 @@ export const Contact = () => {
                   <div>
                     <label className="block text-sm font-semibold text-white mb-2">Company</label>
                     <input 
+                      name="company"
                       type="text" 
                       required
+                      value={formData.company}
+                      onChange={handleChange}
                       className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-900 transition-all"
                       placeholder="Enterprise Inc."
                     />
@@ -94,8 +151,11 @@ export const Contact = () => {
                   <div>
                     <label className="block text-sm font-semibold text-white mb-2">Email</label>
                     <input 
+                      name="email"
                       type="email" 
                       required
+                      value={formData.email}
+                      onChange={handleChange}
                       className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-900 transition-all"
                       placeholder="john@company.com"
                     />
@@ -103,8 +163,11 @@ export const Contact = () => {
                   <div>
                     <label className="block text-sm font-semibold text-white mb-2">Phone</label>
                     <input 
+                      name="phone"
                       type="tel" 
                       required
+                      value={formData.phone}
+                      onChange={handleChange}
                       className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-900 transition-all"
                       placeholder="+91 98765 43210"
                     />
@@ -113,17 +176,26 @@ export const Contact = () => {
                 <div>
                   <label className="block text-sm font-semibold text-white mb-2">Message</label>
                   <textarea 
+                    name="message"
                     rows={4}
                     required
+                    value={formData.message}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-900 transition-all"
                     placeholder="Tell us about your project..."
                   />
                 </div>
+                {error ? (
+                  <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                    {error}
+                  </div>
+                ) : null}
                 <button 
                   type="submit"
-                  className="w-full bg-brand-navy text-white py-4 rounded-xl font-bold text-lg hover:bg-brand-navy/90 transition-all flex items-center justify-center gap-2"
+                  disabled={isSubmitting}
+                  className="w-full bg-brand-navy text-white py-4 rounded-xl font-bold text-lg hover:bg-brand-navy/90 transition-all flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:opacity-70"
                 >
-                  Submit Request <Send size={20} />
+                  {isSubmitting ? "Submitting..." : "Submit Request"} <Send size={20} />
                 </button>
               </form>
             )}

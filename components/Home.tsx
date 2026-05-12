@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { ChevronDown, ChevronRight, MessageSquare, Globe, Cpu, Database, BarChart3, CheckCircle2, Star } from 'lucide-react';
 import { assetPath } from '@/lib/asset';
@@ -387,7 +387,7 @@ const WhySoftClinch = () => {
             <div>
               <BarChart3 size={40} className="text-white/30 mb-6" />
               <h4 className="text-white font-bold text-xl mb-3 leading-tight">Ready to build something enterprise-grade?</h4>
-              <p className="text-white/60 text-sm leading-relaxed">Let's discuss your engineering challenges and architect the right solution.</p>
+              <p className="text-white/60 text-sm leading-relaxed">Let&apos;s discuss your engineering challenges and architect the right solution.</p>
             </div>
             <Link
               href="/contact"
@@ -436,7 +436,13 @@ const FAQ = () => {
   const leftColumnFaqs = faqs.slice(0, 3);
   const rightColumnFaqs = faqs.slice(3, 6);
 
-  const FAQItem = ({ faq, index }: { faq: any, index: number }) => {
+  const FAQItem = ({
+    faq,
+    index,
+  }: {
+    faq: (typeof faqs)[number];
+    index: number;
+  }) => {
     const isOpen = openIndex === index;
     return (
       <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
@@ -687,7 +693,7 @@ const Testimonials = () => {
 
               {/* Quote */}
               <div className="relative mb-6">
-                <div className="absolute -top-4 -left-2 text-slate-200 text-6xl font-serif select-none pointer-events-none opacity-50">"</div>
+                <div className="absolute -top-4 -left-2 text-slate-200 text-6xl font-serif select-none pointer-events-none opacity-50">&quot;</div>
                 <p className="text-slate-700 leading-relaxed relative z-10 font-medium">
                   {t.quote}
                 </p>

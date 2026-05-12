@@ -27,6 +27,7 @@ export const Header = () => {
             name: 'Services',
             path: '/services',
             subLinks: [
+                { name: 'AI-Powered Business Systems', path: '/services/ai-powered-business-systems' },
                 { name: 'Digital Marketing', path: '/digital-marketing' },
                 { name: 'SAP AMS Support', path: '/sap-ams-support' },
                 { name: 'Custom App Development', path: '/custom-application-development' },
