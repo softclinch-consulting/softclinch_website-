@@ -3,55 +3,66 @@ import { motion } from 'framer-motion';
 import { MessageSquare, CheckCircle2, Zap, Shield, BarChart3, Users, Link as LinkIcon, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { FaqSection } from "@/components/FaqSection";
+import { ServiceMediaPanel } from "@/components/ServiceMediaPanel";
+import { ServiceStatStrip } from "@/components/ServiceStatStrip";
 import { whatsappAutomationFaq } from "@/lib/faqs";
 
 export const WhatsAppAutomation = () => {
   return (
-    <div className="py-24">
+    <div className="bg-[linear-gradient(180deg,#f8fafc_0%,#ffffff_18%,#f8fafc_100%)] pt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32">
+        <div className="relative overflow-hidden rounded-[36px] border border-slate-200 bg-white px-8 py-14 shadow-sm lg:px-10 lg:py-16">
+          <div className="absolute inset-x-0 top-0 h-[420px] bg-[radial-gradient(circle_at_top_left,rgba(11,37,69,0.12),transparent_45%),radial-gradient(circle_at_top_right,rgba(37,211,102,0.12),transparent_35%)]" />
+          <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
+            <div className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 mb-6">
+              Enterprise WhatsApp Automation
+            </div>
             <h1 className="text-5xl lg:text-6xl font-display font-bold text-slate-900 mb-8">Enterprise WhatsApp Automation Platform (Inaiwazhi)</h1>
             <p className="text-xl text-slate-600 mb-10 leading-relaxed">
               Scale your business communication with Inaiwazhi, the premier WhatsApp automation platform developed by SoftClinch. Leverage the official WhatsApp Business API to automate sales, marketing, and customer support at an enterprise scale.
             </p>
-            <div className="flex gap-4">
-              <Link href="/contact" className="bg-brand-navy text-white px-8 py-4 rounded-full font-semibold hover:bg-brand-navy/90 transition-all">
+            <div className="flex gap-4 flex-wrap">
+              <Link href="/contact" className="bg-brand-navy text-white px-8 py-4 rounded-full font-semibold hover:bg-brand-navy/90 transition-all inline-flex items-center">
                 Request Demo
               </Link>
+              <Link href="/contact" className="border border-slate-300 bg-white text-slate-800 px-8 py-4 rounded-full font-semibold hover:border-emerald-500 hover:text-emerald-600 transition-all inline-flex items-center">
+                Talk to Our Team
+              </Link>
             </div>
+            <p className="mt-8 max-w-2xl text-sm leading-7 text-slate-500">
+              Built for high-intent lead response, campaign automation, CRM-connected messaging, and scalable customer communication workflows.
+            </p>
           </div>
-          <div className="relative">
-            <div className="bg-slate-100 rounded-[3rem] aspect-square flex items-center justify-center overflow-hidden">
-              <div className="w-4/5 h-4/5 bg-white rounded-3xl shadow-2xl p-8 flex flex-col">
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center text-white">
-                    <MessageSquare size={24} />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-slate-900">Inaiwazhi Bot</h3>
-                    <p className="text-xs text-emerald-500 font-medium">Online</p>
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  <div className="bg-slate-100 p-4 rounded-2xl rounded-tl-none max-w-[80%] text-sm">
-                    Hello! How can I help your enterprise today?
-                  </div>
-                  <div className="bg-slate-900 text-white p-4 rounded-2xl rounded-tr-none max-w-[80%] ml-auto text-sm">
-                    I'd like to automate our sales workflow.
-                  </div>
-                  <div className="bg-slate-100 p-4 rounded-2xl rounded-tl-none max-w-[80%] text-sm">
-                    Excellent choice. I've tagged this lead and notified your sales team.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ServiceMediaPanel
+            title="WhatsApp Workflow Preview"
+            subtitle="A product-style visual box for conversations, automations, routing, campaign delivery, and CRM-connected response handling."
+            imageSrc="/whatsapp_automation_hero_v2.png"
+            imageAlt="WhatsApp automation platform preview"
+            points={[
+              "Official WhatsApp API workflows",
+              "Lead tagging and follow-up automation",
+              "Shared inbox and campaign execution",
+              "CRM and ERP integration pathways",
+            ]}
+            mode="video"
+            theme="light"
+          />
+        </div>
         </div>
 
+        <ServiceStatStrip
+          items={[
+            { value: "24/7", label: "Automated Lead Response" },
+            { value: "API", label: "Official WhatsApp Business Integration" },
+            { value: "CRM", label: "Connected Sales & Support Workflows" },
+            { value: "AI", label: "Routing, Follow-Up & Chat Automation" },
+          ]}
+        />
+
         {/* About Inaiwazhi */}
-        <div className="bg-slate-50 rounded-[2.5rem] p-12 lg:p-20 mb-32">
+        <div className="bg-slate-50 rounded-[2.5rem] p-12 lg:p-20 mb-32 mt-20">
           <div className="max-w-3xl">
             <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900 mb-6">About Inaiwazhi</h2>
             <p className="text-lg text-slate-600 mb-8 leading-relaxed">

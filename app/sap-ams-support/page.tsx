@@ -5,18 +5,24 @@ import { faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 import { sapConsultingFaq } from "@/lib/faqs";
 
 const canonicalPath = "/sap-ams-support";
-const title = "SAP AMS Support Services | SAP Application Management – SoftClinch";
+const title = "SAP AMS Support & Enterprise SAP Consulting Services | SoftClinch";
 const description =
-  "Expert SAP AMS support services including SAP maintenance, optimization, system monitoring and enterprise support.";
+  "Enterprise SAP AMS support services including SAP implementation, monitoring, optimization, migration, and functional consulting for scalable business operations.";
 
 export const metadata = buildMetadata({
   title,
   description,
   keywords: [
-    "SAP AMS support",
-    "SAP application management services",
-    "SAP consulting company",
-    "SAP maintenance services",
+    "sap ams support",
+    "sap consulting company",
+    "enterprise sap consulting",
+    "sap implementation services",
+    "sap support services",
+    "sap migration solutions",
+    "sap mm support",
+    "sap sd support",
+    "sap fico consulting",
+    "sap managed services",
   ],
   canonicalPath,
 });
@@ -30,7 +36,11 @@ export default function SAPAmsSupportPage() {
             canonicalPath,
             title,
           }),
-          serviceJsonLd({ canonicalPath, name: "SAP AMS Support Services", description }),
+          serviceJsonLd({
+            canonicalPath,
+            name: "SAP AMS Support and Enterprise SAP Consulting Services",
+            description,
+          }),
           faqJsonLd(sapConsultingFaq),
         ]}
       />

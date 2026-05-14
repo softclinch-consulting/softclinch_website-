@@ -5,19 +5,24 @@ import { faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 import { digitalMarketingFaq } from "@/lib/faqs";
 
 const canonicalPath = "/digital-marketing";
-const title = "Digital Marketing Services | SEO, Social Media & Growth Marketing – SoftClinch";
+const title = "SEO, Google Ads & Performance Marketing Services | SoftClinch";
 const description =
-  "Boost your business with SoftClinch digital marketing services including SEO, performance marketing, social media management and conversion optimization.";
+  "Grow your business with SEO, GEO, AEO, Google Ads, Meta Ads, funnels, automation, and performance marketing strategies designed for leads and revenue growth.";
 
 export const metadata = buildMetadata({
   title,
   description,
   keywords: [
-    "digital marketing services",
-    "SEO services",
-    "social media marketing",
-    "growth marketing agency",
-    "online marketing company",
+    "performance marketing agency",
+    "seo services company",
+    "google ads agency",
+    "meta ads management",
+    "digital marketing company",
+    "lead generation agency",
+    "seo and ppc services",
+    "geo optimization services",
+    "aeo optimization company",
+    "ai search optimization",
   ],
   canonicalPath,
 });
@@ -31,7 +36,11 @@ export default function DigitalMarketingPage() {
             canonicalPath,
             title,
           }),
-          serviceJsonLd({ canonicalPath, name: "Digital Marketing Services", description }),
+          serviceJsonLd({
+            canonicalPath,
+            name: "SEO, Google Ads and Performance Marketing Services",
+            description,
+          }),
           faqJsonLd(digitalMarketingFaq),
         ]}
       />

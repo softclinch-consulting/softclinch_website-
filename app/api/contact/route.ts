@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { appendFile, mkdir } from "node:fs/promises";
+import path from "node:path";
 import nodemailer from "nodemailer";
 import { CONTACT } from "@/lib/contact";
 
@@ -37,6 +39,21 @@ function splitName(fullName: string) {
   };
 }
 
+async function storeSubmission(payload: Required<ContactPayload>) {
+  const submissionsDir = path.join(process.cwd(), "data");
+  const submissionsFile = path.join(submissionsDir, "contact-submissions.ndjson");
+
+  await mkdir(submissionsDir, { recursive: true });
+  await appendFile(
+    submissionsFile,
+    `${JSON.stringify({
+      submittedAt: new Date().toISOString(),
+      ...payload,
+    })}\n`,
+    "utf8"
+  );
+}
+
 async function brevoRequest<T>(path: string, body: Record<string, unknown>) {
   const apiKey = getRequiredEnv("BREVO_API_KEY");
   const response = await fetch(`https://api.brevo.com/v3${path}`, {
@@ -51,7 +68,13 @@ async function brevoRequest<T>(path: string, body: Record<string, unknown>) {
 
   if (!response.ok) {
     const errorText = await response.text();
-    throw new Error(`Brevo API error (${response.status}): ${errorText}`);
+    const error = new Error(`Brevo API error (${response.status}): ${errorText}`) as Error & {
+      status?: number;
+      details?: string;
+    };
+    error.status = response.status;
+    error.details = errorText;
+    throw error;
   }
 
   if (response.status === 204) {
@@ -61,7 +84,23 @@ async function brevoRequest<T>(path: string, body: Record<string, unknown>) {
   return (await response.json()) as T;
 }
 
-async function syncBrevoContact(payload: Required<ContactPayload>) {
+function isBrevoDuplicateSmsError(error: unknown) {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "status" in error &&
+    "details" in error &&
+    (error as { status?: number }).status === 400 &&
+    typeof (error as { details?: string }).details === "string" &&
+    (error as { details: string }).details.includes('"duplicate_identifiers":["SMS"]')
+  );
+}
+
+async function syncBrevoContact(
+  payload: Required<ContactPayload>,
+  options?: { includePhone?: boolean }
+) {
+  const includePhone = options?.includePhone ?? true;
   const { firstName, lastName } = splitName(payload.name);
   const listId = getEnvNumber("BREVO_CONTACT_LIST_ID", 2);
 
@@ -73,7 +112,7 @@ async function syncBrevoContact(payload: Required<ContactPayload>) {
     attributes.LASTNAME = lastName;
   }
 
-  if (payload.phone) {
+  if (includePhone && payload.phone) {
     attributes.SMS = payload.phone;
   }
 
@@ -89,7 +128,7 @@ async function syncBrevoContact(payload: Required<ContactPayload>) {
     attributes[messageAttribute] = payload.message;
   }
 
-  if (phoneAttribute) {
+  if (includePhone && phoneAttribute) {
     attributes[phoneAttribute] = payload.phone;
   }
 
@@ -102,11 +141,6 @@ async function syncBrevoContact(payload: Required<ContactPayload>) {
 }
 
 async function sendBrevoAutoReply(payload: Required<ContactPayload>) {
-  const templateId = getEnvNumber("BREVO_CONFIRMATION_TEMPLATE_ID", 1);
-  if (!templateId) {
-    throw new Error("Missing Brevo confirmation template id.");
-  }
-
   const senderEmail =
     process.env.BREVO_SENDER_EMAIL?.trim() ||
     process.env.SMTP_FROM_EMAIL?.trim() ||
@@ -115,6 +149,7 @@ async function sendBrevoAutoReply(payload: Required<ContactPayload>) {
     process.env.BREVO_SENDER_NAME?.trim() ||
     process.env.SMTP_FROM_NAME?.trim() ||
     "SoftClinch Consulting Services";
+  const autoReplyEmail = buildAutoReplyEmail(payload);
 
   await brevoRequest("/smtp/email", {
     sender: {
@@ -127,15 +162,12 @@ async function sendBrevoAutoReply(payload: Required<ContactPayload>) {
         name: payload.name,
       },
     ],
-    templateId,
-    params: {
-      name: payload.name,
-      firstName: splitName(payload.name).firstName,
-      company: payload.company,
-      email: payload.email,
-      phone: payload.phone,
-      message: payload.message,
+    replyTo: {
+      email: CONTACT.email,
+      name: senderName,
     },
+    subject: autoReplyEmail.subject,
+    htmlContent: autoReplyEmail.html,
   });
 }
 
@@ -191,8 +223,16 @@ function buildAutoReplyEmail(payload: Required<ContactPayload>) {
       <div style="font-family: Arial, Helvetica, sans-serif; color: #0f172a; line-height: 1.7;">
         <h2 style="margin-bottom: 16px;">Thank you for contacting SoftClinch</h2>
         <p>Hello ${payload.name},</p>
-        <p>We have received your enquiry and our team is reviewing the details you shared.</p>
-        <p>We will connect with you shortly to discuss the next steps and how we can support your business goals.</p>
+        <p>Thank you for submitting your enquiry. Our team has received your request and is reviewing the details you shared.</p>
+        <p>We will get in touch with you shortly to discuss the next steps and how we can support your business goals.</p>
+        <div style="margin-top: 24px; padding: 16px; border: 1px solid #e2e8f0; border-radius: 12px; background: #f8fafc;">
+          <h3 style="margin: 0 0 12px;">Your submitted details</h3>
+          <p style="margin: 0 0 8px;"><strong>Name:</strong> ${payload.name}</p>
+          <p style="margin: 0 0 8px;"><strong>Company:</strong> ${payload.company}</p>
+          <p style="margin: 0 0 8px;"><strong>Email:</strong> ${payload.email}</p>
+          <p style="margin: 0 0 8px;"><strong>Phone:</strong> ${payload.phone}</p>
+          <p style="margin: 0;"><strong>Message:</strong> ${payload.message}</p>
+        </div>
         <p style="margin-top: 24px;">Regards,<br />SoftClinch Consulting Services</p>
       </div>
     `,
@@ -232,8 +272,18 @@ export async function POST(request: Request) {
       );
     }
 
+    await storeSubmission(payload);
+
     if (process.env.BREVO_API_KEY?.trim()) {
-      await syncBrevoContact(payload);
+      try {
+        await syncBrevoContact(payload);
+      } catch (error) {
+        if (isBrevoDuplicateSmsError(error)) {
+          await syncBrevoContact(payload, { includePhone: false });
+        } else {
+          throw error;
+        }
+      }
       await sendBrevoAutoReply(payload);
       await sendBrevoAdminEmail(payload);
       return NextResponse.json({ success: true, provider: "brevo" });
@@ -273,6 +323,28 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true, provider: "smtp" });
   } catch (error) {
     console.error("Contact form email error", error);
+
+    if (
+      typeof error === "object" &&
+      error !== null &&
+      "status" in error &&
+      "details" in error
+    ) {
+      const typedError = error as { status?: number; details?: string };
+      if (
+        typedError.status === 401 &&
+        typedError.details?.includes("unrecognised IP address")
+      ) {
+        return NextResponse.json(
+          {
+            error:
+              "Brevo is blocking requests from this IP address. Please add this IP in your Brevo authorized IP settings and try again.",
+          },
+          { status: 503 }
+        );
+      }
+    }
+
     return NextResponse.json(
       {
         error:

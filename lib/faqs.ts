@@ -5,19 +5,24 @@ export type FaqItem = {
 
 export const digitalMarketingFaq: FaqItem[] = [
   {
-    question: "How long does SEO take to show results?",
+    question: "What makes your SEO strategy different?",
     answer:
-      "Most sites see measurable improvements within 8–12 weeks, with compounding gains over 3–6 months based on competition and content velocity.",
+      "Our SEO strategies focus on modern ranking systems including AI search optimization, entity SEO, topical authority, and conversion-focused content.",
   },
   {
-    question: "Do you manage paid ads (Google/Meta)?",
+    question: "Do you provide AI search optimization services?",
     answer:
-      "Yes. We manage campaign setup, creative testing, conversion tracking, landing page optimization, and ongoing budget allocation.",
+      "Yes. We optimize websites for Google AI Overviews, ChatGPT discovery, Perplexity, Gemini, and modern AI-powered search engines.",
   },
   {
-    question: "What reporting do you provide?",
+    question: "Can you manage both SEO and paid advertising?",
     answer:
-      "We provide KPI dashboards and monthly reports covering leads, CAC/ROAS, rankings, traffic quality, and conversion performance.",
+      "Yes. We provide integrated SEO, PPC, automation, CRO, and analytics solutions for complete digital growth.",
+  },
+  {
+    question: "How long does SEO take to generate results?",
+    answer:
+      "SEO typically starts showing measurable improvements within 3-6 months depending on industry competition and website authority.",
   },
 ];
 
@@ -33,7 +38,7 @@ export const sapConsultingFaq: FaqItem[] = [
       "Yes. We offer AMS support, performance tuning, incident management, enhancements, and integration maintenance.",
   },
   {
-    question: "Do you work with integrations (SAP ↔ CRM/BI)?",
+    question: "Do you work with integrations (SAP to CRM/BI)?",
     answer:
       "Yes. We design and implement integrations to CRM, data platforms, middleware, and custom APIs with governance and monitoring.",
   },
@@ -41,19 +46,24 @@ export const sapConsultingFaq: FaqItem[] = [
 
 export const customDevelopmentFaq: FaqItem[] = [
   {
-    question: "Do you build both web and mobile apps?",
+    question: "Do you build both web and mobile applications?",
     answer:
-      "Yes. We build responsive web apps and mobile applications, with shared backend APIs and scalable cloud infrastructure.",
+      "Yes. We develop responsive web applications, SaaS platforms, and cross-platform mobile applications.",
   },
   {
-    question: "Can you integrate with our existing systems?",
+    question: "Can you integrate with existing systems?",
     answer:
-      "Yes. We integrate with ERP/CRM, payment gateways, analytics, identity providers, and custom internal APIs.",
+      "Yes. We provide CRM, ERP, payment gateway, API, and third-party system integration services.",
   },
   {
-    question: "Do you provide ongoing maintenance?",
+    question: "Do you provide maintenance and support?",
     answer:
-      "Yes. We offer maintenance and enhancement retainers, including monitoring, security updates, and feature delivery.",
+      "Yes. We provide ongoing support, monitoring, optimization, and infrastructure maintenance services.",
+  },
+  {
+    question: "What technologies do you use?",
+    answer:
+      "We use Next.js, React, Node.js, TypeScript, Python, PostgreSQL, MongoDB, Docker, Kubernetes, and AWS cloud technologies.",
   },
 ];
 
@@ -74,4 +84,3 @@ export const whatsappAutomationFaq: FaqItem[] = [
       "We follow security best practices for data handling, access controls, auditability, and integration design based on your requirements.",
   },
 ];
-

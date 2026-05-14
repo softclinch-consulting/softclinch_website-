@@ -7,6 +7,8 @@ import {
   ArrowRight, Activity
 } from 'lucide-react';
 import { FaqSection } from "@/components/FaqSection";
+import { ServiceMediaPanel } from "@/components/ServiceMediaPanel";
+import { ServiceStatStrip } from "@/components/ServiceStatStrip";
 import { sapConsultingFaq } from "@/lib/faqs";
 
 const Button = ({ children, className, variant, ...props }: any) => {
@@ -83,50 +85,77 @@ export const SAPConsulting = () => {
           className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-brand-navy/10 to-brand-terracotta/10 rounded-full blur-3xl opacity-70"
         />
         <div className="max-w-[1200px] mx-auto px-8 relative z-10">
-          <div className="text-center max-w-[900px] mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="inline-flex items-center gap-2 bg-brand-navy/5 border border-brand-navy/10 text-brand-navy px-5 py-2 rounded-full text-sm font-bold mb-8 uppercase tracking-wide"
-            >
-              <Activity className="w-4 h-4 text-brand-terracotta" />
-              Application Management Support
-            </motion.div>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-5xl lg:text-7xl font-extrabold text-slate-900 leading-[1.1] mb-6 tracking-tight"
-            >
-              Proactive SAP AMS for <br />
-              <span className="bg-gradient-to-r from-brand-navy to-brand-terracotta bg-clip-text text-transparent">
-                Uninterrupted Growth
-              </span>
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-xl text-slate-600 mb-10 leading-relaxed max-w-3xl mx-auto"
-            >
-              Ensure continuous system performance, operational stability, and business agility with structured SAP Application Management Services designed for modern enterprises. We support SAP environments including SAP S/4HANA and SAP ECC landscapes with scalable engagement models tailored to your operational complexity.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="flex gap-4 justify-center flex-wrap"
-            >
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button className="bg-brand-navy hover:bg-brand-navy/90 text-white px-8 py-4 text-lg rounded-xl shadow-xl shadow-brand-navy/20 transition-all duration-300 flex items-center font-semibold gap-2">
-                  Talk to an AMS Expert <ArrowRight className="w-5 h-5" />
-                </Button>
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.95fr] gap-16 items-center">
+            <div className="max-w-[900px]">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="inline-flex items-center gap-2 bg-brand-navy/5 border border-brand-navy/10 text-brand-navy px-5 py-2 rounded-full text-sm font-bold mb-8 uppercase tracking-wide"
+              >
+                <Activity className="w-4 h-4 text-brand-terracotta" />
+                Application Management Support
               </motion.div>
-            </motion.div>
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-5xl lg:text-7xl font-extrabold text-slate-900 leading-[1.1] mb-6 tracking-tight"
+              >
+                Proactive SAP AMS for <br />
+                <span className="bg-gradient-to-r from-brand-navy to-brand-terracotta bg-clip-text text-transparent">
+                  Uninterrupted Growth
+                </span>
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="text-xl text-slate-600 mb-10 leading-relaxed max-w-3xl"
+              >
+                Ensure continuous system performance, operational stability, and business agility with structured SAP Application Management Services designed for modern enterprises. We support SAP environments including SAP S/4HANA and SAP ECC landscapes with scalable engagement models tailored to your operational complexity.
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="flex gap-4 flex-wrap"
+              >
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button className="bg-brand-navy hover:bg-brand-navy/90 text-white px-8 py-4 text-lg rounded-xl shadow-xl shadow-brand-navy/20 transition-all duration-300 flex items-center font-semibold gap-2">
+                    Talk to an AMS Expert <ArrowRight className="w-5 h-5" />
+                  </Button>
+                </motion.div>
+              </motion.div>
+            </div>
+
+            <ServiceMediaPanel
+              title="SAP Support Command Center"
+              subtitle="A structured visual space for monitoring, support workflows, governance, and enterprise SAP performance visibility."
+              imageSrc="/sap_consulting_hero_v2.png"
+              imageAlt="SAP AMS support service preview"
+              points={[
+                "Monitoring and incident management",
+                "S/4HANA and ECC support coverage",
+                "Functional and technical AMS delivery",
+                "Governance, SLA, and optimization layers",
+              ]}
+              theme="light"
+            />
           </div>
         </div>
       </section>
+
+      <div className="px-8 pb-6">
+        <ServiceStatStrip
+          items={[
+            { value: "24/7", label: "Monitoring & Response Capability" },
+            { value: "SLA", label: "Governed AMS Delivery Model" },
+            { value: "ECC + S/4", label: "Support Across SAP Landscapes" },
+            { value: "AMS", label: "Functional, Technical & Basis Coverage" },
+          ]}
+        />
+      </div>
 
       {/* Intro Section */}
       <section className="py-20 bg-white">
@@ -431,4 +460,3 @@ export const SAPConsulting = () => {
     </div>
   );
 };
-

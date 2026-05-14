@@ -1,6 +1,7 @@
 "use client";
 import { motion } from 'framer-motion';
 import { Shield, Cpu, Database, MessageSquare, CheckCircle2, Plug, TrendingUp, Settings, Zap } from 'lucide-react';
+import { assetPath } from '@/lib/asset';
 
 const MissionVision = () => (
   <section className="relative py-24 bg-brand-navy rounded-[3rem] mb-32 overflow-hidden">
@@ -73,6 +74,56 @@ const Values = () => (
     </div>
   </section>
 );
+
+const ClientLogos = () => {
+  const clients = [
+    { name: 'Prenora Investment Holding', logoPath: '/client-logos/sc-clients-001.jpg', bg: 'bg-white' },
+    { name: 'Rane', logoPath: '/client-logos/sc-clients-002.jpg', bg: 'bg-white' },
+    { name: 'NTT DATA', logoPath: '/client-logos/sc-clients-003.jpg', bg: 'bg-white' },
+    { name: 'Fujitsu', logoPath: '/client-logos/sc-clients-004.jpg', bg: 'bg-white' },
+    { name: 'Star Eltech', logoPath: '/client-logos/sc-clients-005.jpg', bg: 'bg-white' },
+    { name: 'SoftClinch', logoPath: '/client-logos/logo.gif', bg: 'bg-white' },
+    { name: 'Client Logo 007', logoPath: '/client-logos/client-logo-007.jpeg', bg: 'bg-white' },
+    { name: 'Client Logo 008', logoPath: '/client-logos/client-logo-008.jpeg', bg: 'bg-white' },
+  ];
+
+  return (
+    <section className="py-24 bg-slate-50 rounded-[3rem] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-8">
+        <div className="text-center mb-16">
+          <p className="text-sm uppercase tracking-[0.3em] text-slate-500 font-bold mb-4">Trusted by our clients</p>
+          <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900">Clients We Serve</h2>
+          <p className="text-slate-600 max-w-2xl mx-auto mt-4">
+            We partner with established brands and growing enterprises to deliver mission-critical systems, automation, and digital transformation.
+          </p>
+        </div>
+
+        <div className="relative mb-12 overflow-hidden rounded-[2rem] border border-slate-200 bg-white/80 py-5 shadow-sm">
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-slate-50 to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-slate-50 to-transparent" />
+          <motion.div
+            className="flex w-max gap-4"
+            animate={{ x: ['0%', '-50%'] }}
+            transition={{ duration: 22, ease: 'linear', repeat: Infinity }}
+          >
+            {[...clients, ...clients].map((client, index) => (
+              <div
+                key={`${client.name}-${index}`}
+                className="flex min-w-[180px] items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 px-6 py-5"
+              >
+                <img
+                  src={assetPath(client.logoPath)}
+                  alt={client.name}
+                  className="h-14 w-28 object-contain"
+                />
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const Timeline = () => (
   <section className="py-24 mb-32 border-t border-slate-100">
@@ -349,6 +400,8 @@ export const About = () => {
         </div>
 
         <MissionVision />
+
+        <ClientLogos />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-32">
           {/* Left: Our Expertise */}

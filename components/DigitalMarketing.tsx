@@ -1,20 +1,24 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { TrendingUp, Target, Search, BarChart, Mail, Zap, Check, ArrowRight, Star } from 'lucide-react';
+import React, { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import {
+  ArrowRight,
+  BarChart,
+  Check,
+  Mail,
+  Search,
+  Star,
+  Target,
+  TrendingUp,
+  Zap,
+} from "lucide-react";
 import { FaqSection } from "@/components/FaqSection";
+import { ServiceMediaPanel } from "@/components/ServiceMediaPanel";
 import { digitalMarketingFaq } from "@/lib/faqs";
 import { reviews } from "@/lib/reviews";
 
-const Button = ({ children, className, variant, ...props }: any) => {
-  return (
-    <button className={className} {...props}>
-      {children}
-    </button>
-  );
-};
-
-const Card = ({ children, className }: any) => {
+const Card = ({ children, className }: { children: React.ReactNode; className: string }) => {
   return <div className={className}>{children}</div>;
 };
 
@@ -29,10 +33,7 @@ export const DigitalMarketing = () => {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] overflow-hidden font-sans pt-20">
-
-      {/* Hero Section */}
       <section className="relative bg-white overflow-hidden py-12 lg:py-24" ref={heroRef}>
-        {/* Animated Background Gradient Blob */}
         <motion.div
           animate={{
             scale: [1, 1.2, 1],
@@ -41,14 +42,13 @@ export const DigitalMarketing = () => {
           transition={{
             duration: 20,
             repeat: Infinity,
-            ease: "linear"
+            ease: "linear",
           }}
           className="absolute -top-[300px] -right-[300px] w-[800px] h-[800px] bg-gradient-to-br from-brand-navy/10 to-brand-terracotta/10 rounded-full blur-3xl"
         />
 
         <div className="max-w-[1200px] mx-auto px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left: Text Content */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -60,42 +60,45 @@ export const DigitalMarketing = () => {
                 transition={{ delay: 0.2 }}
                 className="inline-block bg-brand-navy/10 text-brand-navy px-4 py-1.5 rounded-full text-sm font-semibold mb-6"
               >
-                Performance Digital Marketing & Revenue Growth
+                AI SEO, GEO, AEO & Performance Marketing
               </motion.div>
 
               <h1 className="text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-6">
-                Data-Driven Digital Marketing for{' '}
+                AI-Powered Digital Marketing, SEO &{" "}
                 <span className="bg-gradient-to-r from-brand-navy to-brand-terracotta bg-clip-text text-transparent">
-                  Predictable Growth
+                  Performance Growth Solutions
                 </span>
               </h1>
 
               <p className="text-xl text-slate-600 mb-8 leading-relaxed">
-                We design scalable marketing systems combining paid ads, SEO, funnels, automation, and advanced analytics.
+                Generate qualified leads, increase revenue, and scale faster with SEO, Google Ads, AI search optimization, conversion funnels, automation, and performance marketing strategies built for modern businesses.
               </p>
 
               <div className="flex gap-4 flex-wrap">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Button className="bg-brand-navy hover:bg-brand-navy/90 text-white px-8 py-4 text-base rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center font-semibold">
-                    Book Growth Strategy Call
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Link
+                    href="/contact"
+                    className="bg-brand-navy hover:bg-brand-navy/90 text-white px-8 py-4 text-base rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center font-semibold"
+                  >
+                    Book Free Growth Consultation
                     <ArrowRight className="ml-2 w-5 h-5" />
-                  </Button>
+                  </Link>
                 </motion.div>
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Button variant="outline" className="border-2 border-slate-200 text-slate-700 font-semibold px-8 py-4 text-base rounded-lg hover:bg-slate-50 hover:border-brand-navy transition-all duration-300">
-                    View Case Studies
-                  </Button>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Link
+                    href="/case-studies"
+                    className="border-2 border-slate-200 text-slate-700 font-semibold px-8 py-4 text-base rounded-lg hover:bg-slate-50 hover:border-brand-navy transition-all duration-300 inline-flex"
+                  >
+                    View Success Stories
+                  </Link>
                 </motion.div>
               </div>
+
+              <p className="text-sm text-slate-500 mt-8 leading-relaxed max-w-xl">
+                Performance-focused digital marketing agency helping startups, ecommerce brands, and enterprises grow through SEO, GEO, AEO, PPC, AI-driven marketing, and conversion optimization.
+              </p>
             </motion.div>
 
-            {/* Right: Floating Dashboard Image */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -103,54 +106,43 @@ export const DigitalMarketing = () => {
               className="relative"
               style={{ y }}
             >
-              {/* Gradient Blob Behind */}
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-navy/20 via-brand-terracotta/10 to-brand-navy/5 rounded-[20px] blur-3xl transform scale-110" />
-
-              {/* Floating Animation */}
-              <motion.div
-                animate={{
-                  y: [0, -20, 0],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                className="relative"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.05, rotateY: 5 }}
-                  transition={{ duration: 0.3 }}
-                  className="rounded-[20px] overflow-hidden shadow-2xl border border-slate-100 bg-white"
-                >
-                  <img
-                    src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhbmFseXRpY3MlMjBkYXNoYm9hcmQlMjBncm93dGglMjBjaGFydHxlbnwxfHx8fDE3NzIwMDczNjF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                    alt="Analytics Dashboard"
-                    className="w-full h-auto object-cover"
-                  />
-                </motion.div>
-              </motion.div>
+              <ServiceMediaPanel
+                title="Growth Campaign Dashboard"
+                subtitle="SEO, paid media, attribution, and conversion performance working together in one decision layer."
+                imageSrc="/digital_marketing_hero_v2.png"
+                imageAlt="Digital marketing service preview"
+                points={[
+                  "SEO + GEO + AEO strategy",
+                  "Google Ads and funnel optimization",
+                  "Conversion tracking and analytics",
+                  "Automation and lead growth systems",
+                ]}
+              />
             </motion.div>
           </div>
 
-          {/* Hero Service Cards */}
-          <div className="mt-12 lg:mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="mt-12 lg:mt-16 grid grid-cols-1 md:grid-cols-4 gap-6">
             {[
               {
-                icon: Search,
-                title: "SEO & Content",
-                description: "Technical SEO + content strategy to win high-intent organic traffic."
+                icon: TrendingUp,
+                title: "140%",
+                description: "Average ROI Growth",
               },
               {
                 icon: Target,
-                title: "Paid Performance",
-                description: "Google/Meta campaigns with testing, tracking, and ROI-first optimization."
+                title: "2X",
+                description: "Increase in Qualified Leads",
               },
               {
                 icon: BarChart,
-                title: "Analytics & Attribution",
-                description: "Clean measurement, dashboards, and insights to scale what works."
-              }
+                title: "28%",
+                description: "Lower Customer Acquisition Cost",
+              },
+              {
+                icon: Search,
+                title: "AI + SEO",
+                description: "Optimized for Google & AI Search Engines",
+              },
             ].map((item, index) => (
               <motion.div
                 key={item.title}
@@ -164,7 +156,7 @@ export const DigitalMarketing = () => {
                   <div className="w-12 h-12 rounded-xl bg-brand-navy/5 flex items-center justify-center mb-4">
                     <item.icon className="w-6 h-6 text-brand-terracotta" />
                   </div>
-                  <div className="text-lg font-bold text-slate-900 mb-2">{item.title}</div>
+                  <div className="text-2xl font-bold text-slate-900 mb-2">{item.title}</div>
                   <div className="text-sm text-slate-600 leading-relaxed">{item.description}</div>
                 </div>
               </motion.div>
@@ -172,7 +164,6 @@ export const DigitalMarketing = () => {
           </div>
         </div>
 
-        {/* SVG Wave Divider */}
         <div className="absolute bottom-0 left-0 right-0">
           <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full text-[#F8FAFC]">
             <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="currentColor" />
@@ -180,15 +171,14 @@ export const DigitalMarketing = () => {
         </div>
       </section>
 
-      {/* Services Grid Section */}
       <section className="max-w-[1200px] mx-auto px-8 py-20">
         <FadeInSection>
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-slate-900 mb-4">
-              Comprehensive Marketing Solutions
+              Digital Marketing Services Designed for Modern Search & Revenue Growth
             </h2>
-            <p className="text-xl text-slate-600 max-w-[700px] mx-auto">
-              End-to-end digital marketing services designed to drive measurable results
+            <p className="text-xl text-slate-600 max-w-[760px] mx-auto">
+              Built for Google rankings, AI discovery, qualified lead generation, and measurable revenue growth.
             </p>
           </div>
         </FadeInSection>
@@ -196,43 +186,49 @@ export const DigitalMarketing = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
             {
-              icon: Target,
-              title: 'Performance Advertising',
-              description: 'Strategic campaign management across Google, Meta, and LinkedIn with continuous optimization for maximum ROI.',
-              features: ['Google Ads', 'Meta Ads', 'LinkedIn Campaigns', 'Budget Optimization']
+              icon: Search,
+              title: "SEO, GEO & AEO Optimization",
+              description:
+                "Improve visibility across Google Search, ChatGPT, Gemini, Perplexity, and AI-powered search engines using advanced SEO, GEO, and Answer Engine Optimization strategies.",
+              features: ["Technical SEO", "AI Search Optimization", "Entity SEO", "Topical Authority"],
             },
             {
-              icon: Search,
-              title: 'SEO & Content Marketing',
-              description: 'Comprehensive search engine optimization and strategic content creation to drive organic traffic.',
-              features: ['Technical SEO', 'Content Strategy', 'Link Building', 'Keyword Research']
+              icon: Target,
+              title: "Google Ads & Performance Marketing",
+              description:
+                "High-converting Google Ads, Meta Ads, YouTube Ads, and remarketing campaigns optimized for ROI, lead generation, and scalable growth.",
+              features: ["Google Ads", "Meta Ads", "YouTube Ads", "Remarketing"],
             },
             {
               icon: TrendingUp,
-              title: 'Funnel Architecture & CRO',
-              description: 'Data-driven funnel analysis and conversion rate optimization to maximize customer acquisition.',
-              features: ['Landing Pages', 'A/B Testing', 'User Journey Mapping', 'Conversion Tracking']
+              title: "Conversion Funnels & CRO",
+              description:
+                "Build landing pages, lead funnels, and conversion systems designed to increase inquiries, bookings, and sales performance.",
+              features: ["Landing Pages", "A/B Testing", "Lead Funnels", "CRO Systems"],
             },
             {
               icon: Mail,
-              title: 'Marketing Automation',
-              description: 'Sophisticated automation workflows and CRM integration for personalized customer experiences.',
-              features: ['Email Automation', 'Lead Scoring', 'CRM Integration', 'Drip Campaigns']
-            },
-            {
-              icon: BarChart,
-              title: 'Analytics & Attribution',
-              description: 'Advanced tracking and attribution modeling to measure true marketing impact across all channels.',
-              features: ['Multi-Touch Attribution', 'Custom Dashboards', 'ROI Tracking', 'Performance Reports']
+              title: "AI Marketing Automation",
+              description:
+                "Automate lead nurturing, customer engagement, WhatsApp campaigns, CRM workflows, and personalized communication systems.",
+              features: ["WhatsApp Workflows", "CRM Automation", "AI Chatbots", "Lead Nurturing"],
             },
             {
               icon: Zap,
-              title: 'Growth Strategy',
-              description: 'High-level marketing strategy development and go-to-market planning for sustainable growth.',
-              features: ['Market Research', 'Competitor Analysis', 'GTM Strategy', 'Growth Planning']
-            }
+              title: "Content Marketing & Authority Building",
+              description:
+                "Create SEO-optimized content, topical authority clusters, and strategic content systems that drive long-term organic traffic.",
+              features: ["Content Clusters", "Authority Building", "Keyword Strategy", "Content Systems"],
+            },
+            {
+              icon: BarChart,
+              title: "Analytics & Attribution Tracking",
+              description:
+                "Advanced reporting dashboards, conversion tracking, attribution models, and performance insights for data-driven scaling.",
+              features: ["Dashboards", "Conversion Tracking", "Attribution", "Performance Insights"],
+            },
           ].map((service, index) => (
-            <FadeInSection key={index} delay={index * 0.1}>
+            <FadeInSection key={service.title} delay={index * 0.1}>
               <motion.div
                 whileHover={{ y: -8, scale: 1.02 }}
                 transition={{ duration: 0.3 }}
@@ -253,8 +249,8 @@ export const DigitalMarketing = () => {
                     {service.description}
                   </p>
                   <ul className="space-y-2 mt-auto">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-sm text-slate-600">
+                    {service.features.map((feature) => (
+                      <li key={feature} className="flex items-center gap-2 text-sm text-slate-600">
                         <Check className="w-4 h-4 text-brand-terracotta flex-shrink-0" />
                         {feature}
                       </li>
@@ -267,7 +263,6 @@ export const DigitalMarketing = () => {
         </div>
       </section>
 
-      {/* SEO Content Block */}
       <section className="bg-white py-20">
         <div className="max-w-[1200px] mx-auto px-8">
           <div className="max-w-[900px] mx-auto space-y-16">
@@ -275,13 +270,43 @@ export const DigitalMarketing = () => {
               <div>
                 <h2 className="text-4xl font-bold text-slate-900 mb-6 flex items-center gap-3">
                   <span className="w-8 h-1 bg-brand-terracotta rounded-full block"></span>
-                  Performance Marketing Agency
+                  Built for the Future of Search & Digital Growth
                 </h2>
                 <p className="text-slate-600 leading-relaxed text-lg mb-6">
-                  In today's competitive digital landscape, success demands more than just running ads—it requires a comprehensive, data-driven approach to customer acquisition and revenue growth. Our performance marketing methodology combines advanced targeting strategies, sophisticated funnel architecture, and real-time optimization to deliver measurable results. We specialize in creating scalable demand generation systems that integrate seamlessly across paid search, social media advertising, and display networks, ensuring your marketing budget translates directly into qualified pipeline and revenue.
+                  Modern digital marketing is no longer just about rankings. Businesses need visibility across Google Search, AI search engines, voice search, local search, and answer engines.
+                </p>
+                <p className="text-slate-600 leading-relaxed text-lg mb-6">
+                  Our strategies combine SEO, AI search optimization, automation, analytics, and performance marketing to help brands dominate modern digital discovery platforms.
+                </p>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {[
+                    "AI Search Optimization (GEO & AEO)",
+                    "Topical Authority SEO",
+                    "Entity-Based SEO Strategy",
+                    "First-Party Data Tracking",
+                    "Conversion-Focused Landing Pages",
+                    "Performance Creative Testing",
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-slate-600">
+                      <Check className="w-4 h-4 text-brand-terracotta flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </FadeInSection>
+
+            <FadeInSection>
+              <div>
+                <h2 className="text-4xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                  <span className="w-8 h-1 bg-brand-terracotta rounded-full block"></span>
+                  SEO Services for Long-Term Organic Growth
+                </h2>
+                <p className="text-slate-600 leading-relaxed text-lg mb-6">
+                  Our SEO services focus on technical optimization, high-intent keyword targeting, content strategy, authority building, and AI search visibility to help businesses generate sustainable organic traffic and qualified leads.
                 </p>
                 <p className="text-slate-600 leading-relaxed text-lg">
-                  Every campaign we design is built with clear attribution tracking and ROI measurement from day one. Our team leverages proprietary analytics frameworks and industry-leading tools to understand customer behavior at every touchpoint, enabling continuous optimization and informed decision-making. From initial audience research through creative testing, budget allocation, and conversion optimization, we provide end-to-end management that drives predictable, sustainable growth.
+                  We optimize websites for Google rankings, featured snippets, local SEO, entity SEO, AI answer engines, and conversion-focused search experiences.
                 </p>
               </div>
             </FadeInSection>
@@ -290,39 +315,49 @@ export const DigitalMarketing = () => {
               <div>
                 <h2 className="text-4xl font-bold text-slate-900 mb-6 flex items-center gap-3">
                   <span className="w-8 h-1 bg-brand-terracotta rounded-full block"></span>
-                  SEO & Organic Growth Strategy
+                  Google Ads & Paid Media Campaign Management
                 </h2>
                 <p className="text-slate-600 leading-relaxed text-lg mb-6">
-                  Search engine optimization is no longer optional—it's a critical component of any sustainable digital marketing strategy. Our SEO services go beyond basic keyword optimization to deliver comprehensive technical improvements, authoritative content creation, and strategic link building that elevates your domain authority and organic visibility. We conduct deep competitive analysis and keyword research to identify high-intent search opportunities, then develop content strategies that capture qualified traffic at every stage of the buyer journey.
+                  Scale customer acquisition with data-driven Google Ads, Meta Ads, YouTube campaigns, remarketing strategies, and landing page optimization designed for measurable ROI.
                 </p>
-                <p className="text-slate-600 leading-relaxed text-lg">
-                  Our technical SEO expertise ensures your website architecture, page speed, mobile responsiveness, and structured data are optimized for both search engines and user experience. We implement sophisticated tracking and reporting systems that demonstrate clear correlation between organic rankings and business outcomes. From on-page optimization and content development to backlink acquisition and local SEO, our holistic approach builds long-term organic growth.
-                </p>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {[
+                    "Google Search Ads",
+                    "Meta & Instagram Ads",
+                    "YouTube Video Campaigns",
+                    "Remarketing & Retargeting",
+                    "Lead Generation Campaigns",
+                    "Ecommerce Performance Marketing",
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-slate-600">
+                      <Check className="w-4 h-4 text-brand-terracotta flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </FadeInSection>
           </div>
         </div>
       </section>
 
-      {/* Process Timeline */}
       <section className="max-w-[1200px] mx-auto px-8 py-20">
         <FadeInSection>
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-slate-900 mb-4">
-              Our Marketing Process
+              Why Businesses Choose SoftClinch
             </h2>
             <p className="text-xl text-slate-600">
-              A systematic approach to driving measurable growth
+              Search strategy, paid media, automation, and CRO working toward measurable growth.
             </p>
           </div>
         </FadeInSection>
 
         <div className="relative">
-          {/* Animated Connecting Line */}
           <div className="absolute top-20 left-0 right-0 h-1 bg-brand-navy/10 hidden lg:block">
             <motion.div
               initial={{ width: 0 }}
-              whileInView={{ width: '100%' }}
+              whileInView={{ width: "100%" }}
               transition={{ duration: 2, ease: "easeInOut" }}
               className="h-full bg-gradient-to-r from-brand-navy to-brand-terracotta"
             />
@@ -330,16 +365,13 @@ export const DigitalMarketing = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
             {[
-              { step: '01', title: 'Audit & Research', description: 'Comprehensive analysis of current performance, competitive landscape, and growth opportunities.' },
-              { step: '02', title: 'Strategy & Funnel Design', description: 'Custom marketing roadmap with detailed funnel architecture and channel strategy.' },
-              { step: '03', title: 'Campaign Execution', description: 'Multi-channel campaign launch with advanced tracking and creative optimization.' },
-              { step: '04', title: 'Optimization & Scaling', description: 'Continuous testing, data analysis, and refinement to maximize ROI and scale results.' }
+              { step: "01", title: "SEO + AI Search Expertise", description: "We optimize businesses for both traditional search engines and AI-powered search platforms." },
+              { step: "02", title: "Revenue-Focused Marketing", description: "Every strategy is built to improve leads, conversions, revenue, and long-term growth." },
+              { step: "03", title: "Advanced Funnel & CRO Systems", description: "High-converting customer journeys designed to maximize ROI from every traffic source." },
+              { step: "04", title: "Automation & Scalable Growth", description: "CRM automation, WhatsApp workflows, AI chatbots, and automated lead nurturing systems." },
             ].map((item, index) => (
-              <FadeInSection key={index} delay={index * 0.2}>
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="text-center"
-                >
+              <FadeInSection key={item.title} delay={index * 0.2}>
+                <motion.div whileHover={{ scale: 1.05 }} className="text-center">
                   <div className="w-20 h-20 bg-gradient-to-br from-brand-navy to-brand-navy/80 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl border-4 border-white">
                     <span className="text-2xl font-bold text-white">{item.step}</span>
                   </div>
@@ -352,7 +384,6 @@ export const DigitalMarketing = () => {
         </div>
       </section>
 
-      {/* Results Section with Animated Counters */}
       <section className="bg-gradient-to-br from-slate-50 to-brand-navy/5 py-20 border-y border-slate-100">
         <div className="max-w-[1200px] mx-auto px-8">
           <FadeInSection>
@@ -361,20 +392,19 @@ export const DigitalMarketing = () => {
                 Proven Results That Matter
               </h2>
               <p className="text-xl text-slate-600">
-                Real outcomes from our marketing campaigns
+                Outcomes aligned with lead generation, CAC reduction, and scalable revenue.
               </p>
             </div>
           </FadeInSection>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <AnimatedCounter end={200} suffix="%" label="ROI Growth" />
-            <AnimatedCounter end={3} suffix="x" label="Lead Volume Increase" />
-            <AnimatedCounter end={40} suffix="%" label="CAC Reduction" />
+            <AnimatedCounter end={140} suffix="%" label="Average ROI Growth" />
+            <AnimatedCounter end={2} suffix="x" label="Qualified Lead Increase" />
+            <AnimatedCounter end={28} suffix="%" label="Lower CAC" />
           </div>
         </div>
       </section>
 
-      {/* Reviews */}
       <section className="bg-white py-20">
         <div className="max-w-[1200px] mx-auto px-8">
           <FadeInSection>
@@ -398,7 +428,7 @@ export const DigitalMarketing = () => {
                     ))}
                     <span className="text-xs font-semibold text-slate-600 ml-1">{review.rating}.0</span>
                   </div>
-                  <p className="text-slate-700 mt-5 leading-relaxed">â€œ{review.text}â€</p>
+                  <p className="text-slate-700 mt-5 leading-relaxed">&quot;{review.text}&quot;</p>
                   <div className="mt-6 font-bold text-slate-900">{review.name}</div>
                 </div>
               </FadeInSection>
@@ -409,11 +439,37 @@ export const DigitalMarketing = () => {
 
       <FaqSection title="Digital Marketing FAQs" items={digitalMarketingFaq} />
 
+      <section className="bg-white py-20">
+        <div className="max-w-[1200px] mx-auto px-8 text-center">
+          <FadeInSection>
+            <h2 className="text-4xl font-bold text-slate-900 mb-6">
+              Ready to Scale Your Business with AI-Powered Marketing?
+            </h2>
+            <p className="text-xl text-slate-600 max-w-[780px] mx-auto mb-8">
+              Talk to our experts about SEO, AI search optimization, Google Ads, conversion funnels, automation systems, and performance marketing strategies tailored for your business growth.
+            </p>
+            <div className="flex gap-4 justify-center flex-wrap">
+              <Link
+                href="/contact"
+                className="bg-brand-navy hover:bg-brand-navy/90 text-white px-8 py-4 text-base rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center font-semibold"
+              >
+                Get Free Strategy Call
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
+              <Link
+                href="/services"
+                className="border-2 border-slate-200 text-slate-700 font-semibold px-8 py-4 text-base rounded-lg hover:bg-slate-50 hover:border-brand-navy transition-all duration-300 inline-flex"
+              >
+                Explore Services
+              </Link>
+            </div>
+          </FadeInSection>
+        </div>
+      </section>
     </div>
   );
 };
 
-// Fade In Section Component
 function FadeInSection({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef(null);
   const isInView = useInView(ref as any, { once: true, margin: "-100px" });
@@ -430,8 +486,7 @@ function FadeInSection({ children, delay = 0 }: { children: React.ReactNode; del
   );
 }
 
-// Animated Counter Component
-function AnimatedCounter({ end, suffix = '', label }: { end: number; suffix?: string; label: string }) {
+function AnimatedCounter({ end, suffix = "", label }: { end: number; suffix?: string; label: string }) {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
   const isInView = useInView(ref as any, { once: true });

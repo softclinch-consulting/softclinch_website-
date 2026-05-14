@@ -33,6 +33,7 @@ export const Header = () => {
                 { name: 'Custom App Development', path: '/custom-application-development' },
             ]
         },
+        { name: 'Enterprise', path: '/services/enterprise-software' },
         { name: 'Inaiwazhi', path: '/inaiwazhi-whatsapp-automation' },
         { name: 'Blog', path: '/blog' },
         { name: 'Contact', path: '/contact' },
@@ -153,7 +154,10 @@ export const Header = () => {
                                         )}
                                         {link.subLinks && (
                                             <button
+                                                type="button"
                                                 onClick={() => setExpandedMobileNav(expandedMobileNav === link.name ? null : link.name)}
+                                                aria-label={`${expandedMobileNav === link.name ? 'Collapse' : 'Expand'} ${link.name} submenu`}
+                                                aria-expanded={expandedMobileNav === link.name}
                                                 className="p-2 -mr-2 text-slate-600"
                                             >
                                                 <ChevronDown className={`w-6 h-6 transition-transform ${expandedMobileNav === link.name ? 'rotate-180' : ''}`} />

@@ -13,7 +13,6 @@ export const Footer = () => {
         <footer className="bg-brand-navy text-white pt-20 pb-12">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
-                    {/* Brand Section */}
                     <div className="col-span-1 lg:col-span-1">
                         <Link href="/" className="flex items-center gap-2 mb-8">
                             <Image
@@ -26,7 +25,7 @@ export const Footer = () => {
                               />
                         </Link>
                         <p className="text-slate-400 leading-relaxed mb-8">
-                            Engineering-led consulting firm specializing in scalable digital systems, SAP implementation, and enterprise automation solutions.
+                            SoftClinch is a technology-driven consulting and digital solutions company specializing in SAP consulting, enterprise automation, SEO, AI-powered growth strategies, WhatsApp automation, and scalable software development solutions for modern businesses.
                         </p>
                         <div className="flex gap-4">
                             {[Linkedin, Twitter, Github].map((Icon, i) => (
@@ -41,16 +40,15 @@ export const Footer = () => {
                         </div>
                     </div>
 
-                    {/* Quick Links */}
                     <div>
                         <h4 className="text-lg font-bold mb-8">Solutions</h4>
                         <ul className="space-y-4">
                             {[
-                                { name: 'AI-Powered Business Systems', path: '/services/ai-powered-business-systems' },
+                                { name: 'SAP Consulting & AMS Support', path: '/sap-ams-support' },
                                 { name: 'Inaiwazhi WhatsApp Automation', path: '/inaiwazhi-whatsapp-automation' },
-                                { name: 'Digital Marketing', path: '/digital-marketing' },
+                                { name: 'AI-Powered Business Systems', path: '/services/ai-powered-business-systems' },
+                                { name: 'SEO, GEO & AEO Services', path: '/digital-marketing' },
                                 { name: 'Custom App Development', path: '/custom-application-development' },
-                                { name: 'SAP AMS Support', path: '/sap-ams-support' },
                             ].map((link) => (
                                 <li key={link.name}>
                                     <Link
@@ -65,13 +63,12 @@ export const Footer = () => {
                         </ul>
                     </div>
 
-                    {/* Company */}
                     <div>
                         <h4 className="text-lg font-bold mb-8">Company</h4>
                         <ul className="space-y-4">
                             {[
                                 { name: 'About Us', path: '/about' },
-                                { name: 'Case Studies', path: '/case-studies' },
+                                { name: 'Services', path: '/services' },
                                 { name: 'Contact', path: '/contact' },
                             ].map((link) => (
                                 <li key={link.name}>
@@ -87,7 +84,6 @@ export const Footer = () => {
                         </ul>
                     </div>
 
-                    {/* Contact info */}
                     <div>
                         <h4 className="text-lg font-bold mb-8">Get in Touch</h4>
                         <div className="space-y-6">
