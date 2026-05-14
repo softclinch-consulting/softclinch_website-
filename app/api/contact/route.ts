@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
-import { appendFile, mkdir } from "node:fs/promises";
-import path from "node:path";
 import {
   normalizeContactFormData,
   validateContactFormData,
@@ -121,21 +119,6 @@ function isDuplicateSubmission(payload: ContactFormData) {
   return false;
 }
 
-async function storeSubmission(payload: ContactFormData) {
-  const submissionsDir = path.join(process.cwd(), "data");
-  const submissionsFile = path.join(submissionsDir, "contact-submissions.ndjson");
-
-  await mkdir(submissionsDir, { recursive: true });
-  await appendFile(
-    submissionsFile,
-    `${JSON.stringify({
-      submittedAt: new Date().toISOString(),
-      ...payload,
-    })}\n`,
-    "utf8"
-  );
-}
-
 async function upsertBrevoContact(payload: ContactFormData) {
   await brevoRequest("/contacts", {
     email: payload.email,
@@ -247,7 +230,6 @@ export async function POST(request: Request) {
       });
     }
 
-    await storeSubmission(payload);
     await upsertBrevoContact(payload);
     await sendBrevoTemplateEmail(payload);
 

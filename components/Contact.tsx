@@ -73,7 +73,9 @@ export const Contact = () => {
       const contentType = response.headers.get("content-type") || "";
       const data = contentType.includes("application/json")
         ? ((await response.json()) as ContactApiResponse)
-        : { error: "Unexpected server response." };
+        : {
+            error: `Unexpected server response (${response.status}).`,
+          };
 
       if (!response.ok) {
         if (data.fieldErrors) {
