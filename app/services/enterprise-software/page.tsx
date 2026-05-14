@@ -1,12 +1,12 @@
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { EnterpriseSoftware } from "@/components/EnterpriseSoftware";
 import { buildMetadata } from "@/lib/seo";
-import { faqJsonLd, webpageJsonLd } from "@/lib/schema";
+import { faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 
 const canonicalPath = "/services/enterprise-software";
-const title = "Enterprise Software Development | SoftClinch";
+const title = "Enterprise Digital Transformation & Automation Solutions | SoftClinch";
 const description =
-  "Build custom enterprise applications, SaaS platforms, cloud-native systems, and AI-powered business systems for scalable operations and digital transformation.";
+  "Enterprise consulting and digital transformation company offering SAP consulting, custom software development, AI automation, WhatsApp automation, and scalable digital engineering solutions.";
 
 const enterpriseFaq = [
   {
@@ -25,7 +25,28 @@ export const metadata = buildMetadata({
   title,
   description,
   canonicalPath,
-  keywords: ["enterprise software", "custom enterprise applications", "SaaS platform development", "enterprise systems"],
+  keywords: [
+    "enterprise digital transformation",
+    "enterprise automation solutions",
+    "enterprise software development",
+    "enterprise consulting services",
+    "digital transformation company",
+    "enterprise application development",
+    "enterprise engineering solutions",
+    "business automation company",
+    "enterprise technology solutions",
+    "enterprise workflow automation",
+    "sap consulting company",
+    "custom enterprise software",
+    "enterprise saas development",
+    "enterprise ai automation",
+    "enterprise whatsapp automation",
+    "business process automation",
+    "cloud enterprise applications",
+    "digital engineering company",
+    "enterprise api integrations",
+    "enterprise software solutions",
+  ],
 });
 
 export default function EnterpriseSoftwarePage() {
@@ -36,6 +57,11 @@ export default function EnterpriseSoftwarePage() {
           webpageJsonLd({
             canonicalPath,
             title,
+          }),
+          serviceJsonLd({
+            canonicalPath,
+            name: "Enterprise Digital Transformation & Automation Solutions",
+            description,
           }),
           faqJsonLd(enterpriseFaq),
         ]}

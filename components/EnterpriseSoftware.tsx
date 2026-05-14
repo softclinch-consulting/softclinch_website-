@@ -280,13 +280,13 @@ export function EnterpriseSoftware() {
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
               <h1 className="text-5xl font-bold leading-tight text-slate-950 md:text-6xl">
-                Enterprise Applications Built for Scale, Automation & Growth
+                Enterprise Digital Transformation & Automation Solutions
               </h1>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
-                Custom enterprise software, SaaS platforms, cloud-native
-                applications, and AI-powered business systems engineered to
-                streamline operations, improve efficiency, and accelerate
-                digital transformation.
+                SoftClinch provides enterprise consulting, SAP solutions,
+                custom software development, AI-powered automation, WhatsApp
+                automation, and scalable digital engineering services designed
+                for modern business growth.
               </p>
               <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-600">
                 Trusted by businesses across Healthcare, Finance, Manufacturing,

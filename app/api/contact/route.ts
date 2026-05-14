@@ -1,20 +1,27 @@
 import { NextResponse } from "next/server";
+import { headers } from "next/headers";
 import { appendFile, mkdir } from "node:fs/promises";
 import path from "node:path";
-import nodemailer from "nodemailer";
-import { CONTACT } from "@/lib/contact";
+import {
+  normalizeContactFormData,
+  validateContactFormData,
+  type ContactFormData,
+  type ContactSubmissionInput,
+} from "@/lib/contact-form";
 
-type ContactPayload = {
-  name?: string;
-  company?: string;
-  email?: string;
-  phone?: string;
-  message?: string;
+type BrevoApiError = Error & {
+  status?: number;
+  details?: string;
 };
 
-function sanitize(value: string) {
-  return value.replace(/[<>]/g, "").trim();
-}
+const BREVO_BASE_URL = "https://api.brevo.com/v3";
+const MAX_SUBMISSIONS_PER_WINDOW = 5;
+const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
+const DUPLICATE_WINDOW_MS = 5 * 60 * 1000;
+const MIN_FORM_FILL_MS = 3000;
+
+const rateLimitStore = new Map<string, number[]>();
+const duplicateSubmissionStore = new Map<string, number>();
 
 function getRequiredEnv(name: string) {
   const value = process.env[name]?.trim();
@@ -24,22 +31,97 @@ function getRequiredEnv(name: string) {
   return value;
 }
 
-function getEnvNumber(name: string, fallback?: number) {
-  const raw = process.env[name]?.trim();
-  if (!raw) return fallback;
-  const parsed = Number(raw);
-  return Number.isFinite(parsed) ? parsed : fallback;
+function getRequiredEnvNumber(name: string) {
+  const parsed = Number(getRequiredEnv(name));
+  if (!Number.isInteger(parsed) || parsed <= 0) {
+    throw new Error(`Environment variable ${name} must be a positive integer.`);
+  }
+  return parsed;
 }
 
-function splitName(fullName: string) {
-  const parts = fullName.split(/\s+/).filter(Boolean);
-  return {
-    firstName: parts[0] ?? fullName,
-    lastName: parts.slice(1).join(" "),
-  };
+async function brevoRequest<T>(pathname: string, body: Record<string, unknown>) {
+  const response = await fetch(`${BREVO_BASE_URL}${pathname}`, {
+    method: "POST",
+    headers: {
+      accept: "application/json",
+      "content-type": "application/json",
+      "api-key": getRequiredEnv("BREVO_API_KEY"),
+    },
+    body: JSON.stringify(body),
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    const error = new Error(
+      `Brevo API error (${response.status}): ${errorText}`
+    ) as BrevoApiError;
+    error.status = response.status;
+    error.details = errorText;
+    throw error;
+  }
+
+  if (response.status === 204) {
+    return undefined as T;
+  }
+
+  return (await response.json()) as T;
 }
 
-async function storeSubmission(payload: Required<ContactPayload>) {
+function getClientIp(allHeaders: Headers) {
+  const forwardedFor = allHeaders.get("x-forwarded-for");
+  if (forwardedFor) {
+    return forwardedFor.split(",")[0]?.trim() || "unknown";
+  }
+
+  const realIp = allHeaders.get("x-real-ip");
+  return realIp?.trim() || "unknown";
+}
+
+function enforceRateLimit(clientIp: string) {
+  const now = Date.now();
+  const recentEntries = (rateLimitStore.get(clientIp) || []).filter(
+    (timestamp) => now - timestamp < RATE_LIMIT_WINDOW_MS
+  );
+
+  if (recentEntries.length >= MAX_SUBMISSIONS_PER_WINDOW) {
+    return false;
+  }
+
+  recentEntries.push(now);
+  rateLimitStore.set(clientIp, recentEntries);
+  return true;
+}
+
+function buildDuplicateKey(payload: ContactFormData) {
+  return [
+    payload.email,
+    payload.phone.replace(/\s+/g, ""),
+    payload.message.replace(/\s+/g, " ").toLowerCase(),
+  ].join("|");
+}
+
+function isDuplicateSubmission(payload: ContactFormData) {
+  const now = Date.now();
+
+  for (const [key, timestamp] of duplicateSubmissionStore.entries()) {
+    if (now - timestamp >= DUPLICATE_WINDOW_MS) {
+      duplicateSubmissionStore.delete(key);
+    }
+  }
+
+  const duplicateKey = buildDuplicateKey(payload);
+  const lastSeenAt = duplicateSubmissionStore.get(duplicateKey);
+
+  if (lastSeenAt && now - lastSeenAt < DUPLICATE_WINDOW_MS) {
+    return true;
+  }
+
+  duplicateSubmissionStore.set(duplicateKey, now);
+  return false;
+}
+
+async function storeSubmission(payload: ContactFormData) {
   const submissionsDir = path.join(process.cwd(), "data");
   const submissionsFile = path.join(submissionsDir, "contact-submissions.ndjson");
 
@@ -54,196 +136,68 @@ async function storeSubmission(payload: Required<ContactPayload>) {
   );
 }
 
-async function brevoRequest<T>(path: string, body: Record<string, unknown>) {
-  const apiKey = getRequiredEnv("BREVO_API_KEY");
-  const response = await fetch(`https://api.brevo.com/v3${path}`, {
-    method: "POST",
-    headers: {
-      accept: "application/json",
-      "content-type": "application/json",
-      "api-key": apiKey,
-    },
-    body: JSON.stringify(body),
-  });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    const error = new Error(`Brevo API error (${response.status}): ${errorText}`) as Error & {
-      status?: number;
-      details?: string;
-    };
-    error.status = response.status;
-    error.details = errorText;
-    throw error;
-  }
-
-  if (response.status === 204) {
-    return undefined as T;
-  }
-
-  return (await response.json()) as T;
-}
-
-function isBrevoDuplicateSmsError(error: unknown) {
-  return (
-    typeof error === "object" &&
-    error !== null &&
-    "status" in error &&
-    "details" in error &&
-    (error as { status?: number }).status === 400 &&
-    typeof (error as { details?: string }).details === "string" &&
-    (error as { details: string }).details.includes('"duplicate_identifiers":["SMS"]')
-  );
-}
-
-async function syncBrevoContact(
-  payload: Required<ContactPayload>,
-  options?: { includePhone?: boolean }
-) {
-  const includePhone = options?.includePhone ?? true;
-  const { firstName, lastName } = splitName(payload.name);
-  const listId = getEnvNumber("BREVO_CONTACT_LIST_ID", 2);
-
-  const attributes: Record<string, string> = {
-    FIRSTNAME: firstName,
-  };
-
-  if (lastName) {
-    attributes.LASTNAME = lastName;
-  }
-
-  if (includePhone && payload.phone) {
-    attributes.SMS = payload.phone;
-  }
-
-  const companyAttribute = process.env.BREVO_COMPANY_ATTRIBUTE?.trim();
-  const messageAttribute = process.env.BREVO_MESSAGE_ATTRIBUTE?.trim();
-  const phoneAttribute = process.env.BREVO_PHONE_ATTRIBUTE?.trim();
-
-  if (companyAttribute) {
-    attributes[companyAttribute] = payload.company;
-  }
-
-  if (messageAttribute) {
-    attributes[messageAttribute] = payload.message;
-  }
-
-  if (includePhone && phoneAttribute) {
-    attributes[phoneAttribute] = payload.phone;
-  }
-
+async function upsertBrevoContact(payload: ContactFormData) {
   await brevoRequest("/contacts", {
     email: payload.email,
-    attributes,
-    listIds: listId ? [listId] : undefined,
+    attributes: {
+      FIRSTNAME: payload.name,
+      COMPANY: payload.company,
+      SMS: payload.phone,
+      MESSAGE: payload.message,
+    },
+    listIds: [getRequiredEnvNumber("BREVO_LIST_ID")],
     updateEnabled: true,
   });
 }
 
-async function sendBrevoAutoReply(payload: Required<ContactPayload>) {
-  const senderEmail =
-    process.env.BREVO_SENDER_EMAIL?.trim() ||
-    process.env.SMTP_FROM_EMAIL?.trim() ||
-    CONTACT.email;
+async function sendBrevoTemplateEmail(payload: ContactFormData) {
+  const senderEmail = process.env.BREVO_SENDER_EMAIL?.trim();
   const senderName =
-    process.env.BREVO_SENDER_NAME?.trim() ||
-    process.env.SMTP_FROM_NAME?.trim() ||
-    "SoftClinch Consulting Services";
-  const autoReplyEmail = buildAutoReplyEmail(payload);
+    process.env.BREVO_SENDER_NAME?.trim() || "SoftClinch Consulting Services";
 
   await brevoRequest("/smtp/email", {
-    sender: {
-      email: senderEmail,
-      name: senderName,
-    },
+    ...(senderEmail
+      ? {
+          sender: {
+            email: senderEmail,
+            name: senderName,
+          },
+        }
+      : {}),
     to: [
       {
         email: payload.email,
         name: payload.name,
       },
     ],
-    replyTo: {
-      email: CONTACT.email,
-      name: senderName,
-    },
-    subject: autoReplyEmail.subject,
-    htmlContent: autoReplyEmail.html,
-  });
-}
-
-async function sendBrevoAdminEmail(payload: Required<ContactPayload>) {
-  const senderEmail =
-    process.env.BREVO_SENDER_EMAIL?.trim() ||
-    process.env.SMTP_FROM_EMAIL?.trim() ||
-    CONTACT.email;
-  const senderName =
-    process.env.BREVO_SENDER_NAME?.trim() ||
-    process.env.SMTP_FROM_NAME?.trim() ||
-    "SoftClinch Consulting Services";
-  const adminEmail = buildAdminEmail(payload);
-
-  await brevoRequest("/smtp/email", {
-    sender: {
-      email: senderEmail,
-      name: senderName,
-    },
-    to: [{ email: CONTACT.email, name: "SoftClinch Admin" }],
-    replyTo: {
-      email: payload.email,
+    templateId: getRequiredEnvNumber("BREVO_TEMPLATE_ID"),
+    params: {
       name: payload.name,
+      company: payload.company,
+      email: payload.email,
+      phone: payload.phone,
+      message: payload.message,
     },
-    subject: adminEmail.subject,
-    htmlContent: adminEmail.html,
   });
 }
 
-function buildAdminEmail(payload: Required<ContactPayload>) {
-  return {
-    subject: `New Contact Form Submission from ${payload.name}`,
-    html: `
-      <div style="font-family: Arial, Helvetica, sans-serif; color: #0f172a; line-height: 1.6;">
-        <h2 style="margin-bottom: 16px;">New Contact Form Submission</h2>
-        <p>You have received a new enquiry from the SoftClinch website.</p>
-        <table style="border-collapse: collapse; width: 100%; margin-top: 20px;">
-          <tr><td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: 700;">Name</td><td style="padding: 10px; border: 1px solid #e2e8f0;">${payload.name}</td></tr>
-          <tr><td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: 700;">Company</td><td style="padding: 10px; border: 1px solid #e2e8f0;">${payload.company}</td></tr>
-          <tr><td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: 700;">Email</td><td style="padding: 10px; border: 1px solid #e2e8f0;">${payload.email}</td></tr>
-          <tr><td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: 700;">Phone</td><td style="padding: 10px; border: 1px solid #e2e8f0;">${payload.phone}</td></tr>
-          <tr><td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: 700; vertical-align: top;">Message</td><td style="padding: 10px; border: 1px solid #e2e8f0; white-space: pre-wrap;">${payload.message}</td></tr>
-        </table>
-      </div>
-    `,
-  };
-}
-
-function buildAutoReplyEmail(payload: Required<ContactPayload>) {
-  return {
-    subject: "We received your enquiry | SoftClinch",
-    html: `
-      <div style="font-family: Arial, Helvetica, sans-serif; color: #0f172a; line-height: 1.7;">
-        <h2 style="margin-bottom: 16px;">Thank you for contacting SoftClinch</h2>
-        <p>Hello ${payload.name},</p>
-        <p>Thank you for submitting your enquiry. Our team has received your request and is reviewing the details you shared.</p>
-        <p>We will get in touch with you shortly to discuss the next steps and how we can support your business goals.</p>
-        <div style="margin-top: 24px; padding: 16px; border: 1px solid #e2e8f0; border-radius: 12px; background: #f8fafc;">
-          <h3 style="margin: 0 0 12px;">Your submitted details</h3>
-          <p style="margin: 0 0 8px;"><strong>Name:</strong> ${payload.name}</p>
-          <p style="margin: 0 0 8px;"><strong>Company:</strong> ${payload.company}</p>
-          <p style="margin: 0 0 8px;"><strong>Email:</strong> ${payload.email}</p>
-          <p style="margin: 0 0 8px;"><strong>Phone:</strong> ${payload.phone}</p>
-          <p style="margin: 0;"><strong>Message:</strong> ${payload.message}</p>
-        </div>
-        <p style="margin-top: 24px;">Regards,<br />SoftClinch Consulting Services</p>
-      </div>
-    `,
-  };
+function getValidationErrorResponse(input: Partial<ContactFormData>) {
+  const { errors } = validateContactFormData(input);
+  return NextResponse.json(
+    {
+      error: "Please correct the highlighted fields and try again.",
+      fieldErrors: errors,
+    },
+    { status: 400 }
+  );
 }
 
 export async function POST(request: Request) {
   try {
-    let body: ContactPayload;
+    let body: ContactSubmissionInput;
+
     try {
-      body = (await request.json()) as ContactPayload;
+      body = (await request.json()) as ContactSubmissionInput;
     } catch {
       return NextResponse.json(
         { error: "Invalid request payload." },
@@ -251,78 +205,55 @@ export async function POST(request: Request) {
       );
     }
 
-    const payload = {
-      name: sanitize(body.name ?? ""),
-      company: sanitize(body.company ?? ""),
-      email: sanitize(body.email ?? ""),
-      phone: sanitize(body.phone ?? ""),
-      message: sanitize(body.message ?? ""),
-    };
+    if ((body.website || "").trim().length > 0) {
+      return NextResponse.json({ success: true }, { status: 200 });
+    }
 
     if (
-      !payload.name ||
-      !payload.company ||
-      !payload.email ||
-      !payload.phone ||
-      !payload.message
+      typeof body.formStartedAt !== "number" ||
+      !Number.isFinite(body.formStartedAt) ||
+      Date.now() - body.formStartedAt < MIN_FORM_FILL_MS
     ) {
       return NextResponse.json(
-        { error: "Please fill in all required fields." },
+        { error: "Submission could not be verified. Please try again." },
         { status: 400 }
       );
     }
 
-    await storeSubmission(payload);
+    const requestHeaders = await headers();
+    const clientIp = getClientIp(requestHeaders);
 
-    if (process.env.BREVO_API_KEY?.trim()) {
-      try {
-        await syncBrevoContact(payload);
-      } catch (error) {
-        if (isBrevoDuplicateSmsError(error)) {
-          await syncBrevoContact(payload, { includePhone: false });
-        } else {
-          throw error;
-        }
-      }
-      await sendBrevoAutoReply(payload);
-      await sendBrevoAdminEmail(payload);
-      return NextResponse.json({ success: true, provider: "brevo" });
+    if (!enforceRateLimit(clientIp)) {
+      return NextResponse.json(
+        {
+          error:
+            "Too many requests from this network. Please wait a few minutes and try again.",
+        },
+        { status: 429 }
+      );
     }
 
-    const transporter = nodemailer.createTransport({
-      host: getRequiredEnv("SMTP_HOST"),
-      port: Number(getRequiredEnv("SMTP_PORT")),
-      secure: process.env.SMTP_SECURE === "true",
-      auth: {
-        user: getRequiredEnv("SMTP_USER"),
-        pass: getRequiredEnv("SMTP_PASS"),
-      },
-    });
+    const validation = validateContactFormData(body);
+    if (!validation.isValid) {
+      return getValidationErrorResponse(body);
+    }
 
-    const fromEmail = process.env.SMTP_FROM_EMAIL?.trim() || CONTACT.email;
-    const fromName = process.env.SMTP_FROM_NAME?.trim() || "SoftClinch";
+    const payload = normalizeContactFormData(validation.data);
 
-    const adminEmail = buildAdminEmail(payload);
-    const autoReplyEmail = buildAutoReplyEmail(payload);
+    if (isDuplicateSubmission(payload)) {
+      return NextResponse.json({
+        success: true,
+        duplicate: true,
+      });
+    }
 
-    await transporter.sendMail({
-      from: `"${fromName}" <${fromEmail}>`,
-      to: CONTACT.email,
-      replyTo: payload.email,
-      subject: adminEmail.subject,
-      html: adminEmail.html,
-    });
+    await storeSubmission(payload);
+    await upsertBrevoContact(payload);
+    await sendBrevoTemplateEmail(payload);
 
-    await transporter.sendMail({
-      from: `"${fromName}" <${fromEmail}>`,
-      to: payload.email,
-      subject: autoReplyEmail.subject,
-      html: autoReplyEmail.html,
-    });
-
-    return NextResponse.json({ success: true, provider: "smtp" });
+    return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Contact form email error", error);
+    console.error("Contact form integration error", error);
 
     if (
       typeof error === "object" &&
@@ -330,7 +261,8 @@ export async function POST(request: Request) {
       "status" in error &&
       "details" in error
     ) {
-      const typedError = error as { status?: number; details?: string };
+      const typedError = error as BrevoApiError;
+
       if (
         typedError.status === 401 &&
         typedError.details?.includes("unrecognised IP address")
@@ -338,7 +270,7 @@ export async function POST(request: Request) {
         return NextResponse.json(
           {
             error:
-              "Brevo is blocking requests from this IP address. Please add this IP in your Brevo authorized IP settings and try again.",
+              "Brevo is blocking requests from this server IP. Add the deployment IP to your Brevo allowlist and try again.",
           },
           { status: 503 }
         );

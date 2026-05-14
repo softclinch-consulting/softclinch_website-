@@ -1,61 +1,92 @@
 "use client";
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
-import React, { useState } from 'react';
+
+import { Mail, Phone, MapPin, Send } from "lucide-react";
+import React, { useEffect, useState } from "react";
 import { CONTACT } from "@/lib/contact";
+import {
+  validateContactFormData,
+  type ContactFormData,
+  type ContactValidationErrors,
+} from "@/lib/contact-form";
+
+const INITIAL_FORM_DATA: ContactFormData = {
+  name: "",
+  company: "",
+  email: "",
+  phone: "",
+  message: "",
+};
+
+type ContactApiResponse = {
+  success?: boolean;
+  error?: string;
+  fieldErrors?: ContactValidationErrors;
+};
 
 export const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [formData, setFormData] = useState({
-    name: "",
-    company: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
+  const [fieldErrors, setFieldErrors] = useState<ContactValidationErrors>({});
+  const [formData, setFormData] = useState<ContactFormData>(INITIAL_FORM_DATA);
+  const [website, setWebsite] = useState("");
+  const [formStartedAt, setFormStartedAt] = useState<number>(Date.now());
+
+  useEffect(() => {
+    setFormStartedAt(Date.now());
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((current) => ({ ...current, [name]: value }));
+    setFieldErrors((current) => ({ ...current, [name]: undefined }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
     setError(null);
 
+    const validation = validateContactFormData(formData);
+    if (!validation.isValid) {
+      setFieldErrors(validation.errors);
+      return;
+    }
+
+    setIsSubmitting(true);
+    setFieldErrors({});
+
     try {
-      const response = await fetch("/api/contact/", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...validation.data,
+          website,
+          formStartedAt,
+        }),
       });
 
       const contentType = response.headers.get("content-type") || "";
       const data = contentType.includes("application/json")
-        ? ((await response.json()) as { error?: string })
-        : {
-            error:
-              "The server returned an unexpected response. Please check the contact API configuration and try again.",
-          };
+        ? ((await response.json()) as ContactApiResponse)
+        : { error: "Unexpected server response." };
 
       if (!response.ok) {
+        if (data.fieldErrors) {
+          setFieldErrors(data.fieldErrors);
+        }
+
         throw new Error(data.error || "Unable to submit your request right now.");
       }
 
       setSubmitted(true);
-      setFormData({
-        name: "",
-        company: "",
-        email: "",
-        phone: "",
-        message: "",
-      });
+      setFormData(INITIAL_FORM_DATA);
+      setWebsite("");
+      setFormStartedAt(Date.now());
     } catch (err) {
       setError(
         err instanceof Error
@@ -67,19 +98,30 @@ export const Contact = () => {
     }
   };
 
+  const inputClassName =
+    "w-full rounded-2xl border px-4 py-3 text-slate-900 transition focus:outline-none focus:ring-2 focus:ring-white/70";
+
+  const getInputStateClassName = (fieldError?: string) =>
+    fieldError
+      ? "border-red-300 bg-red-50/90 focus:border-red-400"
+      : "border-white/15 bg-white focus:border-white/50";
+
   return (
     <div className="py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
           <div>
-            <h1 className="text-5xl lg:text-6xl font-display font-bold text-slate-900 mb-8">Let’s Build Your Next Digital Platform</h1>
-            <p className="text-xl text-slate-600 mb-12 leading-relaxed">
-              Ready to scale your enterprise communication or modernize your digital infrastructure? Get in touch with our engineering team.
+            <h1 className="mb-8 text-5xl font-display font-bold text-slate-900 lg:text-6xl">
+              Let&apos;s Build Your Next Digital Platform
+            </h1>
+            <p className="mb-12 text-xl leading-relaxed text-slate-600">
+              Ready to scale your enterprise communication or modernize your
+              digital infrastructure? Get in touch with our engineering team.
             </p>
-            
+
             <div className="space-y-8">
               <div className="flex gap-6">
-                <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-slate-900">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-slate-900">
                   <Mail size={24} />
                 </div>
                 <div>
@@ -88,7 +130,7 @@ export const Contact = () => {
                 </div>
               </div>
               <div className="flex gap-6">
-                <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-slate-900">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-slate-900">
                   <Phone size={24} />
                 </div>
                 <div>
@@ -97,111 +139,216 @@ export const Contact = () => {
                 </div>
               </div>
               <div className="flex gap-6">
-                <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-slate-900">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-slate-900">
                   <MapPin size={24} />
                 </div>
                 <div>
                   <h4 className="font-bold text-slate-900">Visit Us</h4>
-                  <p className="text-slate-600"> No: 30, 53rd St, opposite to Anjaneyar Temple, Ashok Nagar, Chennai, Tamil Nadu 600083</p>
+                  <p className="text-slate-600">{CONTACT.address}</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-brand-navy p-8 lg:p-12 rounded-[2.5rem] border border-slate-200 shadow-xl">
+          <div className="rounded-[2.5rem] border border-slate-200 bg-brand-navy p-8 shadow-xl lg:p-12">
             {submitted ? (
-              <div className="text-center py-20">
-                <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="py-20 text-center">
+                <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
                   <Send size={32} />
                 </div>
-                <h3 className="text-2xl font-display font-bold text-slate-900 mb-4">Request Received</h3>
-                <p className="text-slate-600">
-                  Thank you for contacting SoftClinch. Our team has received your request, and a confirmation email has been sent to you. We will get in touch shortly.
+                <h3 className="mb-4 text-2xl font-display font-bold text-white">
+                  Request Received
+                </h3>
+                <p className="text-slate-200">
+                  Thank you for contacting SoftClinch. Your details were sent
+                  successfully, and a confirmation email should reach your inbox
+                  shortly.
                 </p>
-                <button 
+                <button
                   onClick={() => setSubmitted(false)}
-                  className="mt-8 text-slate-900 font-semibold underline"
+                  className="mt-8 font-semibold text-white underline"
                 >
                   Send another message
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+                <input
+                  type="text"
+                  name="website"
+                  value={website}
+                  onChange={(e) => setWebsite(e.target.value)}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  className="hidden"
+                  aria-hidden="true"
+                />
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                   <div>
-                    <label className="black text-sm font-semibold text-white mb-2">Name</label>
-                    <input 
+                    <label
+                      htmlFor="contact-name"
+                      className="mb-2 block text-sm font-semibold text-white"
+                    >
+                      Name
+                    </label>
+                    <input
+                      id="contact-name"
                       name="name"
-                      type="text" 
+                      type="text"
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-900 transition-all"
+                      className={`${inputClassName} ${getInputStateClassName(fieldErrors.name)}`}
                       placeholder="John Doe"
+                      aria-invalid={Boolean(fieldErrors.name)}
+                      aria-describedby={
+                        fieldErrors.name ? "contact-name-error" : undefined
+                      }
                     />
+                    {fieldErrors.name ? (
+                      <p
+                        id="contact-name-error"
+                        className="mt-2 text-sm text-red-200"
+                      >
+                        {fieldErrors.name}
+                      </p>
+                    ) : null}
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-white mb-2">Company</label>
-                    <input 
+                    <label
+                      htmlFor="contact-company"
+                      className="mb-2 block text-sm font-semibold text-white"
+                    >
+                      Company
+                    </label>
+                    <input
+                      id="contact-company"
                       name="company"
-                      type="text" 
+                      type="text"
                       required
                       value={formData.company}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-900 transition-all"
+                      className={`${inputClassName} ${getInputStateClassName(fieldErrors.company)}`}
                       placeholder="Enterprise Inc."
+                      aria-invalid={Boolean(fieldErrors.company)}
+                      aria-describedby={
+                        fieldErrors.company ? "contact-company-error" : undefined
+                      }
                     />
+                    {fieldErrors.company ? (
+                      <p
+                        id="contact-company-error"
+                        className="mt-2 text-sm text-red-200"
+                      >
+                        {fieldErrors.company}
+                      </p>
+                    ) : null}
                   </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                   <div>
-                    <label className="block text-sm font-semibold text-white mb-2">Email</label>
-                    <input 
+                    <label
+                      htmlFor="contact-email"
+                      className="mb-2 block text-sm font-semibold text-white"
+                    >
+                      Email
+                    </label>
+                    <input
+                      id="contact-email"
                       name="email"
-                      type="email" 
+                      type="email"
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-900 transition-all"
+                      className={`${inputClassName} ${getInputStateClassName(fieldErrors.email)}`}
                       placeholder="john@company.com"
+                      aria-invalid={Boolean(fieldErrors.email)}
+                      aria-describedby={
+                        fieldErrors.email ? "contact-email-error" : undefined
+                      }
                     />
+                    {fieldErrors.email ? (
+                      <p
+                        id="contact-email-error"
+                        className="mt-2 text-sm text-red-200"
+                      >
+                        {fieldErrors.email}
+                      </p>
+                    ) : null}
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-white mb-2">Phone</label>
-                    <input 
+                    <label
+                      htmlFor="contact-phone"
+                      className="mb-2 block text-sm font-semibold text-white"
+                    >
+                      Phone
+                    </label>
+                    <input
+                      id="contact-phone"
                       name="phone"
-                      type="tel" 
+                      type="tel"
                       required
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-900 transition-all"
+                      className={`${inputClassName} ${getInputStateClassName(fieldErrors.phone)}`}
                       placeholder="+91 98765 43210"
+                      aria-invalid={Boolean(fieldErrors.phone)}
+                      aria-describedby={
+                        fieldErrors.phone ? "contact-phone-error" : undefined
+                      }
                     />
+                    {fieldErrors.phone ? (
+                      <p
+                        id="contact-phone-error"
+                        className="mt-2 text-sm text-red-200"
+                      >
+                        {fieldErrors.phone}
+                      </p>
+                    ) : null}
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-white mb-2">Message</label>
-                  <textarea 
+                  <label
+                    htmlFor="contact-message"
+                    className="mb-2 block text-sm font-semibold text-white"
+                  >
+                    Message
+                  </label>
+                  <textarea
+                    id="contact-message"
                     name="message"
-                    rows={4}
+                    rows={5}
                     required
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-900 transition-all"
+                    className={`${inputClassName} resize-y ${getInputStateClassName(fieldErrors.message)}`}
                     placeholder="Tell us about your project..."
+                    aria-invalid={Boolean(fieldErrors.message)}
+                    aria-describedby={
+                      fieldErrors.message ? "contact-message-error" : undefined
+                    }
                   />
+                  {fieldErrors.message ? (
+                    <p
+                      id="contact-message-error"
+                      className="mt-2 text-sm text-red-200"
+                    >
+                      {fieldErrors.message}
+                    </p>
+                  ) : null}
                 </div>
                 {error ? (
-                  <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                  <div className="rounded-2xl border border-red-300/30 bg-red-500/10 px-4 py-3 text-sm text-red-100">
                     {error}
                   </div>
                 ) : null}
-                <button 
+                <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-brand-navy text-white py-4 rounded-xl font-bold text-lg hover:bg-brand-navy/90 transition-all flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:opacity-70"
+                  className="flex w-full items-center justify-center gap-2 rounded-2xl bg-white py-4 text-lg font-bold text-brand-navy transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-70"
                 >
-                  {isSubmitting ? "Submitting..." : "Submit Request"} <Send size={20} />
+                  {isSubmitting ? "Submitting..." : "Submit Request"}
+                  <Send size={20} />
                 </button>
               </form>
             )}
