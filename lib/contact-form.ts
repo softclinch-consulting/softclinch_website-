@@ -9,6 +9,7 @@ export type ContactFormData = {
 export type ContactSubmissionInput = Partial<ContactFormData> & {
   website?: string;
   formStartedAt?: number;
+  recaptchaToken?: string;
 };
 
 export type ContactValidationErrors = Partial<Record<keyof ContactFormData, string>>;

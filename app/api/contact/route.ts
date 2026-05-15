@@ -12,6 +12,13 @@ type BrevoApiError = Error & {
   details?: string;
 };
 
+type RecaptchaVerifyResponse = {
+  success: boolean;
+  score?: number;
+  action?: string;
+  "error-codes"?: string[];
+};
+
 const BREVO_BASE_URL = "https://api.brevo.com/v3";
 const MAX_SUBMISSIONS_PER_WINDOW = 5;
 const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
@@ -24,7 +31,9 @@ const duplicateSubmissionStore = new Map<string, number>();
 function getRequiredEnv(name: string) {
   const value = process.env[name]?.trim();
   if (!value) {
-    throw new Error(`Missing required environment variable: ${name}`);
+    const error = new Error(`Missing required environment variable: ${name}`);
+    (error as { missingEnv?: string }).missingEnv = name;
+    throw error;
   }
   return value;
 }
@@ -76,6 +85,47 @@ function getClientIp(allHeaders: Headers) {
   return realIp?.trim() || "unknown";
 }
 
+async function verifyRecaptchaToken(token?: string) {
+  if (!token || !token.trim()) {
+    return false;
+  }
+
+  const secret = getRequiredEnv("RECAPTCHA_SECRET_KEY");
+  const response = await fetch(
+    "https://www.google.com/recaptcha/api/siteverify",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        secret,
+        response: token,
+      }),
+      cache: "no-store",
+    }
+  );
+
+  if (!response.ok) {
+    return false;
+  }
+
+  const data = (await response.json()) as RecaptchaVerifyResponse;
+  if (!data.success) {
+    return false;
+  }
+
+  if (typeof data.score === "number" && data.score < 0.4) {
+    return false;
+  }
+
+  if (data.action && data.action !== "contact_form") {
+    return false;
+  }
+
+  return true;
+}
+
 function enforceRateLimit(clientIp: string) {
   const now = Date.now();
   const recentEntries = (rateLimitStore.get(clientIp) || []).filter(
@@ -120,15 +170,19 @@ function isDuplicateSubmission(payload: ContactFormData) {
 }
 
 async function upsertBrevoContact(payload: ContactFormData) {
+  const companyAttr = process.env.BREVO_COMPANY_ATTRIBUTE?.trim() || "COMPANY";
+  const phoneAttr = process.env.BREVO_PHONE_ATTRIBUTE?.trim() || "SMS";
+  const messageAttr = process.env.BREVO_MESSAGE_ATTRIBUTE?.trim() || "MESSAGE";
+
   await brevoRequest("/contacts", {
     email: payload.email,
     attributes: {
       FIRSTNAME: payload.name,
-      COMPANY: payload.company,
-      SMS: payload.phone,
-      MESSAGE: payload.message,
+      [companyAttr]: payload.company,
+      [phoneAttr]: payload.phone,
+      [messageAttr]: payload.message,
     },
-    listIds: [getRequiredEnvNumber("BREVO_LIST_ID")],
+    listIds: [getRequiredEnvNumber("BREVO_CONTACT_LIST_ID")],
     updateEnabled: true,
   });
 }
@@ -153,7 +207,7 @@ async function sendBrevoTemplateEmail(payload: ContactFormData) {
         name: payload.name,
       },
     ],
-    templateId: getRequiredEnvNumber("BREVO_TEMPLATE_ID"),
+    templateId: getRequiredEnvNumber("BREVO_CONFIRMATION_TEMPLATE_ID"),
     params: {
       name: payload.name,
       company: payload.company,
@@ -190,6 +244,13 @@ export async function POST(request: Request) {
 
     if ((body.website || "").trim().length > 0) {
       return NextResponse.json({ success: true }, { status: 200 });
+    }
+
+    if (!(await verifyRecaptchaToken(body.recaptchaToken))) {
+      return NextResponse.json(
+        { error: "Captcha failed. Please try again." },
+        { status: 400 }
+      );
     }
 
     if (
@@ -236,6 +297,20 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Contact form integration error", error);
+
+    if (
+      typeof error === "object" &&
+      error !== null &&
+      "missingEnv" in error
+    ) {
+      const missingEnv = (error as { missingEnv?: string }).missingEnv;
+      return NextResponse.json(
+        {
+          error: `Server misconfiguration: missing environment variable ${missingEnv}.`,
+        },
+        { status: 500 }
+      );
+    }
 
     if (
       typeof error === "object" &&
