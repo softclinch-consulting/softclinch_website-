@@ -1,5 +1,5 @@
 import { SeoJsonLd } from "@/components/SeoJsonLd";
-import { ContactWithRecaptcha } from "@/components/ContactWithRecaptcha";
+import { Contact } from "@/components/Contact";
 import { buildMetadata } from "@/lib/seo";
 import { webpageJsonLd } from "@/lib/schema";
 import { SITE_NAME } from "@/lib/site";
@@ -24,7 +24,7 @@ export default function ContactPage() {
           title: `Contact | ${SITE_NAME}`,
         })}
       />
-      <ContactWithRecaptcha />
+      <Contact />
     </>
   );
 }

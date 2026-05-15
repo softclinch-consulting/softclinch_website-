@@ -33,4 +33,17 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
+### Required Vercel environment variables
+
+For the contact form to send a reply email via Brevo, set these variables in your Vercel project settings:
+
+- `BREVO_API_KEY`
+- `BREVO_CONTACT_LIST_ID` (or alias `BREVO_LIST_ID`)
+- `BREVO_CONFIRMATION_TEMPLATE_ID` (or alias `BREVO_TEMPLATE_ID`)
+- `BREVO_SENDER_EMAIL`
+- `BREVO_SENDER_NAME`
+- `NEXT_PUBLIC_SITE_URL`
+
+Once these are configured, redeploy the `main` branch and the contact form will send a confirmation email to the user.
+
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

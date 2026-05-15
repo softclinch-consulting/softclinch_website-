@@ -22,20 +22,27 @@ const MIN_FORM_FILL_MS = 3000;
 const rateLimitStore = new Map<string, number[]>();
 const duplicateSubmissionStore = new Map<string, number>();
 
-function getRequiredEnv(name: string) {
-  const value = process.env[name]?.trim();
-  if (!value) {
-    const error = new Error(`Missing required environment variable: ${name}`);
-    (error as { missingEnv?: string }).missingEnv = name;
-    throw error;
+function getRequiredEnv(nameOrNames: string | string[]) {
+  const names = typeof nameOrNames === "string" ? [nameOrNames] : nameOrNames;
+
+  for (const name of names) {
+    const value = process.env[name]?.trim();
+    if (value) {
+      return value;
+    }
   }
-  return value;
+
+  const missingName = names.join(" or ");
+  const error = new Error(`Missing required environment variable: ${missingName}`);
+  (error as { missingEnv?: string }).missingEnv = names[0];
+  throw error;
 }
 
-function getRequiredEnvNumber(name: string) {
-  const parsed = Number(getRequiredEnv(name));
+function getRequiredEnvNumber(nameOrNames: string | string[]) {
+  const parsed = Number(getRequiredEnv(nameOrNames));
+  const firstName = Array.isArray(nameOrNames) ? nameOrNames[0] : nameOrNames;
   if (!Number.isInteger(parsed) || parsed <= 0) {
-    throw new Error(`Environment variable ${name} must be a positive integer.`);
+    throw new Error(`Environment variable ${firstName} must be a positive integer.`);
   }
   return parsed;
 }
@@ -135,7 +142,7 @@ async function upsertBrevoContact(payload: ContactFormData) {
       [phoneAttr]: payload.phone,
       [messageAttr]: payload.message,
     },
-    listIds: [getRequiredEnvNumber("BREVO_CONTACT_LIST_ID")],
+    listIds: [getRequiredEnvNumber(["BREVO_CONTACT_LIST_ID", "BREVO_LIST_ID"])],
     updateEnabled: true,
   });
 }
@@ -160,7 +167,10 @@ async function sendBrevoTemplateEmail(payload: ContactFormData) {
         name: payload.name,
       },
     ],
-    templateId: getRequiredEnvNumber("BREVO_CONFIRMATION_TEMPLATE_ID"),
+    templateId: getRequiredEnvNumber([
+      "BREVO_CONFIRMATION_TEMPLATE_ID",
+      "BREVO_TEMPLATE_ID",
+    ]),
     params: {
       name: payload.name,
       company: payload.company,
