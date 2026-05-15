@@ -44,6 +44,13 @@ For the contact form to send a reply email via Brevo, set these variables in you
 - `BREVO_SENDER_NAME`
 - `NEXT_PUBLIC_SITE_URL`
 
+Verify the following in your Brevo dashboard:
+
+- The API key is active and has access to transactional email.
+- The contact list ID is correct and exists.
+- The template ID is correct and published.
+- The template has sender and recipient variables configured correctly.
+
 Once these are configured, redeploy the `main` branch and the contact form will send a confirmation email to the user.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

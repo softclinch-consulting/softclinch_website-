@@ -288,6 +288,18 @@ export async function POST(request: Request) {
           { status: 503 }
         );
       }
+
+      return NextResponse.json(
+        {
+          error:
+            typedError.details
+              ? `Brevo API error (${typedError.status}): ${typedError.details}`
+              : error instanceof Error
+              ? error.message
+              : "Your request could not be sent right now. Please try again in a few minutes.",
+        },
+        { status: 502 }
+      );
     }
 
     return NextResponse.json(
