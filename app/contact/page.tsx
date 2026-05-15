@@ -15,11 +15,7 @@ export const metadata = buildMetadata({
   canonicalPath: "/contact",
 });
 
-const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-
 export default function ContactPage() {
-  const siteKey = RECAPTCHA_SITE_KEY?.trim();
-
   return (
     <>
       <SeoJsonLd
@@ -28,7 +24,7 @@ export default function ContactPage() {
           title: `Contact | ${SITE_NAME}`,
         })}
       />
-      <ContactWithRecaptcha siteKey={siteKey} />
+      <ContactWithRecaptcha />
     </>
   );
 }

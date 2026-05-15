@@ -2,7 +2,6 @@
 
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { CONTACT } from "@/lib/contact";
 import {
   validateContactFormData,
@@ -32,7 +31,6 @@ export const Contact = () => {
   const [formData, setFormData] = useState<ContactFormData>(INITIAL_FORM_DATA);
   const [website, setWebsite] = useState("");
   const [formStartedAt, setFormStartedAt] = useState<number>(Date.now());
-  const { executeRecaptcha } = useGoogleReCaptcha();
 
   useEffect(() => {
     setFormStartedAt(Date.now());
@@ -60,15 +58,6 @@ export const Contact = () => {
     setFieldErrors({});
 
     try {
-      if (!executeRecaptcha) {
-        throw new Error("Unable to verify reCAPTCHA at this time.");
-      }
-
-      const token = await executeRecaptcha("contact_form");
-      if (!token) {
-        throw new Error("reCAPTCHA verification failed. Please try again.");
-      }
-
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
@@ -78,7 +67,6 @@ export const Contact = () => {
           ...validation.data,
           website,
           formStartedAt,
-          recaptchaToken: token,
         }),
       });
 

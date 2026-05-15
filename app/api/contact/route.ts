@@ -12,12 +12,6 @@ type BrevoApiError = Error & {
   details?: string;
 };
 
-type RecaptchaVerifyResponse = {
-  success: boolean;
-  score?: number;
-  action?: string;
-  "error-codes"?: string[];
-};
 
 const BREVO_BASE_URL = "https://api.brevo.com/v3";
 const MAX_SUBMISSIONS_PER_WINDOW = 5;
@@ -83,47 +77,6 @@ function getClientIp(allHeaders: Headers) {
 
   const realIp = allHeaders.get("x-real-ip");
   return realIp?.trim() || "unknown";
-}
-
-async function verifyRecaptchaToken(token?: string) {
-  if (!token || !token.trim()) {
-    return false;
-  }
-
-  const secret = getRequiredEnv("RECAPTCHA_SECRET_KEY");
-  const response = await fetch(
-    "https://www.google.com/recaptcha/api/siteverify",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams({
-        secret,
-        response: token,
-      }),
-      cache: "no-store",
-    }
-  );
-
-  if (!response.ok) {
-    return false;
-  }
-
-  const data = (await response.json()) as RecaptchaVerifyResponse;
-  if (!data.success) {
-    return false;
-  }
-
-  if (typeof data.score === "number" && data.score < 0.4) {
-    return false;
-  }
-
-  if (data.action && data.action !== "contact_form") {
-    return false;
-  }
-
-  return true;
 }
 
 function enforceRateLimit(clientIp: string) {
@@ -244,13 +197,6 @@ export async function POST(request: Request) {
 
     if ((body.website || "").trim().length > 0) {
       return NextResponse.json({ success: true }, { status: 200 });
-    }
-
-    if (!(await verifyRecaptchaToken(body.recaptchaToken))) {
-      return NextResponse.json(
-        { error: "Captcha failed. Please try again." },
-        { status: 400 }
-      );
     }
 
     if (
