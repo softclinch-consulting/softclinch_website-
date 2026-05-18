@@ -40,8 +40,6 @@ For the contact form to send a reply email via Brevo, set these variables in you
 - `BREVO_API_KEY`
 - `BREVO_CONTACT_LIST_ID` (or alias `BREVO_LIST_ID`)
 - `BREVO_CONFIRMATION_TEMPLATE_ID` (or alias `BREVO_TEMPLATE_ID`)
-- `BREVO_SENDER_EMAIL`
-- `BREVO_SENDER_NAME`
 - `NEXT_PUBLIC_SITE_URL`
 
 Verify the following in your Brevo dashboard:
@@ -49,7 +47,7 @@ Verify the following in your Brevo dashboard:
 - The API key is active and has access to transactional email.
 - The contact list ID is correct and exists.
 - The template ID is correct and published.
-- The template has sender and recipient variables configured correctly.
+- The template uses these variables: `{{ params.name }}`, `{{ params.company }}`, `{{ params.message }}`, and `{{ params.phone }}`.
 
 Once these are configured, redeploy the `main` branch and the contact form will send a confirmation email to the user.
 

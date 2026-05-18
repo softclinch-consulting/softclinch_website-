@@ -10,8 +10,12 @@ import {
 type BrevoApiError = Error & {
   status?: number;
   details?: string;
+  body?: unknown;
+  endpoint?: string;
 };
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 const BREVO_BASE_URL = "https://api.brevo.com/v3";
 const MAX_SUBMISSIONS_PER_WINDOW = 5;
@@ -59,13 +63,25 @@ async function brevoRequest<T>(pathname: string, body: Record<string, unknown>) 
     cache: "no-store",
   });
 
+  const responseText = await response.text();
+
   if (!response.ok) {
-    const errorText = await response.text();
+    let parsedBody: unknown = undefined;
+    if (responseText) {
+      try {
+        parsedBody = JSON.parse(responseText);
+      } catch {
+        parsedBody = responseText;
+      }
+    }
+
     const error = new Error(
-      `Brevo API error (${response.status}): ${errorText}`
+      `Brevo API error (${response.status}) on ${pathname}`
     ) as BrevoApiError;
     error.status = response.status;
-    error.details = errorText;
+    error.details = responseText;
+    error.body = parsedBody;
+    error.endpoint = pathname;
     throw error;
   }
 
@@ -73,7 +89,11 @@ async function brevoRequest<T>(pathname: string, body: Record<string, unknown>) 
     return undefined as T;
   }
 
-  return (await response.json()) as T;
+  if (!responseText) {
+    return undefined as T;
+  }
+
+  return JSON.parse(responseText) as T;
 }
 
 function getClientIp(allHeaders: Headers) {
@@ -148,19 +168,7 @@ async function upsertBrevoContact(payload: ContactFormData) {
 }
 
 async function sendBrevoTemplateEmail(payload: ContactFormData) {
-  const senderEmail = process.env.BREVO_SENDER_EMAIL?.trim();
-  const senderName =
-    process.env.BREVO_SENDER_NAME?.trim() || "SoftClinch Consulting Services";
-
   await brevoRequest("/smtp/email", {
-    ...(senderEmail
-      ? {
-          sender: {
-            email: senderEmail,
-            name: senderName,
-          },
-        }
-      : {}),
     to: [
       {
         email: payload.email,
@@ -174,9 +182,8 @@ async function sendBrevoTemplateEmail(payload: ContactFormData) {
     params: {
       name: payload.name,
       company: payload.company,
-      email: payload.email,
-      phone: payload.phone,
       message: payload.message,
+      phone: payload.phone,
     },
   });
 }
@@ -252,8 +259,6 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Contact form integration error", error);
-
     if (
       typeof error === "object" &&
       error !== null &&
@@ -275,6 +280,12 @@ export async function POST(request: Request) {
       "details" in error
     ) {
       const typedError = error as BrevoApiError;
+      console.error("Brevo request failed", {
+        endpoint: typedError.endpoint,
+        status: typedError.status,
+        details: typedError.details,
+        body: typedError.body,
+      });
 
       if (
         typedError.status === 401 &&
@@ -293,7 +304,7 @@ export async function POST(request: Request) {
         {
           error:
             typedError.details
-              ? `Brevo API error (${typedError.status}): ${typedError.details}`
+              ? `Brevo API error (${typedError.status}) while sending your request.`
               : error instanceof Error
               ? error.message
               : "Your request could not be sent right now. Please try again in a few minutes.",
@@ -301,6 +312,8 @@ export async function POST(request: Request) {
         { status: 502 }
       );
     }
+
+    console.error("Contact form integration error", error);
 
     return NextResponse.json(
       {
