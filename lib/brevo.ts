@@ -1,7 +1,3 @@
-import { BrevoClient } from "@getbrevo/brevo";
-
-let brevoClient: BrevoClient | null = null;
-
 function getTrimmedEnv(name: string) {
   return process.env[name]?.trim() || "";
 }
@@ -32,18 +28,6 @@ export function getRequiredEnvNumber(nameOrNames: string | string[]) {
   }
 
   return value;
-}
-
-export function getBrevoClient() {
-  if (!brevoClient) {
-    brevoClient = new BrevoClient({
-      apiKey: getRequiredEnv("BREVO_API_KEY"),
-      timeoutInSeconds: 30,
-      maxRetries: 2,
-    });
-  }
-
-  return brevoClient;
 }
 
 export function getBrevoSender() {
@@ -84,4 +68,52 @@ export function getBrevoFormConfig(formId: 1 | 23) {
       "BREVO_TEMPLATE_ID",
     ]),
   };
+}
+
+export async function postToBrevo<TResponse>(
+  path: string,
+  body: Record<string, unknown>
+) {
+  const response = await fetch(`https://api.brevo.com/v3${path}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "api-key": getRequiredEnv("BREVO_API_KEY"),
+    },
+    body: JSON.stringify(body),
+    cache: "no-store",
+  });
+
+  const rawText = await response.text();
+  const parsedBody = rawText ? tryParseJson(rawText) : undefined;
+
+  if (!response.ok) {
+    const error = new Error(
+      `Brevo API error (${response.status}): ${
+        typeof parsedBody === "string" ? parsedBody : rawText
+      }`
+    ) as Error & {
+      statusCode?: number;
+      body?: unknown;
+      rawResponse?: { headers?: Record<string, string> };
+    };
+
+    error.statusCode = response.status;
+    error.body = parsedBody;
+    error.rawResponse = {
+      headers: Object.fromEntries(response.headers.entries()),
+    };
+
+    throw error;
+  }
+
+  return parsedBody as TResponse;
+}
+
+function tryParseJson(value: string) {
+  try {
+    return JSON.parse(value) as unknown;
+  } catch {
+    return value;
+  }
 }

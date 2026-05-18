@@ -7,9 +7,9 @@ import {
 } from "@/lib/contact-form";
 import {
   getBrevoAdminRecipient,
-  getBrevoClient,
   getBrevoFormConfig,
   getBrevoSender,
+  postToBrevo,
   getRequiredEnv,
 } from "@/lib/brevo";
 import { buildCustomerReplyEmailContent } from "@/lib/contact-email-template";
@@ -331,7 +331,6 @@ function buildContactAttributes(submission: ParsedSubmission, includePhone: bool
 }
 
 async function upsertBrevoContact(submission: ParsedSubmission, traceId: string) {
-  const brevo = getBrevoClient();
   const formConfig = getBrevoFormConfig(submission.formId);
   const firstAttempt = buildContactAttributes(submission, true);
   const minimalAttributes = {
@@ -347,7 +346,7 @@ async function upsertBrevoContact(submission: ParsedSubmission, traceId: string)
       includesPhoneAttribute: true,
     });
 
-    const response = await brevo.contacts.createContact({
+    const response = await postToBrevo<{ id?: number }>("/contacts", {
       email: submission.payload.email,
       listIds: [formConfig.listId],
       updateEnabled: true,
@@ -375,7 +374,7 @@ async function upsertBrevoContact(submission: ParsedSubmission, traceId: string)
         reason: getBrevoErrorMessage(error),
       });
 
-      const response = await brevo.contacts.createContact({
+      const response = await postToBrevo<{ id?: number }>("/contacts", {
         email: submission.payload.email,
         listIds: [formConfig.listId],
         updateEnabled: true,
@@ -402,7 +401,7 @@ async function upsertBrevoContact(submission: ParsedSubmission, traceId: string)
       });
 
       const retryPayload = buildContactAttributes(submission, false);
-      const response = await brevo.contacts.createContact({
+      const response = await postToBrevo<{ id?: number }>("/contacts", {
         email: submission.payload.email,
         listIds: [formConfig.listId],
         updateEnabled: true,
@@ -429,7 +428,7 @@ async function upsertBrevoContact(submission: ParsedSubmission, traceId: string)
         reason: getBrevoErrorMessage(retryError),
       });
 
-      const response = await brevo.contacts.createContact({
+      const response = await postToBrevo<{ id?: number }>("/contacts", {
         email: submission.payload.email,
         listIds: [formConfig.listId],
         updateEnabled: true,
@@ -468,7 +467,6 @@ function buildCustomerTemplateParams(submission: ParsedSubmission) {
 }
 
 async function sendCustomerTemplateEmail(submission: ParsedSubmission, traceId: string) {
-  const brevo = getBrevoClient();
   const sender = getBrevoSender();
   const formConfig = getBrevoFormConfig(submission.formId);
 
@@ -477,7 +475,7 @@ async function sendCustomerTemplateEmail(submission: ParsedSubmission, traceId: 
     templateId: formConfig.templateId,
   });
 
-  const response = await brevo.transactionalEmails.sendTransacEmail({
+  const response = await postToBrevo<{ messageId?: string }>("/smtp/email", {
     sender,
     to: [
       {
@@ -503,7 +501,6 @@ async function sendCustomerTemplateEmail(submission: ParsedSubmission, traceId: 
 }
 
 async function sendCustomerHtmlTestEmail(submission: ParsedSubmission, traceId: string) {
-  const brevo = getBrevoClient();
   const sender = getBrevoSender();
   const { payload, extras } = submission;
   const emailContent = buildCustomerReplyEmailContent({
@@ -521,7 +518,7 @@ async function sendCustomerHtmlTestEmail(submission: ParsedSubmission, traceId: 
     email: payload.email,
   });
 
-  const response = await brevo.transactionalEmails.sendTransacEmail({
+  const response = await postToBrevo<{ messageId?: string }>("/smtp/email", {
     sender,
     to: [
       {
@@ -548,7 +545,6 @@ async function sendCustomerHtmlTestEmail(submission: ParsedSubmission, traceId: 
 }
 
 async function sendAdminNotificationEmail(submission: ParsedSubmission, traceId: string) {
-  const brevo = getBrevoClient();
   const sender = getBrevoSender();
   const adminRecipient = getBrevoAdminRecipient();
   const { payload, extras, formId } = submission;
@@ -558,7 +554,7 @@ async function sendAdminNotificationEmail(submission: ParsedSubmission, traceId:
     contactEmail: payload.email,
   });
 
-  const response = await brevo.transactionalEmails.sendTransacEmail({
+  const response = await postToBrevo<{ messageId?: string }>("/smtp/email", {
     sender,
     to: [adminRecipient],
     replyTo: {
