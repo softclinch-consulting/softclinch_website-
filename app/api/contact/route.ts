@@ -14,6 +14,39 @@ type BrevoApiError = Error & {
   endpoint?: string;
 };
 
+type SupportedFormId = 1 | 23;
+
+type ReferenceSubmissionInput = {
+  formId?: number;
+  FIRSTNAME?: string;
+  LASTNAME?: string;
+  email?: string;
+  phone?: string;
+  companyName?: string;
+  industry?: string;
+  service?: string;
+  timeline?: string;
+  budget?: string;
+  message?: string;
+  website?: string;
+  formStartedAt?: number;
+};
+
+type ParsedSubmission = {
+  formId: SupportedFormId;
+  payload: ContactFormData;
+  extras: {
+    firstName: string;
+    lastName: string;
+    industry: string;
+    service: string;
+    timeline: string;
+    budget: string;
+  };
+  website?: string;
+  formStartedAt?: number;
+};
+
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
@@ -74,6 +107,84 @@ function splitContactName(name: string) {
   const lastName = parts.slice(1).join(" ");
 
   return { firstName, lastName };
+}
+
+function isSupportedFormId(value: number): value is SupportedFormId {
+  return value === 1 || value === 23;
+}
+
+function normalizeOptionalValue(value: unknown) {
+  return typeof value === "string" ? value.trim() : "";
+}
+
+function parseSubmissionInput(
+  input: ContactSubmissionInput & ReferenceSubmissionInput
+): ParsedSubmission | null {
+  const rawFormId = typeof input.formId === "number" ? input.formId : 1;
+  if (!isSupportedFormId(rawFormId)) {
+    return null;
+  }
+
+  const firstName = normalizeOptionalValue(input.FIRSTNAME);
+  const lastName = normalizeOptionalValue(input.LASTNAME);
+  const combinedName = [firstName, lastName].filter(Boolean).join(" ");
+
+  const payload = normalizeContactFormData({
+    name: input.name ?? combinedName,
+    company: input.company ?? input.companyName,
+    email: input.email,
+    phone: input.phone,
+    message: input.message,
+  });
+
+  const resolvedName = combinedName || payload.name;
+  const splitName = splitContactName(resolvedName);
+
+  return {
+    formId: rawFormId,
+    payload: {
+      ...payload,
+      name: resolvedName,
+    },
+    extras: {
+      firstName: splitName.firstName,
+      lastName: splitName.lastName,
+      industry: normalizeOptionalValue(input.industry),
+      service: normalizeOptionalValue(input.service),
+      timeline: normalizeOptionalValue(input.timeline),
+      budget: normalizeOptionalValue(input.budget),
+    },
+    website: normalizeOptionalValue(input.website),
+    formStartedAt:
+      typeof input.formStartedAt === "number" ? input.formStartedAt : undefined,
+  };
+}
+
+function getBrevoFormConfig(formId: SupportedFormId) {
+  if (formId === 23) {
+    return {
+      listId: getRequiredEnvNumber([
+        "BREVO_ENTERPRISE_LIST_ID",
+        "BREVO_ENTERPRISE_CONTACT_LIST_ID",
+        "BREVO_CONTACT_LIST_ID",
+        "BREVO_LIST_ID",
+      ]),
+      templateId: getRequiredEnvNumber([
+        "BREVO_ENTERPRISE_TEMPLATE_ID",
+        "BREVO_ENTERPRISE_CONFIRMATION_TEMPLATE_ID",
+        "BREVO_CONFIRMATION_TEMPLATE_ID",
+        "BREVO_TEMPLATE_ID",
+      ]),
+    };
+  }
+
+  return {
+    listId: getRequiredEnvNumber(["BREVO_CONTACT_LIST_ID", "BREVO_LIST_ID"]),
+    templateId: getRequiredEnvNumber([
+      "BREVO_CONFIRMATION_TEMPLATE_ID",
+      "BREVO_TEMPLATE_ID",
+    ]),
+  };
 }
 
 function escapeHtml(value: string) {
@@ -155,15 +266,16 @@ function enforceRateLimit(clientIp: string) {
   return true;
 }
 
-function buildDuplicateKey(payload: ContactFormData) {
+function buildDuplicateKey(formId: SupportedFormId, payload: ContactFormData) {
   return [
+    String(formId),
     payload.email,
     payload.phone.replace(/\s+/g, ""),
     payload.message.replace(/\s+/g, " ").toLowerCase(),
   ].join("|");
 }
 
-function isDuplicateSubmission(payload: ContactFormData) {
+function isDuplicateSubmission(formId: SupportedFormId, payload: ContactFormData) {
   const now = Date.now();
 
   for (const [key, timestamp] of duplicateSubmissionStore.entries()) {
@@ -172,7 +284,7 @@ function isDuplicateSubmission(payload: ContactFormData) {
     }
   }
 
-  const duplicateKey = buildDuplicateKey(payload);
+  const duplicateKey = buildDuplicateKey(formId, payload);
   const lastSeenAt = duplicateSubmissionStore.get(duplicateKey);
 
   if (lastSeenAt && now - lastSeenAt < DUPLICATE_WINDOW_MS) {
@@ -183,30 +295,43 @@ function isDuplicateSubmission(payload: ContactFormData) {
   return false;
 }
 
-async function upsertBrevoContact(payload: ContactFormData) {
+async function upsertBrevoContact(submission: ParsedSubmission) {
   const companyAttr = process.env.BREVO_COMPANY_ATTRIBUTE?.trim() || "COMPANY";
   const phoneAttr = process.env.BREVO_PHONE_ATTRIBUTE?.trim() || "SMS";
   const messageAttr = process.env.BREVO_MESSAGE_ATTRIBUTE?.trim() || "MESSAGE";
-  const { firstName, lastName } = splitContactName(payload.name);
+  const industryAttr = process.env.BREVO_INDUSTRY_ATTRIBUTE?.trim() || "INDUSTRY";
+  const serviceAttr = process.env.BREVO_SERVICE_ATTRIBUTE?.trim() || "SERVICE";
+  const timelineAttr = process.env.BREVO_TIMELINE_ATTRIBUTE?.trim() || "TIMELINE";
+  const budgetAttr = process.env.BREVO_BUDGET_ATTRIBUTE?.trim() || "BUDGET";
+  const { payload, extras, formId } = submission;
 
   await brevoRequest("/contacts", {
     email: payload.email,
     attributes: {
-      FIRSTNAME: firstName,
-      ...(lastName ? { LASTNAME: lastName } : {}),
+      FIRSTNAME: extras.firstName,
+      ...(extras.lastName ? { LASTNAME: extras.lastName } : {}),
       [companyAttr]: payload.company,
       [phoneAttr]: payload.phone,
       [messageAttr]: payload.message,
+      ...(formId === 23
+        ? {
+            [industryAttr]: extras.industry,
+            [serviceAttr]: extras.service,
+            [timelineAttr]: extras.timeline,
+            [budgetAttr]: extras.budget,
+          }
+        : {}),
     },
-    listIds: [getRequiredEnvNumber(["BREVO_CONTACT_LIST_ID", "BREVO_LIST_ID"])],
+    listIds: [getBrevoFormConfig(formId).listId],
     updateEnabled: true,
   });
 }
 
-async function sendBrevoTemplateEmail(payload: ContactFormData) {
+async function sendBrevoTemplateEmail(submission: ParsedSubmission) {
   const senderEmail = getRequiredEnv("BREVO_SENDER_EMAIL");
   const senderName =
     process.env.BREVO_SENDER_NAME?.trim() || "SoftClinch Consulting Services";
+  const { payload, extras, formId } = submission;
 
   await brevoRequest("/smtp/email", {
     sender: {
@@ -223,23 +348,28 @@ async function sendBrevoTemplateEmail(payload: ContactFormData) {
         name: payload.name,
       },
     ],
-    templateId: getRequiredEnvNumber([
-      "BREVO_CONFIRMATION_TEMPLATE_ID",
-      "BREVO_TEMPLATE_ID",
-    ]),
+    templateId: getBrevoFormConfig(formId).templateId,
     params: {
       name: payload.name,
       company: payload.company,
       message: payload.message,
       phone: payload.phone,
+      FIRSTNAME: extras.firstName,
+      LASTNAME: extras.lastName,
+      company_name: payload.company,
+      industry: extras.industry,
+      service: extras.service,
+      timeline: extras.timeline,
+      budget: extras.budget,
     },
   });
 }
 
-async function sendBrevoFallbackCustomerEmail(payload: ContactFormData) {
+async function sendBrevoFallbackCustomerEmail(submission: ParsedSubmission) {
   const senderEmail = getRequiredEnv("BREVO_SENDER_EMAIL");
   const senderName =
     process.env.BREVO_SENDER_NAME?.trim() || "SoftClinch Consulting Services";
+  const { payload, extras } = submission;
 
   await brevoRequest("/smtp/email", {
     sender: {
@@ -275,6 +405,10 @@ async function sendBrevoFallbackCustomerEmail(payload: ContactFormData) {
       "",
       `Company: ${payload.company}`,
       `Phone: ${payload.phone}`,
+      ...(extras.industry ? [`Industry: ${extras.industry}`] : []),
+      ...(extras.service ? [`Service: ${extras.service}`] : []),
+      ...(extras.timeline ? [`Timeline: ${extras.timeline}`] : []),
+      ...(extras.budget ? [`Budget: ${extras.budget}`] : []),
       "Message:",
       payload.message,
       "",
@@ -284,12 +418,13 @@ async function sendBrevoFallbackCustomerEmail(payload: ContactFormData) {
   });
 }
 
-async function sendBrevoAdminNotification(payload: ContactFormData) {
+async function sendBrevoAdminNotification(submission: ParsedSubmission) {
   const senderEmail = getRequiredEnv("BREVO_SENDER_EMAIL");
   const senderName =
     process.env.BREVO_SENDER_NAME?.trim() || "SoftClinch Consulting Services";
   const adminEmail = process.env.BREVO_ADMIN_EMAIL?.trim() || "info@softclinch.com";
   const adminName = process.env.BREVO_ADMIN_NAME?.trim() || "SoftClinch";
+  const { payload, extras, formId } = submission;
 
   await brevoRequest("/smtp/email", {
     sender: {
@@ -313,6 +448,11 @@ async function sendBrevoAdminNotification(payload: ContactFormData) {
       <p><strong>Email:</strong> ${escapeHtml(payload.email)}</p>
       <p><strong>Company:</strong> ${escapeHtml(payload.company)}</p>
       <p><strong>Phone:</strong> ${escapeHtml(payload.phone)}</p>
+      ${extras.industry ? `<p><strong>Industry:</strong> ${escapeHtml(extras.industry)}</p>` : ""}
+      ${extras.service ? `<p><strong>Service:</strong> ${escapeHtml(extras.service)}</p>` : ""}
+      ${extras.timeline ? `<p><strong>Timeline:</strong> ${escapeHtml(extras.timeline)}</p>` : ""}
+      ${extras.budget ? `<p><strong>Budget:</strong> ${escapeHtml(extras.budget)}</p>` : ""}
+      <p><strong>Form ID:</strong> ${formId}</p>
       <p><strong>Message:</strong></p>
       <p>${escapeHtml(payload.message).replace(/\n/g, "<br />")}</p>
     `,
@@ -322,6 +462,11 @@ async function sendBrevoAdminNotification(payload: ContactFormData) {
       `Email: ${payload.email}`,
       `Company: ${payload.company}`,
       `Phone: ${payload.phone}`,
+      ...(extras.industry ? [`Industry: ${extras.industry}`] : []),
+      ...(extras.service ? [`Service: ${extras.service}`] : []),
+      ...(extras.timeline ? [`Timeline: ${extras.timeline}`] : []),
+      ...(extras.budget ? [`Budget: ${extras.budget}`] : []),
+      `Form ID: ${formId}`,
       "Message:",
       payload.message,
     ].join("\n"),
@@ -341,7 +486,7 @@ function getValidationErrorResponse(input: Partial<ContactFormData>) {
 
 export async function POST(request: Request) {
   try {
-    let body: ContactSubmissionInput;
+    let body: ContactSubmissionInput & ReferenceSubmissionInput;
 
     try {
       body = (await request.json()) as ContactSubmissionInput;
@@ -352,14 +497,22 @@ export async function POST(request: Request) {
       );
     }
 
-    if ((body.website || "").trim().length > 0) {
+    const submission = parseSubmissionInput(body);
+    if (!submission) {
+      return NextResponse.json(
+        { error: "Invalid form." },
+        { status: 400 }
+      );
+    }
+
+    if ((submission.website || "").trim().length > 0) {
       return NextResponse.json({ success: true }, { status: 200 });
     }
 
     if (
-      typeof body.formStartedAt !== "number" ||
-      !Number.isFinite(body.formStartedAt) ||
-      Date.now() - body.formStartedAt < MIN_FORM_FILL_MS
+      typeof submission.formStartedAt === "number" &&
+      (!Number.isFinite(submission.formStartedAt) ||
+        Date.now() - submission.formStartedAt < MIN_FORM_FILL_MS)
     ) {
       return NextResponse.json(
         { error: "Submission could not be verified. Please try again." },
@@ -380,25 +533,28 @@ export async function POST(request: Request) {
       );
     }
 
-    const validation = validateContactFormData(body);
+    const validation = validateContactFormData(submission.payload);
     if (!validation.isValid) {
-      return getValidationErrorResponse(body);
+      return getValidationErrorResponse(submission.payload);
     }
 
-    const payload = normalizeContactFormData(validation.data);
+    const normalizedSubmission: ParsedSubmission = {
+      ...submission,
+      payload: normalizeContactFormData(validation.data),
+    };
 
-    if (isDuplicateSubmission(payload)) {
+    if (isDuplicateSubmission(normalizedSubmission.formId, normalizedSubmission.payload)) {
       return NextResponse.json({
         success: true,
         duplicate: true,
       });
     }
 
-    await upsertBrevoContact(payload);
+    await upsertBrevoContact(normalizedSubmission);
 
     let usedFallbackEmail = false;
     try {
-      await sendBrevoTemplateEmail(payload);
+      await sendBrevoTemplateEmail(normalizedSubmission);
     } catch (error) {
       if (
         typeof error === "object" &&
@@ -417,11 +573,11 @@ export async function POST(request: Request) {
         console.error("Brevo template email failed, trying fallback email", error);
       }
 
-      await sendBrevoFallbackCustomerEmail(payload);
+      await sendBrevoFallbackCustomerEmail(normalizedSubmission);
       usedFallbackEmail = true;
     }
 
-    await sendBrevoAdminNotification(payload);
+    await sendBrevoAdminNotification(normalizedSubmission);
 
     return NextResponse.json({ success: true, usedFallbackEmail });
   } catch (error) {

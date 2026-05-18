@@ -40,6 +40,8 @@ For the contact form to send a reply email via Brevo, set these variables in you
 - `BREVO_API_KEY`
 - `BREVO_CONTACT_LIST_ID` (or alias `BREVO_LIST_ID`)
 - `BREVO_CONFIRMATION_TEMPLATE_ID` (or alias `BREVO_TEMPLATE_ID`)
+- `BREVO_ENTERPRISE_LIST_ID` (optional, for enterprise formId `23`)
+- `BREVO_ENTERPRISE_TEMPLATE_ID` (optional, for enterprise formId `23`)
 - `BREVO_SENDER_EMAIL`
 - `BREVO_SENDER_NAME`
 - `BREVO_ADMIN_EMAIL` (optional, defaults to `info@softclinch.com`)
@@ -55,9 +57,20 @@ Verify the following in your Brevo dashboard:
 - The contact attributes exist in Brevo if you want to store company and message fields:
   `COMPANY`, `SMS`, and `MESSAGE` by default, or set `BREVO_COMPANY_ATTRIBUTE`,
   `BREVO_PHONE_ATTRIBUTE`, and `BREVO_MESSAGE_ATTRIBUTE` to match your Brevo setup.
+- If you use the reference-style enterprise payload, also create `INDUSTRY`, `SERVICE`,
+  `TIMELINE`, and `BUDGET` attributes in Brevo, or map them with
+  `BREVO_INDUSTRY_ATTRIBUTE`, `BREVO_SERVICE_ATTRIBUTE`, `BREVO_TIMELINE_ATTRIBUTE`,
+  and `BREVO_BUDGET_ATTRIBUTE`.
 - The template uses these variables: `{{ params.name }}`, `{{ params.company }}`, `{{ params.message }}`, and `{{ params.phone }}`.
 
 Once these are configured, redeploy the `main` branch and the contact form will send a confirmation email to the user.
 It will also send a separate admin notification email with the full form details to `BREVO_ADMIN_EMAIL`.
+The backend also accepts a reference-style payload with `formId`, `FIRSTNAME`, `LASTNAME`,
+`companyName`, `industry`, `service`, `timeline`, and `budget`.
+
+Current confirmed values for the main contact flow:
+
+- `BREVO_CONTACT_LIST_ID=5`
+- `BREVO_CONFIRMATION_TEMPLATE_ID=7`
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
