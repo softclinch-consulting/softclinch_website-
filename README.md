@@ -64,6 +64,7 @@ Verify the following in your Brevo dashboard:
   `BREVO_INDUSTRY_ATTRIBUTE`, `BREVO_SERVICE_ATTRIBUTE`, `BREVO_TIMELINE_ATTRIBUTE`,
   and `BREVO_BUDGET_ATTRIBUTE`.
 - The template uses these variables: `{{ params.name }}`, `{{ params.company }}`, `{{ params.message }}`, and `{{ params.phone }}`.
+- A ready-to-paste reply template is available at [docs/brevo-contact-reply-template.md](/C:/Users/Ashwin/Downloads/softclinch_website--main/softclinch_website--main/docs/brevo-contact-reply-template.md).
 
 Once these are configured, redeploy the `main` branch and the contact form will send a confirmation email to the user.
 It will also send a separate admin notification email with the full form details to `BREVO_ADMIN_EMAIL`.

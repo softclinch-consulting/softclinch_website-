@@ -12,6 +12,7 @@ import {
   getBrevoSender,
   getRequiredEnv,
 } from "@/lib/brevo";
+import { buildCustomerReplyEmailContent } from "@/lib/contact-email-template";
 
 type SupportedFormId = 1 | 23;
 
@@ -505,6 +506,16 @@ async function sendCustomerHtmlTestEmail(submission: ParsedSubmission, traceId: 
   const brevo = getBrevoClient();
   const sender = getBrevoSender();
   const { payload, extras } = submission;
+  const emailContent = buildCustomerReplyEmailContent({
+    name: payload.name,
+    company: payload.company,
+    phone: payload.phone,
+    message: payload.message,
+    industry: extras.industry,
+    service: extras.service,
+    timeline: extras.timeline,
+    budget: extras.budget,
+  });
 
   logStep(traceId, "brevo.email.customer.html_debug.start", {
     email: payload.email,
@@ -519,43 +530,9 @@ async function sendCustomerHtmlTestEmail(submission: ParsedSubmission, traceId: 
       },
     ],
     replyTo: sender,
-    subject: "Thank you for contacting SoftClinch Consulting Services",
-    htmlContent: `
-      <html>
-        <body>
-          <p>Hi ${escapeHtml(payload.name)},</p>
-          <p>Thank you for contacting SoftClinch Consulting Services.</p>
-          <p>We received your enquiry and our team will get back to you shortly.</p>
-          <p><strong>Company:</strong> ${escapeHtml(payload.company)}</p>
-          <p><strong>Phone:</strong> ${escapeHtml(payload.phone)}</p>
-          ${extras.industry ? `<p><strong>Industry:</strong> ${escapeHtml(extras.industry)}</p>` : ""}
-          ${extras.service ? `<p><strong>Service:</strong> ${escapeHtml(extras.service)}</p>` : ""}
-          ${extras.timeline ? `<p><strong>Timeline:</strong> ${escapeHtml(extras.timeline)}</p>` : ""}
-          ${extras.budget ? `<p><strong>Budget:</strong> ${escapeHtml(extras.budget)}</p>` : ""}
-          <p><strong>Message:</strong></p>
-          <p>${escapeHtml(payload.message).replace(/\n/g, "<br />")}</p>
-          <p>Regards,<br />SoftClinch Consulting Services</p>
-        </body>
-      </html>
-    `,
-    textContent: [
-      `Hi ${payload.name},`,
-      "",
-      "Thank you for contacting SoftClinch Consulting Services.",
-      "We received your enquiry and our team will get back to you shortly.",
-      "",
-      `Company: ${payload.company}`,
-      `Phone: ${payload.phone}`,
-      ...(extras.industry ? [`Industry: ${extras.industry}`] : []),
-      ...(extras.service ? [`Service: ${extras.service}`] : []),
-      ...(extras.timeline ? [`Timeline: ${extras.timeline}`] : []),
-      ...(extras.budget ? [`Budget: ${extras.budget}`] : []),
-      "Message:",
-      payload.message,
-      "",
-      "Regards,",
-      "SoftClinch Consulting Services",
-    ].join("\n"),
+    subject: emailContent.subject,
+    htmlContent: emailContent.htmlContent,
+    textContent: emailContent.textContent,
   });
 
   logStep(traceId, "brevo.email.customer.html_debug.success", {
