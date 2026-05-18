@@ -291,6 +291,18 @@ function isPhoneDuplicateError(error: unknown, phoneAttributeName: string) {
   );
 }
 
+function isInvalidContactAttributeError(error: unknown) {
+  const typedError = error as BrevoRouteError;
+  const serializedBody = JSON.stringify(typedError.body || "");
+
+  return (
+    typedError.statusCode === 400 &&
+    /attribute|invalid_parameter|duplicate_parameter|unknown/i.test(
+      `${typedError.message} ${serializedBody}`
+    )
+  );
+}
+
 function buildContactAttributes(submission: ParsedSubmission, includePhone: boolean) {
   const companyAttr = process.env.BREVO_COMPANY_ATTRIBUTE?.trim() || "COMPANY";
   const phoneAttr = process.env.BREVO_PHONE_ATTRIBUTE?.trim() || "SMS";
@@ -321,6 +333,10 @@ async function upsertBrevoContact(submission: ParsedSubmission, traceId: string)
   const brevo = getBrevoClient();
   const formConfig = getBrevoFormConfig(submission.formId);
   const firstAttempt = buildContactAttributes(submission, true);
+  const minimalAttributes = {
+    FIRSTNAME: submission.extras.firstName,
+    ...(submission.extras.lastName ? { LASTNAME: submission.extras.lastName } : {}),
+  };
 
   try {
     logStep(traceId, "brevo.contact.upsert.start", {
@@ -349,33 +365,87 @@ async function upsertBrevoContact(submission: ParsedSubmission, traceId: string)
     } satisfies StepResult;
   } catch (error) {
     if (!isPhoneDuplicateError(error, firstAttempt.phoneAttr)) {
-      throw error;
+      if (!isInvalidContactAttributeError(error)) {
+        throw error;
+      }
+
+      logStep(traceId, "brevo.contact.upsert.retry_minimal_attributes", {
+        email: submission.payload.email,
+        reason: getBrevoErrorMessage(error),
+      });
+
+      const response = await brevo.contacts.createContact({
+        email: submission.payload.email,
+        listIds: [formConfig.listId],
+        updateEnabled: true,
+        attributes: minimalAttributes,
+      });
+
+      logStep(traceId, "brevo.contact.upsert.success_minimal_attributes", {
+        email: submission.payload.email,
+        contactId: response?.id,
+      });
+
+      return {
+        ok: true,
+        warning:
+          "Contact was saved with minimal Brevo fields because one or more custom contact attributes are not configured in Brevo.",
+      } satisfies StepResult;
     }
 
-    logStep(traceId, "brevo.contact.upsert.retry_without_phone", {
-      email: submission.payload.email,
-      phoneAttribute: firstAttempt.phoneAttr,
-      reason: "Phone attribute is already associated with another Brevo contact.",
-    });
+    try {
+      logStep(traceId, "brevo.contact.upsert.retry_without_phone", {
+        email: submission.payload.email,
+        phoneAttribute: firstAttempt.phoneAttr,
+        reason: "Phone attribute is already associated with another Brevo contact.",
+      });
 
-    const retryPayload = buildContactAttributes(submission, false);
-    const response = await brevo.contacts.createContact({
-      email: submission.payload.email,
-      listIds: [formConfig.listId],
-      updateEnabled: true,
-      attributes: retryPayload.attributes,
-    });
+      const retryPayload = buildContactAttributes(submission, false);
+      const response = await brevo.contacts.createContact({
+        email: submission.payload.email,
+        listIds: [formConfig.listId],
+        updateEnabled: true,
+        attributes: retryPayload.attributes,
+      });
 
-    logStep(traceId, "brevo.contact.upsert.success_without_phone", {
-      email: submission.payload.email,
-      contactId: response?.id,
-    });
+      logStep(traceId, "brevo.contact.upsert.success_without_phone", {
+        email: submission.payload.email,
+        contactId: response?.id,
+      });
 
-    return {
-      ok: true,
-      warning:
-        "Contact was saved without the Brevo phone attribute because that number already belongs to another contact.",
-    } satisfies StepResult;
+      return {
+        ok: true,
+        warning:
+          "Contact was saved without the Brevo phone attribute because that number already belongs to another contact.",
+      } satisfies StepResult;
+    } catch (retryError) {
+      if (!isInvalidContactAttributeError(retryError)) {
+        throw retryError;
+      }
+
+      logStep(traceId, "brevo.contact.upsert.retry_minimal_attributes", {
+        email: submission.payload.email,
+        reason: getBrevoErrorMessage(retryError),
+      });
+
+      const response = await brevo.contacts.createContact({
+        email: submission.payload.email,
+        listIds: [formConfig.listId],
+        updateEnabled: true,
+        attributes: minimalAttributes,
+      });
+
+      logStep(traceId, "brevo.contact.upsert.success_minimal_attributes", {
+        email: submission.payload.email,
+        contactId: response?.id,
+      });
+
+      return {
+        ok: true,
+        warning:
+          "Contact was saved with minimal Brevo fields because one or more custom contact attributes are not configured in Brevo.",
+      } satisfies StepResult;
+    }
   }
 }
 
@@ -711,7 +781,17 @@ export async function POST(request: Request) {
       );
     }
 
-    const contactResult = await upsertBrevoContact(normalizedSubmission, traceId);
+    let contactResult: StepResult;
+    try {
+      contactResult = await upsertBrevoContact(normalizedSubmission, traceId);
+    } catch (error) {
+      logStepError(traceId, "brevo.contact.upsert.failed", error);
+      contactResult = {
+        ok: false,
+        error: getBrevoErrorMessage(error),
+      };
+    }
+
     const customerEmailResult = await sendCustomerEmail(normalizedSubmission, traceId);
 
     let adminEmailResult: StepResult;
@@ -725,11 +805,11 @@ export async function POST(request: Request) {
       };
     }
 
-    if (!customerEmailResult.ok || !adminEmailResult.ok) {
+    if (!contactResult.ok || !customerEmailResult.ok || !adminEmailResult.ok) {
       return buildErrorResponse(
         502,
         traceId,
-        "Contact saved, but one or more emails failed to send.",
+        "One or more contact delivery steps failed.",
         {
           contact: contactResult,
           customerEmail: customerEmailResult,
