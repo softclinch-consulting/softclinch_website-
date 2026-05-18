@@ -51,6 +51,23 @@ function getRequiredEnvNumber(nameOrNames: string | string[]) {
   return parsed;
 }
 
+function getBrevoErrorMessage(error: BrevoApiError) {
+  if (error.body && typeof error.body === "object") {
+    const message = (error.body as { message?: unknown }).message;
+    const code = (error.body as { code?: unknown }).code;
+
+    if (typeof message === "string" && typeof code === "string") {
+      return `${code}: ${message}`;
+    }
+
+    if (typeof message === "string") {
+      return message;
+    }
+  }
+
+  return error.details || "Unknown Brevo error.";
+}
+
 async function brevoRequest<T>(pathname: string, body: Record<string, unknown>) {
   const response = await fetch(`${BREVO_BASE_URL}${pathname}`, {
     method: "POST",
@@ -168,7 +185,19 @@ async function upsertBrevoContact(payload: ContactFormData) {
 }
 
 async function sendBrevoTemplateEmail(payload: ContactFormData) {
+  const senderEmail = process.env.BREVO_SENDER_EMAIL?.trim();
+  const senderName =
+    process.env.BREVO_SENDER_NAME?.trim() || "SoftClinch Consulting Services";
+
   await brevoRequest("/smtp/email", {
+    ...(senderEmail
+      ? {
+          sender: {
+            email: senderEmail,
+            name: senderName,
+          },
+        }
+      : {}),
     to: [
       {
         email: payload.email,
@@ -280,6 +309,7 @@ export async function POST(request: Request) {
       "details" in error
     ) {
       const typedError = error as BrevoApiError;
+      const brevoMessage = getBrevoErrorMessage(typedError);
       console.error("Brevo request failed", {
         endpoint: typedError.endpoint,
         status: typedError.status,
@@ -304,7 +334,7 @@ export async function POST(request: Request) {
         {
           error:
             typedError.details
-              ? `Brevo API error (${typedError.status}) while sending your request.`
+              ? `Brevo API error (${typedError.status}): ${brevoMessage}`
               : error instanceof Error
               ? error.message
               : "Your request could not be sent right now. Please try again in a few minutes.",
