@@ -236,6 +236,54 @@ async function sendBrevoTemplateEmail(payload: ContactFormData) {
   });
 }
 
+async function sendBrevoFallbackCustomerEmail(payload: ContactFormData) {
+  const senderEmail = getRequiredEnv("BREVO_SENDER_EMAIL");
+  const senderName =
+    process.env.BREVO_SENDER_NAME?.trim() || "SoftClinch Consulting Services";
+
+  await brevoRequest("/smtp/email", {
+    sender: {
+      email: senderEmail,
+      name: senderName,
+    },
+    replyTo: {
+      email: senderEmail,
+      name: senderName,
+    },
+    to: [
+      {
+        email: payload.email,
+        name: payload.name,
+      },
+    ],
+    subject: "Thank you for contacting SoftClinch Consulting Services",
+    htmlContent: `
+      <p>Hi ${escapeHtml(payload.name)},</p>
+      <p>Thank you for contacting SoftClinch Consulting Services.</p>
+      <p>We received your enquiry and our team will get back to you shortly.</p>
+      <p><strong>Company:</strong> ${escapeHtml(payload.company)}</p>
+      <p><strong>Phone:</strong> ${escapeHtml(payload.phone)}</p>
+      <p><strong>Message:</strong></p>
+      <p>${escapeHtml(payload.message).replace(/\n/g, "<br />")}</p>
+      <p>Regards,<br />SoftClinch Consulting Services</p>
+    `,
+    textContent: [
+      `Hi ${payload.name},`,
+      "",
+      "Thank you for contacting SoftClinch Consulting Services.",
+      "We received your enquiry and our team will get back to you shortly.",
+      "",
+      `Company: ${payload.company}`,
+      `Phone: ${payload.phone}`,
+      "Message:",
+      payload.message,
+      "",
+      "Regards,",
+      "SoftClinch Consulting Services",
+    ].join("\n"),
+  });
+}
+
 async function sendBrevoAdminNotification(payload: ContactFormData) {
   const senderEmail = getRequiredEnv("BREVO_SENDER_EMAIL");
   const senderName =
@@ -347,10 +395,35 @@ export async function POST(request: Request) {
     }
 
     await upsertBrevoContact(payload);
-    await sendBrevoTemplateEmail(payload);
+
+    let usedFallbackEmail = false;
+    try {
+      await sendBrevoTemplateEmail(payload);
+    } catch (error) {
+      if (
+        typeof error === "object" &&
+        error !== null &&
+        "status" in error &&
+        "details" in error
+      ) {
+        const typedError = error as BrevoApiError;
+        console.error("Brevo template email failed, trying fallback email", {
+          endpoint: typedError.endpoint,
+          status: typedError.status,
+          details: typedError.details,
+          body: typedError.body,
+        });
+      } else {
+        console.error("Brevo template email failed, trying fallback email", error);
+      }
+
+      await sendBrevoFallbackCustomerEmail(payload);
+      usedFallbackEmail = true;
+    }
+
     await sendBrevoAdminNotification(payload);
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, usedFallbackEmail });
   } catch (error) {
     if (
       typeof error === "object" &&
