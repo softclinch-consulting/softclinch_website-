@@ -1,20 +1,28 @@
 import { NextResponse } from "next/server";
-import { headers } from "next/headers";
 import {
   normalizeContactFormData,
   validateContactFormData,
   type ContactFormData,
   type ContactSubmissionInput,
 } from "@/lib/contact-form";
-
-type BrevoApiError = Error & {
-  status?: number;
-  details?: string;
-  body?: unknown;
-  endpoint?: string;
-};
+import {
+  getBrevoAdminRecipient,
+  getBrevoClient,
+  getBrevoFormConfig,
+  getBrevoSender,
+  getRequiredEnv,
+} from "@/lib/brevo";
 
 type SupportedFormId = 1 | 23;
+
+type BrevoRouteError = Error & {
+  missingEnv?: string;
+  statusCode?: number;
+  body?: unknown;
+  rawResponse?: {
+    headers?: Record<string, string | string[] | undefined>;
+  };
+};
 
 type ReferenceSubmissionInput = {
   formId?: number;
@@ -30,6 +38,7 @@ type ReferenceSubmissionInput = {
   message?: string;
   website?: string;
   formStartedAt?: number;
+  debugEmailMode?: "template" | "html";
 };
 
 type ParsedSubmission = {
@@ -45,12 +54,20 @@ type ParsedSubmission = {
   };
   website?: string;
   formStartedAt?: number;
+  debugEmailMode: "template" | "html";
+};
+
+type StepResult = {
+  ok: boolean;
+  mode?: "template" | "html";
+  messageId?: string;
+  warning?: string;
+  error?: string;
 };
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const BREVO_BASE_URL = "https://api.brevo.com/v3";
 const MAX_SUBMISSIONS_PER_WINDOW = 5;
 const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
 const DUPLICATE_WINDOW_MS = 5 * 60 * 1000;
@@ -59,54 +76,13 @@ const MIN_FORM_FILL_MS = 3000;
 const rateLimitStore = new Map<string, number[]>();
 const duplicateSubmissionStore = new Map<string, number>();
 
-function getRequiredEnv(nameOrNames: string | string[]) {
-  const names = typeof nameOrNames === "string" ? [nameOrNames] : nameOrNames;
-
-  for (const name of names) {
-    const value = process.env[name]?.trim();
-    if (value) {
-      return value;
-    }
-  }
-
-  const missingName = names.join(" or ");
-  const error = new Error(`Missing required environment variable: ${missingName}`);
-  (error as { missingEnv?: string }).missingEnv = names[0];
-  throw error;
-}
-
-function getRequiredEnvNumber(nameOrNames: string | string[]) {
-  const parsed = Number(getRequiredEnv(nameOrNames));
-  const firstName = Array.isArray(nameOrNames) ? nameOrNames[0] : nameOrNames;
-  if (!Number.isInteger(parsed) || parsed <= 0) {
-    throw new Error(`Environment variable ${firstName} must be a positive integer.`);
-  }
-  return parsed;
-}
-
-function getBrevoErrorMessage(error: BrevoApiError) {
-  if (error.body && typeof error.body === "object") {
-    const message = (error.body as { message?: unknown }).message;
-    const code = (error.body as { code?: unknown }).code;
-
-    if (typeof message === "string" && typeof code === "string") {
-      return `${code}: ${message}`;
-    }
-
-    if (typeof message === "string") {
-      return message;
-    }
-  }
-
-  return error.details || "Unknown Brevo error.";
-}
-
-function splitContactName(name: string) {
-  const parts = name.trim().split(/\s+/).filter(Boolean);
-  const firstName = parts[0] || name;
-  const lastName = parts.slice(1).join(" ");
-
-  return { firstName, lastName };
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 function isSupportedFormId(value: number): value is SupportedFormId {
@@ -115,6 +91,14 @@ function isSupportedFormId(value: number): value is SupportedFormId {
 
 function normalizeOptionalValue(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
+}
+
+function splitContactName(name: string) {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  return {
+    firstName: parts[0] || name,
+    lastName: parts.slice(1).join(" "),
+  };
 }
 
 function parseSubmissionInput(
@@ -157,98 +141,17 @@ function parseSubmissionInput(
     website: normalizeOptionalValue(input.website),
     formStartedAt:
       typeof input.formStartedAt === "number" ? input.formStartedAt : undefined,
+    debugEmailMode: input.debugEmailMode === "html" ? "html" : "template",
   };
 }
 
-function getBrevoFormConfig(formId: SupportedFormId) {
-  if (formId === 23) {
-    return {
-      listId: getRequiredEnvNumber([
-        "BREVO_ENTERPRISE_LIST_ID",
-        "BREVO_ENTERPRISE_CONTACT_LIST_ID",
-        "BREVO_CONTACT_LIST_ID",
-        "BREVO_LIST_ID",
-      ]),
-      templateId: getRequiredEnvNumber([
-        "BREVO_ENTERPRISE_TEMPLATE_ID",
-        "BREVO_ENTERPRISE_CONFIRMATION_TEMPLATE_ID",
-        "BREVO_CONFIRMATION_TEMPLATE_ID",
-        "BREVO_TEMPLATE_ID",
-      ]),
-    };
-  }
-
-  return {
-    listId: getRequiredEnvNumber(["BREVO_CONTACT_LIST_ID", "BREVO_LIST_ID"]),
-    templateId: getRequiredEnvNumber([
-      "BREVO_CONFIRMATION_TEMPLATE_ID",
-      "BREVO_TEMPLATE_ID",
-    ]),
-  };
-}
-
-function escapeHtml(value: string) {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
-async function brevoRequest<T>(pathname: string, body: Record<string, unknown>) {
-  const response = await fetch(`${BREVO_BASE_URL}${pathname}`, {
-    method: "POST",
-    headers: {
-      accept: "application/json",
-      "content-type": "application/json",
-      "api-key": getRequiredEnv("BREVO_API_KEY"),
-    },
-    body: JSON.stringify(body),
-    cache: "no-store",
-  });
-
-  const responseText = await response.text();
-
-  if (!response.ok) {
-    let parsedBody: unknown = undefined;
-    if (responseText) {
-      try {
-        parsedBody = JSON.parse(responseText);
-      } catch {
-        parsedBody = responseText;
-      }
-    }
-
-    const error = new Error(
-      `Brevo API error (${response.status}) on ${pathname}`
-    ) as BrevoApiError;
-    error.status = response.status;
-    error.details = responseText;
-    error.body = parsedBody;
-    error.endpoint = pathname;
-    throw error;
-  }
-
-  if (response.status === 204) {
-    return undefined as T;
-  }
-
-  if (!responseText) {
-    return undefined as T;
-  }
-
-  return JSON.parse(responseText) as T;
-}
-
-function getClientIp(allHeaders: Headers) {
-  const forwardedFor = allHeaders.get("x-forwarded-for");
+function getClientIp(headers: Headers) {
+  const forwardedFor = headers.get("x-forwarded-for");
   if (forwardedFor) {
     return forwardedFor.split(",")[0]?.trim() || "unknown";
   }
 
-  const realIp = allHeaders.get("x-real-ip");
-  return realIp?.trim() || "unknown";
+  return headers.get("x-real-ip")?.trim() || "unknown";
 }
 
 function enforceRateLimit(clientIp: string) {
@@ -295,7 +198,100 @@ function isDuplicateSubmission(formId: SupportedFormId, payload: ContactFormData
   return false;
 }
 
-async function upsertBrevoContact(submission: ParsedSubmission) {
+function getValidationErrorResponse(
+  traceId: string,
+  input: Partial<ContactFormData>
+) {
+  const { errors } = validateContactFormData(input);
+  return NextResponse.json(
+    {
+      success: false,
+      traceId,
+      error: "Please correct the highlighted fields and try again.",
+      fieldErrors: errors,
+    },
+    { status: 400 }
+  );
+}
+
+function logStep(traceId: string, step: string, data?: Record<string, unknown>) {
+  console.info(`[contact:${traceId}] ${step}`, data || {});
+}
+
+function logStepError(traceId: string, step: string, error: unknown) {
+  console.error(`[contact:${traceId}] ${step}`, serializeError(error));
+}
+
+function serializeError(error: unknown) {
+  const typedError = error as BrevoRouteError;
+  const responseBody =
+    typedError.body && typeof typedError.body === "object"
+      ? typedError.body
+      : undefined;
+
+  return {
+    name: typedError?.name,
+    message: typedError?.message,
+    statusCode: typedError?.statusCode,
+    body: responseBody,
+    headers: typedError?.rawResponse?.headers,
+    stack: typedError?.stack,
+  };
+}
+
+function getBrevoErrorMessage(error: unknown) {
+  const typedError = error as BrevoRouteError;
+  if (typedError.body && typeof typedError.body === "object") {
+    const message = (typedError.body as { message?: unknown }).message;
+    const code = (typedError.body as { code?: unknown }).code;
+
+    if (typeof code === "string" && typeof message === "string") {
+      return `${code}: ${message}`;
+    }
+
+    if (typeof message === "string") {
+      return message;
+    }
+  }
+
+  return typedError.message || "Unknown Brevo error.";
+}
+
+function isIpAllowlistError(error: unknown) {
+  const typedError = error as BrevoRouteError;
+  return (
+    typedError.statusCode === 401 &&
+    JSON.stringify(typedError.body || typedError.message || "").includes(
+      "unrecognised IP address"
+    )
+  );
+}
+
+function isPhoneDuplicateError(error: unknown, phoneAttributeName: string) {
+  const typedError = error as BrevoRouteError;
+  if (typedError.statusCode !== 400 || !typedError.body || typeof typedError.body !== "object") {
+    return false;
+  }
+
+  const body = typedError.body as {
+    code?: unknown;
+    metadata?: { duplicate_identifiers?: unknown };
+  };
+  const duplicateIdentifiers = Array.isArray(body.metadata?.duplicate_identifiers)
+    ? body.metadata?.duplicate_identifiers
+    : [];
+
+  return (
+    body.code === "duplicate_parameter" &&
+    duplicateIdentifiers.some(
+      (value) =>
+        typeof value === "string" &&
+        value.toUpperCase() === phoneAttributeName.toUpperCase()
+    )
+  );
+}
+
+function buildContactAttributes(submission: ParsedSubmission, includePhone: boolean) {
   const companyAttr = process.env.BREVO_COMPANY_ATTRIBUTE?.trim() || "COMPANY";
   const phoneAttr = process.env.BREVO_PHONE_ATTRIBUTE?.trim() || "SMS";
   const messageAttr = process.env.BREVO_MESSAGE_ATTRIBUTE?.trim() || "MESSAGE";
@@ -305,97 +301,172 @@ async function upsertBrevoContact(submission: ParsedSubmission) {
   const budgetAttr = process.env.BREVO_BUDGET_ATTRIBUTE?.trim() || "BUDGET";
   const { payload, extras, formId } = submission;
 
-  await brevoRequest("/contacts", {
-    email: payload.email,
+  return {
+    phoneAttr,
     attributes: {
       FIRSTNAME: extras.firstName,
       ...(extras.lastName ? { LASTNAME: extras.lastName } : {}),
-      [companyAttr]: payload.company,
-      [phoneAttr]: payload.phone,
-      [messageAttr]: payload.message,
-      ...(formId === 23
-        ? {
-            [industryAttr]: extras.industry,
-            [serviceAttr]: extras.service,
-            [timelineAttr]: extras.timeline,
-            [budgetAttr]: extras.budget,
-          }
-        : {}),
+      ...(payload.company ? { [companyAttr]: payload.company } : {}),
+      ...(includePhone && payload.phone ? { [phoneAttr]: payload.phone } : {}),
+      ...(payload.message ? { [messageAttr]: payload.message } : {}),
+      ...(formId === 23 && extras.industry ? { [industryAttr]: extras.industry } : {}),
+      ...(formId === 23 && extras.service ? { [serviceAttr]: extras.service } : {}),
+      ...(formId === 23 && extras.timeline ? { [timelineAttr]: extras.timeline } : {}),
+      ...(formId === 23 && extras.budget ? { [budgetAttr]: extras.budget } : {}),
     },
-    listIds: [getBrevoFormConfig(formId).listId],
-    updateEnabled: true,
-  });
+  };
 }
 
-async function sendBrevoTemplateEmail(submission: ParsedSubmission) {
-  const senderEmail = getRequiredEnv("BREVO_SENDER_EMAIL");
-  const senderName =
-    process.env.BREVO_SENDER_NAME?.trim() || "SoftClinch Consulting Services";
-  const { payload, extras, formId } = submission;
+async function upsertBrevoContact(submission: ParsedSubmission, traceId: string) {
+  const brevo = getBrevoClient();
+  const formConfig = getBrevoFormConfig(submission.formId);
+  const firstAttempt = buildContactAttributes(submission, true);
 
-  await brevoRequest("/smtp/email", {
-    sender: {
-      email: senderEmail,
-      name: senderName,
-    },
-    replyTo: {
-      email: payload.email,
-      name: payload.name,
-    },
+  try {
+    logStep(traceId, "brevo.contact.upsert.start", {
+      email: submission.payload.email,
+      formId: submission.formId,
+      listId: formConfig.listId,
+      includesPhoneAttribute: true,
+    });
+
+    const response = await brevo.contacts.createContact({
+      email: submission.payload.email,
+      listIds: [formConfig.listId],
+      updateEnabled: true,
+      attributes: firstAttempt.attributes,
+    });
+
+    logStep(traceId, "brevo.contact.upsert.success", {
+      email: submission.payload.email,
+      contactId: response?.id,
+      includesPhoneAttribute: true,
+    });
+
+    return {
+      ok: true,
+      warning: undefined,
+    } satisfies StepResult;
+  } catch (error) {
+    if (!isPhoneDuplicateError(error, firstAttempt.phoneAttr)) {
+      throw error;
+    }
+
+    logStep(traceId, "brevo.contact.upsert.retry_without_phone", {
+      email: submission.payload.email,
+      phoneAttribute: firstAttempt.phoneAttr,
+      reason: "Phone attribute is already associated with another Brevo contact.",
+    });
+
+    const retryPayload = buildContactAttributes(submission, false);
+    const response = await brevo.contacts.createContact({
+      email: submission.payload.email,
+      listIds: [formConfig.listId],
+      updateEnabled: true,
+      attributes: retryPayload.attributes,
+    });
+
+    logStep(traceId, "brevo.contact.upsert.success_without_phone", {
+      email: submission.payload.email,
+      contactId: response?.id,
+    });
+
+    return {
+      ok: true,
+      warning:
+        "Contact was saved without the Brevo phone attribute because that number already belongs to another contact.",
+    } satisfies StepResult;
+  }
+}
+
+function buildCustomerTemplateParams(submission: ParsedSubmission) {
+  const { payload, extras } = submission;
+  return {
+    name: payload.name,
+    company: payload.company,
+    message: payload.message,
+    phone: payload.phone,
+    FIRSTNAME: extras.firstName,
+    LASTNAME: extras.lastName,
+    company_name: payload.company,
+    industry: extras.industry,
+    service: extras.service,
+    timeline: extras.timeline,
+    budget: extras.budget,
+  };
+}
+
+async function sendCustomerTemplateEmail(submission: ParsedSubmission, traceId: string) {
+  const brevo = getBrevoClient();
+  const sender = getBrevoSender();
+  const formConfig = getBrevoFormConfig(submission.formId);
+
+  logStep(traceId, "brevo.email.customer.template.start", {
+    email: submission.payload.email,
+    templateId: formConfig.templateId,
+  });
+
+  const response = await brevo.transactionalEmails.sendTransacEmail({
+    sender,
     to: [
       {
-        email: payload.email,
-        name: payload.name,
+        email: submission.payload.email,
+        name: submission.payload.name,
       },
     ],
-    templateId: getBrevoFormConfig(formId).templateId,
-    params: {
-      name: payload.name,
-      company: payload.company,
-      message: payload.message,
-      phone: payload.phone,
-      FIRSTNAME: extras.firstName,
-      LASTNAME: extras.lastName,
-      company_name: payload.company,
-      industry: extras.industry,
-      service: extras.service,
-      timeline: extras.timeline,
-      budget: extras.budget,
-    },
+    replyTo: sender,
+    templateId: formConfig.templateId,
+    params: buildCustomerTemplateParams(submission),
   });
+
+  logStep(traceId, "brevo.email.customer.template.success", {
+    email: submission.payload.email,
+    messageId: response.messageId,
+  });
+
+  return {
+    ok: true,
+    mode: "template",
+    messageId: response.messageId,
+  } satisfies StepResult;
 }
 
-async function sendBrevoFallbackCustomerEmail(submission: ParsedSubmission) {
-  const senderEmail = getRequiredEnv("BREVO_SENDER_EMAIL");
-  const senderName =
-    process.env.BREVO_SENDER_NAME?.trim() || "SoftClinch Consulting Services";
+async function sendCustomerHtmlTestEmail(submission: ParsedSubmission, traceId: string) {
+  const brevo = getBrevoClient();
+  const sender = getBrevoSender();
   const { payload, extras } = submission;
 
-  await brevoRequest("/smtp/email", {
-    sender: {
-      email: senderEmail,
-      name: senderName,
-    },
-    replyTo: {
-      email: senderEmail,
-      name: senderName,
-    },
+  logStep(traceId, "brevo.email.customer.html_debug.start", {
+    email: payload.email,
+  });
+
+  const response = await brevo.transactionalEmails.sendTransacEmail({
+    sender,
     to: [
       {
         email: payload.email,
         name: payload.name,
       },
     ],
+    replyTo: sender,
     subject: "Thank you for contacting SoftClinch Consulting Services",
     htmlContent: `
-      <p>Hi ${escapeHtml(payload.name)},</p>
-      <p>Thank you for contacting SoftClinch Consulting Services.</p>
-      <p>We received your enquiry and our team will get back to you shortly.</p>
-      <p><strong>Company:</strong> ${escapeHtml(payload.company)}</p>
-      <p><strong>Phone:</strong> ${escapeHtml(payload.phone)}</p>
-      <p><strong>Message:</strong></p>
-      <p>${escapeHtml(payload.message).replace(/\n/g, "<br />")}</p>
-      <p>Regards,<br />SoftClinch Consulting Services</p>
+      <html>
+        <body>
+          <p>Hi ${escapeHtml(payload.name)},</p>
+          <p>Thank you for contacting SoftClinch Consulting Services.</p>
+          <p>We received your enquiry and our team will get back to you shortly.</p>
+          <p><strong>Company:</strong> ${escapeHtml(payload.company)}</p>
+          <p><strong>Phone:</strong> ${escapeHtml(payload.phone)}</p>
+          ${extras.industry ? `<p><strong>Industry:</strong> ${escapeHtml(extras.industry)}</p>` : ""}
+          ${extras.service ? `<p><strong>Service:</strong> ${escapeHtml(extras.service)}</p>` : ""}
+          ${extras.timeline ? `<p><strong>Timeline:</strong> ${escapeHtml(extras.timeline)}</p>` : ""}
+          ${extras.budget ? `<p><strong>Budget:</strong> ${escapeHtml(extras.budget)}</p>` : ""}
+          <p><strong>Message:</strong></p>
+          <p>${escapeHtml(payload.message).replace(/\n/g, "<br />")}</p>
+          <p>Regards,<br />SoftClinch Consulting Services</p>
+        </body>
+      </html>
     `,
     textContent: [
       `Hi ${payload.name},`,
@@ -416,45 +487,55 @@ async function sendBrevoFallbackCustomerEmail(submission: ParsedSubmission) {
       "SoftClinch Consulting Services",
     ].join("\n"),
   });
+
+  logStep(traceId, "brevo.email.customer.html_debug.success", {
+    email: payload.email,
+    messageId: response.messageId,
+  });
+
+  return {
+    ok: true,
+    mode: "html",
+    messageId: response.messageId,
+  } satisfies StepResult;
 }
 
-async function sendBrevoAdminNotification(submission: ParsedSubmission) {
-  const senderEmail = getRequiredEnv("BREVO_SENDER_EMAIL");
-  const senderName =
-    process.env.BREVO_SENDER_NAME?.trim() || "SoftClinch Consulting Services";
-  const adminEmail = process.env.BREVO_ADMIN_EMAIL?.trim() || "info@softclinch.com";
-  const adminName = process.env.BREVO_ADMIN_NAME?.trim() || "SoftClinch";
+async function sendAdminNotificationEmail(submission: ParsedSubmission, traceId: string) {
+  const brevo = getBrevoClient();
+  const sender = getBrevoSender();
+  const adminRecipient = getBrevoAdminRecipient();
   const { payload, extras, formId } = submission;
 
-  await brevoRequest("/smtp/email", {
-    sender: {
-      email: senderEmail,
-      name: senderName,
-    },
-    to: [
-      {
-        email: adminEmail,
-        name: adminName,
-      },
-    ],
+  logStep(traceId, "brevo.email.admin.start", {
+    adminEmail: adminRecipient.email,
+    contactEmail: payload.email,
+  });
+
+  const response = await brevo.transactionalEmails.sendTransacEmail({
+    sender,
+    to: [adminRecipient],
     replyTo: {
       email: payload.email,
       name: payload.name,
     },
     subject: `New contact form submission from ${payload.name}`,
     htmlContent: `
-      <h2>New contact form submission</h2>
-      <p><strong>Name:</strong> ${escapeHtml(payload.name)}</p>
-      <p><strong>Email:</strong> ${escapeHtml(payload.email)}</p>
-      <p><strong>Company:</strong> ${escapeHtml(payload.company)}</p>
-      <p><strong>Phone:</strong> ${escapeHtml(payload.phone)}</p>
-      ${extras.industry ? `<p><strong>Industry:</strong> ${escapeHtml(extras.industry)}</p>` : ""}
-      ${extras.service ? `<p><strong>Service:</strong> ${escapeHtml(extras.service)}</p>` : ""}
-      ${extras.timeline ? `<p><strong>Timeline:</strong> ${escapeHtml(extras.timeline)}</p>` : ""}
-      ${extras.budget ? `<p><strong>Budget:</strong> ${escapeHtml(extras.budget)}</p>` : ""}
-      <p><strong>Form ID:</strong> ${formId}</p>
-      <p><strong>Message:</strong></p>
-      <p>${escapeHtml(payload.message).replace(/\n/g, "<br />")}</p>
+      <html>
+        <body>
+          <h2>New contact form submission</h2>
+          <p><strong>Name:</strong> ${escapeHtml(payload.name)}</p>
+          <p><strong>Email:</strong> ${escapeHtml(payload.email)}</p>
+          <p><strong>Company:</strong> ${escapeHtml(payload.company)}</p>
+          <p><strong>Phone:</strong> ${escapeHtml(payload.phone)}</p>
+          ${extras.industry ? `<p><strong>Industry:</strong> ${escapeHtml(extras.industry)}</p>` : ""}
+          ${extras.service ? `<p><strong>Service:</strong> ${escapeHtml(extras.service)}</p>` : ""}
+          ${extras.timeline ? `<p><strong>Timeline:</strong> ${escapeHtml(extras.timeline)}</p>` : ""}
+          ${extras.budget ? `<p><strong>Budget:</strong> ${escapeHtml(extras.budget)}</p>` : ""}
+          <p><strong>Form ID:</strong> ${formId}</p>
+          <p><strong>Message:</strong></p>
+          <p>${escapeHtml(payload.message).replace(/\n/g, "<br />")}</p>
+        </body>
+      </html>
     `,
     textContent: [
       "New contact form submission",
@@ -471,42 +552,117 @@ async function sendBrevoAdminNotification(submission: ParsedSubmission) {
       payload.message,
     ].join("\n"),
   });
+
+  logStep(traceId, "brevo.email.admin.success", {
+    adminEmail: adminRecipient.email,
+    messageId: response.messageId,
+  });
+
+  return {
+    ok: true,
+    messageId: response.messageId,
+  } satisfies StepResult;
 }
 
-function getValidationErrorResponse(input: Partial<ContactFormData>) {
-  const { errors } = validateContactFormData(input);
+async function sendCustomerEmail(submission: ParsedSubmission, traceId: string) {
+  if (submission.debugEmailMode === "html") {
+    return sendCustomerHtmlTestEmail(submission, traceId);
+  }
+
+  try {
+    return await sendCustomerTemplateEmail(submission, traceId);
+  } catch (error) {
+    logStepError(traceId, "brevo.email.customer.template.failed", error);
+    logStep(traceId, "brevo.email.customer.fallback_to_html", {
+      email: submission.payload.email,
+      reason: getBrevoErrorMessage(error),
+    });
+
+    const fallbackResponse = await sendCustomerHtmlTestEmail(submission, traceId);
+    return {
+      ...fallbackResponse,
+      warning: "Template email failed, so the HTML debug email was sent instead.",
+    } satisfies StepResult;
+  }
+}
+
+function buildSuccessResponse(
+  traceId: string,
+  contact: StepResult,
+  customerEmail: StepResult,
+  adminEmail: StepResult,
+  duplicate = false
+) {
+  const warnings = [contact.warning, customerEmail.warning, adminEmail.warning].filter(
+    Boolean
+  );
+
+  return NextResponse.json({
+    success: true,
+    duplicate,
+    traceId,
+    contact,
+    customerEmail,
+    adminEmail,
+    ...(warnings.length > 0 ? { warnings } : {}),
+  });
+}
+
+function buildErrorResponse(
+  status: number,
+  traceId: string,
+  message: string,
+  details?: Record<string, unknown>
+) {
   return NextResponse.json(
     {
-      error: "Please correct the highlighted fields and try again.",
-      fieldErrors: errors,
+      success: false,
+      traceId,
+      error: message,
+      ...(details ? { details } : {}),
     },
-    { status: 400 }
+    { status }
   );
 }
 
 export async function POST(request: Request) {
+  const traceId = crypto.randomUUID();
+  const startedAt = Date.now();
+
   try {
+    getRequiredEnv("BREVO_API_KEY");
+    getRequiredEnv("BREVO_SENDER_EMAIL");
+
     let body: ContactSubmissionInput & ReferenceSubmissionInput;
 
     try {
-      body = (await request.json()) as ContactSubmissionInput;
+      body = (await request.json()) as ContactSubmissionInput & ReferenceSubmissionInput;
     } catch {
-      return NextResponse.json(
-        { error: "Invalid request payload." },
-        { status: 400 }
-      );
+      return buildErrorResponse(400, traceId, "Invalid request payload.");
     }
 
     const submission = parseSubmissionInput(body);
     if (!submission) {
-      return NextResponse.json(
-        { error: "Invalid form." },
-        { status: 400 }
-      );
+      return buildErrorResponse(400, traceId, "Invalid form.");
     }
 
-    if ((submission.website || "").trim().length > 0) {
-      return NextResponse.json({ success: true }, { status: 200 });
+    logStep(traceId, "request.received", {
+      formId: submission.formId,
+      email: submission.payload.email,
+      debugEmailMode: submission.debugEmailMode,
+      hasCompany: Boolean(submission.payload.company),
+      hasPhone: Boolean(submission.payload.phone),
+    });
+
+    if ((submission.website || "").length > 0) {
+      logStep(traceId, "request.honeypot_triggered");
+      return buildSuccessResponse(
+        traceId,
+        { ok: true },
+        { ok: true },
+        { ok: true },
+        false
+      );
     }
 
     if (
@@ -514,28 +670,26 @@ export async function POST(request: Request) {
       (!Number.isFinite(submission.formStartedAt) ||
         Date.now() - submission.formStartedAt < MIN_FORM_FILL_MS)
     ) {
-      return NextResponse.json(
-        { error: "Submission could not be verified. Please try again." },
-        { status: 400 }
+      return buildErrorResponse(
+        400,
+        traceId,
+        "Submission could not be verified. Please try again."
       );
     }
 
-    const requestHeaders = await headers();
-    const clientIp = getClientIp(requestHeaders);
-
+    const clientIp = getClientIp(request.headers);
     if (!enforceRateLimit(clientIp)) {
-      return NextResponse.json(
-        {
-          error:
-            "Too many requests from this network. Please wait a few minutes and try again.",
-        },
-        { status: 429 }
+      logStep(traceId, "request.rate_limited", { clientIp });
+      return buildErrorResponse(
+        429,
+        traceId,
+        "Too many requests from this network. Please wait a few minutes and try again."
       );
     }
 
     const validation = validateContactFormData(submission.payload);
     if (!validation.isValid) {
-      return getValidationErrorResponse(submission.payload);
+      return getValidationErrorResponse(traceId, submission.payload);
     }
 
     const normalizedSubmission: ParsedSubmission = {
@@ -544,106 +698,97 @@ export async function POST(request: Request) {
     };
 
     if (isDuplicateSubmission(normalizedSubmission.formId, normalizedSubmission.payload)) {
-      return NextResponse.json({
-        success: true,
-        duplicate: true,
+      logStep(traceId, "request.duplicate_detected", {
+        email: normalizedSubmission.payload.email,
       });
+
+      return buildSuccessResponse(
+        traceId,
+        { ok: true },
+        { ok: true, warning: "Duplicate submission ignored before re-sending emails." },
+        { ok: true, warning: "Duplicate submission ignored before re-sending emails." },
+        true
+      );
     }
 
-    await upsertBrevoContact(normalizedSubmission);
+    const contactResult = await upsertBrevoContact(normalizedSubmission, traceId);
+    const customerEmailResult = await sendCustomerEmail(normalizedSubmission, traceId);
 
-    let usedFallbackEmail = false;
+    let adminEmailResult: StepResult;
     try {
-      await sendBrevoTemplateEmail(normalizedSubmission);
+      adminEmailResult = await sendAdminNotificationEmail(normalizedSubmission, traceId);
     } catch (error) {
-      if (
-        typeof error === "object" &&
-        error !== null &&
-        "status" in error &&
-        "details" in error
-      ) {
-        const typedError = error as BrevoApiError;
-        console.error("Brevo template email failed, trying fallback email", {
-          endpoint: typedError.endpoint,
-          status: typedError.status,
-          details: typedError.details,
-          body: typedError.body,
-        });
-      } else {
-        console.error("Brevo template email failed, trying fallback email", error);
-      }
-
-      await sendBrevoFallbackCustomerEmail(normalizedSubmission);
-      usedFallbackEmail = true;
+      logStepError(traceId, "brevo.email.admin.failed", error);
+      adminEmailResult = {
+        ok: false,
+        error: getBrevoErrorMessage(error),
+      };
     }
 
-    await sendBrevoAdminNotification(normalizedSubmission);
+    if (!customerEmailResult.ok || !adminEmailResult.ok) {
+      return buildErrorResponse(
+        502,
+        traceId,
+        "Contact saved, but one or more emails failed to send.",
+        {
+          contact: contactResult,
+          customerEmail: customerEmailResult,
+          adminEmail: adminEmailResult,
+        }
+      );
+    }
 
-    return NextResponse.json({ success: true, usedFallbackEmail });
+    logStep(traceId, "request.completed", {
+      durationMs: Date.now() - startedAt,
+      customerEmailMode: customerEmailResult.mode,
+    });
+
+    return buildSuccessResponse(
+      traceId,
+      contactResult,
+      customerEmailResult,
+      adminEmailResult
+    );
   } catch (error) {
-    if (
-      typeof error === "object" &&
-      error !== null &&
-      "missingEnv" in error
-    ) {
-      const missingEnv = (error as { missingEnv?: string }).missingEnv;
-      return NextResponse.json(
-        {
-          error: `Server misconfiguration: missing environment variable ${missingEnv}.`,
-        },
-        { status: 500 }
+    logStepError(traceId, "request.failed", error);
+
+    const typedError = error as BrevoRouteError;
+
+    if (typedError.missingEnv) {
+      return buildErrorResponse(
+        500,
+        traceId,
+        `Server misconfiguration: missing environment variable ${typedError.missingEnv}.`
       );
     }
 
-    if (
-      typeof error === "object" &&
-      error !== null &&
-      "status" in error &&
-      "details" in error
-    ) {
-      const typedError = error as BrevoApiError;
-      const brevoMessage = getBrevoErrorMessage(typedError);
-      console.error("Brevo request failed", {
-        endpoint: typedError.endpoint,
-        status: typedError.status,
-        details: typedError.details,
-        body: typedError.body,
-      });
-
-      if (
-        typedError.status === 401 &&
-        typedError.details?.includes("unrecognised IP address")
-      ) {
-        return NextResponse.json(
-          {
-            error:
-              "Brevo is blocking requests from this server IP. Add the deployment IP to your Brevo allowlist and try again.",
-          },
-          { status: 503 }
-        );
-      }
-
-      return NextResponse.json(
-        {
-          error:
-            typedError.details
-              ? `Brevo API error (${typedError.status}): ${brevoMessage}`
-              : error instanceof Error
-              ? error.message
-              : "Your request could not be sent right now. Please try again in a few minutes.",
-        },
-        { status: 502 }
+    if (isIpAllowlistError(error)) {
+      return buildErrorResponse(
+        503,
+        traceId,
+        "Brevo is blocking requests from this server IP. Add the Vercel deployment IP to your Brevo allowlist and try again."
       );
     }
 
-    console.error("Contact form integration error", error);
+    if (typedError.statusCode) {
+      return buildErrorResponse(
+        502,
+        traceId,
+        `Brevo API error (${typedError.statusCode}): ${getBrevoErrorMessage(error)}`
+      );
+    }
 
-    return NextResponse.json(
-      {
-        error:
-          "Your request could not be sent right now. Please try again in a few minutes.",
-      },
-      { status: 500 }
+    return buildErrorResponse(
+      500,
+      traceId,
+      "Your request could not be sent right now. Please try again in a few minutes."
     );
   }
+}
+
+export async function GET() {
+  return NextResponse.json(
+    { success: false, error: "Method not allowed." },
+    { status: 405 }
+  );
 }
