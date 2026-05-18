@@ -55,8 +55,10 @@ Verify the following in your Brevo dashboard:
 - The template ID is correct and published.
 - The sender email is verified in Brevo.
 - The contact attributes exist in Brevo if you want to store company and message fields:
-  `COMPANY`, `SMS`, and `MESSAGE` by default, or set `BREVO_COMPANY_ATTRIBUTE`,
-  `BREVO_PHONE_ATTRIBUTE`, and `BREVO_MESSAGE_ATTRIBUTE` to match your Brevo setup.
+  `COMPANY` and `MESSAGE` by default, or set `BREVO_COMPANY_ATTRIBUTE` and
+  `BREVO_MESSAGE_ATTRIBUTE` to match your Brevo setup.
+- If you also want to store phone in a Brevo contact field, set
+  `BREVO_PHONE_ATTRIBUTE` to your real Brevo attribute name, for example `SMS`.
 - If you use the reference-style enterprise payload, also create `INDUSTRY`, `SERVICE`,
   `TIMELINE`, and `BUDGET` attributes in Brevo, or map them with
   `BREVO_INDUSTRY_ATTRIBUTE`, `BREVO_SERVICE_ATTRIBUTE`, `BREVO_TIMELINE_ATTRIBUTE`,
