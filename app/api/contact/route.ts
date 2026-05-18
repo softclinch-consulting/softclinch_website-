@@ -76,6 +76,15 @@ function splitContactName(name: string) {
   return { firstName, lastName };
 }
 
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 async function brevoRequest<T>(pathname: string, body: Record<string, unknown>) {
   const response = await fetch(`${BREVO_BASE_URL}${pathname}`, {
     method: "POST",
@@ -195,20 +204,15 @@ async function upsertBrevoContact(payload: ContactFormData) {
 }
 
 async function sendBrevoTemplateEmail(payload: ContactFormData) {
-  const senderEmail = process.env.BREVO_SENDER_EMAIL?.trim();
+  const senderEmail = getRequiredEnv("BREVO_SENDER_EMAIL");
   const senderName =
     process.env.BREVO_SENDER_NAME?.trim() || "SoftClinch Consulting Services";
-  const ccEmail = process.env.BREVO_CC_EMAIL?.trim() || "info@softclinch.com";
 
   await brevoRequest("/smtp/email", {
-    ...(senderEmail
-      ? {
-          sender: {
-            email: senderEmail,
-            name: senderName,
-          },
-        }
-      : {}),
+    sender: {
+      email: senderEmail,
+      name: senderName,
+    },
     replyTo: {
       email: payload.email,
       name: payload.name,
@@ -219,14 +223,6 @@ async function sendBrevoTemplateEmail(payload: ContactFormData) {
         name: payload.name,
       },
     ],
-    cc: ccEmail
-      ? [
-          {
-            email: ccEmail,
-            name: "SoftClinch",
-          },
-        ]
-      : undefined,
     templateId: getRequiredEnvNumber([
       "BREVO_CONFIRMATION_TEMPLATE_ID",
       "BREVO_TEMPLATE_ID",
@@ -237,6 +233,50 @@ async function sendBrevoTemplateEmail(payload: ContactFormData) {
       message: payload.message,
       phone: payload.phone,
     },
+  });
+}
+
+async function sendBrevoAdminNotification(payload: ContactFormData) {
+  const senderEmail = getRequiredEnv("BREVO_SENDER_EMAIL");
+  const senderName =
+    process.env.BREVO_SENDER_NAME?.trim() || "SoftClinch Consulting Services";
+  const adminEmail = process.env.BREVO_ADMIN_EMAIL?.trim() || "info@softclinch.com";
+  const adminName = process.env.BREVO_ADMIN_NAME?.trim() || "SoftClinch";
+
+  await brevoRequest("/smtp/email", {
+    sender: {
+      email: senderEmail,
+      name: senderName,
+    },
+    to: [
+      {
+        email: adminEmail,
+        name: adminName,
+      },
+    ],
+    replyTo: {
+      email: payload.email,
+      name: payload.name,
+    },
+    subject: `New contact form submission from ${payload.name}`,
+    htmlContent: `
+      <h2>New contact form submission</h2>
+      <p><strong>Name:</strong> ${escapeHtml(payload.name)}</p>
+      <p><strong>Email:</strong> ${escapeHtml(payload.email)}</p>
+      <p><strong>Company:</strong> ${escapeHtml(payload.company)}</p>
+      <p><strong>Phone:</strong> ${escapeHtml(payload.phone)}</p>
+      <p><strong>Message:</strong></p>
+      <p>${escapeHtml(payload.message).replace(/\n/g, "<br />")}</p>
+    `,
+    textContent: [
+      "New contact form submission",
+      `Name: ${payload.name}`,
+      `Email: ${payload.email}`,
+      `Company: ${payload.company}`,
+      `Phone: ${payload.phone}`,
+      "Message:",
+      payload.message,
+    ].join("\n"),
   });
 }
 
@@ -308,6 +348,7 @@ export async function POST(request: Request) {
 
     await upsertBrevoContact(payload);
     await sendBrevoTemplateEmail(payload);
+    await sendBrevoAdminNotification(payload);
 
     return NextResponse.json({ success: true });
   } catch (error) {

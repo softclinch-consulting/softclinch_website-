@@ -42,7 +42,8 @@ For the contact form to send a reply email via Brevo, set these variables in you
 - `BREVO_CONFIRMATION_TEMPLATE_ID` (or alias `BREVO_TEMPLATE_ID`)
 - `BREVO_SENDER_EMAIL`
 - `BREVO_SENDER_NAME`
-- `BREVO_CC_EMAIL` (optional, defaults to `info@softclinch.com`)
+- `BREVO_ADMIN_EMAIL` (optional, defaults to `info@softclinch.com`)
+- `BREVO_ADMIN_NAME` (optional, defaults to `SoftClinch`)
 - `NEXT_PUBLIC_SITE_URL`
 
 Verify the following in your Brevo dashboard:
@@ -57,5 +58,6 @@ Verify the following in your Brevo dashboard:
 - The template uses these variables: `{{ params.name }}`, `{{ params.company }}`, `{{ params.message }}`, and `{{ params.phone }}`.
 
 Once these are configured, redeploy the `main` branch and the contact form will send a confirmation email to the user.
+It will also send a separate admin notification email with the full form details to `BREVO_ADMIN_EMAIL`.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
