@@ -68,6 +68,14 @@ function getBrevoErrorMessage(error: BrevoApiError) {
   return error.details || "Unknown Brevo error.";
 }
 
+function splitContactName(name: string) {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  const firstName = parts[0] || name;
+  const lastName = parts.slice(1).join(" ");
+
+  return { firstName, lastName };
+}
+
 async function brevoRequest<T>(pathname: string, body: Record<string, unknown>) {
   const response = await fetch(`${BREVO_BASE_URL}${pathname}`, {
     method: "POST",
@@ -170,11 +178,13 @@ async function upsertBrevoContact(payload: ContactFormData) {
   const companyAttr = process.env.BREVO_COMPANY_ATTRIBUTE?.trim() || "COMPANY";
   const phoneAttr = process.env.BREVO_PHONE_ATTRIBUTE?.trim() || "SMS";
   const messageAttr = process.env.BREVO_MESSAGE_ATTRIBUTE?.trim() || "MESSAGE";
+  const { firstName, lastName } = splitContactName(payload.name);
 
   await brevoRequest("/contacts", {
     email: payload.email,
     attributes: {
-      FIRSTNAME: payload.name,
+      FIRSTNAME: firstName,
+      ...(lastName ? { LASTNAME: lastName } : {}),
       [companyAttr]: payload.company,
       [phoneAttr]: payload.phone,
       [messageAttr]: payload.message,
@@ -188,6 +198,7 @@ async function sendBrevoTemplateEmail(payload: ContactFormData) {
   const senderEmail = process.env.BREVO_SENDER_EMAIL?.trim();
   const senderName =
     process.env.BREVO_SENDER_NAME?.trim() || "SoftClinch Consulting Services";
+  const ccEmail = process.env.BREVO_CC_EMAIL?.trim() || "info@softclinch.com";
 
   await brevoRequest("/smtp/email", {
     ...(senderEmail
@@ -198,12 +209,24 @@ async function sendBrevoTemplateEmail(payload: ContactFormData) {
           },
         }
       : {}),
+    replyTo: {
+      email: payload.email,
+      name: payload.name,
+    },
     to: [
       {
         email: payload.email,
         name: payload.name,
       },
     ],
+    cc: ccEmail
+      ? [
+          {
+            email: ccEmail,
+            name: "SoftClinch",
+          },
+        ]
+      : undefined,
     templateId: getRequiredEnvNumber([
       "BREVO_CONFIRMATION_TEMPLATE_ID",
       "BREVO_TEMPLATE_ID",
