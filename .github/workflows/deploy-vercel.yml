@@ -15,11 +15,75 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v42
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: --prod
+          node-version: 20
+
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          BREVO_CONTACT_LIST_ID: ${{ secrets.BREVO_CONTACT_LIST_ID }}
+          BREVO_CONFIRMATION_TEMPLATE_ID: ${{ secrets.BREVO_CONFIRMATION_TEMPLATE_ID }}
+          BREVO_ENTERPRISE_LIST_ID: ${{ secrets.BREVO_ENTERPRISE_LIST_ID }}
+          BREVO_ENTERPRISE_TEMPLATE_ID: ${{ secrets.BREVO_ENTERPRISE_TEMPLATE_ID }}
+          BREVO_SENDER_EMAIL: ${{ secrets.BREVO_SENDER_EMAIL }}
+          BREVO_SENDER_NAME: ${{ secrets.BREVO_SENDER_NAME }}
+          BREVO_ADMIN_EMAIL: ${{ secrets.BREVO_ADMIN_EMAIL }}
+          BREVO_ADMIN_NAME: ${{ secrets.BREVO_ADMIN_NAME }}
+          BREVO_LIST_ID: ${{ secrets.BREVO_LIST_ID }}
+          BREVO_TEMPLATE_ID: ${{ secrets.BREVO_TEMPLATE_ID }}
+          BREVO_COMPANY_ATTRIBUTE: ${{ secrets.BREVO_COMPANY_ATTRIBUTE }}
+          BREVO_PHONE_ATTRIBUTE: ${{ secrets.BREVO_PHONE_ATTRIBUTE }}
+          BREVO_MESSAGE_ATTRIBUTE: ${{ secrets.BREVO_MESSAGE_ATTRIBUTE }}
+          BREVO_INDUSTRY_ATTRIBUTE: ${{ secrets.BREVO_INDUSTRY_ATTRIBUTE }}
+          BREVO_SERVICE_ATTRIBUTE: ${{ secrets.BREVO_SERVICE_ATTRIBUTE }}
+          BREVO_TIMELINE_ATTRIBUTE: ${{ secrets.BREVO_TIMELINE_ATTRIBUTE }}
+          BREVO_BUDGET_ATTRIBUTE: ${{ secrets.BREVO_BUDGET_ATTRIBUTE }}
+          NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+          NEXT_PUBLIC_BASE_PATH: ${{ secrets.NEXT_PUBLIC_BASE_PATH }}
+        run: >
+          npx vercel deploy --prod --yes --token "${{ secrets.VERCEL_TOKEN }}"
+          --build-env BREVO_API_KEY="$BREVO_API_KEY"
+          --build-env BREVO_CONTACT_LIST_ID="$BREVO_CONTACT_LIST_ID"
+          --build-env BREVO_CONFIRMATION_TEMPLATE_ID="$BREVO_CONFIRMATION_TEMPLATE_ID"
+          --build-env BREVO_ENTERPRISE_LIST_ID="$BREVO_ENTERPRISE_LIST_ID"
+          --build-env BREVO_ENTERPRISE_TEMPLATE_ID="$BREVO_ENTERPRISE_TEMPLATE_ID"
+          --build-env BREVO_SENDER_EMAIL="$BREVO_SENDER_EMAIL"
+          --build-env BREVO_SENDER_NAME="$BREVO_SENDER_NAME"
+          --build-env BREVO_ADMIN_EMAIL="$BREVO_ADMIN_EMAIL"
+          --build-env BREVO_ADMIN_NAME="$BREVO_ADMIN_NAME"
+          --build-env BREVO_LIST_ID="$BREVO_LIST_ID"
+          --build-env BREVO_TEMPLATE_ID="$BREVO_TEMPLATE_ID"
+          --build-env BREVO_COMPANY_ATTRIBUTE="$BREVO_COMPANY_ATTRIBUTE"
+          --build-env BREVO_PHONE_ATTRIBUTE="$BREVO_PHONE_ATTRIBUTE"
+          --build-env BREVO_MESSAGE_ATTRIBUTE="$BREVO_MESSAGE_ATTRIBUTE"
+          --build-env BREVO_INDUSTRY_ATTRIBUTE="$BREVO_INDUSTRY_ATTRIBUTE"
+          --build-env BREVO_SERVICE_ATTRIBUTE="$BREVO_SERVICE_ATTRIBUTE"
+          --build-env BREVO_TIMELINE_ATTRIBUTE="$BREVO_TIMELINE_ATTRIBUTE"
+          --build-env BREVO_BUDGET_ATTRIBUTE="$BREVO_BUDGET_ATTRIBUTE"
+          --build-env NEXT_PUBLIC_SITE_URL="$NEXT_PUBLIC_SITE_URL"
+          --build-env NEXT_PUBLIC_BASE_PATH="$NEXT_PUBLIC_BASE_PATH"
+          --env BREVO_API_KEY="$BREVO_API_KEY"
+          --env BREVO_CONTACT_LIST_ID="$BREVO_CONTACT_LIST_ID"
+          --env BREVO_CONFIRMATION_TEMPLATE_ID="$BREVO_CONFIRMATION_TEMPLATE_ID"
+          --env BREVO_ENTERPRISE_LIST_ID="$BREVO_ENTERPRISE_LIST_ID"
+          --env BREVO_ENTERPRISE_TEMPLATE_ID="$BREVO_ENTERPRISE_TEMPLATE_ID"
+          --env BREVO_SENDER_EMAIL="$BREVO_SENDER_EMAIL"
+          --env BREVO_SENDER_NAME="$BREVO_SENDER_NAME"
+          --env BREVO_ADMIN_EMAIL="$BREVO_ADMIN_EMAIL"
+          --env BREVO_ADMIN_NAME="$BREVO_ADMIN_NAME"
+          --env BREVO_LIST_ID="$BREVO_LIST_ID"
+          --env BREVO_TEMPLATE_ID="$BREVO_TEMPLATE_ID"
+          --env BREVO_COMPANY_ATTRIBUTE="$BREVO_COMPANY_ATTRIBUTE"
+          --env BREVO_PHONE_ATTRIBUTE="$BREVO_PHONE_ATTRIBUTE"
+          --env BREVO_MESSAGE_ATTRIBUTE="$BREVO_MESSAGE_ATTRIBUTE"
+          --env BREVO_INDUSTRY_ATTRIBUTE="$BREVO_INDUSTRY_ATTRIBUTE"
+          --env BREVO_SERVICE_ATTRIBUTE="$BREVO_SERVICE_ATTRIBUTE"
+          --env BREVO_TIMELINE_ATTRIBUTE="$BREVO_TIMELINE_ATTRIBUTE"
+          --env BREVO_BUDGET_ATTRIBUTE="$BREVO_BUDGET_ATTRIBUTE"
+          --env NEXT_PUBLIC_SITE_URL="$NEXT_PUBLIC_SITE_URL"
+          --env NEXT_PUBLIC_BASE_PATH="$NEXT_PUBLIC_BASE_PATH"
