@@ -101,7 +101,7 @@ export function getRequiredEnvNumber(nameOrNames: string | string[]) {
 
 export function getBrevoSender() {
   return {
-    email: getRequiredEnv("BREVO_SENDER_EMAIL"),
+    email: getTrimmedEnv("BREVO_SENDER_EMAIL") || "info@softclinch.com",
     name: getTrimmedEnv("BREVO_SENDER_NAME") || "SoftClinch Consulting Services",
   };
 }

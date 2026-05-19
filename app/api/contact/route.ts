@@ -515,7 +515,10 @@ async function sendCustomerTemplateEmail(submission: ParsedSubmission, traceId: 
         name: submission.payload.name,
       },
     ],
-    replyTo: sender,
+    replyTo: {
+      email: "info@softclinch.com",
+      name: "SoftClinch Consulting Services",
+    },
     templateId: formConfig.customerTemplateId,
     params: buildCustomerTemplateParams(submission),
   });
@@ -567,7 +570,10 @@ async function sendCustomerHtmlTestEmail(submission: ParsedSubmission, traceId: 
         name: payload.name,
       },
     ],
-    replyTo: sender,
+    replyTo: {
+      email: "info@softclinch.com",
+      name: "SoftClinch Consulting Services",
+    },
     subject: emailContent.subject,
     htmlContent: emailContent.htmlContent,
     textContent: emailContent.textContent,
@@ -603,8 +609,8 @@ async function sendAdminNotificationEmail(submission: ParsedSubmission, traceId:
     sender,
     to: [adminRecipient],
     replyTo: {
-      email: payload.email,
-      name: payload.name,
+      email: "info@softclinch.com",
+      name: "SoftClinch Consulting Services",
     },
     templateId: adminTemplateId,
     params: {
