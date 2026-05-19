@@ -39,7 +39,10 @@ export function getBrevoSender() {
 
 export function getBrevoAdminRecipient() {
   return {
-    email: getTrimmedEnv("BREVO_ADMIN_EMAIL") || "info@softclinch.com",
+    email:
+      getTrimmedEnv("ADMIN_EMAIL") ||
+      getTrimmedEnv("BREVO_ADMIN_EMAIL") ||
+      "info@softclinch.com",
     name: getTrimmedEnv("BREVO_ADMIN_NAME") || "SoftClinch",
   };
 }
@@ -53,21 +56,31 @@ export function getBrevoFormConfig(formId: 1 | 23) {
         "BREVO_CONTACT_LIST_ID",
         "BREVO_LIST_ID",
       ]),
-      templateId: getRequiredEnvNumber([
+      customerTemplateId: getRequiredEnvNumber([
+        "BREVO_USER_TEMPLATE_ID",
         "BREVO_ENTERPRISE_TEMPLATE_ID",
         "BREVO_ENTERPRISE_CONFIRMATION_TEMPLATE_ID",
         "BREVO_CONFIRMATION_TEMPLATE_ID",
+        "BREVO_TEMPLATE_ID",
       ]),
     };
   }
 
   return {
     listId: getRequiredEnvNumber(["BREVO_CONTACT_LIST_ID", "BREVO_LIST_ID"]),
-    templateId: getRequiredEnvNumber([
+    customerTemplateId: getRequiredEnvNumber([
+      "BREVO_USER_TEMPLATE_ID",
       "BREVO_CONFIRMATION_TEMPLATE_ID",
       "BREVO_TEMPLATE_ID",
     ]),
   };
+}
+
+export function getBrevoAdminTemplateId() {
+  return getRequiredEnvNumber([
+    "BREVO_ADMIN_TEMPLATE_ID",
+    "BREVO_NOTIFICATION_TEMPLATE_ID",
+  ]);
 }
 
 export async function postToBrevo<TResponse>(

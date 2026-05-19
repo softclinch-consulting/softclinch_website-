@@ -3,6 +3,7 @@ export type ContactFormData = {
   company: string;
   email: string;
   phone: string;
+  service: string;
   message: string;
 };
 
@@ -41,6 +42,7 @@ export function normalizeContactFormData(
     company: collapseWhitespace(stripHtmlLikeChars(input.company ?? "")),
     email: collapseWhitespace(stripHtmlLikeChars(input.email ?? "")).toLowerCase(),
     phone: collapseWhitespace(stripHtmlLikeChars(input.phone ?? "")),
+    service: collapseWhitespace(stripHtmlLikeChars(input.service ?? "")),
     message: normalizeMultiline(input.message ?? ""),
   };
 }

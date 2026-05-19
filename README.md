@@ -1,79 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SoftClinch Website
 
-## Getting Started
+This is a Next.js App Router project for the SoftClinch website.
 
-First, run the development server:
+## Local development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Brevo contact flow
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The contact form posts to [app/api/contact/route.ts](/C:/Users/Ashwin/Downloads/softclinch_website--main/softclinch_website--main/app/api/contact/route.ts) and does three things:
 
-## Learn More
+1. Creates or updates the contact in Brevo.
+2. Sends a thank-you email to the user with a Brevo template.
+3. Sends an admin notification email with a separate Brevo template.
 
-To learn more about Next.js, take a look at the following resources:
+The frontend form in [components/Contact.tsx](/C:/Users/Ashwin/Downloads/softclinch_website--main/softclinch_website--main/components/Contact.tsx) now submits:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `name`
+- `email`
+- `phone`
+- `company`
+- `service`
+- `message`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Required environment variables
 
-## Deploy on Vercel
+Set these in GitHub Secrets, Vercel Environment Variables, and Netlify Environment Variables:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```env
+BREVO_API_KEY=your_brevo_api_key
+BREVO_CONTACT_LIST_ID=5
+BREVO_USER_TEMPLATE_ID=10
+BREVO_ADMIN_TEMPLATE_ID=11
+ADMIN_EMAIL=admin@yourcompany.com
+```
 
-### Required Vercel environment variables
+These are also still supported for backward compatibility if you already use them:
 
-For the contact form to send a reply email via Brevo, set these variables in your Vercel project settings:
+- `BREVO_CONFIRMATION_TEMPLATE_ID`
+- `BREVO_TEMPLATE_ID`
+- `BREVO_ADMIN_EMAIL`
 
-- `BREVO_API_KEY`
-- `BREVO_CONTACT_LIST_ID` (or alias `BREVO_LIST_ID`)
-- `BREVO_CONFIRMATION_TEMPLATE_ID` (or alias `BREVO_TEMPLATE_ID`)
-- `BREVO_ENTERPRISE_LIST_ID` (optional, for enterprise formId `23`)
-- `BREVO_ENTERPRISE_TEMPLATE_ID` (optional, for enterprise formId `23`)
+The project also expects:
+
 - `BREVO_SENDER_EMAIL`
 - `BREVO_SENDER_NAME`
-- `BREVO_ADMIN_EMAIL` (optional, defaults to `info@softclinch.com`)
-- `BREVO_ADMIN_NAME` (optional, defaults to `SoftClinch`)
 - `NEXT_PUBLIC_SITE_URL`
 
-Verify the following in your Brevo dashboard:
+Optional Brevo attribute mappings:
 
-- The API key is active and has access to transactional email.
-- The contact list ID is correct and exists.
-- The template ID is correct and published.
-- The sender email is verified in Brevo.
-- The contact attributes exist in Brevo if you want to store company and message fields:
-  `COMPANY` and `MESSAGE` by default, or set `BREVO_COMPANY_ATTRIBUTE` and
-  `BREVO_MESSAGE_ATTRIBUTE` to match your Brevo setup.
-- If you also want to store phone in a Brevo contact field, set
-  `BREVO_PHONE_ATTRIBUTE` to your real Brevo attribute name, for example `SMS`.
-- If you use the reference-style enterprise payload, also create `INDUSTRY`, `SERVICE`,
-  `TIMELINE`, and `BUDGET` attributes in Brevo, or map them with
-  `BREVO_INDUSTRY_ATTRIBUTE`, `BREVO_SERVICE_ATTRIBUTE`, `BREVO_TIMELINE_ATTRIBUTE`,
-  and `BREVO_BUDGET_ATTRIBUTE`.
-- The template uses these variables: `{{ params.name }}`, `{{ params.company }}`, `{{ params.message }}`, and `{{ params.phone }}`.
-- A ready-to-paste reply template is available at [docs/brevo-contact-reply-template.md](/C:/Users/Ashwin/Downloads/softclinch_website--main/softclinch_website--main/docs/brevo-contact-reply-template.md).
+- `BREVO_COMPANY_ATTRIBUTE`
+- `BREVO_PHONE_ATTRIBUTE`
+- `BREVO_MESSAGE_ATTRIBUTE`
+- `BREVO_SERVICE_ATTRIBUTE`
+- `BREVO_INDUSTRY_ATTRIBUTE`
+- `BREVO_TIMELINE_ATTRIBUTE`
+- `BREVO_BUDGET_ATTRIBUTE`
 
-Once these are configured, redeploy the `main` branch and the contact form will send a confirmation email to the user.
-It will also send a separate admin notification email with the full form details to `BREVO_ADMIN_EMAIL`.
-The backend also accepts a reference-style payload with `formId`, `FIRSTNAME`, `LASTNAME`,
-`companyName`, `industry`, `service`, `timeline`, and `budget`.
+## Brevo template variables
 
-Current confirmed values for the main contact flow:
+Use these params inside Brevo transactional templates:
 
-- `BREVO_CONTACT_LIST_ID=5`
-- `BREVO_CONFIRMATION_TEMPLATE_ID=7`
+- `{{ params.name }}`
+- `{{ params.email }}`
+- `{{ params.phone }}`
+- `{{ params.company }}`
+- `{{ params.service }}`
+- `{{ params.message }}`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The user reply template reference lives in [docs/brevo-contact-reply-template.md](/C:/Users/Ashwin/Downloads/softclinch_website--main/softclinch_website--main/docs/brevo-contact-reply-template.md).
+
+Suggested admin template content:
+
+```text
+New lead received from website.
+
+Name:
+{{params.name}}
+
+Email:
+{{params.email}}
+
+Phone:
+{{params.phone}}
+
+Company:
+{{params.company}}
+
+Service:
+{{params.service}}
+
+Requirement:
+{{params.message}}
+```
+
+## Deployment checklist
+
+- Add the environment variables in GitHub, Vercel, and Netlify.
+- Create the Brevo contact list.
+- Generate the Brevo API key.
+- Create and publish both Brevo transactional templates.
+- Verify the sender email in Brevo.
+- If Brevo blocks requests with an IP allowlist error, allow the deployment provider IPs.
+
+## Common Brevo errors
+
+- `401 Unauthorized`: wrong API key.
+- `Template Not Found`: wrong template ID.
+- `Invalid List ID`: wrong Brevo contact list ID.
+- `unrecognised IP address`: add your deployment IP to Brevo allowlist.

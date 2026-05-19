@@ -7,6 +7,7 @@ import {
 } from "@/lib/contact-form";
 import {
   getBrevoAdminRecipient,
+  getBrevoAdminTemplateId,
   getBrevoFormConfig,
   getBrevoSender,
   postToBrevo,
@@ -76,15 +77,6 @@ const MIN_FORM_FILL_MS = 3000;
 
 const rateLimitStore = new Map<string, number[]>();
 const duplicateSubmissionStore = new Map<string, number>();
-
-function escapeHtml(value: string) {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
 
 function isSupportedFormId(value: number): value is SupportedFormId {
   return value === 1 || value === 23;
@@ -322,8 +314,8 @@ function buildContactAttributes(submission: ParsedSubmission, includePhone: bool
       ...(payload.company ? { [companyAttr]: payload.company } : {}),
       ...(includePhone && payload.phone ? { [phoneAttr]: payload.phone } : {}),
       ...(payload.message ? { [messageAttr]: payload.message } : {}),
+      ...(extras.service ? { [serviceAttr]: extras.service } : {}),
       ...(formId === 23 && extras.industry ? { [industryAttr]: extras.industry } : {}),
-      ...(formId === 23 && extras.service ? { [serviceAttr]: extras.service } : {}),
       ...(formId === 23 && extras.timeline ? { [timelineAttr]: extras.timeline } : {}),
       ...(formId === 23 && extras.budget ? { [budgetAttr]: extras.budget } : {}),
     },
@@ -472,7 +464,7 @@ async function sendCustomerTemplateEmail(submission: ParsedSubmission, traceId: 
 
   logStep(traceId, "brevo.email.customer.template.start", {
     email: submission.payload.email,
-    templateId: formConfig.templateId,
+    templateId: formConfig.customerTemplateId,
   });
 
   const response = await postToBrevo<{ messageId?: string }>("/smtp/email", {
@@ -484,7 +476,7 @@ async function sendCustomerTemplateEmail(submission: ParsedSubmission, traceId: 
       },
     ],
     replyTo: sender,
-    templateId: formConfig.templateId,
+    templateId: formConfig.customerTemplateId,
     params: buildCustomerTemplateParams(submission),
   });
 
@@ -547,6 +539,7 @@ async function sendCustomerHtmlTestEmail(submission: ParsedSubmission, traceId: 
 async function sendAdminNotificationEmail(submission: ParsedSubmission, traceId: string) {
   const sender = getBrevoSender();
   const adminRecipient = getBrevoAdminRecipient();
+  const adminTemplateId = getBrevoAdminTemplateId();
   const { payload, extras, formId } = submission;
 
   logStep(traceId, "brevo.email.admin.start", {
@@ -561,39 +554,21 @@ async function sendAdminNotificationEmail(submission: ParsedSubmission, traceId:
       email: payload.email,
       name: payload.name,
     },
-    subject: `New contact form submission from ${payload.name}`,
-    htmlContent: `
-      <html>
-        <body>
-          <h2>New contact form submission</h2>
-          <p><strong>Name:</strong> ${escapeHtml(payload.name)}</p>
-          <p><strong>Email:</strong> ${escapeHtml(payload.email)}</p>
-          <p><strong>Company:</strong> ${escapeHtml(payload.company)}</p>
-          <p><strong>Phone:</strong> ${escapeHtml(payload.phone)}</p>
-          ${extras.industry ? `<p><strong>Industry:</strong> ${escapeHtml(extras.industry)}</p>` : ""}
-          ${extras.service ? `<p><strong>Service:</strong> ${escapeHtml(extras.service)}</p>` : ""}
-          ${extras.timeline ? `<p><strong>Timeline:</strong> ${escapeHtml(extras.timeline)}</p>` : ""}
-          ${extras.budget ? `<p><strong>Budget:</strong> ${escapeHtml(extras.budget)}</p>` : ""}
-          <p><strong>Form ID:</strong> ${formId}</p>
-          <p><strong>Message:</strong></p>
-          <p>${escapeHtml(payload.message).replace(/\n/g, "<br />")}</p>
-        </body>
-      </html>
-    `,
-    textContent: [
-      "New contact form submission",
-      `Name: ${payload.name}`,
-      `Email: ${payload.email}`,
-      `Company: ${payload.company}`,
-      `Phone: ${payload.phone}`,
-      ...(extras.industry ? [`Industry: ${extras.industry}`] : []),
-      ...(extras.service ? [`Service: ${extras.service}`] : []),
-      ...(extras.timeline ? [`Timeline: ${extras.timeline}`] : []),
-      ...(extras.budget ? [`Budget: ${extras.budget}`] : []),
-      `Form ID: ${formId}`,
-      "Message:",
-      payload.message,
-    ].join("\n"),
+    templateId: adminTemplateId,
+    params: {
+      name: payload.name,
+      email: payload.email,
+      phone: payload.phone,
+      company: payload.company,
+      service: extras.service,
+      message: payload.message,
+      industry: extras.industry,
+      timeline: extras.timeline,
+      budget: extras.budget,
+      formId,
+      FIRSTNAME: extras.firstName,
+      LASTNAME: extras.lastName,
+    },
   });
 
   logStep(traceId, "brevo.email.admin.success", {

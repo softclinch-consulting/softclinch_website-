@@ -14,6 +14,7 @@ const INITIAL_FORM_DATA: ContactFormData = {
   company: "",
   email: "",
   phone: "",
+  service: "",
   message: "",
 };
 
@@ -308,6 +309,35 @@ export const Contact = () => {
                       </p>
                     ) : null}
                   </div>
+                </div>
+                <div>
+                  <label
+                    htmlFor="contact-service"
+                    className="mb-2 block text-sm font-semibold text-white"
+                  >
+                    Service
+                  </label>
+                  <input
+                    id="contact-service"
+                    name="service"
+                    type="text"
+                    value={formData.service}
+                    onChange={handleChange}
+                    className={`${inputClassName} ${getInputStateClassName(fieldErrors.service)}`}
+                    placeholder="SEO, SAP support, automation, custom app..."
+                    aria-invalid={Boolean(fieldErrors.service)}
+                    aria-describedby={
+                      fieldErrors.service ? "contact-service-error" : undefined
+                    }
+                  />
+                  {fieldErrors.service ? (
+                    <p
+                      id="contact-service-error"
+                      className="mt-2 text-sm text-red-200"
+                    >
+                      {fieldErrors.service}
+                    </p>
+                  ) : null}
                 </div>
                 <div>
                   <label
