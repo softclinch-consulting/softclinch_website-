@@ -65,6 +65,7 @@ type StepResult = {
   messageId?: string;
   warning?: string;
   error?: string;
+  details?: Record<string, unknown>;
 };
 
 export const runtime = "nodejs";
@@ -84,6 +85,36 @@ function isSupportedFormId(value: number): value is SupportedFormId {
 
 function normalizeOptionalValue(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
+}
+
+function maskEmailAddress(value: string) {
+  const [localPart = "", domain = ""] = value.split("@");
+  if (!localPart || !domain) {
+    return value;
+  }
+
+  const visibleLocalPart =
+    localPart.length <= 2
+      ? `${localPart[0] ?? ""}*`
+      : `${localPart.slice(0, 2)}***`;
+
+  return `${visibleLocalPart}@${domain}`;
+}
+
+function summarizeSubmissionBody(input: ContactSubmissionInput & ReferenceSubmissionInput) {
+  return {
+    formId: typeof input.formId === "number" ? input.formId : 1,
+    name: normalizeOptionalValue(input.name),
+    email: maskEmailAddress(normalizeOptionalValue(input.email)),
+    phone: normalizeOptionalValue(input.phone),
+    company: normalizeOptionalValue(input.company ?? input.companyName),
+    service: normalizeOptionalValue(input.service),
+    messageLength: normalizeOptionalValue(input.message).length,
+    websiteLength: normalizeOptionalValue(input.website).length,
+    formStartedAt:
+      typeof input.formStartedAt === "number" ? input.formStartedAt : undefined,
+    debugEmailMode: input.debugEmailMode === "html" ? "html" : "template",
+  };
 }
 
 function splitContactName(name: string) {
@@ -111,6 +142,7 @@ function parseSubmissionInput(
     company: input.company ?? input.companyName,
     email: input.email,
     phone: input.phone,
+    service: input.service,
     message: input.message,
   });
 
@@ -445,14 +477,15 @@ function buildCustomerTemplateParams(submission: ParsedSubmission) {
   const { payload, extras } = submission;
   return {
     name: payload.name,
+    email: payload.email,
     company: payload.company,
     message: payload.message,
     phone: payload.phone,
+    service: payload.service || extras.service,
     FIRSTNAME: extras.firstName,
     LASTNAME: extras.lastName,
     company_name: payload.company,
     industry: extras.industry,
-    service: extras.service,
     timeline: extras.timeline,
     budget: extras.budget,
   };
@@ -461,17 +494,24 @@ function buildCustomerTemplateParams(submission: ParsedSubmission) {
 async function sendCustomerTemplateEmail(submission: ParsedSubmission, traceId: string) {
   const sender = getBrevoSender();
   const formConfig = getBrevoFormConfig(submission.formId);
+  const recipientEmail = submission.payload.email;
+
+  if (!recipientEmail) {
+    throw new Error("Customer recipient email is missing after request parsing.");
+  }
 
   logStep(traceId, "brevo.email.customer.template.start", {
-    email: submission.payload.email,
+    recipientEmail: maskEmailAddress(recipientEmail),
+    senderEmail: sender.email,
     templateId: formConfig.customerTemplateId,
+    params: buildCustomerTemplateParams(submission),
   });
 
   const response = await postToBrevo<{ messageId?: string }>("/smtp/email", {
     sender,
     to: [
       {
-        email: submission.payload.email,
+        email: recipientEmail,
         name: submission.payload.name,
       },
     ],
@@ -481,8 +521,9 @@ async function sendCustomerTemplateEmail(submission: ParsedSubmission, traceId: 
   });
 
   logStep(traceId, "brevo.email.customer.template.success", {
-    email: submission.payload.email,
+    recipientEmail: maskEmailAddress(recipientEmail),
     messageId: response.messageId,
+    response,
   });
 
   return {
@@ -495,6 +536,12 @@ async function sendCustomerTemplateEmail(submission: ParsedSubmission, traceId: 
 async function sendCustomerHtmlTestEmail(submission: ParsedSubmission, traceId: string) {
   const sender = getBrevoSender();
   const { payload, extras } = submission;
+  const recipientEmail = payload.email;
+
+  if (!recipientEmail) {
+    throw new Error("Customer recipient email is missing after request parsing.");
+  }
+
   const emailContent = buildCustomerReplyEmailContent({
     name: payload.name,
     company: payload.company,
@@ -507,14 +554,16 @@ async function sendCustomerHtmlTestEmail(submission: ParsedSubmission, traceId: 
   });
 
   logStep(traceId, "brevo.email.customer.html_debug.start", {
-    email: payload.email,
+    recipientEmail: maskEmailAddress(recipientEmail),
+    senderEmail: sender.email,
+    subject: emailContent.subject,
   });
 
   const response = await postToBrevo<{ messageId?: string }>("/smtp/email", {
     sender,
     to: [
       {
-        email: payload.email,
+        email: recipientEmail,
         name: payload.name,
       },
     ],
@@ -525,8 +574,9 @@ async function sendCustomerHtmlTestEmail(submission: ParsedSubmission, traceId: 
   });
 
   logStep(traceId, "brevo.email.customer.html_debug.success", {
-    email: payload.email,
+    recipientEmail: maskEmailAddress(recipientEmail),
     messageId: response.messageId,
+    response,
   });
 
   return {
@@ -543,8 +593,10 @@ async function sendAdminNotificationEmail(submission: ParsedSubmission, traceId:
   const { payload, extras, formId } = submission;
 
   logStep(traceId, "brevo.email.admin.start", {
-    adminEmail: adminRecipient.email,
-    contactEmail: payload.email,
+    adminEmail: maskEmailAddress(adminRecipient.email),
+    contactEmail: maskEmailAddress(payload.email),
+    senderEmail: sender.email,
+    templateId: adminTemplateId,
   });
 
   const response = await postToBrevo<{ messageId?: string }>("/smtp/email", {
@@ -572,8 +624,9 @@ async function sendAdminNotificationEmail(submission: ParsedSubmission, traceId:
   });
 
   logStep(traceId, "brevo.email.admin.success", {
-    adminEmail: adminRecipient.email,
+    adminEmail: maskEmailAddress(adminRecipient.email),
     messageId: response.messageId,
+    response,
   });
 
   return {
@@ -659,17 +712,27 @@ export async function POST(request: Request) {
       return buildErrorResponse(400, traceId, "Invalid request payload.");
     }
 
+    console.log(`[contact:${traceId}] req.body`, summarizeSubmissionBody(body));
+
     const submission = parseSubmissionInput(body);
     if (!submission) {
       return buildErrorResponse(400, traceId, "Invalid form.");
     }
 
+    getBrevoFormConfig(submission.formId);
+    getBrevoAdminTemplateId();
+    getBrevoAdminRecipient();
+
     logStep(traceId, "request.received", {
       formId: submission.formId,
-      email: submission.payload.email,
+      email: maskEmailAddress(submission.payload.email),
+      recipientEmail: maskEmailAddress(submission.payload.email),
       debugEmailMode: submission.debugEmailMode,
       hasCompany: Boolean(submission.payload.company),
       hasPhone: Boolean(submission.payload.phone),
+      hasService: Boolean(submission.payload.service || submission.extras.service),
+      senderEmail: getBrevoSender().email,
+      adminEmail: maskEmailAddress(getBrevoAdminRecipient().email),
     });
 
     if ((submission.website || "").length > 0) {
@@ -717,7 +780,7 @@ export async function POST(request: Request) {
 
     if (isDuplicateSubmission(normalizedSubmission.formId, normalizedSubmission.payload)) {
       logStep(traceId, "request.duplicate_detected", {
-        email: normalizedSubmission.payload.email,
+        email: maskEmailAddress(normalizedSubmission.payload.email),
       });
 
       return buildSuccessResponse(
@@ -737,10 +800,21 @@ export async function POST(request: Request) {
       contactResult = {
         ok: false,
         error: getBrevoErrorMessage(error),
+        details: serializeError(error),
       };
     }
 
-    const customerEmailResult = await sendCustomerEmail(normalizedSubmission, traceId);
+    let customerEmailResult: StepResult;
+    try {
+      customerEmailResult = await sendCustomerEmail(normalizedSubmission, traceId);
+    } catch (error) {
+      logStepError(traceId, "brevo.email.customer.failed", error);
+      customerEmailResult = {
+        ok: false,
+        error: getBrevoErrorMessage(error),
+        details: serializeError(error),
+      };
+    }
 
     let adminEmailResult: StepResult;
     try {
@@ -750,6 +824,7 @@ export async function POST(request: Request) {
       adminEmailResult = {
         ok: false,
         error: getBrevoErrorMessage(error),
+        details: serializeError(error),
       };
     }
 

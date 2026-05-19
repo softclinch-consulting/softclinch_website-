@@ -2,6 +2,75 @@ function getTrimmedEnv(name: string) {
   return process.env[name]?.trim() || "";
 }
 
+function maskEmailAddress(value: string) {
+  const [localPart = "", domain = ""] = value.split("@");
+  if (!localPart || !domain) {
+    return value;
+  }
+
+  const visibleLocalPart =
+    localPart.length <= 2
+      ? `${localPart[0] ?? ""}*`
+      : `${localPart.slice(0, 2)}***`;
+
+  return `${visibleLocalPart}@${domain}`;
+}
+
+function summarizeBrevoPayload(path: string, body: Record<string, unknown>) {
+  const to = Array.isArray(body.to)
+    ? body.to.map((entry) => {
+        if (!entry || typeof entry !== "object") {
+          return entry;
+        }
+
+        const recipient = entry as { email?: unknown; name?: unknown };
+        return {
+          email:
+            typeof recipient.email === "string"
+              ? maskEmailAddress(recipient.email)
+              : recipient.email,
+          name: recipient.name,
+        };
+      })
+    : undefined;
+
+  const sender =
+    body.sender && typeof body.sender === "object"
+      ? {
+          ...(body.sender as Record<string, unknown>),
+          email:
+            typeof (body.sender as { email?: unknown }).email === "string"
+              ? maskEmailAddress((body.sender as { email: string }).email)
+              : (body.sender as { email?: unknown }).email,
+        }
+      : undefined;
+
+  return {
+    path,
+    templateId: body.templateId,
+    listIds: body.listIds,
+    updateEnabled: body.updateEnabled,
+    email:
+      typeof body.email === "string" ? maskEmailAddress(body.email) : body.email,
+    sender,
+    to,
+    params:
+      body.params && typeof body.params === "object"
+        ? {
+            ...((body.params as Record<string, unknown>) || {}),
+            email:
+              typeof (body.params as { email?: unknown }).email === "string"
+                ? maskEmailAddress((body.params as { email: string }).email)
+                : (body.params as { email?: unknown }).email,
+            message:
+              typeof (body.params as { message?: unknown }).message === "string"
+                ? `[length:${((body.params as { message: string }).message || "").length}]`
+                : (body.params as { message?: unknown }).message,
+          }
+        : body.params,
+  };
+}
+
 export function getRequiredEnv(nameOrNames: string | string[]) {
   const names = Array.isArray(nameOrNames) ? nameOrNames : [nameOrNames];
 
@@ -87,6 +156,8 @@ export async function postToBrevo<TResponse>(
   path: string,
   body: Record<string, unknown>
 ) {
+  console.log("[brevo] request", summarizeBrevoPayload(path, body));
+
   const response = await fetch(`https://api.brevo.com/v3${path}`, {
     method: "POST",
     headers: {
@@ -99,6 +170,14 @@ export async function postToBrevo<TResponse>(
 
   const rawText = await response.text();
   const parsedBody = rawText ? tryParseJson(rawText) : undefined;
+
+  console.log("[brevo] response", {
+    path,
+    status: response.status,
+    ok: response.ok,
+    body: parsedBody,
+    headers: Object.fromEntries(response.headers.entries()),
+  });
 
   if (!response.ok) {
     const error = new Error(
