@@ -119,29 +119,40 @@ export function getBrevoAdminRecipient() {
 export function getBrevoFormConfig(formId: 1 | 23) {
   if (formId === 23) {
     return {
-      listId: getRequiredEnvNumber([
-        "BREVO_ENTERPRISE_LIST_ID",
-        "BREVO_ENTERPRISE_CONTACT_LIST_ID",
-        "BREVO_CONTACT_LIST_ID",
-        "BREVO_LIST_ID",
-      ]),
-      customerTemplateId: getRequiredEnvNumber([
-        "BREVO_USER_TEMPLATE_ID",
-        "BREVO_ENTERPRISE_TEMPLATE_ID",
-        "BREVO_ENTERPRISE_CONFIRMATION_TEMPLATE_ID",
-        "BREVO_CONFIRMATION_TEMPLATE_ID",
-        "BREVO_TEMPLATE_ID",
-      ]),
+      listId:
+        Number(
+          getTrimmedEnv("BREVO_ENTERPRISE_LIST_ID") ||
+            getTrimmedEnv("BREVO_ENTERPRISE_CONTACT_LIST_ID") ||
+            getTrimmedEnv("BREVO_CONTACT_LIST_ID") ||
+            getTrimmedEnv("BREVO_LIST_ID") ||
+            "5"
+        ) || 5,
+      customerTemplateId:
+        Number(
+          getTrimmedEnv("BREVO_USER_TEMPLATE_ID") ||
+            getTrimmedEnv("BREVO_ENTERPRISE_TEMPLATE_ID") ||
+            getTrimmedEnv("BREVO_ENTERPRISE_CONFIRMATION_TEMPLATE_ID") ||
+            getTrimmedEnv("BREVO_CONFIRMATION_TEMPLATE_ID") ||
+            getTrimmedEnv("BREVO_TEMPLATE_ID") ||
+            "8"
+        ) || 8,
     };
   }
 
   return {
-    listId: getRequiredEnvNumber(["BREVO_CONTACT_LIST_ID", "BREVO_LIST_ID"]),
-    customerTemplateId: getRequiredEnvNumber([
-      "BREVO_USER_TEMPLATE_ID",
-      "BREVO_CONFIRMATION_TEMPLATE_ID",
-      "BREVO_TEMPLATE_ID",
-    ]),
+    listId:
+      Number(
+        getTrimmedEnv("BREVO_CONTACT_LIST_ID") ||
+          getTrimmedEnv("BREVO_LIST_ID") ||
+          "5"
+      ) || 5,
+    customerTemplateId:
+      Number(
+        getTrimmedEnv("BREVO_USER_TEMPLATE_ID") ||
+          getTrimmedEnv("BREVO_CONFIRMATION_TEMPLATE_ID") ||
+          getTrimmedEnv("BREVO_TEMPLATE_ID") ||
+          "8"
+      ) || 8,
   };
 }
 
@@ -150,6 +161,25 @@ export function getBrevoAdminTemplateId() {
     "BREVO_ADMIN_TEMPLATE_ID",
     "BREVO_NOTIFICATION_TEMPLATE_ID",
   ]);
+}
+
+export function getOptionalBrevoAdminTemplateId() {
+  const value =
+    getTrimmedEnv("BREVO_ADMIN_TEMPLATE_ID") ||
+    getTrimmedEnv("BREVO_NOTIFICATION_TEMPLATE_ID");
+
+  if (!value) {
+    return null;
+  }
+
+  const parsed = Number(value);
+  if (!Number.isInteger(parsed) || parsed <= 0) {
+    throw new Error(
+      "Environment variable BREVO_ADMIN_TEMPLATE_ID must be a positive integer."
+    );
+  }
+
+  return parsed;
 }
 
 export async function postToBrevo<TResponse>(

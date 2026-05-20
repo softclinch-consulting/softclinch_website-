@@ -7,8 +7,8 @@ import {
 } from "@/lib/contact-form";
 import {
   getBrevoAdminRecipient,
-  getBrevoAdminTemplateId,
   getBrevoFormConfig,
+  getOptionalBrevoAdminTemplateId,
   getBrevoSender,
   postToBrevo,
   getRequiredEnv,
@@ -530,6 +530,7 @@ function buildCustomerTemplateParams(submission: ParsedSubmission) {
 async function sendCustomerTemplateEmail(submission: ParsedSubmission, traceId: string) {
   const sender = getBrevoSender();
   const formConfig = getBrevoFormConfig(submission.formId);
+  const adminRecipient = getBrevoAdminRecipient();
   const recipientEmail = submission.payload.email;
 
   if (!recipientEmail) {
@@ -551,6 +552,7 @@ async function sendCustomerTemplateEmail(submission: ParsedSubmission, traceId: 
         name: submission.payload.name,
       },
     ],
+    cc: [adminRecipient],
     replyTo: {
       email: "info@softclinch.com",
       name: "SoftClinch Consulting Services",
@@ -574,6 +576,7 @@ async function sendCustomerTemplateEmail(submission: ParsedSubmission, traceId: 
 
 async function sendCustomerHtmlTestEmail(submission: ParsedSubmission, traceId: string) {
   const sender = getBrevoSender();
+  const adminRecipient = getBrevoAdminRecipient();
   const { payload, extras } = submission;
   const recipientEmail = payload.email;
 
@@ -606,6 +609,7 @@ async function sendCustomerHtmlTestEmail(submission: ParsedSubmission, traceId: 
         name: payload.name,
       },
     ],
+    cc: [adminRecipient],
     replyTo: {
       email: "info@softclinch.com",
       name: "SoftClinch Consulting Services",
@@ -631,8 +635,20 @@ async function sendCustomerHtmlTestEmail(submission: ParsedSubmission, traceId: 
 async function sendAdminNotificationEmail(submission: ParsedSubmission, traceId: string) {
   const sender = getBrevoSender();
   const adminRecipient = getBrevoAdminRecipient();
-  const adminTemplateId = getBrevoAdminTemplateId();
+  const adminTemplateId = getOptionalBrevoAdminTemplateId();
   const { payload, extras, formId } = submission;
+
+  if (!adminTemplateId) {
+    logStep(traceId, "brevo.email.admin.skipped", {
+      adminEmail: maskEmailAddress(adminRecipient.email),
+      reason: "No admin template configured. Admin receives the customer email via cc.",
+    });
+
+    return {
+      ok: true,
+      warning: "Admin notification template not configured. Admin was copied via cc.",
+    } satisfies StepResult;
+  }
 
   logStep(traceId, "brevo.email.admin.start", {
     adminEmail: maskEmailAddress(adminRecipient.email),
@@ -763,7 +779,6 @@ export async function POST(request: Request) {
     }
 
     getBrevoFormConfig(submission.formId);
-    getBrevoAdminTemplateId();
     getBrevoAdminRecipient();
 
     logStep(traceId, "request.received", {
