@@ -46,6 +46,7 @@ type ReferenceSubmissionInput = {
 type ParsedSubmission = {
   formId: SupportedFormId;
   payload: ContactFormData;
+  captchaToken: string;
   extras: {
     firstName: string;
     lastName: string;
@@ -66,6 +67,13 @@ type StepResult = {
   warning?: string;
   error?: string;
   details?: Record<string, unknown>;
+};
+
+type RecaptchaVerificationResponse = {
+  success: boolean;
+  challenge_ts?: string;
+  hostname?: string;
+  "error-codes"?: string[];
 };
 
 export const runtime = "nodejs";
@@ -110,6 +118,7 @@ function summarizeSubmissionBody(input: ContactSubmissionInput & ReferenceSubmis
     company: normalizeOptionalValue(input.company ?? input.companyName),
     service: normalizeOptionalValue(input.service),
     messageLength: normalizeOptionalValue(input.message).length,
+    hasCaptchaToken: Boolean(normalizeOptionalValue(input.captchaToken)),
     websiteLength: normalizeOptionalValue(input.website).length,
     formStartedAt:
       typeof input.formStartedAt === "number" ? input.formStartedAt : undefined,
@@ -155,6 +164,7 @@ function parseSubmissionInput(
       ...payload,
       name: resolvedName,
     },
+    captchaToken: normalizeOptionalValue(input.captchaToken),
     extras: {
       firstName: splitName.firstName,
       lastName: splitName.lastName,
@@ -168,6 +178,32 @@ function parseSubmissionInput(
       typeof input.formStartedAt === "number" ? input.formStartedAt : undefined,
     debugEmailMode: input.debugEmailMode === "html" ? "html" : "template",
   };
+}
+
+async function verifyRecaptchaToken(token: string, clientIp?: string) {
+  const secret = getRequiredEnv("RECAPTCHA_SECRET_KEY");
+  const params = new URLSearchParams({
+    secret,
+    response: token,
+  });
+
+  if (clientIp && clientIp !== "unknown") {
+    params.append("remoteip", clientIp);
+  }
+
+  const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: params.toString(),
+  });
+
+  if (!response.ok) {
+    throw new Error(`reCAPTCHA verification request failed with status ${response.status}.`);
+  }
+
+  return (await response.json()) as RecaptchaVerificationResponse;
 }
 
 function getClientIp(headers: Headers) {
@@ -709,6 +745,7 @@ export async function POST(request: Request) {
   try {
     getRequiredEnv("BREVO_API_KEY");
     getRequiredEnv("BREVO_SENDER_EMAIL");
+    getRequiredEnv("RECAPTCHA_SECRET_KEY");
 
     let body: ContactSubmissionInput & ReferenceSubmissionInput;
 
@@ -783,6 +820,31 @@ export async function POST(request: Request) {
       ...submission,
       payload: normalizeContactFormData(validation.data),
     };
+
+    if (!normalizedSubmission.captchaToken) {
+      return buildErrorResponse(
+        400,
+        traceId,
+        "Please complete the reCAPTCHA checkbox before submitting."
+      );
+    }
+
+    const recaptchaVerification = await verifyRecaptchaToken(
+      normalizedSubmission.captchaToken,
+      clientIp
+    );
+
+    if (!recaptchaVerification.success) {
+      logStep(traceId, "request.recaptcha_failed", {
+        errorCodes: recaptchaVerification["error-codes"] || [],
+      });
+
+      return buildErrorResponse(
+        400,
+        traceId,
+        "reCAPTCHA verification failed. Please try again."
+      );
+    }
 
     if (isDuplicateSubmission(normalizedSubmission.formId, normalizedSubmission.payload)) {
       logStep(traceId, "request.duplicate_detected", {

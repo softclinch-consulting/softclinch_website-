@@ -1,6 +1,7 @@
 "use client";
 
 import { Mail, Phone, MapPin, Send } from "lucide-react";
+import ReCAPTCHA from "react-google-recaptcha";
 import React, { useEffect, useState } from "react";
 import { CONTACT } from "@/lib/contact";
 import {
@@ -27,6 +28,7 @@ type ContactApiResponse = {
 export const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<ContactValidationErrors>({});
   const [formData, setFormData] = useState<ContactFormData>(INITIAL_FORM_DATA);
@@ -55,6 +57,11 @@ export const Contact = () => {
       return;
     }
 
+    if (!captchaToken) {
+      setError("Please complete the reCAPTCHA checkbox before submitting.");
+      return;
+    }
+
     setIsSubmitting(true);
     setFieldErrors({});
 
@@ -66,6 +73,7 @@ export const Contact = () => {
         },
         body: JSON.stringify({
           ...validation.data,
+          captchaToken,
           website,
           formStartedAt,
         }),
@@ -88,6 +96,7 @@ export const Contact = () => {
 
       setSubmitted(true);
       setFormData(INITIAL_FORM_DATA);
+      setCaptchaToken("");
       setWebsite("");
       setFormStartedAt(Date.now());
     } catch (err) {
@@ -368,6 +377,12 @@ export const Contact = () => {
                       {fieldErrors.message}
                     </p>
                   ) : null}
+                </div>
+                <div>
+                  <ReCAPTCHA
+                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+                    onChange={(token) => setCaptchaToken(token || "")}
+                  />
                 </div>
                 {error ? (
                   <div className="rounded-2xl border border-red-300/30 bg-red-500/10 px-4 py-3 text-sm text-red-100">

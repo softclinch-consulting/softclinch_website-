@@ -8,6 +8,7 @@ export type ContactFormData = {
 };
 
 export type ContactSubmissionInput = Partial<ContactFormData> & {
+  captchaToken?: string;
   website?: string;
   formStartedAt?: number;
 };
