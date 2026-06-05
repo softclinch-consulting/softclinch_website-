@@ -82,7 +82,6 @@ const ClientLogos = () => {
     { name: 'NTT DATA', logoPath: '/client-logos/sc-clients-003.jpg', bg: 'bg-white' },
     { name: 'Fujitsu', logoPath: '/client-logos/sc-clients-004.jpg', bg: 'bg-white' },
     { name: 'Star Eltech', logoPath: '/client-logos/sc-clients-005.jpg', bg: 'bg-white' },
-    { name: 'SoftClinch', logoPath: '/client-logos/logo.gif', bg: 'bg-white' },
     { name: 'Client Logo 007', logoPath: '/client-logos/client-logo-007.jpeg', bg: 'bg-white' },
     { name: 'Client Logo 008', logoPath: '/client-logos/client-logo-008.jpeg', bg: 'bg-white' },
   ];
