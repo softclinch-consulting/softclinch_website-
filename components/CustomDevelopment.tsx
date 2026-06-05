@@ -346,26 +346,26 @@ export function CustomDevelopment() {
       <section className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="rounded-[36px] bg-[linear-gradient(135deg,#0b2545_0%,#163a63_55%,#c25e3f_140%)] px-8 py-12 text-white shadow-[0_32px_100px_-40px_rgba(11,37,69,0.75)] md:px-12">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/75">
-            Final CTA
+            Ready to build?
           </p>
           <h2 className="mt-4 max-w-3xl text-3xl font-bold tracking-tight md:text-4xl">
-            Build a custom software system around how your business actually works
+            Launch a custom application that streamlines operations, improves productivity, and scales with your business.
           </h2>
           <p className="mt-5 max-w-3xl text-base leading-8 text-slate-200">
-            Talk to SoftClinch about SaaS platform development, enterprise applications, API integrations, dashboards, cloud-native systems, and long-term product support.
+            Partner with SoftClinch to design, build, and support enterprise-grade web and SaaS applications, API integrations, dashboards, automation flows, and long-term product growth.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
               href="/contact"
               className="inline-flex items-center rounded-xl bg-white px-6 py-3.5 text-sm font-semibold text-brand-navy transition hover:bg-slate-100"
             >
-              Contact Us
+              Start Your Project
             </Link>
             <Link
-              href="/services"
+              href="/contact"
               className="inline-flex items-center rounded-xl border border-white/30 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10"
             >
-              View All Services
+              Schedule a Consultation
             </Link>
           </div>
         </div>
