@@ -35,7 +35,7 @@ export const Header = () => {
         },
         { name: 'Enterprise', path: '/services/enterprise-software' },
         { name: 'Inaiwazhi', path: '/inaiwazhi-whatsapp-automation' },
-        { name: 'Blog', path: '/blog' },
+        // { name: 'Blog', path: '/blog' },
         { name: 'Contact', path: '/contact' },
     ];
 
