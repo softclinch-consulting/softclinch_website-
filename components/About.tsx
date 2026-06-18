@@ -440,10 +440,9 @@ export const About = () => {
           <div className="relative">
             <div className="aspect-square bg-brand-navy rounded-[3rem] overflow-hidden">
               <img
-                src="https://picsum.photos/seed/softclinch-about/800/800"
-                alt="SoftClinch Engineering Team"
-                className="w-full h-full object-cover opacity-50 grayscale"
-                referrerPolicy="no-referrer"
+                src={assetPath("/about_hero_industries.png")}
+                alt="SoftClinch — AI-powered solutions across Healthcare, Finance, Manufacturing & Real Estate"
+                className="w-full h-full object-cover"
               />
             </div>
             <div className="absolute -bottom-8 -right-8 bg-white p-8 rounded-3xl shadow-2xl border border-slate-100 hidden lg:block">

@@ -29,6 +29,9 @@ export const metadata: Metadata = {
   verification: {
     google: "HH9wAKOxxeKPnKdd6bFt2WQzP7BgLV4wZsLLCz-Vwzc",
   },
+  icons: {
+    icon: "/favicon.ico",
+  },
   openGraph: {
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
