@@ -50,30 +50,94 @@ const MissionVision = () => (
 );
 
 
-const Values = () => (
-  <section className="py-10 mb-32">
-    <div className="text-center mb-20">
-      <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900 mb-4">Our Core Values</h2>
-      <p className="text-slate-600">The principles that guide every line of code we write and every strategy we design.</p>
-    </div>
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      {[
-        { title: 'Engineering Excellence', desc: 'We prioritize robust, production-grade code over quick fixes.' },
-        { title: 'Client-Centricity', desc: 'Your business goals are the primary driver of our technical decisions.' },
-        { title: 'Security-First', desc: 'Data integrity and security are baked into the core of every system.' },
-        { title: 'Continuous Innovation', desc: 'We stay ahead of the curve in AI, automation, and enterprise tech.' }
-      ].map((value, i) => (
-        <div key={i} className="p-8 bg-white border border-slate-200 rounded-3xl hover:border-brand-navy transition-all shadow-sm">
-          <div className="w-12 h-12 bg-brand-navy/10 text-brand-navy rounded-xl flex items-center justify-center mb-6 font-bold">
-            0{i + 1}
-          </div>
-          <h4 className="font-bold text-slate-900 mb-3">{value.title}</h4>
-          <p className="text-slate-600 text-sm leading-relaxed">{value.desc}</p>
-        </div>
-      ))}
-    </div>
-  </section>
-);
+const Values = () => {
+  const valuesList = [
+    {
+      title: 'Engineering Excellence',
+      desc: 'We prioritize robust, production-grade code over quick fixes, ensuring clean, scalable, and maintainable software systems.',
+      icon: <Cpu size={24} />,
+      accentColor: 'from-[#003366] to-[#0055aa]',
+      borderHover: 'hover:border-[#003366]/40'
+    },
+    {
+      title: 'Client-Centricity',
+      desc: 'Your business goals are the primary driver of our technical decisions, aligning execution directly with business results.',
+      icon: <TrendingUp size={24} />,
+      accentColor: 'from-[#A23B2A] to-[#c0483a]',
+      borderHover: 'hover:border-[#A23B2A]/40'
+    },
+    {
+      title: 'Security-First',
+      desc: 'Data integrity, privacy, and system security are baked into the core architecture of every single product we build.',
+      icon: <Shield size={24} />,
+      accentColor: 'from-[#003366] to-[#0055aa]',
+      borderHover: 'hover:border-[#003366]/40'
+    },
+    {
+      title: 'Continuous Innovation',
+      desc: 'We stay ahead of the curve in generative AI, business workflow automation, and modern enterprise technologies.',
+      icon: <Zap size={24} />,
+      accentColor: 'from-[#A23B2A] to-[#c0483a]',
+      borderHover: 'hover:border-[#A23B2A]/40'
+    }
+  ];
+
+  return (
+    <section className="py-12 relative overflow-hidden">
+      {/* Decorative blurred background lights */}
+      <div className="absolute top-1/2 left-0 w-72 h-72 bg-[#003366]/5 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#A23B2A]/5 blur-[120px] rounded-full pointer-events-none" />
+
+      <div className="text-center mb-20 relative z-10">
+        <span className="inline-block px-4 py-1.5 rounded-full bg-slate-100 text-[#003366] text-xs font-bold uppercase tracking-widest mb-4">
+          Core Principles
+        </span>
+        <h2 className="text-3xl lg:text-5xl font-display font-bold text-slate-900 mb-6">Our Core Values</h2>
+        <p className="text-slate-600 max-w-xl mx-auto text-lg">
+          The principles that guide every line of code we write and every strategy we design.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
+        {valuesList.map((value, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1, duration: 0.5 }}
+            className={`group relative bg-white border border-slate-200/80 p-8 rounded-[2rem] shadow-sm ${value.borderHover} hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between`}
+          >
+            {/* Top accent line */}
+            <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${value.accentColor} opacity-0 group-hover:opacity-100 transition-opacity rounded-t-[2rem]`} />
+
+            <div>
+              {/* Icon Container with dynamic glow */}
+              <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${value.accentColor} text-white flex items-center justify-center mb-8 shadow-lg transition-transform duration-300 group-hover:scale-110`}>
+                {value.icon}
+              </div>
+
+              <h4 className="font-display font-bold text-xl text-slate-900 mb-4 group-hover:text-slate-800 transition-colors">
+                {value.title}
+              </h4>
+              <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                {value.desc}
+              </p>
+            </div>
+
+            {/* Bottom step count */}
+            <div className="flex justify-between items-center pt-4 border-t border-slate-100">
+              <span className="text-xs uppercase tracking-wider text-slate-400 font-bold">Priority</span>
+              <span className="text-lg font-mono font-black text-slate-300 group-hover:text-slate-400 transition-colors">
+                0{i + 1}
+              </span>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
+};
 
 const ClientLogos = () => {
   const clients = [
@@ -125,7 +189,7 @@ const ClientLogos = () => {
 };
 
 const Timeline = () => (
-  <section className="py-24 mb-32 border-t border-slate-100">
+  <section className="pt-12 pb-24  border-t border-slate-100">
     <div className="text-center mb-20">
       <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900 mb-4">Our Roadmap & Journey</h2>
       <p className="text-slate-600 max-w-2xl mx-auto">Evolution from consulting to product innovation, following industry trends and market demands</p>
@@ -135,7 +199,7 @@ const Timeline = () => (
       {/* Horizontal Roadmap */}
       <div className="relative">
         {/* Progress Line */}
-        <div className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-brand-navy via-brand-navy to-[#A23B2A] transform -translate-y-1/2 -z-10 pointer-events-none" />
+        <div className="hidden lg:block absolute top-[2.5rem] left-[10%] right-[10%] h-1 bg-gradient-to-r from-brand-navy via-brand-navy to-[#A23B2A] -z-10 pointer-events-none" />
 
         {/* Roadmap Items */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
@@ -180,10 +244,10 @@ const Timeline = () => (
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               viewport={{ once: true }}
-              className="flex flex-col items-center"
+              className="flex flex-col items-center h-full"
             >
               {/* Dot Marker */}
-              <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-6 relative z-20 border-4 transition-all duration-300 ${
+              <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-6 relative z-20 border-4 transition-all duration-300 flex-shrink-0 ${
                 item.highlight
                   ? 'bg-[#A23B2A] border-[#A23B2A] shadow-lg shadow-[#A23B2A]/50 scale-110'
                   : 'bg-brand-navy border-brand-navy'
@@ -192,48 +256,52 @@ const Timeline = () => (
               </div>
 
               {/* Card */}
-              <div className={`w-full p-6 rounded-2xl text-center transition-all duration-300 ${
+              <div className={`w-full flex-grow flex flex-col p-6 rounded-2xl text-center transition-all duration-300 ${
                 item.highlight
                   ? 'bg-gradient-to-b from-[#A23B2A]/10 to-[#A23B2A]/5 border-2 border-[#A23B2A]/30 shadow-lg'
                   : 'bg-white border border-slate-200 hover:border-brand-navy/30 hover:shadow-md'
               }`}>
-                <span className={`inline-block px-4 py-2 rounded-full text-lg font-bold mb-4 font-display ${
-                  item.highlight
-                    ? 'bg-[#A23B2A]/20 text-[#A23B2A]'
-                    : 'bg-brand-navy/10 text-brand-navy'
-                }`}>
-                  {item.year}
-                </span>
+                <div className="flex-grow flex flex-col items-center justify-start">
+                  <span className={`inline-block px-4 py-2 rounded-full text-lg font-bold mb-4 font-display ${
+                    item.highlight
+                      ? 'bg-[#A23B2A]/20 text-[#A23B2A]'
+                      : 'bg-brand-navy/10 text-brand-navy'
+                  }`}>
+                    {item.year}
+                  </span>
 
-                <h3 className={`text-lg font-display font-bold mb-2 ${
-                  item.highlight ? 'text-[#A23B2A]' : 'text-slate-900'
-                }`}>
-                  {item.title}
-                </h3>
+                  <h3 className={`text-lg font-display font-bold mb-2 ${
+                    item.highlight ? 'text-[#A23B2A]' : 'text-slate-900'
+                  }`}>
+                    {item.title}
+                  </h3>
 
-                <p className="text-slate-600 text-sm leading-relaxed mb-4">
-                  {item.desc}
-                </p>
-
-                {/* Trend Tag */}
-                <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold ${
-                  item.highlight
-                    ? 'bg-[#A23B2A] text-white'
-                    : 'bg-brand-navy/5 text-brand-navy'
-                }`}>
-                  <TrendingUp size={14} />
-                  {item.trend}
+                  <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                    {item.desc}
+                  </p>
                 </div>
 
-                {/* Status Badge */}
-                {item.status === 'active' && (
-                  <div className="mt-4 pt-4 border-t border-[#A23B2A]/20">
-                    <span className="inline-flex items-center gap-2 text-[#A23B2A] font-bold text-xs">
-                      <span className="w-2 h-2 bg-[#A23B2A] rounded-full animate-pulse" />
-                      Current Phase
-                    </span>
+                <div className="flex flex-col items-center gap-4 mt-auto">
+                  {/* Trend Tag */}
+                  <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold ${
+                    item.highlight
+                      ? 'bg-[#A23B2A] text-white'
+                      : 'bg-brand-navy/5 text-brand-navy'
+                  }`}>
+                    <TrendingUp size={14} />
+                    {item.trend}
                   </div>
-                )}
+
+                  {/* Status Badge */}
+                  {item.status === 'active' && (
+                    <div className="w-full pt-4 border-t border-[#A23B2A]/20">
+                      <span className="inline-flex items-center gap-2 text-[#A23B2A] font-bold text-xs">
+                        <span className="w-2 h-2 bg-[#A23B2A] rounded-full animate-pulse" />
+                        Current Phase
+                      </span>
+                    </div>
+                  )}
+                </div>
               </div>
             </motion.div>
           ))}
@@ -283,7 +351,7 @@ const Timeline = () => (
 );
 
 const OfficeSection = () => (
-  <section className="py-24 border-t border-slate-100">
+  <section className="pt-12 pb-12 border-t border-slate-100">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-20">
         <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900 mb-4">Our Presence</h2>
@@ -402,7 +470,7 @@ export const About = () => {
 
         <ClientLogos />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-32">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-12">
           {/* Left: Our Expertise */}
           <div className="space-y-8">
             <div>
@@ -469,12 +537,12 @@ export const About = () => {
         <OfficeSection />
 
         {/* The SoftClinch Way — manifesto split layout */}
-        <div className="mt-24 border-t-2 border-brand-navy/10 pt-20">
+        <div className="mt-12 border-t-2 border-brand-navy/10 pt-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
             {/* Left — Label + Stat Cards */}
             <div className="space-y-6">
-              <span className="text-xs font-black uppercase tracking-[0.2em] text-[#A23B2A]">— The SoftClinch Way</span>
+              <span className="block text-xs font-black uppercase tracking-[0.2em] text-[#A23B2A] mb-4">— The SoftClinch Way</span>
               <div className="space-y-4">
                 {[
                   { value: '150+', label: 'Enterprise Clients Served', border: 'border-brand-navy' },

@@ -23,7 +23,7 @@ export const Blog = () => {
   };
 
   return (
-    <div className="py-24">
+    <div className="py-24 bg-slate-50/50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero Section */}
         <div className="text-center mb-20">
@@ -46,7 +46,7 @@ export const Blog = () => {
               className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
                 selectedCategory === category
                   ? 'bg-brand-navy text-white shadow-lg'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                  : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50'
               }`}
             >
               {category}
@@ -69,12 +69,12 @@ export const Blog = () => {
                 {/* Image */}
                 <div className="relative h-56 overflow-hidden bg-slate-100">
                   <img
-                    src={`https://picsum.photos/seed/${post.slug}/800/400`}
+                    src={post.image}
                     alt={post.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute top-4 left-4">
-                    <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${categoryColors[post.category]}`}>
+                    <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold shadow-sm ${categoryColors[post.category]}`}>
                       {post.category}
                     </span>
                   </div>
@@ -83,7 +83,9 @@ export const Blog = () => {
                 {/* Content */}
                 <div className="p-8 flex flex-col flex-grow">
                   <h3 className="text-xl font-display font-bold text-slate-900 mb-3 group-hover:text-brand-navy transition-colors line-clamp-2">
-                    {post.title}
+                    <Link href={`/blog/${post.slug}`}>
+                      {post.title}
+                    </Link>
                   </h3>
 
                   <p className="text-slate-600 text-sm leading-relaxed mb-6 flex-grow line-clamp-2">

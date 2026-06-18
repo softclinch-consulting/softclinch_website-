@@ -1,6 +1,6 @@
 "use client";
 import { motion } from 'framer-motion';
-import { MessageSquare, CheckCircle2, Zap, Shield, BarChart3, Users, Link as LinkIcon, ChevronRight } from 'lucide-react';
+import { MessageSquare, CheckCircle2, Zap, Shield, BarChart3, Users, Link as LinkIcon, ChevronRight, PlayCircle } from 'lucide-react';
 import Link from 'next/link';
 import { FaqSection } from "@/components/FaqSection";
 import { ServiceMediaPanel } from "@/components/ServiceMediaPanel";
@@ -9,81 +9,117 @@ import { whatsappAutomationFaq } from "@/lib/faqs";
 
 export const WhatsAppAutomation = () => {
   return (
-    <div className="bg-[linear-gradient(180deg,#f8fafc_0%,#ffffff_18%,#f8fafc_100%)] pt-20">
+    <div className="bg-[linear-gradient(180deg,#f8fafc_0%,#ffffff_18%,#f8fafc_100%)] pt-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero */}
         <div className="relative overflow-hidden rounded-[36px] border border-slate-200 bg-white px-8 py-14 shadow-sm lg:px-10 lg:py-16">
           <div className="absolute inset-x-0 top-0 h-[420px] bg-[radial-gradient(circle_at_top_left,rgba(11,37,69,0.12),transparent_45%),radial-gradient(circle_at_top_right,rgba(37,211,102,0.12),transparent_35%)]" />
           <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <div className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 mb-6">
-              Enterprise WhatsApp Automation
-            </div>
-            <h1 className="text-5xl lg:text-6xl font-display font-bold text-slate-900 mb-8">Enterprise WhatsApp Automation Platform (Inaiwazhi)</h1>
-            <p className="text-xl text-slate-600 mb-10 leading-relaxed">
-              Scale your business communication with Inaiwazhi, the premier WhatsApp automation platform developed by SoftClinch. Leverage the official WhatsApp Business API to automate sales, marketing, and customer support at an enterprise scale.
-            </p>
-            <div className="flex gap-4 flex-wrap">
-              <Link href="/contact" className="bg-brand-navy text-white px-8 py-4 rounded-full font-semibold hover:bg-brand-navy/90 transition-all inline-flex items-center">
-                Request Demo
-              </Link>
-              <Link href="/contact" className="border border-slate-300 bg-white text-slate-800 px-8 py-4 rounded-full font-semibold hover:border-emerald-500 hover:text-emerald-600 transition-all inline-flex items-center">
-                Talk to Our Team
-              </Link>
-            </div>
+            <div>
+              <div className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 mb-6">
+                Enterprise WhatsApp Automation
+              </div>
+              <h1 className="text-5xl lg:text-6xl font-display font-bold text-slate-900 mb-8">Enterprise WhatsApp Automation Platform (Inaiwazhi)</h1>
+              <p className="text-xl text-slate-600 mb-10 leading-relaxed">
+                Scale your business communication with Inaiwazhi, the premier WhatsApp automation platform developed by SoftClinch. Leverage the official WhatsApp Business API to automate sales, marketing, and customer support at an enterprise scale.
+              </p>
+              <div className="flex gap-4 flex-wrap">
+                <Link href="/contact" className="bg-brand-navy text-white px-8 py-4 rounded-full font-semibold hover:bg-brand-navy/90 transition-all inline-flex items-center">
+                  Request Demo
+                </Link>
+                <Link href="/contact" className="border border-slate-300 bg-white text-slate-800 px-8 py-4 rounded-full font-semibold hover:border-emerald-500 hover:text-emerald-600 transition-all inline-flex items-center">
+                  Talk to Our Team
+                </Link>
+              </div>
             <p className="mt-8 max-w-2xl text-sm leading-7 text-slate-500">
               Built for high-intent lead response, campaign automation, CRM-connected messaging, and scalable customer communication workflows.
             </p>
           </div>
-          <ServiceMediaPanel
-            title="WhatsApp Workflow Preview"
-            subtitle="A product-style visual box for conversations, automations, routing, campaign delivery, and CRM-connected response handling."
-            imageSrc="/whatsapp_automation_hero_v2.png"
-            imageAlt="WhatsApp automation platform preview"
-            points={[
-              "Official WhatsApp API workflows",
-              "Lead tagging and follow-up automation",
-              "Shared inbox and campaign execution",
-              "CRM and ERP integration pathways",
-            ]}
-            mode="video"
-            theme="light"
-          />
-        </div>
-        </div>
-
-        <ServiceStatStrip
-          items={[
-            { value: "24/7", label: "Automated Lead Response" },
-            { value: "API", label: "Official WhatsApp Business Integration" },
-            { value: "CRM", label: "Connected Sales & Support Workflows" },
-            { value: "AI", label: "Routing, Follow-Up & Chat Automation" },
-          ]}
-        />
-
-        {/* About Inaiwazhi */}
-        <div className="bg-slate-50 rounded-[2.5rem] p-12 lg:p-20 mb-32 mt-20">
-          <div className="max-w-3xl">
-            <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900 mb-6">About Inaiwazhi</h2>
-            <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-              Inaiwazhi is a proprietary WhatsApp automation platform developed and owned by SoftClinch Consulting Services. It is designed specifically for enterprises requiring secure, API-based communication automation that integrates deeply with existing business systems.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="flex gap-4">
-                <Shield className="text-slate-900 flex-shrink-0" size={24} />
-                <div>
-                  <h4 className="font-bold text-slate-900 mb-1">Secure Architecture</h4>
-                  <p className="text-sm text-slate-600">Enterprise-grade security for sensitive customer data.</p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <Zap className="text-slate-900 flex-shrink-0" size={24} />
-                <div>
-                  <h4 className="font-bold text-slate-900 mb-1">High Performance</h4>
-                  <p className="text-sm text-slate-600">Built for high-volume broadcast and interaction.</p>
-                </div>
+          <div className="relative h-full min-h-[500px] w-full rounded-[2rem] overflow-hidden border border-slate-200 bg-slate-50 shadow-lg group">
+            {/* Ambient glow */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/10 to-brand-navy/10 opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
+            <img
+              src="/whatsapp_automation_hero_v2.png"
+              alt="WhatsApp automation platform preview"
+              className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500"
+            />
+            {/* Play button overlay */}
+            <div className="absolute inset-0 flex items-center justify-center bg-slate-950/10 hover:bg-slate-950/20 transition-colors">
+              <div className="rounded-full bg-white/95 p-5 shadow-2xl hover:scale-110 transition-transform duration-300">
+                <PlayCircle className="h-12 w-12 text-emerald-600" />
               </div>
             </div>
+          </div>
+        </div>
+        </div>
+
+        {/* About Inaiwazhi */}
+        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 border-t border-slate-200/60 mt-10">
+          <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="space-y-6"
+            >
+              <span className="text-xs font-mono font-black uppercase tracking-[0.2em] text-emerald-600">
+                {"// OWNED & DEVELOPED BY SOFTCLINCH"}
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-slate-900 leading-tight">
+                About Inaiwazhi Platform
+              </h2>
+              
+              <div className="border-l-4 border-emerald-600 bg-emerald-50/40 p-6 rounded-r-2xl shadow-sm">
+                <p className="text-base sm:text-lg leading-relaxed text-slate-700 font-semibold">
+                  Inaiwazhi is a proprietary WhatsApp automation platform developed and owned by SoftClinch Consulting Services. It is designed specifically for enterprises requiring secure, API-based communication automation that integrates deeply with existing business systems.
+                </p>
+              </div>
+
+              <p className="text-slate-500 text-sm sm:text-base leading-relaxed font-semibold">
+                By bypassing third-party middleware, Inaiwazhi establishes a direct, secure tunnel to Meta's Cloud API endpoints, ensuring maximum performance, data privacy, and minimal latency.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="space-y-4"
+            >
+              {[
+                {
+                  title: "Secure Architecture",
+                  desc: "Enterprise-grade security protocols for sensitive customer data, with strict API verification.",
+                  icon: Shield,
+                  color: "text-emerald-600 bg-emerald-50 border-emerald-100"
+                },
+                {
+                  title: "High Performance Engine",
+                  desc: "Built for high-volume broadcasts, automated response routing, and instantaneous template delivery.",
+                  icon: Zap,
+                  color: "text-amber-500 bg-amber-50 border-amber-100"
+                }
+              ].map((card) => (
+                <div
+                  key={card.title}
+                  className="group flex gap-5 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md hover:border-emerald-600/30 transition-all duration-300"
+                >
+                  <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border ${card.color} group-hover:scale-105 transition-transform`}>
+                    <card.icon className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h4 className="font-display font-bold text-slate-900 mb-1 group-hover:text-emerald-700 transition-colors">
+                      {card.title}
+                    </h4>
+                    <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-semibold">
+                      {card.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
           </div>
         </div>
 
@@ -186,22 +222,8 @@ export const WhatsAppAutomation = () => {
         </div>
 
 
-        {/* FAQ */}
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl font-display font-bold text-slate-900 mb-12 text-center">WhatsApp Automation FAQ</h2>
-          <div className="space-y-6">
-            {[
-              { q: "How does Inaiwazhi integrate with my CRM?", a: "We provide custom API connectors that sync WhatsApp interactions directly with your CRM, ensuring your sales team has a unified view of customer communication." },
-              { q: "Can we use our existing WhatsApp number?", a: "Yes, you can migrate your existing number to the official WhatsApp Business API, or we can help you set up a new dedicated number." },
-              { q: "What kind of analytics do you provide?", a: "Our dashboard tracks delivery rates, read rates, response times, conversion rates, and custom workflow completion metrics." }
-            ].map((faq, i) => (
-              <div key={i} className="border-b border-slate-200 pb-6">
-                <h4 className="font-bold text-slate-900 mb-2">{faq.q}</h4>
-                <p className="text-slate-600 text-sm">{faq.a}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+
+
       </div>
 
       <FaqSection title="WhatsApp Automation FAQs" items={whatsappAutomationFaq} />

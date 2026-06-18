@@ -5,19 +5,20 @@ import { blogPosts } from "@/lib/blog";
 import { SITE_NAME } from "@/lib/site";
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps) {
-  const post = blogPosts.find(p => p.slug === params.slug);
+  const { slug } = await params;
+  const post = blogPosts.find(p => p.slug === slug);
 
   if (!post) {
     return buildMetadata({
       title: "Blog Post Not Found",
       description: "The blog post you're looking for doesn't exist.",
-      canonicalPath: `/blog/${params.slug}`,
+      canonicalPath: `/blog/${slug}`,
     });
   }
 
@@ -25,7 +26,7 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
     title: post.metaTitle,
     description: post.metaDescription,
     keywords: post.keywords,
-    canonicalPath: `/blog/${params.slug}`,
+    canonicalPath: `/blog/${slug}`,
   });
 }
 
@@ -35,8 +36,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = blogPosts.find(p => p.slug === params.slug);
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { slug } = await params;
+  const post = blogPosts.find(p => p.slug === slug);
 
   if (!post) {
     return (
@@ -68,7 +70,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           url: blogUrl,
         }}
       />
-      <BlogDetail slug={params.slug} />
+      <BlogDetail slug={slug} />
     </>
   );
 }

@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { ChevronDown, ChevronRight, MessageSquare, Globe, Cpu, Database, BarChart3, CheckCircle2, Star } from 'lucide-react';
+import { ChevronDown, ChevronRight, MessageSquare, Globe, Cpu, Database, BarChart3, CheckCircle2, Star, Layers, Code } from 'lucide-react';
 import { assetPath } from '@/lib/asset';
 
 const Hero = () => {
@@ -549,57 +549,106 @@ const WhySoftClinch = () => {
   );
 };
 
-const Process = () => (
-  <section className="py-24 bg-slate-50 overflow-hidden">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="text-center mb-20 relative">
-        <h2 className="text-3xl lg:text-5xl font-display font-bold text-slate-900 mb-6">
-          Our Process
-        </h2>
-        <p className="text-slate-600 max-w-2xl mx-auto text-lg leading-relaxed">
-          Understanding your business goals, building the right systems, and supporting long-term performance through structured delivery.
-        </p>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[10rem] font-display font-black text-slate-200/30 -z-10 select-none">
-          PROCESS
+const Process = () => {
+  const steps = [
+    {
+      step: '01',
+      title: 'Consultation',
+      desc: 'Understanding your business goals, operational challenges, and technical requirements.',
+      icon: <MessageSquare className="text-white group-hover:text-[#A23B2A] transition-colors" size={24} />
+    },
+    {
+      step: '02',
+      title: 'Strategy & Design',
+      desc: 'Designing scalable architectures, database schemas, and tailored integration plans.',
+      icon: <Layers className="text-white group-hover:text-[#A23B2A] transition-colors" size={24} />
+    },
+    {
+      step: '03',
+      title: 'Development',
+      desc: 'Building secure, enterprise-ready systems using Next.js, Cloudflare, and robust backends.',
+      icon: <Code className="text-white group-hover:text-[#A23B2A] transition-colors" size={24} />
+    },
+    {
+      step: '04',
+      title: 'Integration',
+      desc: 'Connecting SAP workflows, custom APIs, WhatsApp communication, and databases.',
+      icon: <Database className="text-white group-hover:text-[#A23B2A] transition-colors" size={24} />
+    },
+    {
+      step: '05',
+      title: 'Support & Growth',
+      desc: 'Continuous optimization, AMS support, performance tracking, and feature scaling.',
+      icon: <BarChart3 className="text-white group-hover:text-[#A23B2A] transition-colors" size={24} />
+    }
+  ];
+
+  return (
+    <section className="py-24 bg-brand-navy overflow-hidden relative">
+      {/* Background Decorative Gradients */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#A23B2A]/5 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute top-10 right-10 w-80 h-80 bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
+      
+      {/* Subtle grid pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-20">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-400 text-xs font-bold uppercase tracking-widest mb-4">
+            How We Deliver
+          </span>
+          <h2 className="text-3xl lg:text-5xl font-display font-bold text-white mb-6">
+            Our Structured Process
+          </h2>
+          <p className="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
+            From initial consultation to deployment and long-term support, we follow a transparent and agile workflow focused on business results.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 relative">
+          {/* Timeline Connector Line */}
+          <div className="hidden lg:block absolute top-[4.25rem] left-[5%] right-[5%] h-[2px] bg-gradient-to-r from-[#A23B2A]/20 via-blue-500/20 to-emerald-500/20 pointer-events-none" />
+
+          {steps.map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.6 }}
+              className="relative z-10 group"
+            >
+              {/* Step indicator and Icon */}
+              <div className="flex flex-col items-center lg:items-start mb-6">
+                <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-xl group-hover:border-[#A23B2A] group-hover:bg-white/10 transition-all duration-300 relative overflow-hidden">
+                  <div className="absolute -top-1 -right-1 pr-2 pt-1 text-[10px] font-mono font-bold text-slate-500 group-hover:text-[#A23B2A] transition-colors">
+                    {item.step}
+                  </div>
+                  <div className="mt-1">
+                    {item.icon}
+                  </div>
+                </div>
+              </div>
+
+              {/* Card Container */}
+              <div className="bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-sm shadow-xl group-hover:bg-white/10 group-hover:border-white/20 group-hover:-translate-y-2 group-hover:shadow-2xl transition-all duration-500 h-[calc(100%-5.5rem)] flex flex-col justify-between">
+                <div>
+                  <div className="w-8 h-[2px] bg-gradient-to-r from-[#A23B2A] to-[#c0483a] group-hover:w-full transition-all duration-500 mb-6" />
+                  <h4 className="text-xl font-bold text-white mb-4 group-hover:text-[#A23B2A] transition-colors">
+                    {item.title}
+                  </h4>
+                  <p className="text-slate-400 text-sm leading-relaxed group-hover:text-slate-300 transition-colors">
+                    {item.desc}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 relative">
-        <div className="hidden lg:block absolute top-[4.5rem] left-0 w-full h-0.5 bg-gradient-to-r from-brand-navy/10 via-brand-terracotta/20 to-brand-navy/10 -z-0"></div>
-
-        {[
-          { step: '01', title: 'Consultation', desc: 'Understanding your business goals, operational challenges, and technical requirements.' },
-          { step: '02', title: 'Strategy & Architecture', desc: 'Designing scalable systems, workflows, and automation strategies tailored to your business.' },
-          { step: '03', title: 'Development', desc: 'Building secure, enterprise-ready applications using modern technologies and scalable frameworks.' },
-          { step: '04', title: 'Integration', desc: 'Connecting SAP systems, CRMs, APIs, and third-party platforms seamlessly.' },
-          { step: '05', title: 'Support & Optimization', desc: 'Continuous improvements, AMS support, analytics, and long-term optimization for business growth.' }
-        ].map((item, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1, duration: 0.5 }}
-            className="relative z-10 group"
-          >
-            <div className="w-16 h-16 rounded-2xl bg-white shadow-xl flex items-center justify-center mb-8 border border-slate-100 group-hover:border-brand-terracotta transition-all duration-300 relative overflow-hidden mx-auto lg:mx-0">
-              <div className="absolute inset-0 bg-brand-navy opacity-0 group-hover:opacity-5 transition-opacity"></div>
-              <span className="text-2xl font-display font-black text-brand-navy group-hover:text-brand-terracotta transition-colors">
-                {item.step}
-              </span>
-            </div>
-
-            <div className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-300 h-full min-h-[220px] flex flex-col text-center lg:text-left">
-              <div className="w-8 h-1 bg-brand-terracotta/20 group-hover:w-full group-hover:bg-brand-terracotta transition-all duration-500 mb-6"></div>
-              <h4 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-brand-navy transition-colors">{item.title}</h4>
-              <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const Testimonials = () => {
   const testimonials = [
@@ -709,11 +758,15 @@ const FAQ = () => {
     {
       q: "How does SEO and AI search optimization help businesses?",
       a: "SEO, GEO, and AEO improve business visibility across Google Search, AI search engines, and answer engines to generate traffic and leads."
+    },
+    {
+      q: "Can you integrate your solutions with our existing ERP or CRM systems?",
+      a: "Yes. We specialize in connecting our custom applications, WhatsApp automation platforms, and digital growth systems with existing enterprise ERPs (including SAP), CRMs, databases, and third-party APIs."
     }
   ];
 
   const leftColumnFaqs = faqs.slice(0, 3);
-  const rightColumnFaqs = faqs.slice(3, 5);
+  const rightColumnFaqs = faqs.slice(3, 6);
 
   const FAQItem = ({
     faq,

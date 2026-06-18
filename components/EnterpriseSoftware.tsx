@@ -1,4 +1,6 @@
+"use client";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import {
   ArrowRight,
   Bot,
@@ -16,9 +18,9 @@ import {
   Truck,
   Wallet,
 } from "lucide-react";
-import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { FaqSection } from "@/components/FaqSection";
 import { ServiceStatStrip } from "@/components/ServiceStatStrip";
+import { ServiceMediaPanel } from "@/components/ServiceMediaPanel";
 
 const trustItems = [
   { value: "AI + Cloud", label: "Built for modern digital transformation" },
@@ -331,6 +333,11 @@ const outcomes = [
     description:
       "Optimize online customer journeys with AI-driven recommendations and automation.",
   },
+  {
+    title: "Enhanced Enterprise Security",
+    description:
+      "Protect proprietary data and customer transaction assets with modern encryption and secure cloud protocols.",
+  },
 ];
 
 const technologyGroups = [
@@ -353,6 +360,10 @@ const technologyGroups = [
   {
     title: "Databases",
     items: ["MongoDB", "PostgreSQL", "MySQL", "Firebase", "SQL Server"],
+  },
+  {
+    title: "eCommerce & Integrations",
+    items: ["Shopify API", "WooCommerce", "Stripe Checkout", "PayPal SDK", "REST/GraphQL APIs"],
   },
 ];
 
@@ -401,7 +412,7 @@ function ListBlock({ items }: { items: string[] }) {
   return (
     <ul className="space-y-3 text-slate-700">
       {items.map((item) => (
-        <li key={item} className="flex gap-3">
+        <li key={item} className="flex gap-3 text-sm font-semibold">
           <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-brand-terracotta" />
           <span>{item}</span>
         </li>
@@ -412,271 +423,440 @@ function ListBlock({ items }: { items: string[] }) {
 
 export function EnterpriseSoftware() {
   return (
-    <div className="bg-[linear-gradient(180deg,#f7fafc_0%,#ffffff_18%,#f8fafc_100%)] pt-20 text-slate-900">
-      <section className="relative overflow-hidden border-b border-slate-200">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(11,37,69,0.16),transparent_40%),radial-gradient(circle_at_80%_15%,rgba(194,94,63,0.16),transparent_28%),linear-gradient(180deg,#ffffff_0%,#f8fafc_100%)]" />
-        <div className="relative mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-24">
-          <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Enterprise" }]} />
-          <div className="grid gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
+    <div className="bg-[#F8FAFC] text-slate-900 overflow-hidden">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden border-b border-slate-200/60 bg-white">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(0,51,102,0.08),_transparent_40%),radial-gradient(circle_at_80%_20%,_rgba(162,59,42,0.08),_transparent_28%),linear-gradient(180deg,_#ffffff_0%,_#f8fafc_100%)]" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-navy/30 to-transparent" />
+
+        <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32 z-10">
+
+          <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center mt-4">
             <div>
-              <div className="mb-6 inline-flex items-center rounded-full border border-brand-navy/10 bg-white/80 px-4 py-2 text-sm font-semibold text-brand-navy shadow-sm backdrop-blur">
+              <div className="mb-6 inline-flex items-center rounded-full border border-brand-navy/10 bg-white/85 px-4 py-2 text-xs sm:text-sm font-semibold text-brand-navy shadow-sm backdrop-blur">
                 AI applications, enterprise software, automation, and eCommerce systems
               </div>
-              <h1 className="max-w-5xl text-4xl font-bold tracking-tight text-slate-950 md:text-5xl lg:text-6xl">
+              <h1 className="max-w-5xl text-4xl font-display font-bold tracking-tight text-slate-955 md:text-5xl lg:text-6xl leading-tight">
                 AI-Powered Enterprise & eCommerce Application Development
               </h1>
-              <p className="mt-6 max-w-4xl text-lg leading-8 text-slate-600 md:text-xl">
+              <p className="mt-6 max-w-4xl text-base sm:text-lg leading-relaxed text-slate-600 font-medium">
                 Build scalable AI applications, enterprise software, automation systems, and custom eCommerce platforms designed to accelerate business growth, automate operations, and improve customer experience.
               </p>
-              <p className="mt-5 max-w-4xl text-base leading-8 text-slate-600 md:text-lg">
-                We help enterprises, startups, and fast-growing eCommerce brands develop secure, scalable, and high-performance digital solutions powered by Artificial Intelligence, cloud infrastructure, automation, and advanced analytics.
-              </p>
-              <p className="mt-5 max-w-4xl text-base leading-8 text-slate-600 md:text-lg">
-                From AI automation platforms to enterprise business systems and intelligent eCommerce applications, we create custom software solutions tailored to your business goals.
-              </p>
+
               <div className="mt-8 flex flex-wrap gap-4">
-                <Link href="/contact" className="inline-flex items-center rounded-2xl bg-brand-navy px-6 py-4 font-semibold text-white shadow-lg shadow-brand-navy/20 transition hover:bg-brand-navy/90">
-                  Book Free Consultation
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                <Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded-2xl bg-brand-navy px-8 py-4 font-bold text-white shadow-lg shadow-brand-navy/20 transition hover:bg-brand-navy/90 hover:-translate-y-0.5">
+                  <span>Book Free Consultation</span>
+                  <ArrowRight className="h-5 w-5" />
                 </Link>
-                <Link href="/contact" className="inline-flex items-center rounded-2xl border border-slate-300 bg-white px-6 py-4 font-semibold text-slate-700 transition hover:border-brand-terracotta hover:text-brand-terracotta">
+                <Link href="/contact" className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-8 py-4 font-bold text-slate-700 transition hover:border-brand-terracotta hover:text-brand-terracotta hover:-translate-y-0.5">
                   Schedule Strategy Call
                 </Link>
               </div>
-              <p className="mt-8 max-w-4xl text-sm leading-7 text-slate-500 md:text-base">
-                Trusted by modern businesses for AI software development, enterprise automation, custom applications, and scalable digital transformation solutions.
-              </p>
-            </div>
 
-            <div className="rounded-[36px] border border-slate-200 bg-white p-8 shadow-xl shadow-slate-200/80">
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="mt-10 grid gap-4 sm:grid-cols-2">
                 {[
-                  { icon: Bot, label: "AI chatbots & automation" },
-                  { icon: Building2, label: "Enterprise workflow systems" },
-                  { icon: ShoppingCart, label: "Conversion-ready commerce apps" },
-                  { icon: Cloud, label: "Cloud-native deployment" },
-                  { icon: ShieldCheck, label: "Secure architecture" },
-                  { icon: MessageSquareMore, label: "Customer engagement platforms" },
+                  "AI chatbots & automation",
+                  "Enterprise workflow systems",
+                  "Conversion-ready commerce apps",
+                  "Cloud-native deployment",
                 ].map((item) => (
-                  <div key={item.label} className="rounded-3xl border border-slate-200 bg-slate-50 p-5">
-                    <item.icon className="h-6 w-6 text-brand-navy" />
-                    <p className="mt-4 text-sm font-semibold leading-6 text-slate-800">{item.label}</p>
+                  <div key={item} className="flex items-center gap-3">
+                    <CheckCircle2 className="h-5 w-5 shrink-0 text-brand-terracotta" />
+                    <span className="text-xs sm:text-sm font-semibold text-slate-700">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
+
+            <ServiceMediaPanel
+              title="Enterprise & Commerce Systems"
+              subtitle="Scalable cloud architectures, AI automation workflows, CRM/ERP dashboards, and secure backend systems."
+              imageSrc="/enterprise_hero_illustration.png"
+              imageAlt="Enterprise & eCommerce systems preview"
+              theme="light"
+            />
           </div>
         </div>
       </section>
 
-      <div className="px-6 lg:px-8">
-        <ServiceStatStrip items={trustItems} />
-      </div>
+      {/* About Section */}
+      <section className="mx-auto max-w-7xl px-4 pt-8 pb-24 sm:px-6 lg:px-8">
+        {/* Intro */}
+        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+          <span className="inline-flex rounded-full border border-brand-terracotta/15 bg-brand-terracotta/5 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-brand-terracotta mb-4">
+            Our Core Focus
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-slate-955 leading-tight">
+            Enterprise AI Solutions & Custom Software Development Company
+          </h2>
+          <p className="mt-6 text-base sm:text-lg leading-relaxed text-slate-600 font-medium">
+            We specialize in AI-powered custom application development that helps businesses streamline workflows, automate repetitive operations, improve customer engagement, and scale efficiently.
+          </p>
+        </div>
 
-      <section className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-terracotta">About</p>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
-              Enterprise AI Solutions & Custom Software Development Company
-            </h2>
-            <p className="mt-5 text-base leading-8 text-slate-600">
-              Looking for a reliable AI application development company for enterprise software or eCommerce solutions?
-            </p>
-            <p className="mt-4 text-base leading-8 text-slate-600">
-              We specialize in AI-powered custom application development that helps businesses streamline workflows, automate repetitive operations, improve customer engagement, and scale efficiently.
-            </p>
-            <p className="mt-4 text-base leading-8 text-slate-600">
-              Our development team builds enterprise-grade applications with modern architecture, cloud scalability, automation capabilities, and seamless integrations.
-            </p>
-            <p className="mt-4 text-base leading-8 text-slate-600">
-              Whether you need enterprise automation, AI integration, or a scalable eCommerce platform, we provide end-to-end digital transformation services.
-            </p>
-          </div>
-          <div className="rounded-[32px] border border-slate-200 bg-white p-8 shadow-sm">
-            <h3 className="text-2xl font-bold text-slate-950">We deliver</h3>
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              {deliverables.map((item) => (
-                <div key={item} className="rounded-2xl bg-slate-50 px-4 py-3 text-sm font-medium text-slate-700">
-                  {item}
+        {/* 3-Column Core Pillars */}
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {[
+            {
+              title: "AI Automation Integration",
+              tagline: "Intelligent Process Execution",
+              icon: BrainCircuit,
+              desc: "Deploy intelligent automation layers, custom AI chatbots, and automated workflows to eliminate manual operations and improve customer response speed.",
+              color: "text-amber-500 bg-amber-50 border-amber-100/60"
+            },
+            {
+              title: "Enterprise Infrastructure",
+              tagline: "Scalable Operations Support",
+              icon: Building2,
+              desc: "Build secure, cloud-ready ERP, CRM, and workflow platforms customized for your team's operational needs and long-term scalability.",
+              color: "text-blue-500 bg-blue-50 border-blue-100/60"
+            },
+            {
+              title: "eCommerce Optimization",
+              tagline: "Conversion & Growth Focus",
+              icon: ShoppingCart,
+              desc: "Deliver high-converting online storefronts powered by AI product recommendations, automated checkouts, and customer behavior insights.",
+              color: "text-emerald-500 bg-emerald-50 border-emerald-100/60"
+            }
+          ].map((card) => (
+            <div
+              key={card.title}
+              className="group relative rounded-[2.5rem] border border-slate-200 bg-white p-8 sm:p-10 shadow-sm hover:shadow-xl hover:border-brand-navy/20 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+            >
+              {/* Top gradient indicator */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-navy to-brand-terracotta opacity-0 group-hover:opacity-100 transition-opacity" />
+
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <div className={`flex h-12 w-12 items-center justify-center rounded-2xl border ${card.color}`}>
+                    <card.icon className="h-6 w-6" />
+                  </div>
+                  <span className="text-xs font-mono font-bold text-slate-400">READY TO SCALE</span>
                 </div>
-              ))}
+
+                <h3 className="text-xl font-display font-bold text-slate-955 group-hover:text-brand-navy transition-colors mb-2">
+                  {card.title}
+                </h3>
+                <span className="text-[11px] font-black uppercase tracking-[0.15em] text-brand-terracotta block mb-4">
+                  {card.tagline}
+                </span>
+
+                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-semibold">
+                  {card.desc}
+                </p>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
-      </section>
 
-      <section className="border-y border-slate-200 bg-white">
-        <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-terracotta">Services</p>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
-              Our Core Services
-            </h2>
+        {/* Deliverables Bento Section */}
+        <div className="mt-20 pt-16 border-t border-slate-200/60">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="text-xs font-mono font-black uppercase tracking-[0.2em] text-brand-terracotta">
+              {"// WHAT WE BUILD"}
+            </span>
+            <h3 className="mt-3 text-2xl sm:text-3xl font-display font-bold text-slate-955">
+              Our Project Deliverables
+            </h3>
+            <p className="mt-3 text-sm text-slate-500 font-semibold">
+              Every system is engineered from the ground up to support high-performance scaling and seamless workflows.
+            </p>
           </div>
-          <div className="mt-12 grid gap-8 xl:grid-cols-2">
-            {coreServices.map((service) => (
-              <article key={service.title} className="rounded-[32px] border border-slate-200 bg-slate-50 p-8 shadow-sm">
-                <div className="flex items-center gap-4">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-brand-navy shadow-sm">
-                    <service.icon className="h-7 w-7" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-slate-950">{service.title}</h3>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+            {deliverables.map((item, index) => (
+              <div
+                key={item}
+                className="group relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md hover:border-brand-navy/30 transition-all duration-300 flex flex-col justify-between"
+              >
+                {/* Visual bullet indicator */}
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-[10px] font-mono font-black text-slate-400 group-hover:text-brand-terracotta transition-colors">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-300 group-hover:bg-brand-terracotta transition-colors" />
                 </div>
-                <p className="mt-5 text-base leading-8 text-slate-600">{service.intro}</p>
-                <div className="mt-8 grid gap-8 lg:grid-cols-2">
-                  <div>
-                    <h4 className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-terracotta">Solutions Include</h4>
-                    <div className="mt-4">
-                      <ListBlock items={service.items} />
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-terracotta">Benefits</h4>
-                    <div className="mt-4">
-                      <ListBlock items={service.benefits} />
-                    </div>
-                  </div>
-                </div>
-              </article>
+
+                <p className="text-xs sm:text-sm font-bold text-slate-800 leading-snug group-hover:text-brand-navy transition-colors">
+                  {item}
+                </p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-        <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-terracotta">Why Choose Us</p>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
-            Why Businesses Choose Our AI & Custom Software Development Company
+      {/* Core Services Section */}
+      <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 border-t border-slate-200/80">
+        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+          <span className="inline-flex rounded-full border border-brand-terracotta/15 bg-brand-terracotta/5 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-brand-terracotta mb-4">
+            Services
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-slate-955 leading-tight">
+            Our Core Services
           </h2>
-          <p className="mt-5 text-base leading-8 text-slate-600">
+        </div>
+
+        <div className="mt-12 grid gap-8 xl:grid-cols-2">
+          {coreServices.map((service, index) => (
+            <article
+              key={service.title}
+              className="group relative rounded-[2.5rem] border border-slate-200 bg-white p-8 sm:p-10 shadow-sm hover:shadow-xl hover:border-brand-navy/20 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+            >
+              {/* Accent top gradient bar */}
+              <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-brand-navy to-brand-terracotta opacity-80 group-hover:opacity-100 transition-opacity" />
+
+              <div>
+                <div className="flex items-center gap-4">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-navy/5 text-brand-navy border border-brand-navy/10 group-hover:bg-brand-navy group-hover:text-white transition-colors duration-300">
+                    <service.icon className="h-7 w-7" />
+                  </div>
+                  <h3 className="text-2xl font-display font-bold text-slate-955 leading-tight">{service.title}</h3>
+                </div>
+                <p className="mt-5 text-sm sm:text-base leading-relaxed text-slate-600 font-semibold">{service.intro}</p>
+
+                <div className="mt-8 grid gap-8 lg:grid-cols-2">
+                  <div>
+                    <h4 className="text-[10px] font-black uppercase tracking-[0.18em] text-[#A23B2A] mb-4">Solutions Include</h4>
+                    <ListBlock items={service.items.slice(0, 6)} />
+                  </div>
+                  <div>
+                    <h4 className="text-[10px] font-black uppercase tracking-[0.18em] text-[#A23B2A] mb-4">Benefits</h4>
+                    <ListBlock items={service.benefits} />
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Why Choose Us Section */}
+      <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 border-t border-slate-200/80">
+        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+          <span className="inline-flex rounded-full border border-brand-terracotta/15 bg-brand-terracotta/5 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-brand-terracotta mb-4">
+            Why Choose Us
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-slate-955 leading-tight">
+            Why Businesses Choose SoftClinch
+          </h2>
+          <p className="mt-6 text-base sm:text-lg leading-relaxed text-slate-600 font-medium">
             We combine AI innovation, enterprise-grade development standards, and scalable technology architecture to build future-ready business applications.
           </p>
         </div>
-        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {advantages.map((item) => (
-            <div key={item.title} className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
-              <h3 className="text-xl font-bold text-slate-950">{item.title}</h3>
-              <p className="mt-4 text-sm leading-7 text-slate-600">{item.description}</p>
+
+        <div className="mt-12 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+          {advantages.map((item, index) => (
+            <div
+              key={item.title}
+              className="group relative rounded-[2.5rem] border border-slate-200 bg-white p-8 sm:p-10 shadow-sm hover:shadow-xl hover:border-brand-navy/20 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+            >
+              {/* Accent top gradient bar */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-navy to-brand-terracotta opacity-0 group-hover:opacity-100 transition-opacity" />
+
+              <div>
+                <div className="flex items-center justify-between mb-5">
+                  <span className="text-xs font-mono font-black text-slate-400 group-hover:text-brand-terracotta transition-colors">
+                    {"// ADVANTAGE 0" + (index + 1)}
+                  </span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 animate-pulse" />
+                </div>
+
+                <h3 className="text-lg font-display font-bold text-slate-955 mb-4 group-hover:text-brand-navy transition-colors">
+                  {item.title}
+                </h3>
+
+                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-semibold">
+                  {item.description}
+                </p>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="border-y border-slate-200 bg-white">
-        <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-terracotta">Industries</p>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
-              Industries We Serve
-            </h2>
-          </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {industries.map((industry) => (
-              <div key={industry.name} className="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
-                <industry.icon className="h-8 w-8 text-brand-navy" />
-                <h3 className="mt-5 text-xl font-bold text-slate-950">{industry.name}</h3>
-                <p className="mt-4 text-sm leading-7 text-slate-600">{industry.description}</p>
+      {/* Industries Section */}
+      <section className="mx-auto max-w-7xl px-4 pt-12 pb-24 sm:px-6 lg:px-8 border-t border-slate-200/80">
+        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+          <span className="inline-flex rounded-full border border-brand-terracotta/15 bg-brand-terracotta/5 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-brand-terracotta mb-4">
+            Industries
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-slate-955 leading-tight">
+            Industries We Serve
+          </h2>
+        </div>
+
+        <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          {industries.map((industry) => (
+            <div
+              key={industry.name}
+              className="group relative rounded-[2.5rem] border border-slate-200 bg-white p-8 shadow-sm hover:shadow-xl hover:border-brand-navy/20 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+            >
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-navy to-brand-terracotta opacity-0 group-hover:opacity-100 transition-opacity" />
+
+              <div>
+                <industry.icon className="h-8 w-8 text-brand-navy group-hover:text-brand-terracotta transition-colors" />
+                <h3 className="mt-5 text-xl font-display font-bold text-slate-955 group-hover:text-brand-navy transition-colors">{industry.name}</h3>
+                <p className="mt-4 text-xs sm:text-sm leading-relaxed text-slate-500 font-semibold">{industry.description}</p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-        <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-terracotta">SEO Optimized Business Solutions</p>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
+      {/* Frequently Searched Business Solutions */}
+      <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 border-t border-slate-200/80">
+        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+          <span className="inline-flex rounded-full border border-brand-terracotta/15 bg-brand-terracotta/5 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-brand-terracotta mb-4">
+            Solutions
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-slate-955 leading-tight">
             Frequently Searched Business Solutions
           </h2>
         </div>
-        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+
+        <div className="mt-12 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {searchSolutions.map((item) => (
-            <div key={item.title} className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
-              <h3 className="text-xl font-bold text-slate-950">{item.title}</h3>
-              <p className="mt-4 text-sm leading-7 text-slate-600">{item.description}</p>
+            <div
+              key={item.title}
+              className="group relative rounded-[2.5rem] border border-slate-200 bg-white p-8 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between border-t-2 border-t-brand-navy/20 hover:border-t-brand-terracotta/80"
+            >
+              <div>
+                <h3 className="text-lg font-display font-bold text-slate-955 group-hover:text-brand-navy transition-colors">{item.title}</h3>
+                <p className="mt-4 text-xs sm:text-sm leading-relaxed text-slate-500 font-semibold">{item.description}</p>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="border-y border-slate-200 bg-slate-50">
-        <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-          <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-terracotta">Development Process</p>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
-                Our Development Process
-              </h2>
-            </div>
-            <div className="space-y-4">
-              {processSteps.map((item) => (
-                <div key={item.step} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                  <h3 className="text-lg font-bold text-slate-950">{item.step}</h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">{item.description}</p>
+      {/* Development Process */}
+      <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 border-t border-slate-200/80">
+        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+          <span className="inline-flex rounded-full border border-brand-terracotta/15 bg-brand-terracotta/5 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-brand-terracotta mb-4">
+            Development Process
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-slate-955 leading-tight">
+            Our Development Process
+          </h2>
+        </div>
+
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {processSteps.map((item, index) => (
+            <div
+              key={item.step}
+              className="group relative rounded-[2.5rem] border border-slate-200 bg-white p-8 sm:p-10 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+            >
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-navy to-brand-terracotta opacity-0 group-hover:opacity-100 transition-opacity" />
+
+              <div>
+                <div className="flex items-center justify-between mb-5">
+                  <span className="text-xs font-mono font-black text-slate-400 group-hover:text-brand-terracotta transition-colors">
+                    {"// STEP 0" + (index + 1)}
+                  </span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 animate-pulse" />
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-terracotta">Results</p>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
-              Business Outcomes You Can Expect
-            </h2>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {outcomes.map((item) => (
-              <div key={item.title} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                <p className="text-lg font-semibold text-slate-900">{item.title}</p>
-                <p className="mt-3 text-sm leading-7 text-slate-600">{item.description}</p>
+                <h3 className="text-lg font-display font-bold text-slate-955 mb-4 group-hover:text-brand-navy transition-colors">
+                  {item.step.replace(/^\d+\.\s*/, "")}
+                </h3>
+
+                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-semibold">
+                  {item.description}
+                </p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </section>
 
-      <section className="border-y border-slate-200 bg-white">
-        <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-terracotta">Technologies</p>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
-              Technologies We Work With
-            </h2>
-          </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {technologyGroups.map((group) => (
-              <div key={group.title} className="rounded-3xl border border-slate-200 bg-slate-50 p-7 shadow-sm">
-                <h3 className="text-xl font-bold text-slate-950">{group.title}</h3>
-                <div className="mt-5 flex flex-wrap gap-3">
+      {/* Outcomes Section */}
+      <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 border-t border-slate-200/80">
+        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+          <span className="inline-flex rounded-full border border-brand-terracotta/15 bg-brand-terracotta/5 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-brand-terracotta mb-4">
+            Results
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-slate-955 leading-tight">
+            Business Outcomes You Can Expect
+          </h2>
+        </div>
+
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {outcomes.map((item, index) => (
+            <div
+              key={item.title}
+              className="group relative rounded-[2.5rem] border border-slate-200 bg-white p-8 sm:p-10 shadow-sm hover:shadow-xl hover:border-brand-navy/35 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+            >
+              <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-brand-navy to-brand-terracotta opacity-80 group-hover:opacity-100 transition-opacity" />
+
+              <div>
+                <h3 className="text-lg font-display font-bold text-slate-955 mb-4 group-hover:text-brand-navy transition-colors">
+                  {item.title}
+                </h3>
+                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-semibold">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Technologies Section */}
+      <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 border-t border-slate-200/80">
+        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+          <span className="inline-flex rounded-full border border-brand-terracotta/15 bg-brand-terracotta/5 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-brand-terracotta mb-4">
+            Technologies
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-slate-955 leading-tight">
+            Technologies We Work With
+          </h2>
+        </div>
+
+        <div className="mt-12 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+          {technologyGroups.map((group) => (
+            <div
+              key={group.title}
+              className="group relative rounded-[2.5rem] border border-slate-200 bg-white p-8 sm:p-10 shadow-sm hover:shadow-xl hover:border-brand-navy/35 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+            >
+              <div>
+                <h3 className="text-lg font-display font-bold text-slate-955 mb-6 group-hover:text-brand-navy transition-colors">{group.title}</h3>
+                <div className="flex flex-wrap gap-2.5">
                   {group.items.map((item) => (
-                    <span key={item} className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700">
+                    <span
+                      key={item}
+                      className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs sm:text-sm font-semibold text-slate-600 hover:border-brand-navy/35 transition-colors duration-200"
+                    >
                       {item}
                     </span>
                   ))}
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-        <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-terracotta">Testimonials</p>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
-            What Businesses Say About Our Solutions
+      {/* Testimonials */}
+      <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 border-t border-slate-200/80">
+        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+          <span className="inline-flex rounded-full border border-brand-terracotta/15 bg-brand-terracotta/5 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-brand-terracotta mb-4">
+            Testimonials
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-slate-955 leading-tight">
+            What Businesses Say About SoftClinch
           </h2>
         </div>
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+
+        <div className="mt-12 grid gap-8 lg:grid-cols-3">
           {testimonials.map((item) => (
-            <blockquote key={item.name} className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-              <p className="text-lg leading-8 text-slate-700">&ldquo;{item.quote}&rdquo;</p>
+            <blockquote
+              key={item.name}
+              className="group relative rounded-[2.5rem] border border-slate-200 bg-white p-8 sm:p-10 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+            >
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-navy to-brand-terracotta opacity-0 group-hover:opacity-100 transition-opacity" />
+
+              <p className="text-base sm:text-lg leading-relaxed text-slate-700 font-medium italic">&ldquo;{item.quote}&rdquo;</p>
               <footer className="mt-6 text-sm font-semibold uppercase tracking-[0.18em] text-brand-terracotta">
                 {item.name}
               </footer>
@@ -685,26 +865,41 @@ export function EnterpriseSoftware() {
         </div>
       </section>
 
+      {/* FAQs */}
       <FaqSection title="Frequently Asked Questions" items={faqItems} includeSEO={false} />
 
-      <section className="mx-auto max-w-7xl px-6 pb-16 lg:px-8">
-        <div className="overflow-hidden rounded-[36px] bg-brand-navy text-white shadow-2xl">
-          <div className="grid gap-10 px-8 py-12 lg:grid-cols-[1fr_0.9fr] lg:px-12 lg:py-14">
+      {/* CTA Section */}
+      <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 border-t border-slate-200/80">
+        <div className="relative overflow-hidden rounded-[3rem] bg-brand-navy text-white shadow-2xl">
+          {/* Subtle decoration */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 blur-[120px] rounded-full pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#A23B2A]/20 blur-[100px] rounded-full pointer-events-none" />
+
+          <div className="relative grid gap-10 px-8 py-14 lg:grid-cols-[1.1fr_0.9fr] lg:px-16 lg:py-16 items-center z-10">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-terracotta">Ready to Build?</p>
-              <h2 className="mt-4 text-4xl font-bold">
-                Build AI-powered applications that scale with your business
+              <span className="text-xs font-black uppercase tracking-[0.2em] text-[#A23B2A]">
+                Ready to Build?
+              </span>
+              <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-display font-bold leading-tight">
+                Build AI-Powered Applications That Scale with Your Business
               </h2>
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-200">
+              <p className="mt-6 max-w-3xl text-lg leading-relaxed text-slate-200">
                 Talk to SoftClinch about enterprise software, AI automation, cloud-native systems, and custom eCommerce applications tailored to your growth goals.
               </p>
             </div>
-            <div className="flex flex-col justify-center gap-4">
-              <Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded-2xl bg-white px-6 py-4 font-semibold text-brand-navy transition hover:bg-slate-100">
-                Book Free Consultation
+
+            <div className="flex flex-col sm:flex-row lg:flex-col justify-center gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-white px-8 py-4 font-bold text-brand-navy transition hover:bg-slate-100 hover:-translate-y-0.5 shadow-lg"
+              >
+                <span>Book Free Consultation</span>
                 <ArrowRight className="h-5 w-5" />
               </Link>
-              <Link href="/contact" className="inline-flex items-center justify-center rounded-2xl border border-white/20 px-6 py-4 font-semibold text-white transition hover:bg-white/10">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center rounded-2xl border border-white/20 px-8 py-4 font-bold text-white transition hover:bg-white/10 hover:-translate-y-0.5"
+              >
                 Schedule Strategy Call
               </Link>
             </div>

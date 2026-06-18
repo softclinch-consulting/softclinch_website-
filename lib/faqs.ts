@@ -46,24 +46,34 @@ export const sapConsultingFaq: FaqItem[] = [
 
 export const customDevelopmentFaq: FaqItem[] = [
   {
-    question: "Do you build both web and mobile applications?",
+    question: "What is custom software development?",
     answer:
-      "Yes. We develop responsive web applications, SaaS platforms, and cross-platform mobile applications.",
+      "Custom software development involves creating software tailored specifically to a business's unique needs, workflows, and objectives. It provides greater flexibility, scalability, and integration capabilities than generic software solutions.",
   },
   {
-    question: "Can you integrate with existing systems?",
+    question: "Do you develop both web and mobile-ready applications?",
     answer:
-      "Yes. We provide CRM, ERP, payment gateway, API, and third-party system integration services.",
+      "Yes. We build responsive web applications and Progressive Web Apps (PWAs) that provide seamless experiences across desktop, tablet, and mobile devices.",
   },
   {
-    question: "Do you provide maintenance and support?",
+    question: "Can you integrate with existing business systems?",
     answer:
-      "Yes. We provide ongoing support, monitoring, optimization, and infrastructure maintenance services.",
+      "Yes. We integrate applications with CRM platforms, ERP systems, payment gateways, SAP environments, marketing platforms, and third-party services through secure APIs.",
+  },
+  {
+    question: "How long does a custom software development project take?",
+    answer:
+      "Most projects take between 8 and 24 weeks depending on complexity, feature requirements, and integration needs.",
+  },
+  {
+    question: "Do you provide ongoing support and maintenance?",
+    answer:
+      "Yes. We offer continuous maintenance, security updates, performance optimization, monitoring, and feature enhancements after deployment.",
   },
   {
     question: "What technologies do you use?",
     answer:
-      "We use Next.js, React, Node.js, TypeScript, Python, PostgreSQL, MongoDB, Docker, Kubernetes, and AWS cloud technologies.",
+      "We work with Next.js, React, Node.js, Python, PostgreSQL, MongoDB, Docker, Kubernetes, AWS, Azure, and Google Cloud technologies.",
   },
 ];
 
@@ -82,5 +92,20 @@ export const whatsappAutomationFaq: FaqItem[] = [
     question: "Is the setup secure and compliant?",
     answer:
       "We follow security best practices for data handling, access controls, auditability, and integration design based on your requirements.",
+  },
+  {
+    question: "How does Inaiwazhi integrate with my CRM?",
+    answer:
+      "We provide custom API connectors that sync WhatsApp interactions directly with your CRM, ensuring your sales team has a unified view of customer communication.",
+  },
+  {
+    question: "Can we use our existing WhatsApp number?",
+    answer:
+      "Yes, you can migrate your existing number to the official WhatsApp Business API, or we can help you set up a new dedicated number.",
+  },
+  {
+    question: "What kind of analytics do you provide?",
+    answer:
+      "Our dashboard tracks delivery rates, read rates, response times, conversion rates, and custom workflow completion metrics.",
   },
 ];

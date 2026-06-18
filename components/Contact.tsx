@@ -83,8 +83,8 @@ export const Contact = () => {
       const data = contentType.includes("application/json")
         ? ((await response.json()) as ContactApiResponse)
         : {
-            error: `Unexpected server response (${response.status}).`,
-          };
+          error: `Unexpected server response (${response.status}).`,
+        };
 
       if (!response.ok) {
         if (data.fieldErrors) {

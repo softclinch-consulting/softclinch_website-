@@ -32,8 +32,8 @@ export const DigitalMarketing = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] overflow-hidden font-sans pt-20">
-      <section className="relative bg-white overflow-hidden py-12 lg:py-24" ref={heroRef}>
+    <div className="min-h-screen bg-[#F8FAFC] overflow-hidden font-sans pt-0">
+      <section className="relative bg-white overflow-hidden pt-8 pb-12 lg:pt-12 lg:pb-24" ref={heroRef}>
         <motion.div
           animate={{
             scale: [1, 1.2, 1],
