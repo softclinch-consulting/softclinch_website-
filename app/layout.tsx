@@ -30,7 +30,12 @@ export const metadata: Metadata = {
     google: "HH9wAKOxxeKPnKdd6bFt2WQzP7BgLV4wZsLLCz-Vwzc",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.ico", type: "image/x-icon" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
   },
   openGraph: {
     title: DEFAULT_TITLE,
