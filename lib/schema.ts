@@ -9,7 +9,12 @@ export function organizationJsonLd() {
     "@id": `${siteUrl}/#organization`,
     name: SITE_NAME,
     url: siteUrl,
-    logo: `${siteUrl}/logo.png`,
+    logo: {
+      "@type": "ImageObject",
+      url: `${siteUrl}/logo.png`,
+      width: 512,
+      height: 512,
+    },
     image: `${siteUrl}/logo.png`,
     email: CONTACT.email,
     telephone: CONTACT.phone,

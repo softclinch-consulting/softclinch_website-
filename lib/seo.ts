@@ -55,7 +55,7 @@ export function buildMetadata({
     icons: {
       icon: "/favicon.ico",
       shortcut: "/favicon.ico",
-      apple: "/logo.png",
+      apple: "/favicon.ico",
     },
   };
 }

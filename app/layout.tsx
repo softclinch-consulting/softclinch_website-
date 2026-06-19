@@ -30,12 +30,9 @@ export const metadata: Metadata = {
     google: "HH9wAKOxxeKPnKdd6bFt2WQzP7BgLV4wZsLLCz-Vwzc",
   },
   icons: {
-    icon: [
-      { url: "/softclinch.jpeg", type: "image/jpeg", sizes: "any" },
-      { url: "/favicon.ico", sizes: "any" },
-    ],
-    shortcut: "/softclinch.jpeg",
-    apple: "/softclinch.jpeg",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
   },
   openGraph: {
     title: DEFAULT_TITLE,
