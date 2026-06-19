@@ -31,11 +31,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: "/softclinch.jpeg", type: "image/jpeg", sizes: "any" },
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon.ico", type: "image/x-icon" },
     ],
-    shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
+    shortcut: "/softclinch.jpeg",
+    apple: "/softclinch.jpeg",
   },
   openGraph: {
     title: DEFAULT_TITLE,
