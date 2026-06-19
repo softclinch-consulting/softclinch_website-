@@ -25,7 +25,7 @@ export function buildMetadata({
   const pageTitle = title ?? DEFAULT_TITLE;
   const pageDescription = description ?? DEFAULT_DESCRIPTION;
   const canonicalUrl = buildCanonicalUrl(canonicalPath, siteUrl);
-  const defaultOgImage = new URL("/softclinch.jpeg", siteUrl).toString();
+  const defaultOgImage = new URL("/logo.png", siteUrl).toString();
 
   return {
     metadataBase: new URL(siteUrl),
@@ -51,6 +51,11 @@ export function buildMetadata({
       title: pageTitle,
       description: pageDescription,
       images: [defaultOgImage],
+    },
+    icons: {
+      icon: "/favicon.ico",
+      shortcut: "/favicon.ico",
+      apple: "/logo.png",
     },
   };
 }

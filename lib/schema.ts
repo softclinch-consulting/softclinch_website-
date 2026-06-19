@@ -9,6 +9,8 @@ export function organizationJsonLd() {
     "@id": `${siteUrl}/#organization`,
     name: SITE_NAME,
     url: siteUrl,
+    logo: `${siteUrl}/logo.png`,
+    image: `${siteUrl}/logo.png`,
     email: CONTACT.email,
     telephone: CONTACT.phone,
     address: {
