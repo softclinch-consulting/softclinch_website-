@@ -459,10 +459,9 @@ const Industries = () => (
         <div className="relative">
           <div className="aspect-square bg-brand-navy rounded-[3rem] overflow-hidden">
             <img
-              src="https://picsum.photos/seed/enterprise/800/800"
+              src="/about_hero_industries.png"
               alt="Enterprise Solutions"
-              className="w-full h-full object-cover opacity-50 grayscale"
-              referrerPolicy="no-referrer"
+              className="w-full h-full object-cover"
             />
           </div>
           <div className="absolute -bottom-10 -left-10 bg-white p-10 rounded-3xl shadow-2xl border border-slate-100 hidden lg:block">

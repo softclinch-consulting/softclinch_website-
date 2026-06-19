@@ -247,32 +247,28 @@ const Timeline = () => (
               className="flex flex-col items-center h-full"
             >
               {/* Dot Marker */}
-              <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-6 relative z-20 border-4 transition-all duration-300 flex-shrink-0 ${
-                item.highlight
+              <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-6 relative z-20 border-4 transition-all duration-300 flex-shrink-0 ${item.highlight
                   ? 'bg-[#A23B2A] border-[#A23B2A] shadow-lg shadow-[#A23B2A]/50 scale-110'
                   : 'bg-brand-navy border-brand-navy'
-              }`}>
+                }`}>
                 <item.Icon size={48} className="text-white" strokeWidth={1.5} />
               </div>
 
               {/* Card */}
-              <div className={`w-full flex-grow flex flex-col p-6 rounded-2xl text-center transition-all duration-300 ${
-                item.highlight
+              <div className={`w-full flex-grow flex flex-col p-6 rounded-2xl text-center transition-all duration-300 ${item.highlight
                   ? 'bg-gradient-to-b from-[#A23B2A]/10 to-[#A23B2A]/5 border-2 border-[#A23B2A]/30 shadow-lg'
                   : 'bg-white border border-slate-200 hover:border-brand-navy/30 hover:shadow-md'
-              }`}>
+                }`}>
                 <div className="flex-grow flex flex-col items-center justify-start">
-                  <span className={`inline-block px-4 py-2 rounded-full text-lg font-bold mb-4 font-display ${
-                    item.highlight
+                  <span className={`inline-block px-4 py-2 rounded-full text-lg font-bold mb-4 font-display ${item.highlight
                       ? 'bg-[#A23B2A]/20 text-[#A23B2A]'
                       : 'bg-brand-navy/10 text-brand-navy'
-                  }`}>
+                    }`}>
                     {item.year}
                   </span>
 
-                  <h3 className={`text-lg font-display font-bold mb-2 ${
-                    item.highlight ? 'text-[#A23B2A]' : 'text-slate-900'
-                  }`}>
+                  <h3 className={`text-lg font-display font-bold mb-2 ${item.highlight ? 'text-[#A23B2A]' : 'text-slate-900'
+                    }`}>
                     {item.title}
                   </h3>
 
@@ -283,11 +279,10 @@ const Timeline = () => (
 
                 <div className="flex flex-col items-center gap-4 mt-auto">
                   {/* Trend Tag */}
-                  <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold ${
-                    item.highlight
+                  <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold ${item.highlight
                       ? 'bg-[#A23B2A] text-white'
                       : 'bg-brand-navy/5 text-brand-navy'
-                  }`}>
+                    }`}>
                     <TrendingUp size={14} />
                     {item.trend}
                   </div>
@@ -368,13 +363,13 @@ const OfficeSection = () => (
           className="group relative bg-white border border-slate-200 rounded-3xl p-10 shadow-sm hover:shadow-xl hover:border-brand-navy/30 transition-all duration-300"
         >
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-navy to-[#1e3a5f] opacity-70 group-hover:opacity-100 transition-opacity rounded-t-3xl" />
-          
+
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-brand-navy/10 border border-brand-navy/20 mb-6 group-hover:bg-brand-navy/20 transition-colors">
             <span className="text-brand-navy font-bold text-xl">📍</span>
           </div>
 
           <h3 className="text-2xl font-display font-bold text-slate-900 mb-4">Headquarters</h3>
-          
+
           <div className="mb-6">
             <p className="text-sm text-slate-500 uppercase tracking-wider font-semibold mb-2">Address</p>
             <p className="text-lg font-semibold text-slate-900 leading-relaxed">
