@@ -5,7 +5,7 @@ import { Breadcrumbs } from './Breadcrumbs';
 import { SocialShare } from './SocialShare';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Calendar, Clock, User, ArrowRight, BookOpen, Share2, Sparkles } from 'lucide-react';
+import { Calendar, Clock, User, ArrowRight, BookOpen, Sparkles } from 'lucide-react';
 
 interface BlogDetailProps {
   slug: string;
@@ -14,8 +14,10 @@ interface BlogDetailProps {
 export const BlogDetail = ({ slug }: BlogDetailProps) => {
   const post = blogPosts.find(p => p.slug === slug);
   const [relatedPosts, setRelatedPosts] = useState(blogPosts.slice(0, 3));
+  const [blogUrl, setBlogUrl] = useState('');
 
   useEffect(() => {
+    setBlogUrl(`${window.location.origin}/blog/${slug}`);
     if (post) {
       // Get 2 other posts from the same category
       const related = blogPosts
@@ -32,7 +34,7 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
         setRelatedPosts(related);
       }
     }
-  }, [post]);
+  }, [post, slug]);
 
   if (!post) {
     return (
@@ -47,8 +49,6 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
       </div>
     );
   }
-
-  const blogUrl = `${typeof window !== 'undefined' ? window.location.origin : ''}/blog/${slug}`;
 
   const categoryConfig: Record<string, { bg: string; text: string; border: string; glow: string }> = {
     'SAP': {
@@ -68,6 +68,12 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
       text: 'text-purple-800',
       border: 'border-purple-200',
       glow: 'shadow-purple-500/10 shadow-lg',
+    },
+    'WhatsApp Automation': {
+      bg: 'bg-green-100 text-green-800',
+      text: 'text-green-800',
+      border: 'border-green-200',
+      glow: 'shadow-green-500/10 shadow-lg',
     },
   };
 

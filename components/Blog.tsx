@@ -5,12 +5,12 @@ import { motion } from 'framer-motion';
 import { blogPosts } from '@/lib/blog';
 import { ArrowRight, Calendar, Clock } from 'lucide-react';
 
-type BlogCategory = 'SAP' | 'Digital Marketing' | 'Custom Development' | 'All';
+type BlogCategory = 'SAP' | 'Digital Marketing' | 'Custom Development' | 'WhatsApp Automation' | 'All';
 
 export const Blog = () => {
   const [selectedCategory, setSelectedCategory] = useState<BlogCategory>('All');
 
-  const categories: BlogCategory[] = ['All', 'SAP', 'Digital Marketing', 'Custom Development'];
+  const categories: BlogCategory[] = ['All', 'WhatsApp Automation', 'SAP', 'Digital Marketing', 'Custom Development'];
 
   const filteredPosts = selectedCategory === 'All'
     ? blogPosts
@@ -20,6 +20,7 @@ export const Blog = () => {
     'SAP': 'bg-blue-100 text-blue-700',
     'Digital Marketing': 'bg-emerald-100 text-emerald-700',
     'Custom Development': 'bg-purple-100 text-purple-700',
+    'WhatsApp Automation': 'bg-green-100 text-green-700',
   };
 
   return (
