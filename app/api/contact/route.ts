@@ -761,7 +761,6 @@ export async function POST(request: Request) {
   try {
     getRequiredEnv("BREVO_API_KEY");
     getRequiredEnv("BREVO_SENDER_EMAIL");
-    getRequiredEnv("RECAPTCHA_SECRET_KEY");
 
     let body: ContactSubmissionInput & ReferenceSubmissionInput;
 
@@ -836,29 +835,32 @@ export async function POST(request: Request) {
       payload: normalizeContactFormData(validation.data),
     };
 
-    if (!normalizedSubmission.captchaToken) {
-      return buildErrorResponse(
-        400,
-        traceId,
-        "Please complete the reCAPTCHA checkbox before submitting."
+    const isRecaptchaEnabled = Boolean(process.env.RECAPTCHA_SECRET_KEY);
+    if (isRecaptchaEnabled) {
+      if (!normalizedSubmission.captchaToken) {
+        return buildErrorResponse(
+          400,
+          traceId,
+          "Please complete the reCAPTCHA checkbox before submitting."
+        );
+      }
+
+      const recaptchaVerification = await verifyRecaptchaToken(
+        normalizedSubmission.captchaToken,
+        clientIp
       );
-    }
 
-    const recaptchaVerification = await verifyRecaptchaToken(
-      normalizedSubmission.captchaToken,
-      clientIp
-    );
+      if (!recaptchaVerification.success) {
+        logStep(traceId, "request.recaptcha_failed", {
+          errorCodes: recaptchaVerification["error-codes"] || [],
+        });
 
-    if (!recaptchaVerification.success) {
-      logStep(traceId, "request.recaptcha_failed", {
-        errorCodes: recaptchaVerification["error-codes"] || [],
-      });
-
-      return buildErrorResponse(
-        400,
-        traceId,
-        "reCAPTCHA verification failed. Please try again."
-      );
+        return buildErrorResponse(
+          400,
+          traceId,
+          "reCAPTCHA verification failed. Please try again."
+        );
+      }
     }
 
     if (isDuplicateSubmission(normalizedSubmission.formId, normalizedSubmission.payload)) {

@@ -57,7 +57,8 @@ export const Contact = () => {
       return;
     }
 
-    if (!captchaToken) {
+    const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+    if (siteKey && !captchaToken) {
       setError("Please complete the reCAPTCHA checkbox before submitting.");
       return;
     }
@@ -378,12 +379,14 @@ export const Contact = () => {
                     </p>
                   ) : null}
                 </div>
-                <div>
-                  <ReCAPTCHA
-                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-                    onChange={(token) => setCaptchaToken(token || "")}
-                  />
-                </div>
+                {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? (
+                  <div>
+                    <ReCAPTCHA
+                      sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                      onChange={(token) => setCaptchaToken(token || "")}
+                    />
+                  </div>
+                ) : null}
                 {error ? (
                   <div className="rounded-2xl border border-red-300/30 bg-red-500/10 px-4 py-3 text-sm text-red-100">
                     {error}

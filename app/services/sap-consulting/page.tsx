@@ -1,4 +1,4 @@
-import { SAPConsulting } from '@/components/SAPConsulting';
+import { SAPConsultingServices } from '@/components/SAPConsultingServices';
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { buildMetadata } from "@/lib/seo";
 import { faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
@@ -6,9 +6,9 @@ import { SITE_NAME } from "@/lib/site";
 import { sapConsultingFaq } from "@/lib/faqs";
 
 const canonicalPath = "/services/sap-consulting";
-const title = "SAP Consulting Services";
+const title = "SAP Consulting, Implementation & Rollout Services";
 const description =
-  "End-to-end SAP consulting and implementation: S/4HANA migration, AMS, process optimization, and enterprise integrations.";
+  "End-to-end SAP consulting and implementation: S/4HANA migration, rollout services, process optimization, and enterprise integrations.";
 
 export const metadata = buildMetadata({
   title,
@@ -29,7 +29,7 @@ export default function SAPConsultingPage() {
           faqJsonLd(sapConsultingFaq),
         ]}
       />
-      <SAPConsulting />
+      <SAPConsultingServices />
     </>
   );
 }

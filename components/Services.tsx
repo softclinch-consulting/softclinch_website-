@@ -123,10 +123,16 @@ const CaseStudyBlock = ({ title, description, image, results, index }: any) => (
 export const Services = () => {
   const services = [
     {
-      title: "Digital Marketing",
-      description: "Data-driven performance marketing focused on measurable ROI, SEO, GEO, and AEO strategies for modern search landscapes.",
-      icon: Globe,
-      path: "/digital-marketing"
+      title: "SAP Consulting & Rollout",
+      description: "End-to-end SAP solutions, S/4HANA migrations, custom module configurations, and secure enterprise deployments.",
+      icon: Database,
+      path: "/services/sap-consulting"
+    },
+    {
+      title: "SAP AMS Support",
+      description: "Expert guidance and operational support for SAP implementation, migration, and application management services.",
+      icon: Database,
+      path: "/sap-ams-support"
     },
     {
       title: "Custom App Development",
@@ -141,16 +147,16 @@ export const Services = () => {
       path: "/services/ai-powered-business-systems"
     },
     {
+      title: "Digital Marketing",
+      description: "Data-driven performance marketing focused on measurable ROI, SEO, GEO, and AEO strategies for modern search landscapes.",
+      icon: Globe,
+      path: "/digital-marketing"
+    },
+    {
       title: "Enterprise Software",
       description: "Custom enterprise software, SaaS platforms, and cloud-native applications engineered for scale and reliability.",
       icon: Building2,
       path: "/services/enterprise-software"
-    },
-    {
-      title: "SAP AMS Support",
-      description: "Expert guidance and operational support for SAP implementation, migration, and application management services.",
-      icon: Database,
-      path: "/sap-ams-support"
     }
   ];
 

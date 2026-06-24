@@ -7,7 +7,7 @@ import { CONTACT } from "@/lib/contact";
 import { assetPath } from "@/lib/asset";
 
 export const Footer = () => {
-  const currentYear = new Date().getFullYear();
+    const currentYear = new Date().getFullYear();
 
     return (
         <footer className="bg-brand-navy text-white pt-20 pb-12">
@@ -22,7 +22,7 @@ export const Footer = () => {
                                 height={60}
                                 className="object-contain"
                                 priority
-                              />
+                            />
                         </Link>
                         <p className="text-slate-400 leading-relaxed mb-8">
                             SoftClinch is a technology-driven consulting and digital solutions company specializing in SAP consulting, enterprise automation, SEO, AI-powered growth strategies, WhatsApp automation, and scalable software development solutions for modern businesses.

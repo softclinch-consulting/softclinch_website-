@@ -248,15 +248,18 @@ const AboutSoftClinch = () => (
           <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900 mb-6">
             Enterprise Technology &amp; Growth Solutions
           </h2>
+          <p className="text-slate-600 leading-relaxed mb-6 font-semibold text-slate-800">
+            At SoftClinch, we provide expert SAP Consulting services to integrate, optimize, and scale enterprise environments for maximum operational efficiency and seamless digital transformation.
+          </p>
           <p className="text-slate-600 leading-relaxed mb-6">
-            SoftClinch helps businesses automate operations, improve customer engagement, and accelerate growth with enterprise-grade digital solutions, SAP consulting, AI automation, and performance-driven marketing strategies.
+            We help businesses automate operations, improve customer engagement, and accelerate growth with enterprise-grade digital solutions, AI automation, and performance-driven marketing strategies.
           </p>
           <p className="text-slate-600 leading-relaxed">
-            From SAP implementation and enterprise automation to SEO, AI search optimization, and custom application development — we build scalable systems designed for long-term business success.
+            From workflow automation to SEO and custom application development — we build scalable systems designed for long-term business success.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:pt-14">
           {[
             "Enterprise-grade digital solutions built for modern business growth.",
             "SAP consulting, automation, and application development under one delivery model.",
@@ -273,6 +276,201 @@ const AboutSoftClinch = () => (
     </div>
   </section>
 );
+
+const SAPConsultingAMSOverview = () => {
+  const sapConsultingFeatures = [
+    "SAP S/4HANA Implementations",
+    "SAP ECC Implementations & Rollouts",
+    "SAP Business Process Optimization",
+    "SAP Integration & Data Migration",
+    "SAP Solution Architecture",
+    "SAP SD, MM, FI, CO, PP, QM & WM Consulting",
+    "SAP Global Rollout & Localization Support",
+    "SAP Upgrade & Transformation Projects"
+  ];
+
+  const sapAmsFeatures = [
+    "Incident Management & Resolution",
+    "Change Request Management",
+    "SAP Functional Support",
+    "User Assistance & Knowledge Transfer",
+    "Configuration & Enhancement Support",
+    "SAP Performance Optimization",
+    "Business Process Improvements",
+    "SLA-Based Support Management",
+    "SAP Upgrade & Enhancement Assistance"
+  ];
+
+  return (
+    <section className="py-24 bg-slate-50 relative overflow-hidden border-t border-b border-slate-200/60">
+      {/* Ambient background glows */}
+      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-brand-navy/[0.03] rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-terracotta/[0.02] rounded-full blur-[100px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section Header */}
+        <div className="text-center mb-16 max-w-4xl mx-auto">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-brand-navy/5 text-brand-navy text-xs font-bold uppercase tracking-widest mb-4">
+            Enterprise SAP Solutions
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-slate-900 mb-6 leading-tight">
+            Trusted SAP Consulting, Implementation &amp; AMS Partner for Growing Enterprises
+          </h2>
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
+            Delivering SAP S/4HANA Implementations, Global Rollouts, Business Process Optimization, and Application Management Services that drive operational excellence and measurable business outcomes.
+          </p>
+        </div>
+
+        {/* Side-by-side Columns */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+          
+          {/* Left Column - SAP Consulting */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col bg-white border border-slate-200/80 rounded-[2.5rem] p-8 sm:p-10 shadow-xl hover:shadow-2xl transition-all duration-300 relative overflow-hidden"
+          >
+            <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brand-navy to-brand-navy/60" />
+            
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-12 h-12 bg-brand-navy/5 rounded-2xl flex items-center justify-center text-brand-navy">
+                <Database size={24} />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-slate-900">
+                  SAP Consulting &amp; Rollout
+                </h3>
+                <p className="text-xs uppercase tracking-wider text-brand-navy/80 font-bold mt-0.5">
+                  Strategic Systems &amp; Deployments
+                </p>
+              </div>
+            </div>
+
+            <h4 className="text-lg font-bold text-slate-800 mb-4">
+              Transform Business Operations with Expert SAP Consulting
+            </h4>
+
+            <div className="space-y-4 text-slate-600 text-sm leading-relaxed mb-8 flex-1">
+              <p>
+                At SoftClinch, we help organizations unlock the full potential of SAP through strategic consulting, seamless implementations, and successful global rollouts. With decades of industry experience across Manufacturing, Automotive, Consumer Durables, Retail, Garments, Warehousing, and Distribution sectors, our SAP experts deliver solutions that align technology with business objectives.
+              </p>
+              <p>
+                From business process assessment and solution architecture to SAP S/4HANA implementation, ECC upgrades, system integration, and multi-location rollouts, we ensure every SAP project is executed with precision, transparency, and measurable business value. Our consultants work closely with stakeholders to streamline operations, improve visibility, optimize supply chains, and create scalable digital foundations for future growth.
+              </p>
+              <p>
+                Whether you are planning your first SAP implementation, migrating to SAP S/4HANA, expanding to new business locations, or integrating SAP with CRM and third-party applications, SoftClinch delivers industry-focused SAP solutions that accelerate transformation and maximize ROI.
+              </p>
+            </div>
+
+            {/* Checklist */}
+            <div className="mb-8">
+              <p className="font-bold text-slate-900 text-sm mb-4 uppercase tracking-wider">
+                Our SAP Expertise
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {sapConsultingFeatures.map((item, idx) => (
+                  <div key={idx} className="flex items-start gap-2.5">
+                    <CheckCircle2 size={16} className="text-emerald-500 mt-0.5 flex-shrink-0" />
+                    <span className="text-slate-700 text-xs font-semibold leading-snug">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Bottom Quote Box & CTA */}
+            <div className="mt-8 space-y-6">
+              <div className="bg-slate-50 border-l-4 border-brand-navy p-4 rounded-r-2xl">
+                <p className="text-slate-700 text-xs italic font-medium">
+                  &quot;We don&apos;t just implement SAP—we build intelligent business ecosystems that drive operational excellence.&quot;
+                </p>
+              </div>
+              <Link
+                href="/sap-ams-support#contact-ams"
+                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-brand-navy text-white font-bold text-sm rounded-full hover:bg-brand-terracotta hover:scale-[1.02] transition-all duration-300 w-full sm:w-auto"
+              >
+                Contact SAP Director <ChevronRight size={16} />
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* Right Column - SAP AMS */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="flex flex-col bg-white border border-slate-200/80 rounded-[2.5rem] p-8 sm:p-10 shadow-xl hover:shadow-2xl transition-all duration-300 relative overflow-hidden"
+          >
+            <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brand-terracotta to-brand-terracotta/60" />
+            
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-12 h-12 bg-brand-terracotta/5 rounded-2xl flex items-center justify-center text-brand-terracotta">
+                <Cpu size={24} />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-slate-900">
+                  SAP AMS Support
+                </h3>
+                <p className="text-xs uppercase tracking-wider text-brand-terracotta/80 font-bold mt-0.5">
+                  Application Management Services
+                </p>
+              </div>
+            </div>
+
+            <h4 className="text-lg font-bold text-slate-800 mb-4">
+              Reliable SAP AMS Support for Business Continuity
+            </h4>
+
+            <div className="space-y-4 text-slate-600 text-sm leading-relaxed mb-8 flex-1">
+              <p>
+                A successful SAP system requires more than implementation—it requires dependable ongoing support to keep business operations running smoothly. SoftClinch&apos;s SAP Application Management Services (AMS) provide structured, SLA-driven support that helps organizations maintain system stability, resolve issues quickly, and continuously improve business processes.
+              </p>
+              <p>
+                Our AMS team works as an extension of your business, providing functional support, incident management, change request handling, user assistance, configuration updates, enhancement support, and performance optimization across your SAP landscape. Through a well-defined support framework, we ensure faster issue resolution, minimal disruption, and consistent operational efficiency.
+              </p>
+              <p>
+                From day-to-day user support to complex functional enhancements and integration challenges, our experienced consultants bring deep business process knowledge and technical expertise to help organizations maximize the value of their SAP investments.
+              </p>
+            </div>
+
+            {/* Checklist */}
+            <div className="mb-8">
+              <p className="font-bold text-slate-900 text-sm mb-4 uppercase tracking-wider">
+                SAP AMS Services Include
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {sapAmsFeatures.map((item, idx) => (
+                  <div key={idx} className="flex items-start gap-2.5">
+                    <CheckCircle2 size={16} className="text-brand-terracotta mt-0.5 flex-shrink-0" />
+                    <span className="text-slate-700 text-xs font-semibold leading-snug">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Bottom Quote Box & CTA */}
+            <div className="mt-8 space-y-6">
+              <div className="bg-slate-50 border-l-4 border-brand-terracotta p-4 rounded-r-2xl">
+                <p className="text-slate-700 text-xs italic font-medium">
+                  &quot;With SoftClinch SAP AMS, your teams can focus on business growth while we ensure your SAP environment operates efficiently, reliably, and without interruption.&quot;
+                </p>
+              </div>
+              <Link
+                href="/sap-ams-support#contact-ams"
+                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-brand-terracotta text-white font-bold text-sm rounded-full hover:bg-brand-navy hover:scale-[1.02] transition-all duration-300 w-full sm:w-auto"
+              >
+                Contact AMS Head <ChevronRight size={16} />
+              </Link>
+            </div>
+          </motion.div>
+
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const CoreServices = () => {
   const services = [
@@ -814,6 +1012,7 @@ export const Home = () => {
       <Stats />
       <ClientLogos />
       <AboutSoftClinch />
+      <SAPConsultingAMSOverview />
       <CoreServices />
       <ProductAuthority />
       <Process />
