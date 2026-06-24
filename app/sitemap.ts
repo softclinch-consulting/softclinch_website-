@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getSiteUrl } from "@/lib/site";
+import { blogPosts } from "@/lib/blog";
 
 export const dynamic = "force-static";
 
@@ -17,10 +18,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/sap-ams-support",
     "/inaiwazhi-whatsapp-automation",
     "/contact",
+    "/blog",
   ];
 
-  return routes.map((path) => ({
+  const staticUrls = routes.map((path) => ({
     url: `${siteUrl}${path}`,
     lastModified: now,
   }));
+
+  const blogUrls = blogPosts.map((post) => ({
+    url: `${siteUrl}/blog/${post.slug}`,
+    lastModified: new Date(post.publishedDate),
+  }));
+
+  return [...staticUrls, ...blogUrls];
 }
