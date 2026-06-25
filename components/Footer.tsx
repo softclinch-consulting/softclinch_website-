@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Mail, Phone, MapPin, Linkedin, Twitter, ChevronRight, Instagram, Facebook } from "lucide-react";
+import { Mail, Phone, MapPin, ChevronRight, Instagram, Facebook } from "lucide-react";
 import { CONTACT } from "@/lib/contact";
 import { assetPath } from "@/lib/asset";
 
@@ -41,10 +41,17 @@ export const Footer = () => {
                             SoftClinch is a technology-driven consulting and digital solutions company specializing in SAP consulting, enterprise automation, SEO, AI-powered growth strategies, WhatsApp automation, and scalable software development solutions for modern businesses.
                         </p>
                         <div className="flex gap-4">
-                            {[Facebook, Instagram, ThreadsIcon, Linkedin, Twitter].map((Icon, i) => (
+                            {[
+                                { Icon: Facebook, href: 'https://www.facebook.com/profile.php?id=61585112649434', label: 'Facebook' },
+                                { Icon: Instagram, href: 'https://www.instagram.com/softclinch/?hl=en', label: 'Instagram' },
+                                { Icon: ThreadsIcon, href: 'https://www.threads.com/@softclinch?xmt=AQG0YGTQNLGQmWquCThvASSNbce7sVucAGgXk2vRRy9dXOE', label: 'Threads' },
+                            ].map(({ Icon, href, label }) => (
                                 <a
-                                    key={i}
-                                    href="#"
+                                    key={label}
+                                    href={href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={label}
                                     className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-navy transition-colors border border-white/10"
                                 >
                                     <Icon size={18} />
