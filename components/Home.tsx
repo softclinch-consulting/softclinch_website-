@@ -340,7 +340,7 @@ const SAPConsultingAMSOverview = () => {
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-slate-900">
-                  SAP Consulting &amp; Rollout
+                  SAP Implementation &amp; Rollout
                 </h3>
                 <p className="text-xs uppercase tracking-wider text-brand-navy/80 font-bold mt-0.5">
                   Strategic Systems &amp; Deployments
@@ -386,12 +386,12 @@ const SAPConsultingAMSOverview = () => {
                   &quot;We don&apos;t just implement SAP—we build intelligent business ecosystems that drive operational excellence.&quot;
                 </p>
               </div>
-              <Link
-                href="/sap-ams-support#contact-ams"
+              <a
+                href="mailto:venkat@softclinch.com"
                 className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-brand-navy text-white font-bold text-sm rounded-full hover:bg-brand-terracotta hover:scale-[1.02] transition-all duration-300 w-full sm:w-auto"
               >
                 Contact SAP Director <ChevronRight size={16} />
-              </Link>
+              </a>
             </div>
           </motion.div>
 
@@ -457,12 +457,12 @@ const SAPConsultingAMSOverview = () => {
                   &quot;With SoftClinch SAP AMS, your teams can focus on business growth while we ensure your SAP environment operates efficiently, reliably, and without interruption.&quot;
                 </p>
               </div>
-              <Link
-                href="/sap-ams-support#contact-ams"
+              <a
+                href="mailto:venkat@softclinch.com"
                 className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-brand-terracotta text-white font-bold text-sm rounded-full hover:bg-brand-navy hover:scale-[1.02] transition-all duration-300 w-full sm:w-auto"
               >
                 Contact AMS Head <ChevronRight size={16} />
-              </Link>
+              </a>
             </div>
           </motion.div>
 
@@ -475,6 +475,12 @@ const SAPConsultingAMSOverview = () => {
 const CoreServices = () => {
   const services = [
     {
+      title: 'SAP Consulting & AMS Support',
+      description: 'Enterprise SAP consulting services focused on implementation, AMS support, workflow optimization, SAP migration, and scalable business transformation solutions.',
+      icon: <Database className="text-slate-900" size={24} />,
+      path: '/sap-ams-support'
+    },
+    {
       title: 'Digital Marketing & Performance Growth',
       description: 'Grow your business with SEO, GEO, AEO, PPC, and analytics-driven marketing strategies optimized for Google Search, AI search engines, and modern digital platforms.',
       icon: <Globe className="text-slate-900" size={24} />,
@@ -485,12 +491,6 @@ const CoreServices = () => {
       description: 'Build scalable SaaS platforms, enterprise web applications, mobile apps, dashboards, and secure API integrations tailored to your business workflows.',
       icon: <Cpu className="text-slate-900" size={24} />,
       path: '/custom-application-development'
-    },
-    {
-      title: 'SAP Consulting & AMS Support',
-      description: 'Enterprise SAP consulting services focused on implementation, AMS support, workflow optimization, SAP migration, and scalable business transformation solutions.',
-      icon: <Database className="text-slate-900" size={24} />,
-      path: '/sap-ams-support'
     },
     {
       title: 'WhatsApp Automation Solutions',

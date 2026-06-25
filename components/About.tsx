@@ -464,7 +464,13 @@ export const About = () => {
 
         <ClientLogos />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-12">
+
+
+
+        <Values />
+        <Timeline />
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-24 mt-12">
           {/* Left: Our Expertise */}
           <div className="space-y-8">
             <div>
@@ -473,8 +479,8 @@ export const About = () => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {[
+                { title: 'SAP Implementation', icon: Database, desc: 'S/4HANA implementation & AMS support.', accent: 'from-[#A23B2A]/10 to-[#A23B2A]/5', iconColor: 'text-[#A23B2A]' },
                 { title: 'Enterprise Architecture', icon: Shield, desc: 'Scalable system design for global enterprises.', accent: 'from-brand-navy/10 to-brand-navy/5', iconColor: 'text-brand-navy' },
-                { title: 'SAP Consulting', icon: Database, desc: 'S/4HANA implementation & AMS support.', accent: 'from-[#A23B2A]/10 to-[#A23B2A]/5', iconColor: 'text-[#A23B2A]' },
                 { title: 'Custom Platforms', icon: Cpu, desc: 'Bespoke SaaS and web app development.', accent: 'from-brand-navy/10 to-brand-navy/5', iconColor: 'text-brand-navy' },
                 { title: 'WhatsApp Tech', icon: MessageSquare, desc: 'Enterprise WhatsApp API automation.', accent: 'from-[#A23B2A]/10 to-[#A23B2A]/5', iconColor: 'text-[#A23B2A]' }
               ].map((item, i) => (
@@ -524,10 +530,6 @@ export const About = () => {
           </div>
         </div>
 
-
-        <Values />
-        <Timeline />
-
         <OfficeSection />
 
         {/* The SoftClinch Way — manifesto split layout */}
@@ -561,7 +563,9 @@ export const About = () => {
                 Our focus is scalability, integration, and measurable digital performance. Every system we architect, every platform we build, is designed to make your business move faster and smarter.
               </p>
               <a
-                href="/contact"
+                href="https://wa.me/919445179931"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 text-brand-navy font-bold text-lg group"
               >
                 <span className="border-b-2 border-brand-navy/30 group-hover:border-brand-navy pb-0.5 transition-colors">Start a Conversation</span>

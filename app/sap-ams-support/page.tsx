@@ -2,7 +2,7 @@ import { SAPConsulting } from "@/components/SAPConsulting";
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { buildMetadata } from "@/lib/seo";
 import { faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
-import { sapConsultingFaq } from "@/lib/faqs";
+import { sapAmsFaq } from "@/lib/faqs";
 
 const canonicalPath = "/sap-ams-support";
 const title = "SAP AMS Support & Enterprise SAP Consulting Services | SoftClinch";
@@ -41,7 +41,7 @@ export default function SAPAmsSupportPage() {
             name: "SAP AMS Support and Enterprise SAP Consulting Services",
             description,
           }),
-          faqJsonLd(sapConsultingFaq),
+          faqJsonLd(sapAmsFaq),
         ]}
       />
       <SAPConsulting />

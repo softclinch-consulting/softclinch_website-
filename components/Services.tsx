@@ -123,7 +123,7 @@ const CaseStudyBlock = ({ title, description, image, results, index }: any) => (
 export const Services = () => {
   const services = [
     {
-      title: "SAP Consulting & Rollout",
+      title: "SAP Implementation & Rollout",
       description: "End-to-end SAP solutions, S/4HANA migrations, custom module configurations, and secure enterprise deployments.",
       icon: Database,
       path: "/services/sap-consulting"

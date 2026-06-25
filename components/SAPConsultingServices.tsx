@@ -27,6 +27,8 @@ import {
   Mail
 } from 'lucide-react';
 import { assetPath } from "@/lib/asset";
+import { FaqSection } from "@/components/FaqSection";
+import { sapConsultingFaq } from "@/lib/faqs";
 
 // FadeInSection component for scroll-based animations
 const FadeInSection = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => (
@@ -181,46 +183,6 @@ export const SAPConsultingServices = () => {
       icon: Target,
       theme: "border-emerald-500/35 bg-emerald-500/5 text-emerald-600"
     }
-  ];
-
-  const implementations = [
-    {
-      title: "S4HANA Implementation",
-      duration: "OCT 2024 to Dec 2024",
-      role: "SAP SD and IS Retail consultant",
-      client: "Jeyachandran Industries"
-    },
-    {
-      title: "S4HANA Implementation",
-      duration: "Dec 2022 to July 2023",
-      role: "SAP SD Lead Consultant",
-      client: "NTT Data"
-    },
-    {
-      title: "ECC 6.0 Rollout Nigeria",
-      duration: "April 2024 to Sep 2024",
-      role: "SAP SD Lead Consultant",
-      client: "EME FZE Dubai"
-    },
-    {
-      title: "ECC 6.0 Rollout Nigeria",
-      duration: "Oct 2016 to Feb 2017",
-      role: "SAP SD Consultant",
-      client: "Eltech Electromechanical Engineering"
-    },
-    {
-      title: "S/4 Hana Implementation",
-      duration: "August 2023 to Mar 2024",
-      role: "SAP SD Lead Consultant",
-      client: "SEMIPL"
-    },
-    {
-      title: "SAP SD & Logistics Custom Integration",
-      duration: "June 2020 to May 2021",
-      role: "SAP Solution Architect & Lead",
-      client: "Rane TRW Automotive & TVS"
-    },
-  
   ];
 
   const caseStudies = [
@@ -437,7 +399,7 @@ export const SAPConsultingServices = () => {
       {/* Promise & Leadership Profile Section */}
       <section className="py-24 bg-white">
         <div className="max-w-[1200px] mx-auto px-8 space-y-16">
-          
+
           {/* Our Promise (Manifesto / Mission) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 50 }}
@@ -447,8 +409,8 @@ export const SAPConsultingServices = () => {
             whileHover={{ scale: 1.02 }}
             className="bg-slate-50 border border-slate-200 rounded-[2.5rem] p-8 sm:p-12 relative overflow-hidden shadow-sm cursor-default"
           >
-            <motion.div 
-              animate={{ 
+            <motion.div
+              animate={{
                 scale: [1, 1.2, 1],
                 opacity: [0.5, 0.8, 0.5]
               }}
@@ -457,7 +419,7 @@ export const SAPConsultingServices = () => {
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
-              className="absolute top-0 right-0 w-64 h-64 bg-brand-navy/5 rounded-full blur-[80px] pointer-events-none" 
+              className="absolute top-0 right-0 w-64 h-64 bg-brand-navy/5 rounded-full blur-[80px] pointer-events-none"
             />
             <div className="relative z-10 max-w-4xl space-y-4">
               <span className="inline-flex rounded-full border border-brand-terracotta/15 bg-brand-terracotta/5 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-brand-terracotta">
@@ -475,7 +437,7 @@ export const SAPConsultingServices = () => {
           {/* Founder Profile Card */}
           <div className="bg-slate-900 text-white rounded-[2.5rem] p-8 sm:p-12 shadow-2xl relative overflow-hidden border border-white/10">
             <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-brand-terracotta/10 rounded-full blur-[100px] pointer-events-none" />
-            
+
             <div className="grid lg:grid-cols-12 gap-8 items-start relative z-10">
               {/* Profile Pic & Title Info */}
               <div className="lg:col-span-4 flex flex-col items-center lg:items-start text-center lg:text-left">
@@ -683,38 +645,6 @@ export const SAPConsultingServices = () => {
         </div>
       </section>
 
-      {/* SAP Implementations Section */}
-      <section className="py-24 bg-slate-50 border-t border-b border-slate-200/60">
-        <div className="max-w-[1200px] mx-auto px-8">
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-brand-navy/5 text-brand-navy text-xs font-bold uppercase tracking-widest mb-4">
-              Our Record
-            </span>
-            <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900">
-              SAP Consulting Implementations
-            </h2>
-            <p className="text-slate-600 max-w-2xl mx-auto mt-4 text-sm font-semibold">
-              A track record of successful S/4HANA implementations and ECC rollouts across major corporate clients.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {implementations.map((item, idx) => (
-              <div key={idx} className="bg-white border border-slate-200 p-8 rounded-3xl shadow-sm hover:shadow-lg transition-all relative overflow-hidden group">
-                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-brand-navy to-brand-terracotta" />
-                <span className="inline-flex rounded-full bg-brand-navy/5 text-brand-navy text-[10px] font-black uppercase tracking-wider px-3 py-1 mb-4 border border-brand-navy/10">
-                  {item.duration}
-                </span>
-                <h3 className="text-xl font-bold text-slate-900 font-display mb-2">{item.title}</h3>
-                <div className="space-y-2 mt-4 text-xs font-semibold text-slate-600">
-                  <p><strong className="text-slate-800">Client:</strong> {item.client}</p>
-                  <p><strong className="text-slate-800">Role:</strong> {item.role}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Case Studies Section */}
       <section className="py-24 bg-white">
@@ -736,9 +666,9 @@ export const SAPConsultingServices = () => {
               <div key={idx} className="bg-slate-50 border border-slate-200/80 rounded-[2.5rem] p-8 sm:p-12 shadow-xl hover:shadow-2xl transition-all duration-300 relative overflow-hidden">
                 {/* Visual bar top indicator */}
                 <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brand-navy to-brand-terracotta" />
-                
+
                 <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-                  
+
                   {/* Left Column: Context & Specifications */}
                   <div className="lg:col-span-5 space-y-6">
                     <div className="flex flex-wrap gap-2 items-center">
@@ -824,6 +754,9 @@ export const SAPConsultingServices = () => {
           </div>
         </div>
       </section>
+
+      {/* FAQs Section */}
+      <FaqSection title="SAP Consulting, Implementation & Rollout FAQs" items={sapConsultingFaq} />
 
       {/* CTA / Contact Section */}
       <section id="contact-consultation" className="py-24 bg-slate-50 relative overflow-hidden">
@@ -913,12 +846,12 @@ export const SAPConsultingServices = () => {
                       &ldquo;Speak directly with our technical leadership to coordinate your migration plans, module customizations, and rollout schedules.&rdquo;
                     </p>
 
-                    <Link
-                      href="/contact"
+                    <a
+                      href="mailto:venkat@softclinch.com"
                       className="w-full py-3 bg-white text-brand-navy hover:bg-orange-50 rounded-2xl font-bold text-xs transition-all duration-300 flex items-center justify-center gap-2 border border-white/15"
                     >
                       Connect Direct <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </div>

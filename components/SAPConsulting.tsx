@@ -13,7 +13,7 @@ import {
 import { FaqSection } from "@/components/FaqSection";
 import { ServiceMediaPanel } from "@/components/ServiceMediaPanel";
 import { ServiceStatStrip } from "@/components/ServiceStatStrip";
-import { sapConsultingFaq } from "@/lib/faqs";
+import { sapAmsFaq } from "@/lib/faqs";
 
 // Fade In Section Component
 function FadeInSection({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
@@ -841,7 +841,7 @@ export const SAPConsulting = () => {
       </section>
 
       {/* FAQs Section */}
-      <FaqSection title="SAP Consulting & AMS FAQs" items={sapConsultingFaq} />
+      <FaqSection title="SAP AMS (Application Management Services) FAQs" items={sapAmsFaq} />
 
     </div>
   );
