@@ -674,9 +674,9 @@ const Industries = () => (
 
 const WhySoftClinch = () => {
   const reasons = [
-    { num: '01', title: 'Business-Focused Technology Solutions', desc: 'We combine technical expertise, automation systems, and growth-focused strategies to help businesses improve efficiency and generate measurable results.', accent: 'from-brand-navy to-[#1e3a5f]' },
-    { num: '02', title: 'Enterprise-Grade Development', desc: 'Secure, scalable, and high-performance digital systems built for modern business requirements.', accent: 'from-[#A23B2A] to-[#c0483a]' },
-    { num: '03', title: 'SAP & Enterprise Expertise', desc: 'Deep expertise in SAP consulting, enterprise workflows, automation, and scalable digital transformation solutions.', accent: 'from-brand-navy to-[#1e3a5f]' },
+    { num: '01', title: 'SAP & Enterprise Expertise', desc: 'Deep expertise in SAP consulting, enterprise workflows, automation, and scalable digital transformation solutions.', accent: 'from-brand-navy to-[#1e3a5f]' },
+    { num: '02', title: 'Business-Focused Technology Solutions', desc: 'We combine technical expertise, automation systems, and growth-focused strategies to help businesses improve efficiency and generate measurable results.', accent: 'from-[#A23B2A] to-[#c0483a]' },
+    { num: '03', title: 'Enterprise-Grade Development', desc: 'Secure, scalable, and high-performance digital systems built for modern business requirements.', accent: 'from-brand-navy to-[#1e3a5f]' },
     { num: '04', title: 'SEO & AI Search Optimization', desc: 'Improve visibility across Google Search, AI-powered search engines, and modern digital platforms.', accent: 'from-[#A23B2A] to-[#c0483a]' },
     { num: '05', title: 'Automation-Led Growth Systems', desc: 'From messaging workflows to software platforms, we build systems that support scalability, engagement, and growth.', accent: 'from-brand-navy to-[#1e3a5f]' },
   ];
@@ -915,12 +915,12 @@ const FAQ = () => {
 
   const faqs = [
     {
-      q: "What services does SoftClinch provide?",
-      a: "SoftClinch provides SAP consulting, WhatsApp automation, SEO services, AI automation solutions, custom software development, and enterprise digital transformation services."
-    },
-    {
       q: "Do you provide SAP AMS support?",
       a: "Yes. We provide SAP AMS support, implementation, migration assistance, and enterprise SAP consulting services."
+    },
+    {
+      q: "What services does SoftClinch provide?",
+      a: "SoftClinch provides SAP consulting, WhatsApp automation, SEO services, AI automation solutions, custom software development, and enterprise digital transformation services."
     },
     {
       q: "What is WhatsApp automation for businesses?",

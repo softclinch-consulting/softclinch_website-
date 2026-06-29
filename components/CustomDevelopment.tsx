@@ -24,6 +24,7 @@ import {
   GraduationCap,
   Landmark,
   Briefcase,
+  Building2,
   Target,
   Laptop,
 } from "lucide-react";
@@ -214,6 +215,11 @@ const industries = [
     description: "Client management systems, project tracking tools, reporting dashboards, and workflow automation platforms.",
     icon: Briefcase,
   },
+  {
+    name: "Real Estate",
+    description: "Property management systems, real estate CRMs, lead automation workflows, and customer portals.",
+    icon: Building2,
+  },
 ];
 
 const techStackDetails = {
@@ -287,10 +293,10 @@ const processSteps = [
 ];
 
 const internalLinks = [
+  { label: "SAP Consulting", href: "/services/sap-consulting" },
+  { label: "SAP AMS Support", href: "/sap-ams-support" },
   { label: "AI-Powered Business Systems", href: "/services/ai-powered-business-systems" },
   { label: "Digital Marketing", href: "/digital-marketing" },
-  { label: "SAP AMS Support", href: "/sap-ams-support" },
-  { label: "SAP Consulting", href: "/services/sap-consulting" },
   { label: "All Services", href: "/services" },
   { label: "Contact Us", href: "/contact" },
 ];
