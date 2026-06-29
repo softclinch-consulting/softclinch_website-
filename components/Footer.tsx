@@ -64,11 +64,11 @@ export const Footer = () => {
                         <h4 className="text-lg font-bold mb-8">Solutions</h4>
                         <ul className="space-y-4">
                             {[
-                                { name: 'SAP Consulting & AMS Support', path: '/sap-ams-support' },
-                                { name: 'Inaiwazhi WhatsApp Automation', path: '/inaiwazhi-whatsapp-automation' },
-                                { name: 'AI-Powered Business Systems', path: '/services/ai-powered-business-systems' },
-                                { name: 'SEO, GEO & AEO Services', path: '/digital-marketing' },
+                                { name: 'SAP Implementation & Rollout', path: '/services/sap-consulting' },
+                                { name: 'SAP AMS Support', path: '/sap-ams-support' },
                                 { name: 'Custom App Development', path: '/custom-application-development' },
+                                { name: 'AI-Powered Business Systems', path: '/services/ai-powered-business-systems' },
+                                { name: 'Digital Marketing', path: '/digital-marketing' },
                             ].map((link) => (
                                 <li key={link.name}>
                                     <Link
@@ -89,6 +89,8 @@ export const Footer = () => {
                             {[
                                 { name: 'About Us', path: '/about' },
                                 { name: 'Services', path: '/services' },
+                                { name: 'Enterprise', path: '/services/enterprise-software' },
+                                { name: 'Blog', path: '/blog' },
                                 { name: 'Contact', path: '/contact' },
                             ].map((link) => (
                                 <li key={link.name}>
