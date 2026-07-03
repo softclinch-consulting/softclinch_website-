@@ -75,6 +75,12 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
       border: 'border-green-200',
       glow: 'shadow-green-500/10 shadow-lg',
     },
+    'AI & Customer Experience': {
+      bg: 'bg-indigo-100 text-indigo-800',
+      text: 'text-indigo-800',
+      border: 'border-indigo-200',
+      glow: 'shadow-indigo-500/10 shadow-lg',
+    },
   };
 
   const getInitials = (name: string) => {
