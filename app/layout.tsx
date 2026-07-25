@@ -59,6 +59,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { SoftClinchAIWidget } from "@/components/SoftClinchAIWidget";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -85,6 +87,7 @@ export default function RootLayout({
           <main className="flex-grow pt-[132px] md:pt-[132px]">{children}</main>
           <Footer />
         </div>
+        <SoftClinchAIWidget />
       </body>
     </html>
   );
