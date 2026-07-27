@@ -31,6 +31,7 @@ export const Header = () => {
                 { name: 'SAP AMS Support', path: '/sap-ams-support' },
                 { name: 'Custom App Development', path: '/custom-application-development' },
                 { name: 'AI-Powered Business Systems', path: '/services/ai-powered-business-systems' },
+                { name: 'Commerce Enablement', path: '/commerce-enablement' },
                 { name: 'Digital Marketing', path: '/digital-marketing' },
             ]
         },
@@ -39,6 +40,14 @@ export const Header = () => {
         { name: 'Blog', path: '/blog' },
         { name: 'Contact', path: '/contact' },
     ];
+
+    const isNavLinkActive = (link: (typeof navLinks)[number]) => {
+        if (pathname === link.path || pathname.startsWith(`${link.path}/`)) {
+            return true;
+        }
+
+        return link.subLinks?.some((subLink) => pathname === subLink.path || pathname.startsWith(`${subLink.path}/`)) ?? false;
+    };
 
     return (
         <header
@@ -67,7 +76,7 @@ export const Header = () => {
                             <div key={link.name} className="relative group">
                                 {link.subLinks ? (
                                     <span
-                                        className={`flex items-center gap-1 text-sm font-semibold transition-colors cursor-pointer ${pathname.startsWith(link.path) ? 'text-brand-navy' : 'text-slate-600 hover:text-brand-navy'
+                                        className={`flex items-center gap-1 text-sm font-semibold transition-colors cursor-pointer ${isNavLinkActive(link) ? 'text-brand-navy' : 'text-slate-600 hover:text-brand-navy'
                                             }`}
                                     >
                                         {link.name}
@@ -76,11 +85,11 @@ export const Header = () => {
                                 ) : (
                                     <Link
                                         href={link.path}
-                                        className={`relative flex items-center gap-1 text-sm font-semibold transition-colors ${pathname === link.path ? 'text-brand-navy' : 'text-slate-600 hover:text-brand-navy'
+                                        className={`relative flex items-center gap-1 text-sm font-semibold transition-colors ${isNavLinkActive(link) ? 'text-brand-navy' : 'text-slate-600 hover:text-brand-navy'
                                             }`}
                                     >
                                         {link.name}
-                                        {pathname === link.path && (
+                                        {isNavLinkActive(link) && (
                                             <motion.div
                                                 layoutId="underline"
                                                 className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-navy"
