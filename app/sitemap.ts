@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/about",
     "/services",
     "/services/ai-powered-business-systems",
+    "/commerce-enablement",
     "/digital-marketing",
     "/custom-application-development",
     "/sap-ams-support",
