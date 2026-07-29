@@ -20,6 +20,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/inaiwazhi-whatsapp-automation",
     "/contact",
     "/blog",
+    "/privacy-policy",
+    "/terms-of-use",
   ];
 
   const staticUrls = routes.map((path) => ({

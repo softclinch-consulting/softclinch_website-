@@ -128,8 +128,8 @@ export const Footer = () => {
                 <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-500">
                     <p>© {currentYear} SoftClinch Consulting Services. All rights reserved.</p>
                     <div className="flex gap-8">
-                        <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-                        <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+                        <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+                        <Link href="/terms-of-use" className="hover:text-white transition-colors">Terms of Use</Link>
                     </div>
                 </div>
             </div>
