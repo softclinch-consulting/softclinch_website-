@@ -1,14 +1,13 @@
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { Services } from "@/components/Services";
-import { landingPageKeywords, landingPageSeo } from "@/lib/landingPageKeywords";
 import { buildMetadata } from "@/lib/seo";
 import { faqJsonLd, webpageJsonLd } from "@/lib/schema";
 import { SITE_NAME } from "@/lib/site";
 
 export const metadata = buildMetadata({
-  title: landingPageSeo.services.title,
-  description: landingPageSeo.services.description,
-  keywords: [...landingPageKeywords.services],
+  title: "Services",
+  description:
+    "Explore SoftClinch services: SAP consulting, custom application development, and digital marketing built for enterprise scale.",
   canonicalPath: "/services",
 });
 

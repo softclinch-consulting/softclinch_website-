@@ -1,19 +1,28 @@
 import { CommerceEnablement } from "@/components/CommerceEnablement";
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { commerceEnablementFaq } from "@/lib/commerceEnablement";
-import { landingPageKeywords, landingPageSeo } from "@/lib/landingPageKeywords";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 
 const canonicalPath = "/commerce-enablement";
-const title = landingPageSeo.commerceEnablement.title;
-const description = landingPageSeo.commerceEnablement.description;
+const title = "Commerce Enablement Consulting Program | SoftClinch";
+const description =
+  "SoftClinch Commerce Enablement Program helps ecommerce businesses structure product discoverability, commerce readiness, customer communication, analytics, SOPs, and operational handover.";
 
 export const metadata = buildMetadata({
   title,
   description,
   canonicalPath,
-  keywords: [...landingPageKeywords.commerceEnablement],
+  keywords: [
+    "commerce enablement consulting",
+    "ecommerce operations consulting",
+    "Merchant Center readiness",
+    "Meta Commerce readiness",
+    "WhatsApp commerce implementation",
+    "ecommerce SOP consulting",
+    "customer communication automation",
+    "commerce analytics readiness",
+  ],
 });
 
 export default function CommerceEnablementPage() {

@@ -1,12 +1,25 @@
 import type { FaqItem } from "@/lib/faqs";
-import { landingPageKeywords, landingPageSeo } from "@/lib/landingPageKeywords";
 
 export const aiPoweredBusinessSystemsSeo = {
   slug: "/services/ai-powered-business-systems",
-  seoTitle: landingPageSeo.aiPoweredBusinessSystems.title,
-  metaTitle: landingPageSeo.aiPoweredBusinessSystems.title,
-  metaDescription: landingPageSeo.aiPoweredBusinessSystems.description,
-  focusKeywords: [...landingPageKeywords.aiPoweredBusinessSystems],
+  seoTitle:
+    "AI Business Automation Solutions & Enterprise Systems | SoftClinch",
+  metaTitle:
+    "AI Business Automation Solutions & Enterprise Systems | SoftClinch",
+  metaDescription:
+    "Transform operations with AI-powered business systems, workflow automation, CRM integrations, AI chatbots, and enterprise automation solutions built for scalable growth.",
+  focusKeywords: [
+    "ai business automation",
+    "ai powered business systems",
+    "enterprise automation solutions",
+    "business workflow automation",
+    "ai automation company",
+    "crm automation solutions",
+    "enterprise ai systems",
+    "business process automation",
+    "ai chatbot automation",
+    "digital transformation solutions",
+  ],
   schemaRecommendations: [
     "WebPage",
     "Service",

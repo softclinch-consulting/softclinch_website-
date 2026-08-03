@@ -1,14 +1,14 @@
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { About } from "@/components/About";
-import { landingPageKeywords, landingPageSeo } from "@/lib/landingPageKeywords";
 import { buildMetadata } from "@/lib/seo";
 import { webpageJsonLd } from "@/lib/schema";
 import { SITE_NAME } from "@/lib/site";
 
 export const metadata = buildMetadata({
-  title: landingPageSeo.about.title,
-  description: landingPageSeo.about.description,
-  keywords: [...landingPageKeywords.about],
+  title: "About SoftClinch | Technology & Digital Solutions Company",
+  description:
+    "Learn about SoftClinch, a technology company delivering digital marketing, enterprise software and automation solutions.",
+  keywords: ["about SoftClinch", "technology consulting company", "digital solutions provider"],
   canonicalPath: "/about",
 });
 

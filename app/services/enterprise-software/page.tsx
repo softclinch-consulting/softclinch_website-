@@ -1,12 +1,12 @@
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { EnterpriseSoftware } from "@/components/EnterpriseSoftware";
-import { landingPageKeywords, landingPageSeo } from "@/lib/landingPageKeywords";
 import { buildMetadata } from "@/lib/seo";
 import { faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 
 const canonicalPath = "/services/enterprise-software";
-const title = landingPageSeo.enterpriseSoftware.title;
-const description = landingPageSeo.enterpriseSoftware.description;
+const title = "AI-Powered Enterprise & eCommerce Application Development | SoftClinch";
+const description =
+  "Build scalable AI applications, enterprise software, automation systems, and custom eCommerce platforms with secure cloud architecture, analytics, and enterprise-grade development.";
 
 const enterpriseFaq = [
   {
@@ -35,7 +35,28 @@ export const metadata = buildMetadata({
   title,
   description,
   canonicalPath,
-  keywords: [...landingPageKeywords.enterpriseSoftware],
+  keywords: [
+    "ai application development",
+    "enterprise software development",
+    "custom application development",
+    "ecommerce application development",
+    "enterprise automation software",
+    "saas application development services",
+    "ai chatbot development company",
+    "enterprise digital transformation services",
+    "cloud native application development",
+    "custom software development for ecommerce",
+    "ai powered crm systems",
+    "workflow automation software",
+    "business intelligence dashboards",
+    "enterprise ai solutions",
+    "custom enterprise software",
+    "ai automation systems",
+    "enterprise application development",
+    "cloud automation services",
+    "predictive analytics solutions",
+    "customer engagement systems",
+  ],
 });
 
 export default function EnterpriseSoftwarePage() {

@@ -1,18 +1,23 @@
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { WhatsAppAutomation } from "@/components/WhatsAppAutomation";
-import { landingPageKeywords, landingPageSeo } from "@/lib/landingPageKeywords";
 import { buildMetadata } from "@/lib/seo";
 import { faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 import { whatsappAutomationFaq } from "@/lib/faqs";
 
 const canonicalPath = "/inaiwazhi-whatsapp-automation";
-const title = landingPageSeo.inaiwazhiWhatsAppAutomation.title;
-const description = landingPageSeo.inaiwazhiWhatsAppAutomation.description;
+const title = "Inaiwazhi WhatsApp Automation | AI WhatsApp Marketing Platform";
+const description =
+  "Automate customer communication with Inaiwazhi WhatsApp automation platform. Manage leads, follow-ups, campaigns and AI chat responses.";
 
 export const metadata = buildMetadata({
   title,
   description,
-  keywords: [...landingPageKeywords.inaiwazhiWhatsAppAutomation],
+  keywords: [
+    "WhatsApp automation tool",
+    "WhatsApp marketing software",
+    "WhatsApp chatbot platform",
+    "business WhatsApp automation",
+  ],
   canonicalPath,
 });
 

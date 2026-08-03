@@ -1,13 +1,24 @@
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { Home } from "@/components/Home";
-import { landingPageKeywords, landingPageSeo } from "@/lib/landingPageKeywords";
 import { buildMetadata } from "@/lib/seo";
 import { faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 
 export const metadata = buildMetadata({
-  title: landingPageSeo.homepage.title,
-  description: landingPageSeo.homepage.description,
-  keywords: [...landingPageKeywords.homepage],
+  title:
+    "SAP Consulting, AI Automation & Digital Growth Solutions | SoftClinch",
+  description:
+    "SoftClinch helps businesses scale with SAP consulting, WhatsApp automation, SEO, AI-powered marketing, enterprise software development, and digital transformation solutions.",
+  keywords: [
+    "SAP consulting company",
+    "SAP AMS support",
+    "WhatsApp automation company",
+    "AI automation solutions",
+    "SEO services company",
+    "GEO and AEO optimization",
+    "custom software development company",
+    "SaaS development company",
+    "enterprise digital transformation solutions",
+  ],
   canonicalPath: "/",
 });
 
@@ -41,7 +52,8 @@ export default function Page() {
         data={[
           webpageJsonLd({
             canonicalPath: "/",
-            title: landingPageSeo.homepage.title,
+            title:
+              "SAP Consulting, AI Automation & Digital Growth Solutions | SoftClinch",
           }),
           serviceJsonLd({
             canonicalPath: "/",

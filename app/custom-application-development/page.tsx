@@ -1,6 +1,5 @@
 import { CustomDevelopment } from "@/components/CustomDevelopment";
 import { SeoJsonLd } from "@/components/SeoJsonLd";
-import { landingPageKeywords, landingPageSeo } from "@/lib/landingPageKeywords";
 import { buildMetadata } from "@/lib/seo";
 import {
   breadcrumbJsonLd,
@@ -11,13 +10,35 @@ import {
 import { customDevelopmentFaq } from "@/lib/faqs";
 
 const canonicalPath = "/custom-application-development";
-const title = landingPageSeo.customApplicationDevelopment.title;
-const description = landingPageSeo.customApplicationDevelopment.description;
+const title = "Custom Software & SaaS Application Development Company | SoftClinch";
+const description =
+  "Build scalable SaaS platforms, enterprise applications, mobile apps, dashboards, and custom software solutions with secure API integrations and modern technologies.";
 
 export const metadata = buildMetadata({
   title,
   description,
-  keywords: [...landingPageKeywords.customApplicationDevelopment],
+  keywords: [
+    "custom software development company",
+    "saas development company",
+    "web application development",
+    "enterprise app development",
+    "custom web application development",
+    "cloud application development",
+    "saas platform development",
+    "api integration services",
+    "enterprise software development",
+    "custom business software",
+    "nextjs development company",
+    "react development services",
+    "nodejs development company",
+    "custom crm development",
+    "dashboard development services",
+    "cloud native applications",
+    "microservices development",
+    "mobile app development company",
+    "graphql api development",
+    "full stack development company",
+  ],
   canonicalPath,
 });
 

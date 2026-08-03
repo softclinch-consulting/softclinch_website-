@@ -1,14 +1,14 @@
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { Blog } from "@/components/Blog";
-import { landingPageKeywords, landingPageSeo } from "@/lib/landingPageKeywords";
 import { buildMetadata } from "@/lib/seo";
 import { webpageJsonLd } from "@/lib/schema";
 import { SITE_NAME } from "@/lib/site";
 
 export const metadata = buildMetadata({
-  title: landingPageSeo.blog.title,
-  description: landingPageSeo.blog.description,
-  keywords: [...landingPageKeywords.blog],
+  title: "Blog | Insights on SAP, Digital Marketing & Custom Development",
+  description:
+    "Read our latest insights and best practices on SAP consulting, digital marketing strategies, and custom application development.",
+  keywords: ["blog", "SAP", "digital marketing", "custom development", "tech insights"],
   canonicalPath: "/blog",
 });
 
