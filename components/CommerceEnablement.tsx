@@ -2,24 +2,53 @@
 
 import Link from "next/link";
 import { useState, type ReactNode } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
+  AlertCircle,
+  AlertTriangle,
   ArrowRight,
+  Award,
   BarChart3,
   CheckCircle2,
-  ClipboardCheck,
+  ChevronDown,
+  ChevronRight,
   Compass,
-  FileText,
+  Cpu,
+  CreditCard,
+  Eye,
+  FileWarning,
   Globe,
+  Layers,
+  LayoutGrid,
+  Link2Off,
+  Lock,
   Megaphone,
+  MessageSquare,
+  MessageSquareOff,
   MessageSquareText,
+  MousePointerClick,
+  RefreshCw,
+  Search,
   SearchCheck,
+  SearchX,
   Settings2,
+  ShieldAlert,
   ShieldCheck,
   ShoppingBag,
+  ShoppingCart,
+  Smartphone,
+  Sparkles,
   Star,
+  Store,
+  Target,
+  TrendingDown,
+  TrendingUp,
+  Truck,
+  UserCheck,
   Users,
   Workflow,
+  XCircle,
+  Zap,
 } from "lucide-react";
 import { FaqSection } from "@/components/FaqSection";
 import { ServiceMediaPanel } from "@/components/ServiceMediaPanel";
@@ -32,737 +61,33 @@ const reveal = {
   visible: { opacity: 1, y: 0 },
 };
 
-const trustItems = [
-  "For ecommerce teams modernizing operations",
-  "Structured audits before implementation",
-  "Platform readiness across commerce channels",
-  "Documented handover for internal teams",
-];
-
-const businessProblems = [
-  {
-    title: "Poor Product Discoverability",
-    description:
-      "Products can be difficult to find when catalog structure, search readiness, and product information are not managed as an operating system.",
-    icon: SearchCheck,
-  },
-  {
-    title: "Merchant Center Issues",
-    description:
-      "Commerce operations can slow down when product feeds, policy readiness, and account hygiene require structured review.",
-    icon: ShoppingBag,
-  },
-  {
-    title: "Meta Commerce Readiness",
-    description:
-      "Catalogs, commerce assets, and connected workflows need careful preparation before teams can operate confidently.",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Customer Communication",
-    description:
-      "Manual replies, follow-ups, support, and broadcasts create gaps when communication is not connected to daily commerce workflows.",
-    icon: MessageSquareText,
-  },
-  {
-    title: "Lack of Analytics",
-    description:
-      "Teams need clear measurement foundations to understand readiness, workflow status, and operational follow-through.",
-    icon: BarChart3,
-  },
-  {
-    title: "Manual Operations",
-    description:
-      "Repeated manual tasks make ecommerce execution harder to manage, document, and hand over across teams.",
-    icon: Settings2,
-  },
-  {
-    title: "Missing SOPs",
-    description:
-      "Without standard operating procedures, teams depend on individual memory instead of repeatable operating practices.",
-    icon: FileText,
-  },
-];
-
-const flowRows = [
-  {
-    stage: "01",
-    focus: "Discoverability",
-    input: "Product information, catalog structure, and search readiness",
-    enablement: "Review product data and organize the operating inputs needed for clearer ecommerce discovery.",
-    handover: "Discoverability review path",
-    icon: SearchCheck,
-  },
-  {
-    stage: "02",
-    focus: "Commerce Readiness",
-    input: "Merchant Center, Meta Commerce, catalogs, feeds, and commerce assets",
-    enablement: "Prepare commerce channels before ongoing execution and team ownership.",
-    handover: "Merchant Center and Meta Commerce readiness",
-    icon: ShieldCheck,
-  },
-  {
-    stage: "03",
-    focus: "Customer Communication",
-    input: "WhatsApp commerce, support, broadcasts, follow-ups, and segmentation",
-    enablement: "Connect communication workflows through Inaiwazhi where they are part of the implementation scope.",
-    handover: "Communication workflow model",
-    icon: MessageSquareText,
-  },
-  {
-    stage: "04",
-    focus: "Analytics",
-    input: "Readiness tracking, workflow status, and operational progress",
-    enablement: "Create analytics foundations that help teams review implementation status and operating movement.",
-    handover: "Analytics-ready review rhythm",
-    icon: BarChart3,
-  },
-  {
-    stage: "05",
-    focus: "Operations",
-    input: "SOPs, workflows, testing, training, and handover practices",
-    enablement: "Document and train the operating model so internal teams can run it with clarity.",
-    handover: "Operational independence",
-    icon: Workflow,
-  },
-];
-
-const comparisonRows = [
-  {
-    traditional: "Often centered on campaigns, creatives, or isolated channel execution.",
-    softclinch:
-      "Starts with audit, readiness, workflows, documentation, and implementation structure.",
-  },
-  {
-    traditional: "May leave commerce, communication, and analytics as separate workstreams.",
-    softclinch:
-      "Connects discoverability, commerce readiness, communication, analytics, and operations.",
-  },
-  {
-    traditional: "Handover can depend on verbal updates and individual availability.",
-    softclinch:
-      "Builds toward training, SOPs, documentation, and operational independence.",
-  },
-];
-
-const journey = [
-  {
-    phase: "Phase 1",
-    title: "Discovery",
-    description:
-      "Understand the ecommerce model, current operations, customer communication needs, and implementation priorities.",
-    icon: Compass,
-  },
-  {
-    phase: "Phase 2",
-    title: "Audit",
-    description:
-      "Review product discoverability, Merchant Center, Meta Commerce readiness, analytics, operations, and documentation gaps.",
-    icon: SearchCheck,
-  },
-  {
-    phase: "Phase 3",
-    title: "Implementation",
-    description:
-      "Configure the agreed commerce, communication, analytics, workflow, and operational enablement components.",
-    icon: Settings2,
-  },
-  {
-    phase: "Phase 4",
-    title: "Testing",
-    description:
-      "Validate readiness across workflows, communication paths, commerce assets, and handover materials.",
-    icon: ShieldCheck,
-  },
-  {
-    phase: "Phase 5",
-    title: "Training",
-    description:
-      "Train teams on SOPs, daily operating practices, customer communication, and review routines.",
-    icon: Users,
-  },
-  {
-    phase: "Phase 6",
-    title: "Operational Handover",
-    description:
-      "Transfer documentation, workflows, and ownership practices so the internal team can operate with clarity.",
-    icon: Workflow,
-  },
-];
-
-const metrics = [
-  "Merchant Center Ready",
-  "Meta Commerce Ready",
-  "Workflow Automation",
-  "Analytics Ready",
-  "Documentation Complete",
-  "Operational Independence",
-];
-
-const inaiwazhiCapabilities = [
-  "WhatsApp Commerce",
-  "Customer Communication",
-  "Broadcast Campaigns",
-  "Follow-ups",
-  "Customer Support",
-  "Customer Segmentation",
-  "Automation",
-];
-
 function SectionHeading({
   eyebrow,
   title,
   description,
+  centered = true,
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   description?: string;
+  centered?: boolean;
 }) {
   return (
-    <div className="mx-auto mb-14 max-w-3xl text-center sm:mb-16">
-      <span className="mb-4 inline-flex rounded-full border border-brand-terracotta/15 bg-brand-terracotta/5 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-brand-terracotta">
-        {eyebrow}
-      </span>
+    <div className={`mb-12 sm:mb-16 ${centered ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}`}>
+      {eyebrow && (
+        <span className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-brand-terracotta/20 bg-brand-terracotta/5 px-4 py-1.5 text-xs font-black uppercase tracking-[0.2em] text-brand-terracotta shadow-xs">
+          <Sparkles className="h-3.5 w-3.5" />
+          {eyebrow}
+        </span>
+      )}
       <h2 className="text-3xl font-display font-bold leading-tight text-slate-955 sm:text-4xl lg:text-5xl">
         {title}
       </h2>
       {description && (
-        <p className="mt-6 text-base font-medium leading-relaxed text-slate-600 sm:text-lg">
+        <p className="mt-5 text-base font-medium leading-relaxed text-slate-600 sm:text-lg">
           {description}
         </p>
       )}
-    </div>
-  );
-}
-
-function PremiumCard({
-  children,
-  className = "",
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <motion.article
-      variants={reveal}
-      className={`group relative overflow-hidden rounded-[2.5rem] border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-navy/20 hover:shadow-xl ${className}`}
-    >
-      <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-brand-navy to-brand-terracotta opacity-0 transition-opacity group-hover:opacity-100" />
-      {children}
-    </motion.article>
-  );
-}
-
-function FlowTable() {
-  return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: false, amount: 0.15 }}
-      className="relative rounded-[3rem] border border-slate-200 bg-gradient-to-b from-slate-50 via-white to-slate-50 p-6 sm:p-10 lg:p-12 shadow-xl overflow-hidden min-h-[620px]"
-    >
-      {/* Subtle Grid Background */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none rounded-[3rem]" />
-
-      {/* DESKTOP WINDING ROADWAY LAYOUT */}
-      <div className="relative z-10 hidden lg:block w-full max-w-7xl mx-auto my-auto">
-        <div className="relative h-[540px] w-full">
-          {/* Winding Highway SVG Track */}
-          <svg
-            viewBox="0 0 1000 450"
-            className="absolute inset-0 h-full w-full pointer-events-none overflow-visible"
-            preserveAspectRatio="none"
-          >
-            {/* Outer Road Glow */}
-            <path
-              d="M 30 290 C 180 290, 180 120, 290 120 C 400 120, 400 290, 510 290 C 620 290, 620 120, 730 120 C 840 120, 840 290, 950 290"
-              fill="none"
-              stroke="#A23B2A"
-              strokeWidth="40"
-              strokeLinecap="round"
-              opacity="0.12"
-              className="blur-md"
-            />
-
-            {/* Dark Asphalt Highway Base */}
-            <path
-              d="M 30 290 C 180 290, 180 120, 290 120 C 400 120, 400 290, 510 290 C 620 290, 620 120, 730 120 C 840 120, 840 290, 950 290"
-              fill="none"
-              stroke="#1E293B"
-              strokeWidth="32"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-
-            {/* Highway Edge Markers */}
-            <path
-              d="M 30 290 C 180 290, 180 120, 290 120 C 400 120, 400 290, 510 290 C 620 290, 620 120, 730 120 C 840 120, 840 290, 950 290"
-              fill="none"
-              stroke="#003366"
-              strokeWidth="28"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-
-            {/* Dashed White Center Line */}
-            <path
-              d="M 30 290 C 180 290, 180 120, 290 120 C 400 120, 400 290, 510 290 C 620 290, 620 120, 730 120 C 840 120, 840 290, 950 290"
-              fill="none"
-              stroke="#FFFFFF"
-              strokeWidth="3"
-              strokeDasharray="12 10"
-              strokeLinecap="round"
-            />
-          </svg>
-
-          {/* 5 Milestone Stop Nodes along the Winding Highway */}
-          {flowRows.map((row, index) => {
-            const Icon = row.icon;
-
-            const isTopNode = index % 2 === 1;
-
-            const leftPercents = ["6%", "27%", "48%", "69%", "89%"];
-            const cardPositions = [
-              "top-2 left-[1%]",
-              "bottom-2 left-[22%]",
-              "top-2 left-[43%]",
-              "bottom-2 left-[64%]",
-              "top-2 left-[82%]",
-            ];
-
-            const nodeTopPercents = [
-              "top-[260px]",
-              "top-[90px]",
-              "top-[260px]",
-              "top-[90px]",
-              "top-[260px]",
-            ];
-
-            return (
-              <div key={row.stage}>
-                {/* Glowing Circular Icon Node on Road */}
-                <motion.div
-                  initial={{ scale: 0, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  viewport={{ once: false }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className={`absolute z-30 flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-full border-4 border-white bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-[0_0_20px_rgba(16,185,129,0.5)] ${nodeTopPercents[index]}`}
-                  style={{ left: leftPercents[index] }}
-                >
-                  <Icon className="h-6 w-6" />
-                </motion.div>
-
-                {/* Content Card Branching Above or Below Node */}
-                <motion.div
-                  initial={{ opacity: 0, y: isTopNode ? 20 : -20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`absolute z-20 w-[19%] rounded-2xl border border-slate-200 bg-white p-4 shadow-lg transition-all duration-300 hover:shadow-xl hover:border-brand-navy/30 ${cardPositions[index]}`}
-                >
-                  <div className="flex items-center justify-between border-b border-slate-100 pb-2 mb-2">
-                    <span className="text-[10px] font-black uppercase tracking-wider text-brand-terracotta">
-                      Stage 0{row.stage}
-                    </span>
-                    <span className="text-xs font-bold text-slate-900">{row.focus}</span>
-                  </div>
-
-                  <p className="text-[11px] font-semibold text-slate-600 leading-tight mb-2">
-                    {row.input}
-                  </p>
-
-                  <div className="rounded-lg bg-slate-50 p-2 text-[10px] font-medium text-slate-700 leading-snug mb-2 border border-slate-100">
-                    {row.enablement}
-                  </div>
-
-                  <div className="flex items-center gap-1.5 text-[10px] font-bold text-brand-navy">
-                    <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-brand-terracotta" />
-                    <span className="truncate">{row.handover}</span>
-                  </div>
-                </motion.div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* MOBILE VERTICAL ROADWAY LAYOUT */}
-      <div className="relative z-10 lg:hidden space-y-6 w-full py-4">
-        {/* Vertical Asphalt Road Track */}
-        <div className="absolute left-6 top-6 bottom-6 w-6 bg-slate-800 rounded-full border-2 border-brand-navy shadow-inner flex items-center justify-center overflow-hidden">
-          <div className="h-full w-0.5 border-r-2 border-dashed border-white/80" />
-        </div>
-
-        {flowRows.map((row, index) => {
-          const Icon = row.icon;
-          return (
-            <motion.div
-              key={row.stage}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative flex items-start gap-4 pl-2"
-            >
-              {/* Circular Road Node */}
-              <div className="relative z-20 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-4 border-white bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-md">
-                <Icon className="h-5 w-5" />
-              </div>
-
-              {/* Card */}
-              <div className="flex-1 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] font-black uppercase tracking-wider text-brand-terracotta">
-                    Stage 0{row.stage}
-                  </span>
-                  <h3 className="text-base font-bold text-slate-900">{row.focus}</h3>
-                </div>
-                <p className="text-xs font-semibold text-slate-600 mb-2">{row.input}</p>
-                <div className="rounded-xl bg-slate-50 p-3 text-xs font-medium text-slate-700 mb-3">
-                  {row.enablement}
-                </div>
-                <div className="flex items-center gap-2 text-xs font-bold text-brand-navy">
-                  <CheckCircle2 className="h-4 w-4 text-brand-terracotta" />
-                  <span>{row.handover}</span>
-                </div>
-              </div>
-            </motion.div>
-          );
-        })}
-      </div>
-    </motion.div>
-  );
-}
-
-function RoadmapFlow() {
-  const [activeNode, setActiveNode] = useState<number | null>(0);
-
-  return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: false, amount: 0.2 }}
-      className="relative rounded-[3rem] border border-slate-200 bg-gradient-to-b from-slate-50 via-white to-slate-50 p-6 shadow-xl sm:p-10 lg:px-6 lg:py-48 min-h-[680px] flex items-center justify-center"
-    >
-      {/* Background Subtle Gradient Glows in Brand Colors */}
-      <div className="absolute -left-20 -top-20 h-96 w-96 rounded-full bg-brand-navy/5 blur-3xl pointer-events-none rounded-[3rem] overflow-hidden" />
-      <div className="absolute -right-20 -bottom-20 h-96 w-96 rounded-full bg-brand-terracotta/5 blur-3xl pointer-events-none rounded-[3rem] overflow-hidden" />
-
-      {/* Subtle Background Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none rounded-[3rem]" />
-
-      {/* Desktop Horizontal Timeline Axis Layout */}
-      <div className="relative z-10 hidden lg:block w-full max-w-6xl mx-auto my-auto">
-        {/* Animated Central Horizontal Axis Line */}
-        <motion.div
-          initial={{ scaleX: 0, opacity: 0 }}
-          whileInView={{ scaleX: 1, opacity: 1 }}
-          viewport={{ once: false }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute left-4 right-4 top-1/2 h-[3px] -translate-y-1/2 origin-left bg-gradient-to-r from-brand-navy via-brand-terracotta to-brand-navy shadow-[0_0_10px_rgba(162,59,42,0.3)]"
-        />
-
-        {/* 6 Milestone Nodes & Branch Callout Cards with Sequential Stagger */}
-        <div className="grid grid-cols-6 gap-3 relative">
-          {journey.map((item, index) => {
-            const Icon = item.icon;
-            const isTop = index % 2 === 0;
-            const isActive = activeNode === index;
-            const delay = index * 0.15;
-
-            return (
-              <div
-                key={item.phase}
-                className="relative flex flex-col items-center group cursor-pointer"
-                onMouseEnter={() => setActiveNode(index)}
-              >
-                {/* TOP CALLOUT CARD (Phases 1, 3, 5) - Slides down smoothly */}
-                {isTop ? (
-                  <motion.div
-                    initial={{ opacity: 0, y: -30, scale: 0.95 }}
-                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                    viewport={{ once: false }}
-                    transition={{ duration: 0.7, delay, ease: [0.215, 0.61, 0.355, 1] }}
-                    className="absolute bottom-full mb-7 w-[180px] xl:w-[210px] z-20 left-1/2 -translate-x-1/2"
-                  >
-                    {/* Vertical Stem Connector Line */}
-                    <div className="absolute left-1/2 -bottom-7 h-7 w-[2px] -translate-x-1/2 bg-gradient-to-b from-brand-terracotta to-brand-navy" />
-
-                    <div className={`relative rounded-2xl border p-4 shadow-md backdrop-blur-md transition-all duration-300 ${isActive
-                      ? "border-brand-terracotta bg-white shadow-xl -translate-y-1.5 ring-2 ring-brand-terracotta/20"
-                      : "border-slate-200 bg-white hover:border-brand-terracotta/60 hover:-translate-y-1"
-                      }`}>
-                      <div className="flex items-center justify-between mb-1.5">
-                        <span className="rounded-full border border-brand-terracotta/20 bg-brand-terracotta/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-brand-terracotta">
-                          {item.phase}
-                        </span>
-                        <Icon className={`h-4 w-4 ${isActive ? "text-brand-terracotta" : "text-brand-navy"}`} />
-                      </div>
-                      <h4 className="text-xs font-display font-bold text-slate-900 group-hover:text-brand-navy transition-colors">
-                        {item.title}
-                      </h4>
-                      <p className="mt-1 text-[11px] font-medium leading-normal text-slate-600">
-                        {item.description}
-                      </p>
-                    </div>
-                  </motion.div>
-                ) : null}
-
-                {/* CENTRAL AXIS NODE SPHERE - Scales up smoothly */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.3 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: false }}
-                  transition={{ duration: 0.5, delay: delay + 0.1, ease: "backOut" }}
-                  className="relative z-30 flex items-center justify-center"
-                >
-                  <div className={`relative flex h-9 w-9 items-center justify-center rounded-full border-2 transition-all duration-300 ${isActive
-                    ? "border-brand-terracotta bg-brand-terracotta text-white shadow-lg shadow-brand-terracotta/30 scale-125 ring-4 ring-brand-terracotta/20"
-                    : "border-brand-navy bg-brand-navy text-white group-hover:bg-brand-terracotta group-hover:border-brand-terracotta group-hover:scale-110"
-                    }`}>
-                    <span className="text-[10px] font-black">0{index + 1}</span>
-                  </div>
-                </motion.div>
-
-                {/* BOTTOM CALLOUT CARD (Phases 2, 4, 6) - Slides up smoothly */}
-                {!isTop ? (
-                  <motion.div
-                    initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                    viewport={{ once: false }}
-                    transition={{ duration: 0.7, delay, ease: [0.215, 0.61, 0.355, 1] }}
-                    className="absolute top-full mt-7 w-[180px] xl:w-[210px] z-20 left-1/2 -translate-x-1/2"
-                  >
-                    {/* Vertical Stem Connector Line */}
-                    <div className="absolute left-1/2 -top-7 h-7 w-[2px] -translate-x-1/2 bg-gradient-to-t from-brand-terracotta to-brand-navy" />
-
-                    <div className={`relative rounded-2xl border p-4 shadow-md backdrop-blur-md transition-all duration-300 ${isActive
-                      ? "border-brand-terracotta bg-white shadow-xl translate-y-1.5 ring-2 ring-brand-terracotta/20"
-                      : "border-slate-200 bg-white hover:border-brand-terracotta/60 hover:translate-y-1"
-                      }`}>
-                      <div className="flex items-center justify-between mb-1.5">
-                        <span className="rounded-full border border-brand-terracotta/20 bg-brand-terracotta/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-brand-terracotta">
-                          {item.phase}
-                        </span>
-                        <Icon className={`h-4 w-4 ${isActive ? "text-brand-terracotta" : "text-brand-navy"}`} />
-                      </div>
-                      <h4 className="text-xs font-display font-bold text-slate-900 group-hover:text-brand-navy transition-colors">
-                        {item.title}
-                      </h4>
-                      <p className="mt-1 text-[11px] font-medium leading-normal text-slate-600">
-                        {item.description}
-                      </p>
-                    </div>
-                  </motion.div>
-                ) : null}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Mobile Vertical Flow Layout */}
-      <div className="relative z-10 lg:hidden space-y-5 w-full">
-        <div className="absolute left-5 top-4 bottom-4 w-1 bg-gradient-to-b from-brand-navy via-brand-terracotta to-brand-navy rounded-full" />
-        {journey.map((item, index) => {
-          const Icon = item.icon;
-          return (
-            <motion.div
-              key={item.phase}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative flex items-start gap-4 pl-1"
-            >
-              <div className="relative z-20 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-brand-navy bg-brand-navy text-xs font-black text-white shadow-md">
-                0{index + 1}
-              </div>
-              <div className="flex-1 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] font-black uppercase tracking-wider text-brand-terracotta">
-                    {item.phase}
-                  </span>
-                  <Icon className="h-4 w-4 text-brand-navy" />
-                </div>
-                <h4 className="text-base font-bold text-slate-900">{item.title}</h4>
-                <p className="mt-2 text-xs font-semibold leading-relaxed text-slate-600">{item.description}</p>
-              </div>
-            </motion.div>
-          );
-        })}
-      </div>
-    </motion.div>
-  );
-}
-
-const readinessMetrics = [
-  {
-    stage: "01",
-    title: "Merchant Center Ready",
-    points: [
-      "Product catalog sync & term setups",
-      "SKU mapping & category structures",
-      "Merchant policy compliance verification",
-    ],
-  },
-  {
-    stage: "02",
-    title: "Meta Commerce Ready",
-    points: [
-      "Meta catalog & shop integration",
-      "Instagram & FB store connection",
-      "Commerce Manager health audit",
-    ],
-  },
-  {
-    stage: "03",
-    title: "Workflow Automation",
-    points: [
-      "Order status & tracking workflows",
-      "Customer notification triggers",
-      "Follow-up & broadcast sequences",
-    ],
-  },
-  {
-    stage: "04",
-    title: "Analytics Ready",
-    points: [
-      "GA4 & Meta Pixel event setup",
-      "Conversion tracking validation",
-      "Attribution & performance view",
-    ],
-  },
-  {
-    stage: "05",
-    title: "Documentation Complete",
-    points: [
-      "Standard Operating Procedures (SOPs)",
-      "Daily practice guides for teams",
-      "Communication workflow manuals",
-    ],
-  },
-  {
-    stage: "06",
-    title: "Operational Independence",
-    points: [
-      "Handover review & practice routines",
-      "Internal team training sign-off",
-      "Full autonomous channel control",
-    ],
-  },
-];
-
-function ReadinessMetricsFlow() {
-  return (
-    <div className="mx-auto max-w-5xl rounded-[3rem] bg-[#EBF3FB] p-6 sm:p-12 shadow-inner border border-blue-100/70">
-      <div className="-space-y-3 sm:-space-y-5 relative z-10">
-        {readinessMetrics.map((item, index) => {
-          const isOdd = index % 2 === 0; // 01, 03, 05 (Points Right ▶)
-
-          return (
-            <motion.div
-              key={item.stage}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-              className="relative z-10"
-            >
-              <div className="flex items-center gap-2 sm:gap-4">
-                {/* Floating Number Left (for Odd 01, 03, 05) */}
-                <div className={`w-12 sm:w-16 text-center shrink-0 ${isOdd ? "block" : "invisible"}`}>
-                  <span className="font-display text-3xl font-black text-brand-navy sm:text-4xl lg:text-5xl tracking-tight">
-                    {item.stage}
-                  </span>
-                </div>
-
-                {/* SVG Ribbon Card */}
-                <div className="relative flex-1 group transition-transform duration-300 hover:scale-[1.01] hover:z-30">
-                  {/* SVG Ribbon Background & Crisp Border */}
-                  <svg
-                    viewBox="0 0 800 120"
-                    preserveAspectRatio="none"
-                    className="w-full h-auto min-h-[110px] sm:min-h-[120px] drop-shadow-[0_8px_16px_rgba(0,51,102,0.12)]"
-                  >
-                    <path
-                      d={
-                        isOdd
-                          ? "M 32 0 L 768 0 L 800 60 L 768 120 L 32 120 L 0 60 Z" // Points Right ▶
-                          : "M 32 0 L 800 0 L 768 60 L 800 120 L 32 120 L 0 60 Z" // Points Left ◀
-                      }
-                      fill="#FFFFFF"
-                      stroke="#3B669B"
-                      strokeWidth="2.5"
-                      vectorEffect="non-scaling-stroke"
-                    />
-                  </svg>
-
-                  {/* Inner Text & Content Overlay */}
-                  <div className="absolute inset-0 px-8 sm:px-14 py-4 flex items-center">
-                    <div className="w-full grid gap-2 sm:grid-cols-2 sm:items-center">
-                      {isOdd ? (
-                        <>
-                          {/* Title Left */}
-                          <div>
-                            <span className="text-[10px] font-black uppercase tracking-widest text-brand-terracotta">
-                              Indicator {item.stage}
-                            </span>
-                            <h3 className="mt-0.5 text-sm sm:text-lg font-display font-bold text-brand-navy">
-                              {item.title}
-                            </h3>
-                          </div>
-                          {/* Bullets Right */}
-                          <div>
-                            <ul className="space-y-1 sm:border-l sm:border-blue-100 sm:pl-6">
-                              {item.points.map((pt, i) => (
-                                <li key={i} className="flex items-center gap-2 text-[11px] sm:text-xs font-semibold text-slate-600">
-                                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-brand-navy" />
-                                  <span>{pt}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          {/* Bullets Left */}
-                          <div className="order-2 sm:order-1">
-                            <ul className="space-y-1 sm:border-r sm:border-blue-100 sm:pr-6">
-                              {item.points.map((pt, i) => (
-                                <li key={i} className="flex items-center gap-2 text-[11px] sm:text-xs font-semibold text-slate-600 sm:justify-end">
-                                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-brand-navy" />
-                                  <span>{pt}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                          {/* Title Right */}
-                          <div className="order-1 sm:order-2 sm:text-right">
-                            <span className="text-[10px] font-black uppercase tracking-widest text-brand-terracotta">
-                              Indicator {item.stage}
-                            </span>
-                            <h3 className="mt-0.5 text-sm sm:text-lg font-display font-bold text-brand-navy">
-                              {item.title}
-                            </h3>
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Floating Number Right (for Even 02, 04, 06) */}
-                <div className={`w-12 sm:w-16 text-center shrink-0 ${!isOdd ? "block" : "invisible"}`}>
-                  <span className="font-display text-3xl font-black text-brand-navy sm:text-4xl lg:text-5xl tracking-tight">
-                    {item.stage}
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          );
-        })}
-      </div>
     </div>
   );
 }
@@ -819,7 +144,7 @@ function ClientLogos() {
 function Testimonials() {
   const allReviews = [...reviews, ...reviews];
   return (
-    <section className="py-24 bg-white overflow-hidden relative">
+    <section className="py-24 bg-white overflow-hidden relative border-t border-slate-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center mb-12">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-xs font-bold uppercase tracking-widest mb-4">
           <Globe size={14} />
@@ -877,219 +202,1959 @@ function Testimonials() {
   );
 }
 
+// ----------------------------------------------------
+// AXIS TIMELINE ROADMAP COMPONENT (FOR 90-DAY ROADMAP)
+// ----------------------------------------------------
+function AxisTimelineRoadmap({ phases }: { phases: any[] }) {
+  const [activeNode, setActiveNode] = useState<number>(0);
+
+  return (
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: false, amount: 0.2 }}
+      className="relative rounded-[3rem] border border-slate-200 bg-gradient-to-b from-slate-50 via-white to-slate-50 p-6 shadow-xl sm:p-10 lg:px-8 lg:py-20 min-h-[480px] flex items-center justify-center"
+    >
+      <div className="absolute -left-20 -top-20 h-96 w-96 rounded-full bg-brand-navy/5 blur-3xl pointer-events-none" />
+      <div className="absolute -right-20 -bottom-20 h-96 w-96 rounded-full bg-brand-terracotta/5 blur-3xl pointer-events-none" />
+
+      {/* Desktop Horizontal Timeline Axis Layout */}
+      <div className="relative z-10 hidden lg:block w-full max-w-5xl mx-auto my-auto">
+        <motion.div
+          initial={{ scaleX: 0, opacity: 0 }}
+          whileInView={{ scaleX: 1, opacity: 1 }}
+          viewport={{ once: false }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute left-8 right-8 top-1/2 h-[3px] -translate-y-1/2 origin-left bg-gradient-to-r from-brand-navy via-brand-terracotta to-brand-navy shadow-[0_0_10px_rgba(162,59,42,0.3)]"
+        />
+
+        <div className="grid grid-cols-3 gap-8 relative">
+          {phases.map((item, index) => {
+            const isTop = index % 2 === 0;
+            const isActive = activeNode === index;
+            const delay = index * 0.2;
+
+            return (
+              <div
+                key={item.phase}
+                className="relative flex flex-col items-center group cursor-pointer"
+                onMouseEnter={() => setActiveNode(index)}
+              >
+                {/* TOP CALLOUT CARD */}
+                {isTop ? (
+                  <motion.div
+                    initial={{ opacity: 0, y: -30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false }}
+                    transition={{ duration: 0.6, delay }}
+                    className="absolute bottom-full mb-8 w-[280px] z-20 left-1/2 -translate-x-1/2"
+                  >
+                    <div className="absolute left-1/2 -bottom-8 h-8 w-[2px] -translate-x-1/2 bg-gradient-to-b from-brand-terracotta to-brand-navy" />
+                    <div className={`rounded-2xl border p-5 shadow-lg backdrop-blur-md transition-all duration-300 ${
+                      isActive ? "border-brand-terracotta bg-white shadow-xl -translate-y-1.5 ring-2 ring-brand-terracotta/20" : "border-slate-200 bg-white hover:border-brand-terracotta/60"
+                    }`}>
+                      <span className="inline-block rounded-full bg-brand-terracotta px-3 py-0.5 text-xs font-black text-white">
+                        {item.phase}
+                      </span>
+                      <h4 className="mt-2 text-base font-display font-bold text-slate-900">{item.title}</h4>
+                      <p className="mt-1.5 text-xs font-semibold leading-relaxed text-slate-600">{item.desc}</p>
+                    </div>
+                  </motion.div>
+                ) : null}
+
+                {/* CENTRAL AXIS NODE */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.3 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: false }}
+                  transition={{ duration: 0.5, delay: delay + 0.1 }}
+                  className="relative z-30 flex items-center justify-center"
+                >
+                  <div className={`flex h-12 w-12 items-center justify-center rounded-full border-2 transition-all duration-300 ${
+                    isActive ? "border-brand-terracotta bg-brand-terracotta text-white shadow-lg shadow-brand-terracotta/30 scale-125 ring-4 ring-brand-terracotta/20" : "border-brand-navy bg-brand-navy text-white hover:bg-brand-terracotta"
+                  }`}>
+                    <span className="text-xs font-black">0{index + 1}</span>
+                  </div>
+                </motion.div>
+
+                {/* BOTTOM CALLOUT CARD */}
+                {!isTop ? (
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false }}
+                    transition={{ duration: 0.6, delay }}
+                    className="absolute top-full mt-8 w-[280px] z-20 left-1/2 -translate-x-1/2"
+                  >
+                    <div className="absolute left-1/2 -top-8 h-8 w-[2px] -translate-x-1/2 bg-gradient-to-t from-brand-terracotta to-brand-navy" />
+                    <div className={`rounded-2xl border p-5 shadow-lg backdrop-blur-md transition-all duration-300 ${
+                      isActive ? "border-brand-terracotta bg-white shadow-xl translate-y-1.5 ring-2 ring-brand-terracotta/20" : "border-slate-200 bg-white hover:border-brand-terracotta/60"
+                    }`}>
+                      <span className="inline-block rounded-full bg-brand-navy px-3 py-0.5 text-xs font-black text-white">
+                        {item.phase}
+                      </span>
+                      <h4 className="mt-2 text-base font-display font-bold text-slate-900">{item.title}</h4>
+                      <p className="mt-1.5 text-xs font-semibold leading-relaxed text-slate-600">{item.desc}</p>
+                    </div>
+                  </motion.div>
+                ) : null}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Mobile Vertical Axis Layout */}
+      <div className="relative z-10 lg:hidden space-y-5 w-full">
+        <div className="absolute left-5 top-4 bottom-4 w-1 bg-gradient-to-b from-brand-navy via-brand-terracotta to-brand-navy rounded-full" />
+        {phases.map((item, index) => (
+          <motion.div
+            key={item.phase}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="relative flex items-start gap-4 pl-1"
+          >
+            <div className="relative z-20 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-brand-navy bg-brand-navy text-xs font-black text-white shadow-md">
+              0{index + 1}
+            </div>
+            <div className="flex-1 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+              <span className="inline-block rounded-full bg-brand-navy px-3 py-0.5 text-[10px] font-black text-white">
+                {item.phase}
+              </span>
+              <h4 className="mt-2 text-base font-bold text-slate-900">{item.title}</h4>
+              <p className="mt-1 text-xs font-semibold leading-relaxed text-slate-600">{item.desc}</p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
+// ----------------------------------------------------
+// SVG RIBBON FLOW COMPONENT (FOR HOW SOFTCLINCH WORKS)
+// ----------------------------------------------------
+function SvgRibbonFlow({ steps }: { steps: any[] }) {
+  return (
+    <div className="mx-auto max-w-5xl rounded-[3rem] bg-[#EBF3FB] p-6 sm:p-12 shadow-inner border border-blue-100/70">
+      <div className="-space-y-3 sm:-space-y-4 relative z-10">
+        {steps.map((item, index) => {
+          const isOdd = index % 2 === 0;
+          const Icon = item.icon;
+
+          return (
+            <motion.div
+              key={item.num}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false }}
+              transition={{ duration: 0.45, delay: index * 0.08 }}
+              className="relative z-10"
+            >
+              <div className="flex items-center gap-2 sm:gap-4">
+                {/* Floating Number Left (for Odd 01, 03, 05) */}
+                <div className={`w-12 sm:w-16 text-center shrink-0 ${isOdd ? "block" : "invisible"}`}>
+                  <span className="font-display text-3xl font-black text-brand-navy sm:text-4xl lg:text-5xl tracking-tight">
+                    {item.num}
+                  </span>
+                </div>
+
+                {/* SVG Ribbon Card */}
+                <div className="relative flex-1 group transition-transform duration-300 hover:scale-[1.01] hover:z-30">
+                  <svg
+                    viewBox="0 0 800 110"
+                    preserveAspectRatio="none"
+                    className="w-full h-auto min-h-[90px] sm:min-h-[100px] drop-shadow-[0_8px_16px_rgba(0,51,102,0.1)]"
+                  >
+                    <path
+                      d={
+                        isOdd
+                          ? "M 32 0 L 768 0 L 800 55 L 768 110 L 32 110 L 0 55 Z"
+                          : "M 32 0 L 800 0 L 768 55 L 800 110 L 32 110 L 0 55 Z"
+                      }
+                      fill="#FFFFFF"
+                      stroke="#003366"
+                      strokeWidth="2"
+                      vectorEffect="non-scaling-stroke"
+                    />
+                  </svg>
+
+                  {/* Inner Text Overlay */}
+                  <div className="absolute inset-0 px-8 sm:px-14 py-3 flex items-center">
+                    <div className="w-full flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3.5">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-navy/10 text-brand-navy">
+                          <Icon className="h-5 w-5" />
+                        </div>
+                        <div>
+                          <span className="text-[10px] font-black uppercase tracking-widest text-brand-terracotta">
+                            Step {item.num}
+                          </span>
+                          <h3 className="text-sm sm:text-lg font-display font-bold text-brand-navy">
+                            {item.title}
+                          </h3>
+                        </div>
+                      </div>
+
+                      <div className="max-w-md text-right hidden sm:block">
+                        <p className="text-xs font-semibold text-slate-600 leading-snug">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating Number Right (for Even 02, 04) */}
+                <div className={`w-12 sm:w-16 text-center shrink-0 ${!isOdd ? "block" : "invisible"}`}>
+                  <span className="font-display text-3xl font-black text-brand-navy sm:text-4xl lg:text-5xl tracking-tight">
+                    {item.num}
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ----------------------------------------------------
+// AUDIENCE ROADMAP TRACK COMPONENT (FOR WHO THIS IS FOR)
+// ----------------------------------------------------
+function AudienceRoadmapTrack({ items }: { items: any[] }) {
+  const inflectionIcons = [ShieldCheck, MessageSquareText, BarChart3, Workflow, CheckCircle2];
+
+  // 6 Stage horizontal percentages & x coordinates (0 to 1200 viewBox width)
+  const stages = [
+    { num: "001", xPct: 8.33, xPx: 100, isTop: true },
+    { num: "002", xPct: 25.0, xPx: 300, isTop: false },
+    { num: "003", xPct: 41.66, xPx: 500, isTop: true },
+    { num: "004", xPct: 58.33, xPx: 700, isTop: false },
+    { num: "005", xPct: 75.0, xPx: 900, isTop: true },
+    { num: "006", xPct: 91.66, xPx: 1100, isTop: false },
+  ];
+
+  const midNodes = [
+    { xPct: 16.66, xPx: 200, icon: inflectionIcons[0] },
+    { xPct: 33.33, xPx: 400, icon: inflectionIcons[1] },
+    { xPct: 50.0, xPx: 600, icon: inflectionIcons[2] },
+    { xPct: 66.66, xPx: 800, icon: inflectionIcons[3] },
+    { xPct: 83.33, xPx: 1000, icon: inflectionIcons[4] },
+  ];
+
+  return (
+    <div className="relative mx-auto max-w-[1360px] rounded-[3rem] border border-slate-200 bg-[#F3F7FA] p-4 sm:p-6 lg:p-8 shadow-xl overflow-hidden min-h-[760px] flex flex-col justify-center">
+      {/* Blueprint Grid Background Pattern */}
+      <div
+        className="absolute inset-0 opacity-40 pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(#CBD5E1 1px, transparent 1px), linear-gradient(90deg, #CBD5E1 1px, transparent 1px)`,
+          backgroundSize: "32px 32px",
+        }}
+      />
+      <div className="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-brand-navy/5 blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-brand-terracotta/5 blur-3xl pointer-events-none" />
+
+      {/* DESKTOP 3-ZONE SERPENTINE ROADWAY (lg screens) */}
+      <div className="relative z-10 hidden lg:block w-full h-[720px]">
+        
+        {/* ZONE 1: TOP CARDS ROW (Stages 001, 003, 005) */}
+        <div className="absolute top-2 inset-x-0 h-[225px] pointer-events-none">
+          {items.map((item, index) => {
+            const stageMeta = stages[index];
+            if (!stageMeta.isTop) return null;
+            const Icon = item.icon;
+
+            return (
+              <motion.div
+                key={`top-card-${item.num}`}
+                initial={{ opacity: 0, y: -20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.08 }}
+                className="absolute top-0 pointer-events-auto -translate-x-1/2"
+                style={{ left: `${stageMeta.xPct}%`, width: "285px" }}
+              >
+                <div className="group relative rounded-[1.8rem] border border-slate-200/90 bg-white p-4 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-brand-navy/40 hover:shadow-2xl">
+                  {/* Card Header: STAGE & Title */}
+                  <div className="flex items-center justify-between gap-1 mb-1.5">
+                    <span className="text-xs font-black uppercase tracking-widest text-brand-terracotta">
+                      STAGE {item.num}
+                    </span>
+                    <h3 className="text-sm font-extrabold font-display text-slate-900 truncate group-hover:text-brand-navy transition-colors">
+                      {item.stageTitle || item.label}
+                    </h3>
+                  </div>
+
+                  {/* Subtitle / Focus */}
+                  <p className="text-xs font-bold text-brand-navy leading-tight">
+                    {item.label}
+                  </p>
+                  <p className="mt-1 text-xs font-medium text-slate-600 leading-snug line-clamp-2">
+                    {item.desc}
+                  </p>
+
+                  {/* Inner Tinted Detail Box */}
+                  <div className="mt-2.5 rounded-xl border border-slate-200/70 bg-slate-50/95 p-2.5">
+                    <p className="text-xs font-medium text-slate-700 leading-relaxed">
+                      {item.detailBox}
+                    </p>
+                  </div>
+
+                  {/* Bottom Review Path Footer */}
+                  <div className="mt-2.5 flex items-center gap-2 text-xs font-bold text-slate-800 pt-2 border-t border-slate-100">
+                    <div className="flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+                      <CheckCircle2 className="h-3.5 w-3.5" />
+                    </div>
+                    <span className="truncate">{item.reviewPath || `${item.tag} review path`}</span>
+                  </div>
+                </div>
+
+                {/* Vertical Stem Line down to Road Node */}
+                <div className="w-0.5 h-6 mx-auto border-r-2 border-dashed border-emerald-500/70" />
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* ZONE 2: SERPENTINE SVG ROADWAY CANVAS */}
+        <div className="absolute top-[230px] inset-x-0 h-[240px] pointer-events-none">
+          <svg
+            viewBox="0 0 1200 240"
+            className="w-full h-full overflow-visible"
+            preserveAspectRatio="none"
+          >
+            <defs>
+              <filter id="roadGlow" x="-10%" y="-10%" width="120%" height="120%">
+                <feDropShadow dx="0" dy="6" stdDeviation="8" floodColor="#002244" floodOpacity="0.25" />
+              </filter>
+            </defs>
+
+            {/* Under-Road Shadow */}
+            <path
+              d="M 20 120 C 50 120, 70 30, 100 30 C 180 30, 220 210, 300 210 C 380 210, 420 30, 500 30 C 580 30, 620 210, 700 210 C 780 210, 820 30, 900 30 C 980 30, 1020 210, 1100 210 C 1140 210, 1170 120, 1180 120"
+              fill="none"
+              stroke="#001833"
+              strokeWidth="34"
+              opacity="0.1"
+              strokeLinecap="round"
+            />
+
+            {/* Main Dark Navy Road Track */}
+            <path
+              d="M 20 120 C 50 120, 70 30, 100 30 C 180 30, 220 210, 300 210 C 380 210, 420 30, 500 30 C 580 30, 620 210, 700 210 C 780 210, 820 30, 900 30 C 980 30, 1020 210, 1100 210 C 1140 210, 1170 120, 1180 120"
+              fill="none"
+              stroke="#0B192C"
+              strokeWidth="26"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              filter="url(#roadGlow)"
+            />
+
+            {/* Center White Dashed Lane Line */}
+            <path
+              d="M 20 120 C 50 120, 70 30, 100 30 C 180 30, 220 210, 300 210 C 380 210, 420 30, 500 30 C 580 30, 620 210, 700 210 C 780 210, 820 30, 900 30 C 980 30, 1020 210, 1100 210 C 1140 210, 1170 120, 1180 120"
+              fill="none"
+              stroke="#FFFFFF"
+              strokeWidth="3.5"
+              strokeDasharray="14 10"
+              strokeLinecap="round"
+            />
+          </svg>
+
+          {/* Intermediate Inflection Nodes */}
+          {midNodes.map((node, i) => {
+            const NodeIcon = node.icon;
+            return (
+              <div
+                key={`mid-node-${i}`}
+                className="absolute z-20 -translate-x-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full border-2 border-emerald-400 bg-white text-emerald-600 shadow-[0_0_15px_rgba(16,185,129,0.45)]"
+                style={{ left: `${node.xPct}%`, top: "50%" }}
+              >
+                <NodeIcon className="h-4 w-4" />
+              </div>
+            );
+          })}
+
+          {/* 6 Green Glowing Stage Nodes on the Road */}
+          {items.map((item, index) => {
+            const stageMeta = stages[index];
+            const Icon = item.icon;
+            const nodeYPct = stageMeta.isTop ? "12.5%" : "87.5%"; // 30px or 210px in 240px height
+
+            return (
+              <motion.div
+                key={`stage-node-${item.num}`}
+                initial={{ scale: 0, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.08 }}
+                className="absolute z-30 -translate-x-1/2 -translate-y-1/2 pointer-events-auto cursor-pointer"
+                style={{ left: `${stageMeta.xPct}%`, top: nodeYPct }}
+              >
+                <div className="group relative flex h-12 w-12 items-center justify-center rounded-full border-3 border-emerald-500 bg-white text-emerald-600 shadow-[0_0_20px_rgba(16,185,129,0.6)] transition-all duration-300 hover:scale-125 ring-4 ring-emerald-400/20">
+                  <Icon className="h-5 w-5" />
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* ZONE 3: BOTTOM CARDS ROW (Stages 002, 004, 006) */}
+        <div className="absolute top-[470px] inset-x-0 h-[245px] pointer-events-none">
+          {items.map((item, index) => {
+            const stageMeta = stages[index];
+            if (stageMeta.isTop) return null;
+
+            return (
+              <motion.div
+                key={`bottom-card-${item.num}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.08 }}
+                className="absolute top-0 pointer-events-auto -translate-x-1/2"
+                style={{ left: `${stageMeta.xPct}%`, width: "285px" }}
+              >
+                {/* Vertical Stem Line up to Road Node */}
+                <div className="w-0.5 h-6 mx-auto border-r-2 border-dashed border-emerald-500/70" />
+
+                <div className="group relative rounded-[1.8rem] border border-slate-200/90 bg-white p-4 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-brand-navy/40 hover:shadow-2xl">
+                  {/* Card Header: STAGE & Title */}
+                  <div className="flex items-center justify-between gap-1 mb-1.5">
+                    <span className="text-xs font-black uppercase tracking-widest text-brand-terracotta">
+                      STAGE {item.num}
+                    </span>
+                    <h3 className="text-sm font-extrabold font-display text-slate-900 truncate group-hover:text-brand-navy transition-colors">
+                      {item.stageTitle || item.label}
+                    </h3>
+                  </div>
+
+                  {/* Subtitle / Focus */}
+                  <p className="text-xs font-bold text-brand-navy leading-tight">
+                    {item.label}
+                  </p>
+                  <p className="mt-1 text-xs font-medium text-slate-600 leading-snug line-clamp-2">
+                    {item.desc}
+                  </p>
+
+                  {/* Inner Tinted Detail Box */}
+                  <div className="mt-2.5 rounded-xl border border-slate-200/70 bg-slate-50/95 p-2.5">
+                    <p className="text-xs font-medium text-slate-700 leading-relaxed">
+                      {item.detailBox}
+                    </p>
+                  </div>
+
+                  {/* Bottom Review Path Footer */}
+                  <div className="mt-2.5 flex items-center gap-2 text-xs font-bold text-slate-800 pt-2 border-t border-slate-100">
+                    <div className="flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+                      <CheckCircle2 className="h-3.5 w-3.5" />
+                    </div>
+                    <span className="truncate">{item.reviewPath || `${item.tag} review path`}</span>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+      </div>
+
+      {/* MOBILE VERTICAL SERPENTINE ROADWAY (sm & md screens) */}
+      <div className="relative z-10 lg:hidden space-y-6 w-full py-4">
+        {/* Mobile Vertical Road Line */}
+        <div className="absolute left-6 top-4 bottom-4 w-2 rounded-full bg-[#0B192C] shadow-inner" />
+        <div className="absolute left-6 top-4 bottom-4 w-0.5 -translate-x-1/2 rounded-full border-r border-dashed border-white/80" />
+
+        {items.map((item, index) => {
+          const Icon = item.icon;
+          return (
+            <motion.div
+              key={item.num}
+              initial={{ opacity: 0, x: -15 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.08 }}
+              className="relative flex items-start gap-4 pl-2"
+            >
+              {/* Glowing Green Node Icon */}
+              <div className="relative z-20 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-emerald-500 bg-white text-emerald-600 shadow-[0_0_15px_rgba(16,185,129,0.5)]">
+                <Icon className="h-4 w-4" />
+              </div>
+
+              {/* Mobile Card Box */}
+              <div className="flex-1 rounded-2xl border border-slate-200 bg-white p-4.5 shadow-sm">
+                <div className="flex items-center justify-between gap-2 mb-1.5">
+                  <span className="text-xs font-black uppercase tracking-wider text-brand-terracotta">
+                    STAGE {item.num}
+                  </span>
+                  <span className="rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-emerald-800">
+                    {item.tag}
+                  </span>
+                </div>
+                <h4 className="text-base font-bold font-display text-slate-900">{item.stageTitle || item.label}</h4>
+                <p className="mt-0.5 text-xs font-bold text-brand-navy">{item.label}</p>
+                <p className="mt-1 text-xs font-medium text-slate-600 leading-snug">{item.desc}</p>
+
+                <div className="mt-3 rounded-xl border border-slate-200/70 bg-slate-50 p-3 text-xs font-medium text-slate-700 leading-relaxed">
+                  {item.detailBox}
+                </div>
+
+                <div className="mt-3 flex items-center gap-2 text-xs font-bold text-slate-800 pt-2 border-t border-slate-100">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
+                  <span>{item.reviewPath || `${item.tag} review path`}</span>
+                </div>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 export function CommerceEnablement() {
+  const [activeTab, setActiveTab] = useState<number>(2); // Default to Pillar 03
+
+  // Section 2: Problem Items (With Distinct Color Accents & Badges)
+  const stopGrowingProblems = [
+    {
+      id: "01",
+      title: "Website Visitors Are Not Becoming Customers",
+      icon: ShoppingCart,
+      badge: "Conversion Gap",
+      accentBg: "bg-brand-terracotta/10 text-brand-terracotta border-brand-terracotta/20",
+      badgeColor: "bg-brand-terracotta/15 text-brand-terracotta border-brand-terracotta/30",
+      issues: [
+        "Poor user experience",
+        "Weak product pages",
+        "Slow website",
+        "Checkout friction",
+        "Missing trust signals",
+      ],
+    },
+    {
+      id: "02",
+      title: "Customers Cannot Find Your Products",
+      icon: SearchX,
+      badge: "Visibility Gap",
+      accentBg: "bg-amber-500/10 text-amber-700 border-amber-200",
+      badgeColor: "bg-amber-100 text-amber-900 border-amber-300",
+      issues: [
+        "Poor product catalogue structure",
+        "SEO gaps",
+        "Google Merchant Center problems",
+        "Incorrect product feeds",
+        "Weak search visibility",
+      ],
+    },
+    {
+      id: "03",
+      title: "Advertising Costs Increase But Results Are Unclear",
+      icon: TrendingDown,
+      badge: "Attribution Gap",
+      accentBg: "bg-purple-500/10 text-purple-700 border-purple-200",
+      badgeColor: "bg-purple-100 text-purple-900 border-purple-300",
+      issues: [
+        "Incorrect tracking",
+        "Weak conversion setup",
+        "Poor audience targeting",
+        "No customer behaviour insights",
+      ],
+    },
+    {
+      id: "04",
+      title: "Customer Communication Is Creating Lost Opportunities",
+      icon: MessageSquareOff,
+      badge: "Communication Gap",
+      accentBg: "bg-blue-500/10 text-blue-700 border-blue-200",
+      badgeColor: "bg-blue-100 text-blue-900 border-blue-300",
+      issues: [
+        "Slow responses",
+        "Manual follow-ups",
+        "No abandoned cart recovery",
+        "No customer segmentation",
+      ],
+    },
+    {
+      id: "05",
+      title: "Operations Become Difficult While Scaling",
+      icon: Link2Off,
+      badge: "Operational Gap",
+      accentBg: "bg-emerald-500/10 text-emerald-700 border-emerald-200",
+      badgeColor: "bg-emerald-100 text-emerald-900 border-emerald-300",
+      issues: [
+        "Manual processes",
+        "Disconnected tools",
+        "No SOPs",
+        "Poor reporting visibility",
+      ],
+    },
+  ];
+
+  // Section 3: Framework Pillars
+  const frameworkPillars = [
+    {
+      id: "01",
+      name: "Market, Customer & Competitive Positioning",
+      shortName: "Market Positioning",
+      question: "Are You Targeting The Right Customers With The Right Offer?",
+      icon: Target,
+      analyse: [
+        "Customer segments",
+        "Competitor positioning",
+        "Product offers",
+        "Pricing approach",
+        "Customer reviews",
+        "Market opportunities",
+        "Brand messaging",
+      ],
+      output: "Market Opportunity Map",
+    },
+    {
+      id: "02",
+      name: "Ecommerce Platform Readiness",
+      shortName: "Platform Readiness",
+      question: "Is Your Technology Foundation Ready?",
+      icon: Store,
+      platforms: ["Shopify", "WooCommerce", "Adobe Commerce", "Magento", "Custom Ecommerce"],
+      review: [
+        "Website performance",
+        "Theme architecture",
+        "Plugins/apps",
+        "Checkout experience",
+        "Payment flow",
+        "Scalability",
+      ],
+      output: "Platform Readiness Report",
+    },
+    {
+      id: "03",
+      name: "Customer Experience & Conversion",
+      shortName: "CX & Conversion",
+      question: "Where Are Customers Dropping Before Purchase?",
+      icon: MousePointerClick,
+      journeySteps: [
+        { name: "Discovery", icon: Search, desc: "Search & Landing" },
+        { name: "Product", icon: Eye, desc: "Product Pages" },
+        { name: "Cart", icon: ShoppingCart, desc: "Cart Building" },
+        { name: "Checkout", icon: MousePointerClick, desc: "Checkout Flow" },
+        { name: "Payment", icon: CreditCard, desc: "Payment Gateway" },
+        { name: "Delivery", icon: Truck, desc: "Fulfillment" },
+        { name: "Repeat Purchase", icon: RefreshCw, desc: "Retention" },
+      ],
+      review: [
+        "Navigation",
+        "Mobile experience",
+        "Product pages",
+        "Checkout journey",
+        "Trust elements",
+      ],
+      output: "Conversion Improvement Roadmap",
+    },
+    {
+      id: "04",
+      name: "Product Experience & Commerce Visibility",
+      shortName: "Product Visibility",
+      question: "Can Customers Discover And Understand Your Products?",
+      icon: ShoppingBag,
+      review: [
+        "Product catalogue",
+        "Product titles",
+        "Descriptions",
+        "Images",
+        "Categories",
+        "Variants",
+        "Inventory information",
+      ],
+      channels: ["Google Merchant Center", "Meta Commerce", "Marketplace readiness"],
+      output: "Product Visibility Report",
+    },
+    {
+      id: "05",
+      name: "Marketing & Analytics Intelligence",
+      shortName: "Marketing & Analytics",
+      question: "Understand What Is Driving Business Results",
+      icon: BarChart3,
+      groups: [
+        {
+          heading: "Google Ads",
+          items: ["Search campaigns", "Shopping campaigns", "Conversion tracking"],
+        },
+        {
+          heading: "Meta Ads",
+          items: ["Audience structure", "Retargeting", "Commerce integration"],
+        },
+        {
+          heading: "Analytics",
+          items: ["GA4", "Google Tag Manager", "Meta Pixel", "Attribution"],
+        },
+      ],
+      output: "Marketing Measurement Framework",
+    },
+    {
+      id: "06",
+      name: "Customer Communication Automation",
+      shortName: "Communication (Inaiwazhi™)",
+      subtitle: "Powered By Inaiwazhi™ — Turn Customer Conversations Into Commerce Opportunities",
+      question: "Customers interact before and after purchase. Inaiwazhi helps businesses automate communication workflows.",
+      icon: MessageSquareText,
+      isInaiwazhi: true,
+      workflows: [
+        {
+          title: "Before Purchase",
+          items: ["Product enquiries", "Availability questions", "Recommendations", "Customer support"],
+        },
+        {
+          title: "During Purchase",
+          items: ["Cart reminders", "Purchase confirmation", "Customer updates"],
+        },
+        {
+          title: "After Purchase",
+          items: ["Order confirmation", "Shipping updates", "Delivery notifications", "Feedback requests"],
+        },
+        {
+          title: "Customer Engagement",
+          items: [
+            "Bulk campaigns",
+            "Customer segmentation",
+            "Promotional communication",
+            "Repeat purchase campaigns",
+            "Order updates (confirmation, status, customer chat)",
+          ],
+        },
+        {
+          title: "AI Customer Support",
+          items: ["FAQs", "Product questions", "Order information"],
+        },
+      ],
+      output: "Automated Communication Engine",
+    },
+    {
+      id: "07",
+      name: "Operations, AI & Automation",
+      shortName: "Operations & AI",
+      question: "Build A Commerce System That Works Efficiently",
+      icon: Cpu,
+      identify: [
+        "Workflow automation",
+        "AI implementation",
+        "SOP creation",
+        "Team processes",
+        "Internal efficiency",
+      ],
+      output: "Operational Optimization Playbook",
+    },
+  ];
+
+  // Section 4: Blueprint Items
+  const blueprintComponents = [
+    {
+      title: "Commerce Maturity Score",
+      desc: "Understand your current ecommerce readiness with a benchmark audit.",
+      icon: Target,
+    },
+    {
+      title: "Business Gap Analysis",
+      desc: "Identify critical issues, growth blockers, and key improvement opportunities across your stack.",
+      icon: Layers,
+    },
+    {
+      title: "Technology Recommendations",
+      desc: "Understand required tools, integrations, and automation opportunities tailored to your platform.",
+      icon: Cpu,
+    },
+  ];
+
+  const roadmapPhases = [
+    {
+      phase: "Days 0–30",
+      title: "Fix Foundation Issues",
+      desc: "Audit, resolve critical platform & tracking gaps, catalog alignment, and initial readiness fixes.",
+    },
+    {
+      phase: "Days 31–60",
+      title: "Improve Customer Experience",
+      desc: "Optimize conversion pathways, product discoverability, and initial communication workflows.",
+    },
+    {
+      phase: "Days 61–90",
+      title: "Implement Automation & Optimization",
+      desc: "Deploy Inaiwazhi communication automation, AI workflows, SOP handovers, and continuous measurement.",
+    },
+  ];
+
+  // Section 5: How SoftClinch Works
+  const softClinchSteps = [
+    {
+      num: "01",
+      title: "Discovery",
+      desc: "Understand your business model, customers, technology, and challenges.",
+      icon: Compass,
+    },
+    {
+      num: "02",
+      title: "Commerce Assessment",
+      desc: "Review your complete ecommerce ecosystem across technology, marketing, and operations.",
+      icon: SearchCheck,
+    },
+    {
+      num: "03",
+      title: "Growth Blueprint",
+      desc: "Create your prioritized 90-day improvement plan and maturity score.",
+      icon: Layers,
+    },
+    {
+      num: "04",
+      title: "Implementation",
+      desc: "Execute approved improvements across platform, feeds, workflows, and automation.",
+      icon: Settings2,
+    },
+    {
+      num: "05",
+      title: "Training & Handover",
+      desc: "Enable your team with documentation, SOPs, and structured operational processes.",
+      icon: UserCheck,
+    },
+  ];
+
+  // Section 6: Why SoftClinch Connected Pillars
+  const connectedPillars = [
+    "Ecommerce Technology",
+    "Customer Experience",
+    "Product Systems",
+    "Marketing Channels",
+    "Communication Automation",
+    "Analytics",
+    "Operations",
+  ];
+
+  // Section 7: Who This Is For (Target Audience Roadmap Track)
+  const targetAudience = [
+    {
+      num: "001",
+      stageTitle: "Discoverability",
+      label: "D2C Brands",
+      desc: "Product information, catalog structure, and search readiness",
+      detailBox: "Review product data and organize the operating inputs needed for clearer ecommerce discovery.",
+      reviewPath: "Discoverability review path",
+      icon: ShoppingBag,
+      tag: "Brand Scaling",
+    },
+    {
+      num: "002",
+      stageTitle: "Commerce Readiness",
+      label: "Retail Businesses",
+      desc: "Merchant Center, Meta Commerce, catalogs, feeds, and commerce assets",
+      detailBox: "Prepare commerce channels before ongoing execution and team ownership.",
+      reviewPath: "Commerce channel readiness",
+      icon: Store,
+      tag: "Omnichannel Growth",
+    },
+    {
+      num: "003",
+      stageTitle: "Customer Communication",
+      label: "Manufacturers Selling Online",
+      desc: "WhatsApp commerce, support, broadcasts, follow-ups, and segmentation",
+      detailBox: "Connect communication workflows through Inaiwazhi where they are part of the implementation scope.",
+      reviewPath: "Communication workflow model",
+      icon: Cpu,
+      tag: "Direct Sales Modernization",
+    },
+    {
+      num: "004",
+      stageTitle: "Analytics",
+      label: "Shopify Businesses",
+      desc: "Readiness tracking, workflow status, and operational progress",
+      detailBox: "Create analytics foundations that help teams review implementation status and operating movement.",
+      reviewPath: "Analytics measurement framework",
+      icon: Zap,
+      tag: "Platform & Catalog Optimization",
+    },
+    {
+      num: "005",
+      stageTitle: "Operations",
+      label: "WooCommerce Businesses",
+      desc: "SOPs, workflows, testing, training, and handover practices",
+      detailBox: "Document and train the operating model so internal teams can run it with clarity.",
+      reviewPath: "Operational independence",
+      icon: Workflow,
+      tag: "Custom System Integration",
+    },
+    {
+      num: "006",
+      stageTitle: "Systemic Scaling",
+      label: "Growing Ecommerce Companies",
+      desc: "End-to-end connected growth across marketing, systems & team execution",
+      detailBox: "Scale operating models across technology, marketing, and operations for sustainable expansion.",
+      reviewPath: "Scale execution framework",
+      icon: TrendingUp,
+      tag: "Systemic Scaling",
+    },
+  ];
+
   return (
     <div className="overflow-hidden bg-[#F8FAFC] text-slate-900">
+      {/* HERO SECTION */}
       <section className="relative overflow-hidden border-b border-slate-200/60 bg-white">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(0,51,102,0.08),_transparent_40%),radial-gradient(circle_at_80%_20%,_rgba(162,59,42,0.08),_transparent_28%),linear-gradient(180deg,_#ffffff_0%,_#f8fafc_100%)]" />
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-navy/30 to-transparent" />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
-          <div className="mt-4 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-            <motion.div initial="hidden" animate="visible" variants={reveal} transition={{ duration: 0.45 }}>
-              <div className="mb-6 inline-flex items-center rounded-full border border-brand-navy/10 bg-white/85 px-4 py-2 text-xs font-semibold text-brand-navy shadow-sm backdrop-blur sm:text-sm">
-                Commerce Enablement Consulting
-              </div>
-              <h1 className="max-w-5xl text-4xl font-display font-bold leading-tight tracking-tight text-slate-955 md:text-5xl lg:text-6xl">
-                Transform Your Ecommerce Operations With A Structured Commerce Enablement Program
-              </h1>
-              <p className="mt-6 max-w-4xl text-base font-medium leading-relaxed text-slate-600 sm:text-lg">
-                SoftClinch helps ecommerce businesses prepare commerce channels, communication workflows, analytics foundations, SOPs, and operational handover through a structured consulting and implementation program.
-              </p>
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+          <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+            {/* ANIMATED HERO CONTENT COLUMN */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.1,
+                    delayChildren: 0.05,
+                  },
+                },
+              }}
+            >
+              {/* Animated Top Badge */}
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 15 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+                }}
+                className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-terracotta/25 bg-brand-terracotta/5 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-brand-terracotta shadow-xs"
+              >
+                <Sparkles className="h-4 w-4 animate-pulse text-brand-terracotta" />
+                <span>Commerce Enablement Framework™</span>
+              </motion.div>
 
-              <div className="mt-8 flex flex-wrap gap-4">
+              {/* SMOOTH ANIMATED HEADLINE WITH TERRACOTTA HIGHLIGHT */}
+              <motion.h1
+                variants={{
+                  hidden: { opacity: 0, y: 25 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] } },
+                }}
+                className="max-w-4xl text-4xl font-display font-bold leading-[1.15] tracking-tight text-slate-955 sm:text-5xl lg:text-6xl"
+              >
+                Find And{" "}
+                <span className="bg-gradient-to-r from-brand-terracotta to-[#C24E3A] bg-clip-text text-transparent underline decoration-brand-terracotta/30 underline-offset-8">
+                  Fix The Gaps
+                </span>{" "}
+                Blocking Your Ecommerce Growth
+              </motion.h1>
+
+              {/* SMOOTH ANIMATED SUBTITLE */}
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+                }}
+                className="mt-6 space-y-3 max-w-3xl text-base font-medium leading-relaxed text-slate-600 sm:text-lg"
+              >
+                <p>
+                  <strong className="text-slate-900">Your ecommerce store is live.</strong> But your growth depends on more than your website.
+                </p>
+                <p>
+                  SoftClinch analyzes the connected systems behind your ecommerce business — platform, products, customer experience, marketing, communication, analytics, and operations — and creates a prioritized roadmap to improve performance.
+                </p>
+              </motion.div>
+
+              {/* ANIMATED SUPPORTED PLATFORMS BADGE */}
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 15 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+                }}
+                className="mt-6 inline-flex flex-wrap items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-xs font-bold text-slate-700 sm:text-sm"
+              >
+                <span className="text-brand-navy">Supported Ecosystems:</span>
+                <span className="text-slate-500 font-semibold">For Shopify | WooCommerce | Adobe Commerce | Magento | Custom Ecommerce</span>
+              </motion.div>
+
+              {/* ANIMATED BUTTON ACTION ROW */}
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+                }}
+                className="mt-8 flex flex-wrap items-center gap-4"
+              >
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-brand-navy px-8 py-4 font-bold text-white shadow-lg shadow-brand-navy/20 transition hover:-translate-y-0.5 hover:bg-brand-navy/90"
+                  className="group relative inline-flex items-center justify-center gap-2.5 rounded-2xl bg-brand-navy px-8 py-4 font-bold text-white shadow-xl shadow-brand-navy/20 transition-all hover:-translate-y-1 hover:bg-brand-navy/90 hover:shadow-2xl"
                 >
-                  <span>Book a Discovery Consultation</span>
-                  <ArrowRight className="h-5 w-5" />
+                  <span>Book Your Commerce Assessment</span>
+                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
                 <a
-                  href="#program-overview"
-                  className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-8 py-4 font-bold text-slate-700 transition hover:-translate-y-0.5 hover:border-brand-terracotta hover:text-brand-terracotta"
+                  href="#framework-dashboard"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-7 py-4 font-bold text-slate-700 shadow-xs transition-all hover:-translate-y-0.5 hover:border-brand-terracotta hover:text-brand-terracotta"
                 >
-                  View Program Overview
+                  <span>Explore 7 Pillars</span>
+                  <ChevronRight className="h-4 w-4" />
                 </a>
-              </div>
+              </motion.div>
 
-              <div className="mt-10 grid gap-4 sm:grid-cols-2">
-                {trustItems.map((item) => (
-                  <div key={item} className="flex items-center gap-3">
-                    <CheckCircle2 className="h-5 w-5 shrink-0 text-brand-terracotta" />
-                    <span className="text-xs font-semibold text-slate-700 sm:text-sm">{item}</span>
+              {/* ANIMATED SUPPORTING TRUST POINTS */}
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+                }}
+                className="mt-10 grid gap-3.5 sm:grid-cols-2"
+              >
+                {[
+                  "Complete ecommerce ecosystem review",
+                  "Platform and system performance assessment",
+                  "Customer communication automation strategy",
+                  "Actionable 90-day improvement roadmap",
+                ].map((point) => (
+                  <div key={point} className="flex items-center gap-3">
+                    <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
+                      <CheckCircle2 className="h-4 w-4" />
+                    </div>
+                    <span className="text-xs font-bold text-slate-800 sm:text-sm">{point}</span>
                   </div>
                 ))}
-              </div>
+              </motion.div>
             </motion.div>
 
-            <ServiceMediaPanel
-              title="Commerce Operations System"
-              subtitle="A structured operating model for readiness, communication, analytics, workflows, SOPs, and team handover."
-              imageSrc="/enterprise_hero_illustration.png"
-              imageAlt="Commerce enablement operations preview"
-              theme="light"
-              points={["Audit-led implementation", "Communication workflows", "Operational handover"]}
-            />
+            {/* ANIMATED MEDIA PANEL RIGHT COLUMN */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <ServiceMediaPanel
+                title="Connected Commerce System"
+                subtitle="Platform, Products, CX, Marketing, Communication, Analytics, and Operations synchronized into one growth engine."
+                imageSrc="/enterprise_hero_illustration.png"
+                imageAlt="Commerce enablement system preview"
+                theme="light"
+                points={[
+                  "Full Ecosystem Assessment",
+                  "Inaiwazhi™ Automation",
+                  "90-Day Priority Roadmap",
+                ]}
+              />
+            </motion.div>
           </div>
         </div>
       </section>
 
       <ClientLogos />
 
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.18 }}
-        transition={{ staggerChildren: 0.06 }}
-        className="mx-auto max-w-7xl border-t border-slate-200/80 px-4 py-24 sm:px-6 lg:px-8"
-      >
+      {/* SECTION 2: Why Ecommerce Businesses Stop Growing (SYSTEM DISCONNECTION DIAGNOSTIC HUB) */}
+      <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="The Business Problem"
-          title="Ecommerce Operations Need More Than Disconnected Fixes"
-          description="The program addresses recurring operational gaps that make commerce execution harder to manage across channels, teams, and customer communication."
+          title="Why Ecommerce Businesses Stop Growing"
+          description="Your Problem Is Usually Not One Tool. It Is The Connection Between Systems."
         />
-        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-          {businessProblems.map((item) => (
-            <PremiumCard key={item.title}>
-              <item.icon className="h-8 w-8 text-brand-terracotta transition-colors group-hover:text-brand-navy" />
-              <h3 className="mt-5 text-xl font-display font-bold text-slate-955 transition-colors group-hover:text-brand-terracotta">
-                {item.title}
-              </h3>
-              <p className="mt-4 text-sm font-semibold leading-relaxed text-slate-500">
-                {item.description}
-              </p>
-            </PremiumCard>
-          ))}
-        </div>
-      </motion.section>
 
-      <motion.section
-        id="program-overview"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.18 }}
-        transition={{ staggerChildren: 0.08 }}
-        className="mx-auto max-w-7xl border-t border-slate-200/80 px-4 py-24 sm:px-6 lg:px-8"
-      >
-        <SectionHeading
-          eyebrow="Commerce Enablement Solution"
-          title="A Flow Table For Ecommerce Operating Clarity"
-          description="SoftClinch brings the core commerce workstreams together as a reviewable flow from inputs to enablement and handover."
-        />
-        <FlowTable />
-      </motion.section>
-
-      <section className="mx-auto max-w-7xl border-t border-slate-200/80 px-4 py-24 sm:px-6 lg:px-8">
-        <SectionHeading
-          eyebrow="Why SoftClinch"
-          title="Commerce Enablement, Not Campaign-Only Execution"
-          description="The program is designed for businesses that need readiness, implementation, training, documentation, and operational control."
-        />
-        <div className="overflow-hidden rounded-[2.5rem] border border-slate-200 bg-white shadow-sm">
-          <div className="grid border-b border-slate-200 bg-slate-50 text-sm font-black uppercase tracking-[0.16em] text-slate-500 md:grid-cols-2">
-            <div className="border-b border-slate-200 px-6 py-5 md:border-b-0 md:border-r">Traditional Agencies</div>
-            <div className="px-6 py-5 text-brand-terracotta">SoftClinch Commerce Enablement</div>
-          </div>
-          {comparisonRows.map((row) => (
-            <div key={row.softclinch} className="grid border-b border-slate-100 last:border-b-0 md:grid-cols-2">
-              <div className="border-b border-slate-100 px-6 py-6 text-sm font-semibold leading-relaxed text-slate-500 md:border-b-0 md:border-r">
-                {row.traditional}
-              </div>
-              <div className="px-6 py-6 text-sm font-semibold leading-relaxed text-slate-700">
-                <CheckCircle2 className="mr-3 inline h-5 w-5 text-brand-terracotta" />
-                {row.softclinch}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.18 }}
-        transition={{ staggerChildren: 0.07 }}
-        className="mx-auto max-w-7xl border-t border-slate-200/80 px-4 py-24 sm:px-6 lg:px-8"
-      >
-        <SectionHeading
-          eyebrow="Engagement Journey"
-          title="Roadmap From Discovery To Operational Handover"
-          description="Each phase moves the program forward with a clear sequence, so the team can see what happens first, next, and at handover."
-        />
-        <RoadmapFlow />
-      </motion.section>
-
-      <section className="mx-auto max-w-7xl border-t border-slate-200/80 px-4 py-24 sm:px-6 lg:px-8">
-        <SectionHeading
-          eyebrow="Success Metrics"
-          title="Readiness Indicators That Support Operational Confidence"
-          description="The program measures implementation readiness and handover completion without promising revenue, rankings, sales, or ROAS."
-        />
-        <ReadinessMetricsFlow />
-      </section>
-
-      <section className="mx-auto max-w-7xl border-t border-slate-200/80 px-4 py-24 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden rounded-[3rem] bg-brand-navy p-8 text-white shadow-2xl sm:p-10 lg:p-14">
-          <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-white/5 blur-[120px]" />
-          <div className="absolute bottom-0 left-0 h-80 w-80 rounded-full bg-[#A23B2A]/20 blur-[100px]" />
-          <div className="relative grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        {/* SYSTEM DISCONNECTION FEATURE BANNER */}
+        <div className="mb-12 overflow-hidden rounded-[2.5rem] bg-gradient-to-r from-brand-navy via-slate-900 to-brand-navy p-8 sm:p-12 text-white shadow-xl border border-slate-800 relative">
+          <div className="absolute -right-16 -top-16 h-80 w-80 rounded-full bg-brand-terracotta/20 blur-3xl pointer-events-none" />
+          
+          <div className="relative z-10 grid gap-8 lg:grid-cols-2 lg:items-center">
             <div>
-              <span className="text-xs font-black uppercase tracking-[0.2em] text-[#A23B2A]">
-                Inaiwazhi Integration
+              <span className="inline-flex items-center gap-2 rounded-full bg-brand-terracotta/25 px-3.5 py-1 text-xs font-black uppercase tracking-widest text-orange-200 border border-brand-terracotta/40 mb-3">
+                <AlertTriangle className="h-3.5 w-3.5" />
+                Root Cause Analysis
               </span>
-              <h2 className="mt-4 text-3xl font-display font-bold leading-tight sm:text-4xl lg:text-5xl">
-                Communication Workflows Included In The Implementation
-              </h2>
-              <p className="mt-6 text-base leading-relaxed text-slate-200 sm:text-lg">
-                Inaiwazhi powers the communication layer where WhatsApp commerce, customer communication, broadcasts, follow-ups, support, segmentation, and automation are part of the commerce enablement scope.
+              <h3 className="text-2xl sm:text-3xl font-display font-bold text-white leading-tight">
+                Single tools don&apos;t fix broken system connections.
+              </h3>
+              <p className="mt-3 text-sm font-semibold text-slate-300 leading-relaxed">
+                Most ecommerce stores hit growth ceilings because traffic, catalogue, ads, communication, and operations act as isolated silos. SoftClinch diagnoses and connects all 5 critical gap areas.
               </p>
             </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {inaiwazhiCapabilities.map((item) => (
-                <div key={item} className="rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-sm font-semibold text-white/90">
-                  <MessageSquareText className="mb-3 h-5 w-5 text-brand-terracotta" />
-                  {item}
-                </div>
+
+            <div className="flex flex-wrap gap-2.5 justify-start lg:justify-end">
+              {stopGrowingProblems.map((prob) => (
+                <span key={prob.id} className="rounded-xl border border-white/15 bg-white/10 px-3.5 py-2 text-xs font-bold text-white backdrop-blur-md flex items-center gap-2 shadow-xs">
+                  <span className="h-2 w-2 rounded-full bg-brand-terracotta" />
+                  <span>{prob.badge}</span>
+                </span>
               ))}
             </div>
           </div>
+        </div>
+
+        {/* 5 PROBLEM DIAGNOSTIC CARDS GRID */}
+        {/* Top Row: 3 Cards */}
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-6">
+          {stopGrowingProblems.slice(0, 3).map((problem, idx) => {
+            const Icon = problem.icon;
+            const isFeatured = idx === 0;
+
+            return (
+              <motion.div
+                key={problem.id}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.15 }}
+                variants={reveal}
+                transition={{ duration: 0.4, delay: idx * 0.08 }}
+                className={`group relative flex flex-col justify-between overflow-hidden rounded-[2.5rem] border p-8 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl ${
+                  isFeatured
+                    ? "md:col-span-2 lg:col-span-1 border-brand-terracotta/30 bg-gradient-to-b from-brand-terracotta/5 via-white to-white hover:border-brand-terracotta/60"
+                    : "border-slate-200 bg-white hover:border-brand-navy/30"
+                }`}
+              >
+                <div>
+                  {/* Top Bar with Icon & Badge */}
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
+                    <div className={`flex h-12 w-12 items-center justify-center rounded-2xl transition-colors ${
+                      isFeatured ? "bg-brand-terracotta text-white shadow-md shadow-brand-terracotta/20" : "bg-slate-100 text-brand-navy group-hover:bg-brand-navy group-hover:text-white"
+                    }`}>
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <span className={`rounded-full border px-3 py-1 text-[11px] font-black uppercase tracking-wider ${problem.badgeColor}`}>
+                      {problem.badge}
+                    </span>
+                  </div>
+
+                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                    Gap 0{idx + 1}
+                  </span>
+
+                  <h3 className="mt-1 text-xl font-display font-bold leading-snug text-slate-955 group-hover:text-brand-navy transition-colors">
+                    {problem.title}
+                  </h3>
+
+                  <p className="mt-4 text-[11px] font-black uppercase tracking-wider text-slate-400 border-b border-slate-100 pb-2">
+                    Common Friction Points:
+                  </p>
+
+                  <ul className="mt-3 space-y-2">
+                    {problem.issues.map((issue) => (
+                      <li key={issue} className="flex items-start gap-2 text-xs font-semibold text-slate-700">
+                        <XCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-terracotta/90" />
+                        <span>{issue}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Bottom Row: 2 Cards Centered */}
+        <div className="flex flex-col md:flex-row justify-center gap-6">
+          {stopGrowingProblems.slice(3, 5).map((problem, idx) => {
+            const Icon = problem.icon;
+            const realIdx = idx + 3;
+
+            return (
+              <motion.div
+                key={problem.id}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.15 }}
+                variants={reveal}
+                transition={{ duration: 0.4, delay: realIdx * 0.08 }}
+                className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group relative flex flex-col justify-between overflow-hidden rounded-[2.5rem] border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-navy/30 hover:shadow-xl"
+              >
+                <div>
+                  {/* Top Bar with Icon & Badge */}
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-100 text-brand-navy group-hover:bg-brand-navy group-hover:text-white transition-colors">
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <span className={`rounded-full border px-3 py-1 text-[11px] font-black uppercase tracking-wider ${problem.badgeColor}`}>
+                      {problem.badge}
+                    </span>
+                  </div>
+
+                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                    Gap 0{realIdx + 1}
+                  </span>
+
+                  <h3 className="mt-1 text-xl font-display font-bold leading-snug text-slate-955 group-hover:text-brand-navy transition-colors">
+                    {problem.title}
+                  </h3>
+
+                  <p className="mt-4 text-[11px] font-black uppercase tracking-wider text-slate-400 border-b border-slate-100 pb-2">
+                    Common Friction Points:
+                  </p>
+
+                  <ul className="mt-3 space-y-2">
+                    {problem.issues.map((issue) => (
+                      <li key={issue} className="flex items-start gap-2 text-xs font-semibold text-slate-700">
+                        <XCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-terracotta/90" />
+                        <span>{issue}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* SECTION 3: SoftClinch Commerce Enablement Framework™ (4 TOP, 3 CENTERED BOTTOM CHEVRON MATRIX) */}
+      <section id="framework-dashboard" className="border-t border-slate-200/80 bg-slate-50/70 px-4 py-24 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <SectionHeading
+            title="SoftClinch Commerce Enablement Framework™"
+            description="A Connected Ecommerce Growth Architecture — 4 Foundation Pillars On Top & 3 Execution Engines Centered Below."
+          />
+
+          {/* DESKTOP 2-ROW CHEVRON MATRIX: TOP 4 / BOTTOM CENTERED 3 (lg+ screens) */}
+          <div className="hidden lg:block space-y-10 mt-8">
+            {/* ROW 1: TOP 4 CONNECTED PILLARS (01, 02, 03, 04) */}
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <span className="h-2 w-2 rounded-full bg-brand-terracotta" />
+                <span className="text-xs font-black uppercase tracking-widest text-slate-600">
+                  Phase 1: Ecosystem Audit & Diagnostic Scope (Pillars 01 – 04)
+                </span>
+              </div>
+
+              <div className="grid grid-cols-4 gap-3 items-stretch">
+                {frameworkPillars.slice(0, 4).map((pillar, index) => {
+                  const Icon = pillar.icon;
+                  const isOdd = index % 2 !== 0;
+
+                  const headerBg = index === 0
+                    ? "bg-brand-navy text-white"
+                    : index === 1
+                    ? "bg-brand-terracotta text-white"
+                    : index === 2
+                    ? "bg-slate-800 text-white"
+                    : "bg-brand-navy text-white";
+
+                  const colTint = isOdd ? "bg-brand-terracotta/[0.03] border-brand-terracotta/20" : "bg-brand-navy/[0.02] border-slate-200";
+
+                  return (
+                    <div key={pillar.id} className="flex flex-col h-full group">
+                      {/* Floating Circle Icon Badge */}
+                      <div className="flex justify-center mb-3">
+                        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-lg border-2 border-brand-terracotta text-brand-terracotta group-hover:scale-110 group-hover:bg-brand-terracotta group-hover:text-white transition-all duration-300">
+                          <Icon className="h-6 w-6" />
+                        </div>
+                      </div>
+
+                      {/* Chevron Banner Header */}
+                      <div
+                        className={`relative flex items-center justify-center py-4 px-3 text-center min-h-[70px] shadow-md ${headerBg}`}
+                        style={{
+                          clipPath:
+                            index === 0
+                              ? "polygon(0% 0%, calc(100% - 14px) 0%, 100% 50%, calc(100% - 14px) 100%, 0% 100%)"
+                              : index === 3
+                              ? "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 14px 50%)"
+                              : "polygon(0% 0%, calc(100% - 14px) 0%, 100% 50%, calc(100% - 14px) 100%, 0% 100%, 14px 50%)",
+                        }}
+                      >
+                        <div className="px-2">
+                          <span className="block text-[9px] font-black uppercase tracking-widest opacity-80">
+                            PILLAR {pillar.id}
+                          </span>
+                          <h4 className="text-xs font-bold leading-tight line-clamp-2 mt-0.5">
+                            {pillar.shortName}
+                          </h4>
+                        </div>
+                      </div>
+
+                      {/* Column Content Box */}
+                      <div className={`flex-1 mt-2 rounded-2xl border p-4 flex flex-col justify-between ${colTint}`}>
+                        <div className="space-y-3">
+                          <div className="rounded-xl border border-slate-200/80 bg-white p-3 shadow-2xs">
+                            <span className="text-[9px] font-black uppercase tracking-widest text-brand-terracotta">
+                              Diagnostic Objective
+                            </span>
+                            <p className="mt-1 text-xs font-bold text-slate-800 leading-tight">
+                              &quot;{pillar.question}&quot;
+                            </p>
+                          </div>
+
+                          <div className="space-y-1.5">
+                            {(pillar.analyse || pillar.review || pillar.identify || []).slice(0, 4).map((item: string, itemIdx: number) => (
+                              <div
+                                key={item}
+                                className="flex items-center gap-2 rounded-lg bg-white p-2 text-xs font-semibold text-slate-700 border border-slate-100 shadow-2xs"
+                              >
+                                <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-brand-navy/10 text-[9px] font-black text-brand-navy">
+                                  {itemIdx + 1}
+                                </span>
+                                <span className="truncate">{item}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="mt-4 pt-2 border-t border-slate-200/60">
+                          <span className="block text-[9px] font-black uppercase tracking-wider text-slate-400">
+                            Output Deliverable
+                          </span>
+                          <div className="mt-1 rounded-xl bg-brand-navy p-2 text-center text-xs font-bold text-white shadow-xs">
+                            {pillar.output}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* ROW 2: BOTTOM 3 CONNECTED PILLARS CENTERED IN THE MIDDLE (05, 06, 07) */}
+            <div className="max-w-5xl mx-auto pt-4">
+              <div className="flex items-center justify-center gap-2 mb-4">
+                <span className="h-2 w-2 rounded-full bg-emerald-600" />
+                <span className="text-xs font-black uppercase tracking-widest text-slate-600">
+                  Phase 2: Growth Execution & Automation Engines (Pillars 05 – 07)
+                </span>
+              </div>
+
+              <div className="grid grid-cols-3 gap-3 items-stretch">
+                {frameworkPillars.slice(4, 7).map((pillar, index) => {
+                  const Icon = pillar.icon;
+                  const realIndex = index + 4;
+                  const isOdd = realIndex % 2 !== 0;
+
+                  const headerBg = index === 0
+                    ? "bg-brand-terracotta text-white"
+                    : index === 1
+                    ? "bg-emerald-800 text-white"
+                    : "bg-brand-navy text-white";
+
+                  const colTint = isOdd ? "bg-brand-terracotta/[0.03] border-brand-terracotta/20" : "bg-brand-navy/[0.02] border-slate-200";
+
+                  return (
+                    <div key={pillar.id} className="flex flex-col h-full group">
+                      {/* Floating Circle Icon Badge */}
+                      <div className="flex justify-center mb-3">
+                        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-lg border-2 border-brand-terracotta text-brand-terracotta group-hover:scale-110 group-hover:bg-brand-terracotta group-hover:text-white transition-all duration-300">
+                          <Icon className="h-6 w-6" />
+                        </div>
+                      </div>
+
+                      {/* Chevron Banner Header */}
+                      <div
+                        className={`relative flex items-center justify-center py-4 px-3 text-center min-h-[70px] shadow-md ${headerBg}`}
+                        style={{
+                          clipPath:
+                            index === 0
+                              ? "polygon(0% 0%, calc(100% - 14px) 0%, 100% 50%, calc(100% - 14px) 100%, 0% 100%)"
+                              : index === 2
+                              ? "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 14px 50%)"
+                              : "polygon(0% 0%, calc(100% - 14px) 0%, 100% 50%, calc(100% - 14px) 100%, 0% 100%, 14px 50%)",
+                        }}
+                      >
+                        <div className="px-2">
+                          <span className="block text-[9px] font-black uppercase tracking-widest opacity-80">
+                            PILLAR {pillar.id}
+                          </span>
+                          <h4 className="text-xs font-bold leading-tight line-clamp-2 mt-0.5">
+                            {pillar.shortName}
+                          </h4>
+                        </div>
+                      </div>
+
+                      {/* Column Content Box */}
+                      <div className={`flex-1 mt-2 rounded-2xl border p-4 flex flex-col justify-between ${colTint}`}>
+                        <div className="space-y-3">
+                          <div className="rounded-xl border border-slate-200/80 bg-white p-3 shadow-2xs">
+                            <span className="text-[9px] font-black uppercase tracking-widest text-brand-terracotta">
+                              Diagnostic Objective
+                            </span>
+                            <p className="mt-1 text-xs font-bold text-slate-800 leading-tight">
+                              &quot;{pillar.question}&quot;
+                            </p>
+                          </div>
+
+                          <div className="space-y-1.5">
+                            {(pillar.analyse || pillar.review || pillar.identify || pillar.groups?.flatMap((g: any) => g.items) || []).slice(0, 4).map((item: string, itemIdx: number) => (
+                              <div
+                                key={item}
+                                className="flex items-center gap-2 rounded-lg bg-white p-2 text-xs font-semibold text-slate-700 border border-slate-100 shadow-2xs"
+                              >
+                                <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-brand-navy/10 text-[9px] font-black text-brand-navy">
+                                  {itemIdx + 1}
+                                </span>
+                                <span className="truncate">{item}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="mt-4 pt-2 border-t border-slate-200/60">
+                          <span className="block text-[9px] font-black uppercase tracking-wider text-slate-400">
+                            Output Deliverable
+                          </span>
+                          <div className="mt-1 rounded-xl bg-brand-navy p-2 text-center text-xs font-bold text-white shadow-xs">
+                            {pillar.output}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* MOBILE & TABLET ACCORDION CARDS (sm & md screens) */}
+          <div className="lg:hidden space-y-4">
+            {frameworkPillars.map((pillar, index) => {
+              const Icon = pillar.icon;
+              const isOpen = activeTab === index;
+
+              return (
+                <div
+                  key={pillar.id}
+                  className={`overflow-hidden rounded-2xl border transition-all ${
+                    isOpen ? "border-brand-terracotta bg-white shadow-xl" : "border-slate-200 bg-white"
+                  }`}
+                >
+                  <button
+                    onClick={() => setActiveTab(isOpen ? -1 : index)}
+                    className="w-full p-4 flex items-center justify-between text-left cursor-pointer"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-navy text-white font-bold">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <span className="text-[10px] font-black text-brand-terracotta uppercase">Pillar {pillar.id}</span>
+                        <h4 className="text-sm font-bold text-slate-900">{pillar.name}</h4>
+                      </div>
+                    </div>
+                    <ChevronDown className={`h-5 w-5 text-slate-400 transition-transform ${isOpen ? "rotate-180" : ""}`} />
+                  </button>
+
+                  {isOpen && (
+                    <div className="p-4 border-t border-slate-100 bg-slate-50 space-y-3">
+                      <p className="text-xs font-bold text-slate-800">&quot;{pillar.question}&quot;</p>
+                      <div className="space-y-1">
+                        {(pillar.analyse || pillar.review || pillar.identify || []).map((item: string) => (
+                          <div key={item} className="flex items-center gap-2 text-xs font-semibold text-slate-700 bg-white p-2 rounded-lg border border-slate-200">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                            <span>{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="pt-2 border-t border-slate-200 flex items-center justify-between text-xs font-bold">
+                        <span className="text-slate-500">Deliverable:</span>
+                        <span className="text-brand-terracotta">{pillar.output}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 4: Commerce360™ Growth Blueprint & 90-DAY AXIS ROADMAP */}
+      <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+        <SectionHeading
+          title="Commerce360™ Growth Blueprint"
+          description="Your Roadmap From Problems To Priorities — You Receive:"
+        />
+
+        <div className="grid gap-6 md:grid-cols-3 mb-12">
+          {blueprintComponents.map((comp) => {
+            const Icon = comp.icon;
+            return (
+              <div key={comp.title} className="rounded-[2.5rem] border border-slate-200 bg-white p-8 shadow-sm hover:shadow-xl transition-all">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-navy text-white shadow-md mb-6">
+                  <Icon className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-display font-bold text-slate-955">{comp.title}</h3>
+                <p className="mt-3 text-sm font-semibold leading-relaxed text-slate-600">{comp.desc}</p>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* AXIS TIMELINE ROADMAP (DAYS 0-30, 31-60, 61-90) */}
+        <div className="mt-8">
+          <div className="text-center max-w-2xl mx-auto mb-8">
+            <span className="text-xs font-black uppercase tracking-widest text-brand-terracotta">Structured Phase Timeline</span>
+            <h3 className="text-2xl sm:text-3xl font-display font-bold text-slate-955 mt-1">90-Day Execution Roadmap</h3>
+          </div>
+          <AxisTimelineRoadmap phases={roadmapPhases} />
+        </div>
+      </section>
+
+      {/* SECTION 5: How SoftClinch Works (CONNECTED FLOWCHART DIAGRAM WITH ZERO OVERLAP) */}
+      <section className="border-t border-slate-200/80 bg-white px-4 py-24 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <SectionHeading
+            title="How SoftClinch Works"
+            description="Our 5-Step Connected Enablement Flowchart — Linked Node Architecture With Arrow Connectors"
+          />
+
+          {/* FLOWCHART DIAGRAM CANVAS CONTAINER */}
+          <div className="mt-12 relative overflow-hidden rounded-[2.5rem] border border-slate-200 bg-slate-50/70 p-6 sm:p-10 shadow-2xl">
+            {/* Background Canvas Dot Grid Pattern */}
+            <div
+              className="absolute inset-0 opacity-40 pointer-events-none"
+              style={{
+                backgroundImage: `radial-gradient(#CBD5E1 1.5px, transparent 1.5px)`,
+                backgroundSize: "24px 24px",
+              }}
+            />
+
+            {/* DESKTOP CONNECTED FLOWCHART DIAGRAM (lg+ screens) */}
+            <div className="relative z-10 hidden lg:block py-6">
+              
+              {/* FLEX MATRIX: 4 NODE COLUMNS & 3 INTER-COLUMN ARROW CONNECTORS */}
+              <div className="flex items-center justify-between gap-3 min-h-[460px]">
+                
+                {/* COLUMN 1: NODE 1 - STEP 01: DISCOVERY */}
+                <div className="relative flex-1 flex flex-col items-center max-w-[220px]">
+                  {/* Floating Cursor Badge: Sydney */}
+                  <div className="absolute -bottom-7 left-2 z-20 flex items-center gap-1 rounded-md bg-brand-terracotta px-2.5 py-0.5 text-[10px] font-black text-white shadow-md">
+                    <svg className="h-3 w-3 fill-current" viewBox="0 0 24 24"><path d="M3 3l7 18 3-7 7-3L3 3z"/></svg>
+                    <span>Sydney</span>
+                  </div>
+
+                  <div className="group relative w-full rounded-3xl border-2 border-brand-navy bg-brand-navy p-5 text-white shadow-xl transition-all duration-300 hover:scale-105">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-brand-terracotta text-xs font-black text-white">
+                        01
+                      </span>
+                      <Compass className="h-5 w-5 text-brand-terracotta" />
+                    </div>
+                    <h4 className="text-base font-bold font-display text-white">
+                      Discovery
+                    </h4>
+                    <p className="mt-2 text-[11px] font-medium text-slate-300 leading-relaxed">
+                      Understand your business model, customers, technology, and key challenges.
+                    </p>
+                  </div>
+                </div>
+
+                {/* INTER-COLUMN CONNECTOR 1: NODE 1 ---> NODE 2 */}
+                <div className="shrink-0 flex items-center justify-center w-12 text-brand-terracotta">
+                  <div className="flex items-center w-full">
+                    <div className="h-0.5 flex-1 bg-brand-terracotta stroke-dasharray-2" />
+                    <ChevronRight className="h-6 w-6 -ml-2 text-brand-terracotta shrink-0" />
+                  </div>
+                </div>
+
+                {/* COLUMN 2: NODE 2 - STEP 02: COMMERCE ASSESSMENT (ENGINE NODE) */}
+                <div className="relative flex-1 flex flex-col items-center max-w-[240px]">
+                  {/* Speech Bubble Header Above */}
+                  <div className="absolute -top-12 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 whitespace-nowrap rounded-xl bg-brand-navy border border-brand-terracotta px-3 py-1.5 text-[11px] font-bold text-white shadow-xl">
+                    <span className="text-[10px] font-black uppercase text-brand-terracotta">SoftClinch:</span>
+                    <span>Audit Engine Active</span>
+                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-2.5 w-2.5 rotate-45 bg-brand-navy border-r border-b border-brand-terracotta" />
+                  </div>
+
+                  {/* Floating Cursor Badge: Deepak */}
+                  <div className="absolute -bottom-7 right-2 z-20 flex items-center gap-1 rounded-md bg-brand-navy px-2.5 py-0.5 text-[10px] font-black text-white shadow-md">
+                    <svg className="h-3 w-3 fill-current" viewBox="0 0 24 24"><path d="M3 3l7 18 3-7 7-3L3 3z"/></svg>
+                    <span>Deepak</span>
+                  </div>
+
+                  <div className="group relative w-full rounded-3xl border-2 border-brand-navy bg-brand-terracotta p-5 text-white shadow-2xl ring-4 ring-brand-terracotta/30 transition-all duration-300 hover:scale-105">
+                    {/* Corner Handle Dots */}
+                    <div className="absolute -top-1 -left-1 h-2.5 w-2.5 rounded-full border border-brand-navy bg-white" />
+                    <div className="absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full border border-brand-navy bg-white" />
+                    <div className="absolute -bottom-1 -left-1 h-2.5 w-2.5 rounded-full border border-brand-navy bg-white" />
+                    <div className="absolute -bottom-1 -right-1 h-2.5 w-2.5 rounded-full border border-brand-navy bg-white" />
+
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-brand-navy text-xs font-black text-white">
+                        02
+                      </span>
+                      <SearchCheck className="h-5 w-5 text-white" />
+                    </div>
+                    <h4 className="text-base font-bold font-display text-white">
+                      Commerce Assessment
+                    </h4>
+                    <p className="mt-2 text-[11px] font-medium text-orange-100 leading-relaxed">
+                      Review complete ecommerce ecosystem across tech, marketing, & ops.
+                    </p>
+                  </div>
+                </div>
+
+                {/* INTER-COLUMN CONNECTOR 2: 3-BRANCH SPLINE FROM NODE 2 TO NODES 3, 4, 5 */}
+                <div className="shrink-0 flex flex-col justify-between h-[360px] w-14 py-6">
+                  {/* Top Branch to Node 3 */}
+                  <div className="flex items-center">
+                    <svg className="w-14 h-12 overflow-visible" viewBox="0 0 50 40">
+                      <path d="M 0 35 C 25 35, 25 5, 42 5" fill="none" stroke="#0A192F" strokeWidth="2.5" />
+                      <polygon points="42,0 50,5 42,10" fill="#0A192F" />
+                    </svg>
+                  </div>
+
+                  {/* Middle Center Arrow to Node 4 */}
+                  <div className="flex items-center">
+                    <div className="h-0.5 flex-1 bg-brand-terracotta" />
+                    <ChevronRight className="h-6 w-6 -ml-2 text-brand-terracotta shrink-0" />
+                  </div>
+
+                  {/* Bottom Branch to Node 5 */}
+                  <div className="flex items-center">
+                    <svg className="w-14 h-12 overflow-visible" viewBox="0 0 50 40">
+                      <path d="M 0 5 C 25 5, 25 35, 42 35" fill="none" stroke="#0A192F" strokeWidth="2.5" />
+                      <polygon points="42,30 50,35 42,40" fill="#0A192F" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* COLUMN 3: STACKED NODES 3, 4, 5 (PARALLEL EXECUTION STACK) */}
+                <div className="relative flex-1 flex flex-col justify-between space-y-3 max-w-[260px]">
+                  {/* Floating Cursor Badge: Himari */}
+                  <div className="absolute -top-7 right-0 z-20 flex items-center gap-1 rounded-md bg-brand-terracotta px-2.5 py-0.5 text-[10px] font-black text-white shadow-md">
+                    <svg className="h-3 w-3 fill-current" viewBox="0 0 24 24"><path d="M3 3l7 18 3-7 7-3L3 3z"/></svg>
+                    <span>Himari</span>
+                  </div>
+
+                  {/* NODE 3: STEP 03 - GROWTH BLUEPRINT */}
+                  <div className="group rounded-2xl border-2 border-brand-navy bg-white p-3.5 shadow-md transition-all hover:scale-102 hover:border-brand-terracotta">
+                    <div className="flex items-center gap-2.5">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-brand-navy text-[10px] font-black text-white">
+                        03
+                      </span>
+                      <div>
+                        <h5 className="text-xs font-bold text-slate-900">Growth Blueprint</h5>
+                        <p className="text-[10px] font-medium text-slate-600 leading-tight">Prioritized 90-day roadmap & maturity score.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* NODE 4: STEP 04 - IMPLEMENTATION */}
+                  <div className="group rounded-2xl border-2 border-brand-navy bg-brand-navy p-3.5 text-white shadow-xl transition-all hover:scale-102">
+                    <div className="flex items-center gap-2.5">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-brand-terracotta text-[10px] font-black text-white">
+                        04
+                      </span>
+                      <div>
+                        <h5 className="text-xs font-bold text-white">Implementation</h5>
+                        <p className="text-[10px] font-medium text-slate-200 leading-tight">Execute improvements across tech & workflows.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* NODE 5: STEP 05 - TRAINING & HANDOVER */}
+                  <div className="group rounded-2xl border-2 border-brand-terracotta bg-white p-3.5 shadow-md transition-all hover:scale-102">
+                    <div className="flex items-center gap-2.5">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-brand-terracotta text-[10px] font-black text-white">
+                        05
+                      </span>
+                      <div>
+                        <h5 className="text-xs font-bold text-slate-900">Training & Handover</h5>
+                        <p className="text-[10px] font-medium text-slate-600 leading-tight">SOPs & continuous team handovers.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* INTER-COLUMN CONNECTOR 3: NODE 4 ---> NODE 6 */}
+                <div className="shrink-0 flex items-center justify-center w-12 text-brand-terracotta">
+                  <div className="flex items-center w-full">
+                    <div className="h-0.5 flex-1 bg-brand-terracotta" />
+                    <ChevronRight className="h-6 w-6 -ml-2 text-brand-terracotta shrink-0" />
+                  </div>
+                </div>
+
+                {/* COLUMN 4: NODE 6 - TARGET OUTCOME DIAMOND CARD */}
+                <div className="relative flex-1 flex flex-col items-center max-w-[220px]">
+                  {/* Floating Cursor Badge: Pedro */}
+                  <div className="absolute -bottom-7 right-2 z-20 flex items-center gap-1 rounded-md bg-brand-navy px-2.5 py-0.5 text-[10px] font-black text-white shadow-md">
+                    <svg className="h-3 w-3 fill-current" viewBox="0 0 24 24"><path d="M3 3l7 18 3-7 7-3L3 3z"/></svg>
+                    <span>Pedro</span>
+                  </div>
+
+                  <div className="group relative flex flex-col items-center justify-center text-center rounded-[2.5rem] border-2 border-brand-navy bg-gradient-to-br from-brand-terracotta to-[#842D1F] p-5 text-white shadow-2xl transition-all duration-300 hover:scale-105">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-navy/40 mb-2 backdrop-blur-xs">
+                      <Award className="h-5 w-5 text-orange-200" />
+                    </div>
+                    <span className="text-[9px] font-black uppercase tracking-widest text-orange-200">
+                      Target Growth Outcome
+                    </span>
+                    <h4 className="mt-1 text-xs sm:text-sm font-bold font-display leading-tight text-white">
+                      Scalable Commerce System
+                    </h4>
+                    <p className="mt-1.5 text-[10px] font-medium text-slate-200 leading-snug">
+                      Higher Sales & Automated Ops
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* CLEAN BOTTOM LOOPBACK CONNECTOR LINE: STEP 05 BACK TO STEP 02 */}
+              <div className="relative mt-4 flex items-center justify-center">
+                <div className="w-[45%] h-6 border-b-2 border-l-2 border-r-2 border-dashed border-brand-terracotta rounded-b-2xl opacity-70 flex items-end justify-between px-4">
+                  <span className="text-[9px] font-black uppercase text-brand-terracotta bg-white px-2 py-0.5 rounded-full border border-brand-terracotta/30 -mb-2.5 mx-auto">
+                    Continuous Improvement Loop
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* MOBILE & TABLET FLOWCHART LIST (sm & md screens) */}
+            <div className="lg:hidden space-y-4">
+              {softClinchSteps.map((step) => {
+                const Icon = step.icon;
+                return (
+                  <div key={step.num} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm flex items-start gap-4">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-navy text-white font-bold">
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <span className="text-xs font-black text-brand-terracotta uppercase">Step {step.num}</span>
+                      <h4 className="text-base font-bold text-slate-900">{step.title}</h4>
+                      <p className="mt-1 text-xs font-medium text-slate-600">{step.desc}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 6: Why SoftClinch? (RADIAL AVATAR HUB & 6-PILLAR NODE ARCHITECTURE) */}
+      <section className="border-t border-slate-200/80 bg-slate-50/70 px-4 py-24 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <SectionHeading
+            title="Why SoftClinch?"
+            description="Traditional agencies solve individual problems in isolation. SoftClinch connects all 6 vital growth engines into one unified commerce ecosystem."
+          />
+
+          {/* RADIAL AVATAR HUB DIAGRAM CONTAINER */}
+          <div className="mt-14 relative overflow-hidden rounded-[3rem] border border-slate-200 bg-white p-6 sm:p-12 shadow-2xl">
+            {/* Subtle Canvas Grid Pattern */}
+            <div
+              className="absolute inset-0 opacity-30 pointer-events-none"
+              style={{
+                backgroundImage: `radial-gradient(#CBD5E1 1.5px, transparent 1.5px)`,
+                backgroundSize: "28px 28px",
+              }}
+            />
+
+            {/* DESKTOP RADIAL DIAGRAM (lg+ screens) */}
+            <div className="relative z-10 hidden lg:block py-6">
+              
+              {/* SVG CONNECTING SPOKE LINES LAYER */}
+              <svg className="absolute inset-0 h-full w-full pointer-events-none z-10 overflow-visible">
+                {/* Left Top Spoke */}
+                <line x1="33%" y1="20%" x2="50%" y2="50%" stroke="#0A192F" strokeWidth="2" strokeDasharray="4 4" />
+                {/* Left Mid Spoke */}
+                <line x1="35%" y1="50%" x2="50%" y2="50%" stroke="#A23B2A" strokeWidth="2.5" />
+                {/* Left Bot Spoke */}
+                <line x1="33%" y1="80%" x2="50%" y2="50%" stroke="#0A192F" strokeWidth="2" strokeDasharray="4 4" />
+
+                {/* Right Top Spoke */}
+                <line x1="67%" y1="20%" x2="50%" y2="50%" stroke="#0A192F" strokeWidth="2" strokeDasharray="4 4" />
+                {/* Right Mid Spoke */}
+                <line x1="65%" y1="50%" x2="50%" y2="50%" stroke="#A23B2A" strokeWidth="2.5" />
+                {/* Right Bot Spoke */}
+                <line x1="67%" y1="80%" x2="50%" y2="50%" stroke="#0A192F" strokeWidth="2" strokeDasharray="4 4" />
+              </svg>
+
+              <div className="grid grid-cols-[1fr_1.1fr_1fr] items-center gap-12 min-h-[520px]">
+                
+                {/* LEFT COLUMN: 3 SURROUNDING FEATURE NODES */}
+                <div className="space-y-8 relative z-20">
+                  {/* NODE 1: Ecommerce Technology */}
+                  <div className="group rounded-2xl border-2 border-brand-navy bg-white p-5 shadow-lg transition-all duration-300 hover:-translate-x-1 hover:border-brand-terracotta">
+                    <div className="flex items-center gap-4">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-navy text-white shadow-md group-hover:bg-brand-terracotta transition-colors">
+                        <Cpu className="h-6 w-6" />
+                      </div>
+                      <div>
+                        <h4 className="text-base font-bold text-slate-900 font-display">Ecommerce Technology</h4>
+                        <p className="text-xs font-medium text-slate-500 mt-0.5">Platform stability, speed & catalog scalability.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* NODE 2: Customer Experience */}
+                  <div className="group rounded-2xl border-2 border-brand-terracotta bg-brand-terracotta p-5 text-white shadow-xl transition-all duration-300 hover:-translate-x-1">
+                    <div className="flex items-center gap-4">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-navy text-white shadow-md">
+                        <ShoppingBag className="h-6 w-6 text-brand-terracotta" />
+                      </div>
+                      <div>
+                        <h4 className="text-base font-bold text-white font-display">Customer Experience</h4>
+                        <p className="text-xs font-medium text-orange-100 mt-0.5">Conversion pathways, UI/UX & customer checkout.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* NODE 3: Product Systems */}
+                  <div className="group rounded-2xl border-2 border-brand-navy bg-white p-5 shadow-lg transition-all duration-300 hover:-translate-x-1 hover:border-brand-terracotta">
+                    <div className="flex items-center gap-4">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-navy text-white shadow-md group-hover:bg-brand-terracotta transition-colors">
+                        <Store className="h-6 w-6" />
+                      </div>
+                      <div>
+                        <h4 className="text-base font-bold text-slate-900 font-display">Product Systems</h4>
+                        <p className="text-xs font-medium text-slate-500 mt-0.5">Catalog structuring, inventory & feeds.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* CENTER COLUMN: FOCAL AVATAR / CENTRAL BRAND ENGINE NODE */}
+                <div className="relative flex flex-col items-center justify-center z-20">
+                  <div className="relative flex h-56 w-56 items-center justify-center rounded-full border-4 border-brand-navy bg-gradient-to-br from-brand-navy to-slate-900 text-white shadow-2xl ring-8 ring-brand-terracotta/20">
+                    
+                    {/* Inner Decorative Glowing Rings */}
+                    <div className="absolute inset-3 rounded-full border border-white/15" />
+                    <div className="absolute inset-6 rounded-full border border-brand-terracotta/40" />
+
+                    {/* Center Icon & Branding */}
+                    <div className="flex flex-col items-center text-center px-4">
+                      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-terracotta text-white shadow-xl mb-2">
+                        <Workflow className="h-8 w-8" />
+                      </div>
+                      <span className="text-[10px] font-black uppercase tracking-widest text-brand-terracotta">
+                        SoftClinch Core
+                      </span>
+                      <h3 className="text-base font-bold font-display text-white mt-0.5 leading-tight">
+                        Connected Commerce Framework
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+
+                {/* RIGHT COLUMN: 3 SURROUNDING FEATURE NODES */}
+                <div className="space-y-8 relative z-20">
+                  {/* NODE 4: Marketing Channels */}
+                  <div className="group rounded-2xl border-2 border-brand-navy bg-white p-5 shadow-lg transition-all duration-300 hover:translate-x-1 hover:border-brand-terracotta">
+                    <div className="flex items-center gap-4">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-navy text-white shadow-md group-hover:bg-brand-terracotta transition-colors">
+                        <Zap className="h-6 w-6" />
+                      </div>
+                      <div>
+                        <h4 className="text-base font-bold text-slate-900 font-display">Marketing Channels</h4>
+                        <p className="text-xs font-medium text-slate-500 mt-0.5">Meta Ads, Google Ads & acquisition funnel.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* NODE 5: Communication Automation */}
+                  <div className="group rounded-2xl border-2 border-brand-terracotta bg-brand-terracotta p-5 text-white shadow-xl transition-all duration-300 hover:translate-x-1">
+                    <div className="flex items-center gap-4">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-navy text-white shadow-md">
+                        <MessageSquare className="h-6 w-6 text-brand-terracotta" />
+                      </div>
+                      <div>
+                        <h4 className="text-base font-bold text-white font-display">Communication Automation</h4>
+                        <p className="text-xs font-medium text-orange-100 mt-0.5">Inaiwazhi WhatsApp AI & customer support.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* NODE 6: Analytics & Operations */}
+                  <div className="group rounded-2xl border-2 border-brand-navy bg-white p-5 shadow-lg transition-all duration-300 hover:translate-x-1 hover:border-brand-terracotta">
+                    <div className="flex items-center gap-4">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-navy text-white shadow-md group-hover:bg-brand-terracotta transition-colors">
+                        <TrendingUp className="h-6 w-6" />
+                      </div>
+                      <div>
+                        <h4 className="text-base font-bold text-slate-900 font-display">Analytics & Operations</h4>
+                        <p className="text-xs font-medium text-slate-500 mt-0.5">Performance tracking, SOPs & team handovers.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            {/* MOBILE & TABLET FALLBACK LIST (sm & md screens) */}
+            <div className="lg:hidden space-y-6">
+              {/* Mini Center Focal Badge for Mobile/Tablet */}
+              <div className="flex flex-col items-center justify-center text-center p-6 rounded-3xl bg-brand-navy text-white shadow-xl border-2 border-brand-terracotta mb-6">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-terracotta text-white mb-2">
+                  <Workflow className="h-6 w-6" />
+                </div>
+                <span className="text-[10px] font-black uppercase tracking-widest text-brand-terracotta">SoftClinch Core</span>
+                <h4 className="text-sm font-bold text-white">Connected Commerce Framework</h4>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  { title: "Ecommerce Technology", desc: "Platform stability, speed & catalog scalability.", icon: Cpu },
+                  { title: "Customer Experience", desc: "Conversion pathways, UI/UX & customer checkout.", icon: ShoppingBag },
+                  { title: "Product Systems", desc: "Catalog structuring, inventory & feeds.", icon: Store },
+                  { title: "Marketing Channels", desc: "Meta Ads, Google Ads & acquisition funnel.", icon: Zap },
+                  { title: "Communication Automation", desc: "Inaiwazhi WhatsApp AI & customer support.", icon: MessageSquare },
+                  { title: "Analytics & Operations", desc: "Performance tracking, SOPs & team handovers.", icon: TrendingUp },
+                ].map((item, index) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={item.title} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm flex items-start gap-4 hover:border-brand-navy transition-all">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-navy text-white font-bold">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <span className="text-[10px] font-black text-brand-terracotta uppercase tracking-wider">Pillar 0{index + 1}</span>
+                        <h4 className="text-sm font-bold text-slate-900 leading-snug">{item.title}</h4>
+                        <p className="mt-1 text-xs font-medium text-slate-600 leading-relaxed">{item.desc}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 7: Who This Is For (ROADMAP TRACK FLOW) */}
+      <section className="border-t border-slate-200/80 bg-slate-50/70 px-4 py-24 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <SectionHeading
+            title="Who This Is For"
+            description="Designed for businesses that need systemic growth across technology, customer experience, and operations — Target Audience Roadmap Track"
+          />
+
+          <AudienceRoadmapTrack items={targetAudience} />
         </div>
       </section>
 
       <Testimonials />
 
-      <FaqSection title="Commerce Enablement FAQs" items={commerceEnablementFaq} includeSEO={false} />
+      {/* FAQ SECTION */}
+      <FaqSection title="Frequently Asked Questions" items={commerceEnablementFaq} includeSEO={false} />
 
+      {/* FINAL CTA SECTION */}
       <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden rounded-[3rem] bg-white p-8 shadow-2xl ring-1 ring-slate-200 sm:p-10 lg:p-14">
-          <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-navy to-brand-terracotta" />
+        <div className="relative overflow-hidden rounded-[3rem] bg-white p-8 shadow-2xl ring-1 ring-slate-200 sm:p-12 lg:p-16">
+          <div className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-brand-navy to-brand-terracotta" />
           <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
             <div>
               <span className="text-xs font-black uppercase tracking-[0.2em] text-brand-terracotta">
-                Ready To Modernize?
+                Commerce Enablement
               </span>
               <h2 className="mt-4 text-3xl font-display font-bold leading-tight text-slate-955 sm:text-4xl lg:text-5xl">
-                Ready To Modernize Your Ecommerce Operations?
+                Your Ecommerce Growth Problem Has A System Behind It.
               </h2>
-              <p className="mt-6 max-w-3xl text-base font-medium leading-relaxed text-slate-600 sm:text-lg">
-                Talk to SoftClinch about a structured Commerce Enablement Program for readiness, communication, analytics, workflows, SOPs, and operational handover.
+              <p className="mt-6 max-w-2xl text-base font-medium leading-relaxed text-slate-600 sm:text-lg">
+                Find the gaps. Understand the opportunities. Build a stronger commerce foundation.
               </p>
             </div>
-            <div className="flex flex-col gap-4 sm:flex-row lg:flex-col">
+
+            <div className="flex flex-col items-start lg:items-end justify-center">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-brand-navy px-8 py-4 font-bold text-white shadow-lg shadow-brand-navy/20 transition hover:-translate-y-0.5 hover:bg-brand-navy/90"
+                className="inline-flex items-center justify-center gap-2.5 rounded-2xl bg-brand-navy px-9 py-5 text-base font-bold text-white shadow-xl shadow-brand-navy/20 transition-all hover:-translate-y-1 hover:bg-brand-navy/90"
               >
-                <span>Book Consultation</span>
+                <span>Book Your Commerce Assessment</span>
                 <ArrowRight className="h-5 w-5" />
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-8 py-4 font-bold text-slate-700 transition hover:-translate-y-0.5 hover:border-brand-terracotta hover:text-brand-terracotta"
-              >
-                <span>Contact Sales</span>
-                <Megaphone className="h-5 w-5" />
               </Link>
             </div>
           </div>

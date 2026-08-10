@@ -2,33 +2,23 @@ import type { FaqItem } from "@/lib/faqs";
 
 export const commerceEnablementFaq: FaqItem[] = [
   {
-    question: "What is the SoftClinch Commerce Enablement Program?",
+    question: "Is this only a website audit?",
     answer:
-      "It is a structured consulting and implementation program for ecommerce businesses that need better product discoverability, commerce readiness, customer communication, analytics, operations, and SOPs.",
+      "No. It evaluates your complete ecommerce system, including technology, customer experience, marketing, communication, analytics, and operations.",
   },
   {
-    question: "Is this a digital marketing service?",
+    question: "Do you support Shopify and WooCommerce?",
     answer:
-      "The program is not positioned as a campaign-first marketing service. It focuses on commerce enablement, readiness, workflow implementation, communication systems, analytics foundations, and operational handover.",
+      "Yes. We support Shopify, WooCommerce, Adobe Commerce/Magento, and custom ecommerce platforms.",
   },
   {
-    question: "Does the program include Inaiwazhi?",
+    question: "Does Inaiwazhi work with every ecommerce business?",
     answer:
-      "Yes. Inaiwazhi is included naturally where WhatsApp commerce, customer communication, broadcasts, follow-ups, support, segmentation, and automation are part of the implementation scope.",
+      "Inaiwazhi is recommended when customer communication automation is required based on business needs.",
   },
   {
-    question: "Do you promise revenue, sales, rankings, or ROAS?",
+    question: "Do you guarantee revenue growth?",
     answer:
-      "No. The program focuses on implementation readiness and operational enablement. It does not promise revenue, sales, rankings, or ROAS.",
-  },
-  {
-    question: "What happens during the handover phase?",
-    answer:
-      "SoftClinch provides training, SOPs, documentation, and workflow guidance so the business team can operate the implemented commerce systems with greater independence.",
-  },
-  {
-    question: "Who is this program designed for?",
-    answer:
-      "It is designed for ecommerce businesses that need a structured approach to product discoverability, Merchant Center readiness, Meta Commerce readiness, customer communication, analytics, automation, and operational documentation.",
+      "No. We identify improvement opportunities and create a structured roadmap to improve ecommerce performance and execution.",
   },
 ];
