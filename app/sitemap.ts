@@ -91,6 +91,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/shopify-development",
     "/ecommerce-development",
     "/commerce-enablement",
+    "/business-communication",
     "/mobile-app-development",
     "/ui-ux-design",
     "/digital-marketing",

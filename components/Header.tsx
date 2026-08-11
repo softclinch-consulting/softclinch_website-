@@ -35,7 +35,14 @@ export const Header = () => {
                 { name: 'Digital Marketing', path: '/digital-marketing' },
             ]
         },
-        { name: 'Enterprise', path: '/services/enterprise-software' },
+        {
+            name: 'Enterprise',
+            path: '/services/enterprise-software',
+            subLinks: [
+                { name: 'Enterprise Software', path: '/services/enterprise-software' },
+                { name: 'Business Communication', path: '/business-communication' },
+            ]
+        },
         { name: 'Inaiwazhi', path: '/inaiwazhi-whatsapp-automation' },
         { name: 'Blog', path: '/blog' },
         { name: 'Contact', path: '/contact' },
