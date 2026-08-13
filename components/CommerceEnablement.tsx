@@ -75,16 +75,16 @@ function SectionHeading({
   return (
     <div className={`mb-12 sm:mb-16 ${centered ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}`}>
       {eyebrow && (
-        <span className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-brand-terracotta/20 bg-brand-terracotta/5 px-4 py-1.5 text-xs font-black uppercase tracking-[0.2em] text-brand-terracotta shadow-xs">
-          <Sparkles className="h-3.5 w-3.5" />
+        <span className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-brand-terracotta/20 bg-brand-terracotta/5 px-4 py-1.5 text-sm font-black uppercase tracking-[0.2em] text-brand-terracotta shadow-xs">
+          <Sparkles className="h-4 w-4" />
           {eyebrow}
         </span>
       )}
-      <h2 className="text-3xl font-display font-bold leading-tight text-slate-955 sm:text-4xl lg:text-5xl">
+      <h2 className="text-4xl font-display font-bold leading-tight text-slate-955 sm:text-5xl lg:text-6xl">
         {title}
       </h2>
       {description && (
-        <p className="mt-5 text-base font-medium leading-relaxed text-slate-600 sm:text-lg">
+        <p className="mt-5 text-lg font-medium leading-relaxed text-slate-600 sm:text-xl">
           {description}
         </p>
       )}
@@ -107,9 +107,9 @@ function ClientLogos() {
     <section className="py-16 bg-slate-50 border-y border-slate-200/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-500 font-bold mb-2">Trusted by leading clients</p>
-          <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900">Our Trusted Clients</h2>
-          <p className="text-slate-600 max-w-2xl mx-auto mt-2 text-sm">
+          <p className="text-sm uppercase tracking-[0.3em] text-slate-500 font-bold mb-2">Trusted by leading clients</p>
+          <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900">Our Trusted Clients</h2>
+          <p className="text-slate-600 max-w-2xl mx-auto mt-2 text-base">
             Organizations across enterprise technology, manufacturing, finance, and digital transformation rely on SoftClinch for secure, scalable delivery.
           </p>
         </div>
@@ -150,11 +150,11 @@ function Testimonials() {
           <Globe size={14} />
           Client Trust
         </div>
-        <h2 className="text-3xl lg:text-5xl font-display font-bold text-slate-900 mb-4">Trusted Digital Transformation &amp; Automation Partner</h2>
+        <h2 className="text-4xl lg:text-6xl font-display font-bold text-slate-900 mb-4">Trusted Digital Transformation &amp; Automation Partner</h2>
         <div className="flex items-center justify-center gap-2 text-amber-400 mb-2">
-          <span className="text-slate-900 font-bold text-xl">5.0</span>
-          {[...Array(5)].map((_, i) => <Star key={i} size={18} fill="currentColor" />)}
-          <span className="text-slate-500 font-normal text-sm ml-1">· {reviews.length} verified Google reviews</span>
+          <span className="text-slate-900 font-bold text-2xl">5.0</span>
+          {[...Array(5)].map((_, i) => <Star key={i} size={20} fill="currentColor" />)}
+          <span className="text-slate-500 font-normal text-base ml-1">· {reviews.length} verified Google reviews</span>
         </div>
       </div>
       <div className="relative w-full">
@@ -186,11 +186,11 @@ function Testimonials() {
                 <div className="flex gap-0.5 text-amber-400">
                   {[...Array(5)].map((_, s) => <Star key={s} size={13} fill="currentColor" />)}
                 </div>
-                <p className="text-slate-700 text-sm leading-relaxed flex-1">&quot;{t.text}&quot;</p>
+                <p className="text-slate-700 text-base leading-relaxed flex-1">&quot;{t.text}&quot;</p>
                 <div className="flex items-center gap-3 pt-3 border-t border-slate-100">
-                  <div className="font-bold text-slate-900 text-sm">{t.name}</div>
-                  <div className="text-blue-600 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
-                    Verified <CheckCircle2 size={11} />
+                  <div className="font-bold text-slate-900 text-base">{t.name}</div>
+                  <div className="text-blue-600 text-xs font-bold uppercase tracking-wider flex items-center gap-1">
+                    Verified <CheckCircle2 size={12} />
                   </div>
                 </div>
               </div>
@@ -253,11 +253,11 @@ function AxisTimelineRoadmap({ phases }: { phases: any[] }) {
                     <div className={`rounded-2xl border p-5 shadow-lg backdrop-blur-md transition-all duration-300 ${
                       isActive ? "border-brand-terracotta bg-white shadow-xl -translate-y-1.5 ring-2 ring-brand-terracotta/20" : "border-slate-200 bg-white hover:border-brand-terracotta/60"
                     }`}>
-                      <span className="inline-block rounded-full bg-brand-terracotta px-3 py-0.5 text-xs font-black text-white">
+                      <span className="inline-block rounded-full bg-brand-terracotta px-3 py-0.5 text-sm font-black text-white">
                         {item.phase}
                       </span>
-                      <h4 className="mt-2 text-base font-display font-bold text-slate-900">{item.title}</h4>
-                      <p className="mt-1.5 text-xs font-semibold leading-relaxed text-slate-600">{item.desc}</p>
+                      <h4 className="mt-2 text-lg font-display font-bold text-slate-900">{item.title}</h4>
+                      <p className="mt-1.5 text-sm font-semibold leading-relaxed text-slate-600">{item.desc}</p>
                     </div>
                   </motion.div>
                 ) : null}
@@ -290,11 +290,11 @@ function AxisTimelineRoadmap({ phases }: { phases: any[] }) {
                     <div className={`rounded-2xl border p-5 shadow-lg backdrop-blur-md transition-all duration-300 ${
                       isActive ? "border-brand-terracotta bg-white shadow-xl translate-y-1.5 ring-2 ring-brand-terracotta/20" : "border-slate-200 bg-white hover:border-brand-terracotta/60"
                     }`}>
-                      <span className="inline-block rounded-full bg-brand-navy px-3 py-0.5 text-xs font-black text-white">
+                      <span className="inline-block rounded-full bg-brand-navy px-3 py-0.5 text-sm font-black text-white">
                         {item.phase}
                       </span>
-                      <h4 className="mt-2 text-base font-display font-bold text-slate-900">{item.title}</h4>
-                      <p className="mt-1.5 text-xs font-semibold leading-relaxed text-slate-600">{item.desc}</p>
+                      <h4 className="mt-2 text-lg font-display font-bold text-slate-900">{item.title}</h4>
+                      <p className="mt-1.5 text-sm font-semibold leading-relaxed text-slate-600">{item.desc}</p>
                     </div>
                   </motion.div>
                 ) : null}
@@ -320,11 +320,11 @@ function AxisTimelineRoadmap({ phases }: { phases: any[] }) {
               0{index + 1}
             </div>
             <div className="flex-1 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <span className="inline-block rounded-full bg-brand-navy px-3 py-0.5 text-[10px] font-black text-white">
+              <span className="inline-block rounded-full bg-brand-navy px-3 py-0.5 text-xs font-black text-white">
                 {item.phase}
               </span>
-              <h4 className="mt-2 text-base font-bold text-slate-900">{item.title}</h4>
-              <p className="mt-1 text-xs font-semibold leading-relaxed text-slate-600">{item.desc}</p>
+              <h4 className="mt-2 text-lg font-bold text-slate-900">{item.title}</h4>
+              <p className="mt-1 text-sm font-semibold leading-relaxed text-slate-600">{item.desc}</p>
             </div>
           </motion.div>
         ))}
@@ -389,17 +389,17 @@ function SvgRibbonFlow({ steps }: { steps: any[] }) {
                           <Icon className="h-5 w-5" />
                         </div>
                         <div>
-                          <span className="text-[10px] font-black uppercase tracking-widest text-brand-terracotta">
+                          <span className="text-xs font-black uppercase tracking-widest text-brand-terracotta">
                             Step {item.num}
                           </span>
-                          <h3 className="text-sm sm:text-lg font-display font-bold text-brand-navy">
+                          <h3 className="text-base sm:text-xl font-display font-bold text-brand-navy">
                             {item.title}
                           </h3>
                         </div>
                       </div>
 
                       <div className="max-w-md text-right hidden sm:block">
-                        <p className="text-xs font-semibold text-slate-600 leading-snug">
+                        <p className="text-sm font-semibold text-slate-600 leading-snug">
                           {item.desc}
                         </p>
                       </div>
@@ -482,32 +482,32 @@ function AudienceRoadmapTrack({ items }: { items: any[] }) {
                 <div className="group relative rounded-[1.8rem] border border-slate-200/90 bg-white p-4 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-brand-navy/40 hover:shadow-2xl">
                   {/* Card Header: STAGE & Title */}
                   <div className="flex items-center justify-between gap-1 mb-1.5">
-                    <span className="text-xs font-black uppercase tracking-widest text-brand-terracotta">
+                    <span className="text-sm font-black uppercase tracking-widest text-brand-terracotta">
                       STAGE {item.num}
                     </span>
-                    <h3 className="text-sm font-extrabold font-display text-slate-900 truncate group-hover:text-brand-navy transition-colors">
+                    <h3 className="text-base font-extrabold font-display text-slate-900 truncate group-hover:text-brand-navy transition-colors">
                       {item.stageTitle || item.label}
                     </h3>
                   </div>
 
                   {/* Subtitle / Focus */}
-                  <p className="text-xs font-bold text-brand-navy leading-tight">
+                  <p className="text-sm font-bold text-brand-navy leading-tight">
                     {item.label}
                   </p>
-                  <p className="mt-1 text-xs font-medium text-slate-600 leading-snug line-clamp-2">
+                  <p className="mt-1 text-sm font-medium text-slate-600 leading-snug line-clamp-2">
                     {item.desc}
                   </p>
 
                   {/* Inner Tinted Detail Box */}
                   <div className="mt-2.5 rounded-xl border border-slate-200/70 bg-slate-50/95 p-2.5">
-                    <p className="text-xs font-medium text-slate-700 leading-relaxed">
+                    <p className="text-sm font-medium text-slate-700 leading-relaxed">
                       {item.detailBox}
                     </p>
                   </div>
 
                   {/* Bottom Review Path Footer */}
-                  <div className="mt-2.5 flex items-center gap-2 text-xs font-bold text-slate-800 pt-2 border-t border-slate-100">
-                    <div className="flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+                  <div className="mt-2.5 flex items-center gap-2 text-sm font-bold text-slate-800 pt-2 border-t border-slate-100">
+                    <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
                       <CheckCircle2 className="h-3.5 w-3.5" />
                     </div>
                     <span className="truncate">{item.reviewPath || `${item.tag} review path`}</span>
@@ -689,22 +689,22 @@ function AudienceRoadmapTrack({ items }: { items: any[] }) {
               {/* Mobile Card Box */}
               <div className="flex-1 rounded-2xl border border-slate-200 bg-white p-4.5 shadow-sm">
                 <div className="flex items-center justify-between gap-2 mb-1.5">
-                  <span className="text-xs font-black uppercase tracking-wider text-brand-terracotta">
+                  <span className="text-sm font-black uppercase tracking-wider text-brand-terracotta">
                     STAGE {item.num}
                   </span>
-                  <span className="rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-emerald-800">
+                  <span className="rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-0.5 text-xs font-black uppercase tracking-wider text-emerald-800">
                     {item.tag}
                   </span>
                 </div>
-                <h4 className="text-base font-bold font-display text-slate-900">{item.stageTitle || item.label}</h4>
-                <p className="mt-0.5 text-xs font-bold text-brand-navy">{item.label}</p>
-                <p className="mt-1 text-xs font-medium text-slate-600 leading-snug">{item.desc}</p>
+                <h4 className="text-lg font-bold font-display text-slate-900">{item.stageTitle || item.label}</h4>
+                <p className="mt-0.5 text-sm font-bold text-brand-navy">{item.label}</p>
+                <p className="mt-1 text-sm font-medium text-slate-600 leading-snug">{item.desc}</p>
 
-                <div className="mt-3 rounded-xl border border-slate-200/70 bg-slate-50 p-3 text-xs font-medium text-slate-700 leading-relaxed">
+                <div className="mt-3 rounded-xl border border-slate-200/70 bg-slate-50 p-3 text-sm font-medium text-slate-700 leading-relaxed">
                   {item.detailBox}
                 </div>
 
-                <div className="mt-3 flex items-center gap-2 text-xs font-bold text-slate-800 pt-2 border-t border-slate-100">
+                <div className="mt-3 flex items-center gap-2 text-sm font-bold text-slate-800 pt-2 border-t border-slate-100">
                   <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
                   <span>{item.reviewPath || `${item.tag} review path`}</span>
                 </div>
@@ -1127,7 +1127,7 @@ export function CommerceEnablement() {
                   hidden: { opacity: 0, y: 15 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
                 }}
-                className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-terracotta/25 bg-brand-terracotta/5 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-brand-terracotta shadow-xs"
+                className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-terracotta/25 bg-brand-terracotta/5 px-4 py-2 text-sm font-black uppercase tracking-[0.18em] text-brand-terracotta shadow-xs"
               >
                 <Sparkles className="h-4 w-4 animate-pulse text-brand-terracotta" />
                 <span>Commerce Enablement Framework™</span>
@@ -1139,7 +1139,7 @@ export function CommerceEnablement() {
                   hidden: { opacity: 0, y: 25 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] } },
                 }}
-                className="max-w-4xl text-4xl font-display font-bold leading-[1.15] tracking-tight text-slate-955 sm:text-5xl lg:text-6xl"
+                className="max-w-4xl text-5xl font-display font-bold leading-[1.15] tracking-tight text-slate-955 sm:text-6xl lg:text-7xl"
               >
                 Find And{" "}
                 <span className="bg-gradient-to-r from-brand-terracotta to-[#C24E3A] bg-clip-text text-transparent underline decoration-brand-terracotta/30 underline-offset-8">
@@ -1154,7 +1154,7 @@ export function CommerceEnablement() {
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
                 }}
-                className="mt-6 space-y-3 max-w-3xl text-base font-medium leading-relaxed text-slate-600 sm:text-lg"
+                className="mt-6 space-y-3 max-w-3xl text-lg font-medium leading-relaxed text-slate-600 sm:text-xl"
               >
                 <p>
                   <strong className="text-slate-900">Your ecommerce store is live.</strong> But your growth depends on more than your website.
@@ -1170,7 +1170,7 @@ export function CommerceEnablement() {
                   hidden: { opacity: 0, y: 15 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
                 }}
-                className="mt-6 inline-flex flex-wrap items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-xs font-bold text-slate-700 sm:text-sm"
+                className="mt-6 inline-flex flex-wrap items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm font-bold text-slate-700 sm:text-base"
               >
                 <span className="text-brand-navy">Supported Ecosystems:</span>
                 <span className="text-slate-500 font-semibold">For Shopify | WooCommerce | Adobe Commerce | Magento | Custom Ecommerce</span>
@@ -1218,7 +1218,7 @@ export function CommerceEnablement() {
                     <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
                       <CheckCircle2 className="h-4 w-4" />
                     </div>
-                    <span className="text-xs font-bold text-slate-800 sm:text-sm">{point}</span>
+                    <span className="text-sm font-bold text-slate-800 sm:text-base">{point}</span>
                   </div>
                 ))}
               </motion.div>
@@ -1266,10 +1266,10 @@ export function CommerceEnablement() {
                 <AlertTriangle className="h-3.5 w-3.5" />
                 Root Cause Analysis
               </span>
-              <h3 className="text-2xl sm:text-3xl font-display font-bold text-white leading-tight">
+              <h3 className="text-3xl sm:text-4xl font-display font-bold text-white leading-tight">
                 Single tools don&apos;t fix broken system connections.
               </h3>
-              <p className="mt-3 text-sm font-semibold text-slate-300 leading-relaxed">
+              <p className="mt-3 text-base font-semibold text-slate-300 leading-relaxed">
                 Most ecommerce stores hit growth ceilings because traffic, catalogue, ads, communication, and operations act as isolated silos. SoftClinch diagnoses and connects all 5 critical gap areas.
               </p>
             </div>
@@ -1319,22 +1319,22 @@ export function CommerceEnablement() {
                     </span>
                   </div>
 
-                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                  <span className="text-xs font-black uppercase tracking-widest text-slate-400">
                     Gap 0{idx + 1}
                   </span>
 
-                  <h3 className="mt-1 text-xl font-display font-bold leading-snug text-slate-955 group-hover:text-brand-navy transition-colors">
+                  <h3 className="mt-1 text-2xl font-display font-bold leading-snug text-slate-955 group-hover:text-brand-navy transition-colors">
                     {problem.title}
                   </h3>
 
-                  <p className="mt-4 text-[11px] font-black uppercase tracking-wider text-slate-400 border-b border-slate-100 pb-2">
+                  <p className="mt-4 text-xs font-black uppercase tracking-wider text-slate-400 border-b border-slate-100 pb-2">
                     Common Friction Points:
                   </p>
 
                   <ul className="mt-3 space-y-2">
                     {problem.issues.map((issue) => (
-                      <li key={issue} className="flex items-start gap-2 text-xs font-semibold text-slate-700">
-                        <XCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-terracotta/90" />
+                      <li key={issue} className="flex items-start gap-2 text-sm font-semibold text-slate-700">
+                        <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-brand-terracotta/90" />
                         <span>{issue}</span>
                       </li>
                     ))}
@@ -1372,22 +1372,22 @@ export function CommerceEnablement() {
                     </span>
                   </div>
 
-                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                  <span className="text-xs font-black uppercase tracking-widest text-slate-400">
                     Gap 0{realIdx + 1}
                   </span>
 
-                  <h3 className="mt-1 text-xl font-display font-bold leading-snug text-slate-955 group-hover:text-brand-navy transition-colors">
+                  <h3 className="mt-1 text-2xl font-display font-bold leading-snug text-slate-955 group-hover:text-brand-navy transition-colors">
                     {problem.title}
                   </h3>
 
-                  <p className="mt-4 text-[11px] font-black uppercase tracking-wider text-slate-400 border-b border-slate-100 pb-2">
+                  <p className="mt-4 text-xs font-black uppercase tracking-wider text-slate-400 border-b border-slate-100 pb-2">
                     Common Friction Points:
                   </p>
 
                   <ul className="mt-3 space-y-2">
                     {problem.issues.map((issue) => (
-                      <li key={issue} className="flex items-start gap-2 text-xs font-semibold text-slate-700">
-                        <XCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-terracotta/90" />
+                      <li key={issue} className="flex items-start gap-2 text-sm font-semibold text-slate-700">
+                        <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-brand-terracotta/90" />
                         <span>{issue}</span>
                       </li>
                     ))}
@@ -1455,10 +1455,10 @@ export function CommerceEnablement() {
                         }}
                       >
                         <div className="px-2">
-                          <span className="block text-[9px] font-black uppercase tracking-widest opacity-80">
+                          <span className="block text-xs font-black uppercase tracking-widest opacity-80">
                             PILLAR {pillar.id}
                           </span>
-                          <h4 className="text-xs font-bold leading-tight line-clamp-2 mt-0.5">
+                          <h4 className="text-sm font-bold leading-tight line-clamp-2 mt-0.5">
                             {pillar.shortName}
                           </h4>
                         </div>
@@ -1468,10 +1468,10 @@ export function CommerceEnablement() {
                       <div className={`flex-1 mt-2 rounded-2xl border p-4 flex flex-col justify-between ${colTint}`}>
                         <div className="space-y-3">
                           <div className="rounded-xl border border-slate-200/80 bg-white p-3 shadow-2xs">
-                            <span className="text-[9px] font-black uppercase tracking-widest text-brand-terracotta">
+                            <span className="text-xs font-black uppercase tracking-widest text-brand-terracotta">
                               Diagnostic Objective
                             </span>
-                            <p className="mt-1 text-xs font-bold text-slate-800 leading-tight">
+                            <p className="mt-1 text-sm font-bold text-slate-800 leading-tight">
                               &quot;{pillar.question}&quot;
                             </p>
                           </div>
@@ -1480,7 +1480,7 @@ export function CommerceEnablement() {
                             {(pillar.analyse || pillar.review || pillar.identify || []).slice(0, 4).map((item: string, itemIdx: number) => (
                               <div
                                 key={item}
-                                className="flex items-center gap-2 rounded-lg bg-white p-2 text-xs font-semibold text-slate-700 border border-slate-100 shadow-2xs"
+                                className="flex items-center gap-2 rounded-lg bg-white p-2 text-sm font-semibold text-slate-700 border border-slate-100 shadow-2xs"
                               >
                                 <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-brand-navy/10 text-[9px] font-black text-brand-navy">
                                   {itemIdx + 1}
@@ -1492,10 +1492,10 @@ export function CommerceEnablement() {
                         </div>
 
                         <div className="mt-4 pt-2 border-t border-slate-200/60">
-                          <span className="block text-[9px] font-black uppercase tracking-wider text-slate-400">
+                          <span className="block text-xs font-black uppercase tracking-wider text-slate-400">
                             Output Deliverable
                           </span>
-                          <div className="mt-1 rounded-xl bg-brand-navy p-2 text-center text-xs font-bold text-white shadow-xs">
+                          <div className="mt-1 rounded-xl bg-brand-navy p-2 text-center text-sm font-bold text-white shadow-xs">
                             {pillar.output}
                           </div>
                         </div>
@@ -1551,10 +1551,10 @@ export function CommerceEnablement() {
                         }}
                       >
                         <div className="px-2">
-                          <span className="block text-[9px] font-black uppercase tracking-widest opacity-80">
+                          <span className="block text-xs font-black uppercase tracking-widest opacity-80">
                             PILLAR {pillar.id}
                           </span>
-                          <h4 className="text-xs font-bold leading-tight line-clamp-2 mt-0.5">
+                          <h4 className="text-sm font-bold leading-tight line-clamp-2 mt-0.5">
                             {pillar.shortName}
                           </h4>
                         </div>
@@ -1564,10 +1564,10 @@ export function CommerceEnablement() {
                       <div className={`flex-1 mt-2 rounded-2xl border p-4 flex flex-col justify-between ${colTint}`}>
                         <div className="space-y-3">
                           <div className="rounded-xl border border-slate-200/80 bg-white p-3 shadow-2xs">
-                            <span className="text-[9px] font-black uppercase tracking-widest text-brand-terracotta">
+                            <span className="text-xs font-black uppercase tracking-widest text-brand-terracotta">
                               Diagnostic Objective
                             </span>
-                            <p className="mt-1 text-xs font-bold text-slate-800 leading-tight">
+                            <p className="mt-1 text-sm font-bold text-slate-800 leading-tight">
                               &quot;{pillar.question}&quot;
                             </p>
                           </div>
@@ -1576,7 +1576,7 @@ export function CommerceEnablement() {
                             {(pillar.analyse || pillar.review || pillar.identify || pillar.groups?.flatMap((g: any) => g.items) || []).slice(0, 4).map((item: string, itemIdx: number) => (
                               <div
                                 key={item}
-                                className="flex items-center gap-2 rounded-lg bg-white p-2 text-xs font-semibold text-slate-700 border border-slate-100 shadow-2xs"
+                                className="flex items-center gap-2 rounded-lg bg-white p-2 text-sm font-semibold text-slate-700 border border-slate-100 shadow-2xs"
                               >
                                 <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-brand-navy/10 text-[9px] font-black text-brand-navy">
                                   {itemIdx + 1}
@@ -1588,10 +1588,10 @@ export function CommerceEnablement() {
                         </div>
 
                         <div className="mt-4 pt-2 border-t border-slate-200/60">
-                          <span className="block text-[9px] font-black uppercase tracking-wider text-slate-400">
+                          <span className="block text-xs font-black uppercase tracking-wider text-slate-400">
                             Output Deliverable
                           </span>
-                          <div className="mt-1 rounded-xl bg-brand-navy p-2 text-center text-xs font-bold text-white shadow-xs">
+                          <div className="mt-1 rounded-xl bg-brand-navy p-2 text-center text-sm font-bold text-white shadow-xs">
                             {pillar.output}
                           </div>
                         </div>
@@ -1625,8 +1625,8 @@ export function CommerceEnablement() {
                         <Icon className="h-5 w-5" />
                       </div>
                       <div>
-                        <span className="text-[10px] font-black text-brand-terracotta uppercase">Pillar {pillar.id}</span>
-                        <h4 className="text-sm font-bold text-slate-900">{pillar.name}</h4>
+                        <span className="text-xs font-black text-brand-terracotta uppercase">Pillar {pillar.id}</span>
+                        <h4 className="text-base font-bold text-slate-900">{pillar.name}</h4>
                       </div>
                     </div>
                     <ChevronDown className={`h-5 w-5 text-slate-400 transition-transform ${isOpen ? "rotate-180" : ""}`} />
@@ -1634,16 +1634,16 @@ export function CommerceEnablement() {
 
                   {isOpen && (
                     <div className="p-4 border-t border-slate-100 bg-slate-50 space-y-3">
-                      <p className="text-xs font-bold text-slate-800">&quot;{pillar.question}&quot;</p>
+                      <p className="text-sm font-bold text-slate-800">&quot;{pillar.question}&quot;</p>
                       <div className="space-y-1">
                         {(pillar.analyse || pillar.review || pillar.identify || []).map((item: string) => (
-                          <div key={item} className="flex items-center gap-2 text-xs font-semibold text-slate-700 bg-white p-2 rounded-lg border border-slate-200">
+                          <div key={item} className="flex items-center gap-2 text-sm font-semibold text-slate-700 bg-white p-2 rounded-lg border border-slate-200">
                             <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
                             <span>{item}</span>
                           </div>
                         ))}
                       </div>
-                      <div className="pt-2 border-t border-slate-200 flex items-center justify-between text-xs font-bold">
+                      <div className="pt-2 border-t border-slate-200 flex items-center justify-between text-sm font-bold">
                         <span className="text-slate-500">Deliverable:</span>
                         <span className="text-brand-terracotta">{pillar.output}</span>
                       </div>
@@ -1671,8 +1671,8 @@ export function CommerceEnablement() {
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-navy text-white shadow-md mb-6">
                   <Icon className="h-6 w-6" />
                 </div>
-                <h3 className="text-xl font-display font-bold text-slate-955">{comp.title}</h3>
-                <p className="mt-3 text-sm font-semibold leading-relaxed text-slate-600">{comp.desc}</p>
+                <h3 className="text-2xl font-display font-bold text-slate-955">{comp.title}</h3>
+                <p className="mt-3 text-base font-semibold leading-relaxed text-slate-600">{comp.desc}</p>
               </div>
             );
           })}
@@ -1681,8 +1681,8 @@ export function CommerceEnablement() {
         {/* AXIS TIMELINE ROADMAP (DAYS 0-30, 31-60, 61-90) */}
         <div className="mt-8">
           <div className="text-center max-w-2xl mx-auto mb-8">
-            <span className="text-xs font-black uppercase tracking-widest text-brand-terracotta">Structured Phase Timeline</span>
-            <h3 className="text-2xl sm:text-3xl font-display font-bold text-slate-955 mt-1">90-Day Execution Roadmap</h3>
+            <span className="text-sm font-black uppercase tracking-widest text-brand-terracotta">Structured Phase Timeline</span>
+            <h3 className="text-3xl sm:text-4xl font-display font-bold text-slate-955 mt-1">90-Day Execution Roadmap</h3>
           </div>
           <AxisTimelineRoadmap phases={roadmapPhases} />
         </div>
@@ -1728,10 +1728,10 @@ export function CommerceEnablement() {
                       </span>
                       <Compass className="h-5 w-5 text-brand-terracotta" />
                     </div>
-                    <h4 className="text-base font-bold font-display text-white">
+                    <h4 className="text-lg font-bold font-display text-white">
                       Discovery
                     </h4>
-                    <p className="mt-2 text-[11px] font-medium text-slate-300 leading-relaxed">
+                    <p className="mt-2 text-sm font-medium text-slate-300 leading-relaxed">
                       Understand your business model, customers, technology, and key challenges.
                     </p>
                   </div>
@@ -1773,11 +1773,11 @@ export function CommerceEnablement() {
                       </span>
                       <SearchCheck className="h-5 w-5 text-white" />
                     </div>
-                    <h4 className="text-base font-bold font-display text-white">
+                    <h4 className="text-lg font-bold font-display text-white">
                       Commerce Assessment
                     </h4>
-                    <p className="mt-2 text-[11px] font-medium text-orange-100 leading-relaxed">
-                      Review complete ecommerce ecosystem across tech, marketing, & ops.
+                    <p className="mt-2 text-sm font-medium text-orange-100 leading-relaxed">
+                      Review complete ecommerce ecosystem across tech, marketing, &amp; ops.
                     </p>
                   </div>
                 </div>
@@ -1822,8 +1822,8 @@ export function CommerceEnablement() {
                         03
                       </span>
                       <div>
-                        <h5 className="text-xs font-bold text-slate-900">Growth Blueprint</h5>
-                        <p className="text-[10px] font-medium text-slate-600 leading-tight">Prioritized 90-day roadmap & maturity score.</p>
+                        <h5 className="text-sm font-bold text-slate-900">Growth Blueprint</h5>
+                        <p className="text-xs font-medium text-slate-600 leading-tight">Prioritized 90-day roadmap & maturity score.</p>
                       </div>
                     </div>
                   </div>
@@ -1835,8 +1835,8 @@ export function CommerceEnablement() {
                         04
                       </span>
                       <div>
-                        <h5 className="text-xs font-bold text-white">Implementation</h5>
-                        <p className="text-[10px] font-medium text-slate-200 leading-tight">Execute improvements across tech & workflows.</p>
+                        <h5 className="text-sm font-bold text-white">Implementation</h5>
+                        <p className="text-xs font-medium text-slate-200 leading-tight">Execute improvements across tech & workflows.</p>
                       </div>
                     </div>
                   </div>
@@ -1848,8 +1848,8 @@ export function CommerceEnablement() {
                         05
                       </span>
                       <div>
-                        <h5 className="text-xs font-bold text-slate-900">Training & Handover</h5>
-                        <p className="text-[10px] font-medium text-slate-600 leading-tight">SOPs & continuous team handovers.</p>
+                        <h5 className="text-sm font-bold text-slate-900">Training & Handover</h5>
+                        <p className="text-xs font-medium text-slate-600 leading-tight">SOPs & continuous team handovers.</p>
                       </div>
                     </div>
                   </div>
@@ -1909,9 +1909,9 @@ export function CommerceEnablement() {
                       <Icon className="h-6 w-6" />
                     </div>
                     <div>
-                      <span className="text-xs font-black text-brand-terracotta uppercase">Step {step.num}</span>
-                      <h4 className="text-base font-bold text-slate-900">{step.title}</h4>
-                      <p className="mt-1 text-xs font-medium text-slate-600">{step.desc}</p>
+                      <span className="text-sm font-black text-brand-terracotta uppercase">Step {step.num}</span>
+                      <h4 className="text-lg font-bold text-slate-900">{step.title}</h4>
+                      <p className="mt-1 text-sm font-medium text-slate-600">{step.desc}</p>
                     </div>
                   </div>
                 );
@@ -1972,8 +1972,8 @@ export function CommerceEnablement() {
                         <Cpu className="h-6 w-6" />
                       </div>
                       <div>
-                        <h4 className="text-base font-bold text-slate-900 font-display">Ecommerce Technology</h4>
-                        <p className="text-xs font-medium text-slate-500 mt-0.5">Platform stability, speed & catalog scalability.</p>
+                        <h4 className="text-lg font-bold text-slate-900 font-display">Ecommerce Technology</h4>
+                        <p className="text-sm font-medium text-slate-500 mt-0.5">Platform stability, speed & catalog scalability.</p>
                       </div>
                     </div>
                   </div>
@@ -1985,8 +1985,8 @@ export function CommerceEnablement() {
                         <ShoppingBag className="h-6 w-6 text-brand-terracotta" />
                       </div>
                       <div>
-                        <h4 className="text-base font-bold text-white font-display">Customer Experience</h4>
-                        <p className="text-xs font-medium text-orange-100 mt-0.5">Conversion pathways, UI/UX & customer checkout.</p>
+                        <h4 className="text-lg font-bold text-white font-display">Customer Experience</h4>
+                        <p className="text-sm font-medium text-orange-100 mt-0.5">Conversion pathways, UI/UX & customer checkout.</p>
                       </div>
                     </div>
                   </div>
@@ -1998,8 +1998,8 @@ export function CommerceEnablement() {
                         <Store className="h-6 w-6" />
                       </div>
                       <div>
-                        <h4 className="text-base font-bold text-slate-900 font-display">Product Systems</h4>
-                        <p className="text-xs font-medium text-slate-500 mt-0.5">Catalog structuring, inventory & feeds.</p>
+                        <h4 className="text-lg font-bold text-slate-900 font-display">Product Systems</h4>
+                        <p className="text-sm font-medium text-slate-500 mt-0.5">Catalog structuring, inventory & feeds.</p>
                       </div>
                     </div>
                   </div>
@@ -2018,10 +2018,10 @@ export function CommerceEnablement() {
                       <div className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-terracotta text-white shadow-xl mb-2">
                         <Workflow className="h-8 w-8" />
                       </div>
-                      <span className="text-[10px] font-black uppercase tracking-widest text-brand-terracotta">
+                      <span className="text-xs font-black uppercase tracking-widest text-brand-terracotta">
                         SoftClinch Core
                       </span>
-                      <h3 className="text-base font-bold font-display text-white mt-0.5 leading-tight">
+                      <h3 className="text-lg font-bold font-display text-white mt-0.5 leading-tight">
                         Connected Commerce Framework
                       </h3>
                     </div>
@@ -2037,8 +2037,8 @@ export function CommerceEnablement() {
                         <Zap className="h-6 w-6" />
                       </div>
                       <div>
-                        <h4 className="text-base font-bold text-slate-900 font-display">Marketing Channels</h4>
-                        <p className="text-xs font-medium text-slate-500 mt-0.5">Meta Ads, Google Ads & acquisition funnel.</p>
+                        <h4 className="text-lg font-bold text-slate-900 font-display">Marketing Channels</h4>
+                        <p className="text-sm font-medium text-slate-500 mt-0.5">Meta Ads, Google Ads & acquisition funnel.</p>
                       </div>
                     </div>
                   </div>
@@ -2050,8 +2050,8 @@ export function CommerceEnablement() {
                         <MessageSquare className="h-6 w-6 text-brand-terracotta" />
                       </div>
                       <div>
-                        <h4 className="text-base font-bold text-white font-display">Communication Automation</h4>
-                        <p className="text-xs font-medium text-orange-100 mt-0.5">Inaiwazhi WhatsApp AI & customer support.</p>
+                        <h4 className="text-lg font-bold text-white font-display">Communication Automation</h4>
+                        <p className="text-sm font-medium text-orange-100 mt-0.5">Inaiwazhi WhatsApp AI & customer support.</p>
                       </div>
                     </div>
                   </div>
@@ -2063,8 +2063,8 @@ export function CommerceEnablement() {
                         <TrendingUp className="h-6 w-6" />
                       </div>
                       <div>
-                        <h4 className="text-base font-bold text-slate-900 font-display">Analytics & Operations</h4>
-                        <p className="text-xs font-medium text-slate-500 mt-0.5">Performance tracking, SOPs & team handovers.</p>
+                        <h4 className="text-lg font-bold text-slate-900 font-display">Analytics & Operations</h4>
+                        <p className="text-sm font-medium text-slate-500 mt-0.5">Performance tracking, SOPs & team handovers.</p>
                       </div>
                     </div>
                   </div>
@@ -2137,13 +2137,13 @@ export function CommerceEnablement() {
           <div className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-brand-navy to-brand-terracotta" />
           <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
             <div>
-              <span className="text-xs font-black uppercase tracking-[0.2em] text-brand-terracotta">
+              <span className="text-sm font-black uppercase tracking-[0.2em] text-brand-terracotta">
                 Commerce Enablement
               </span>
-              <h2 className="mt-4 text-3xl font-display font-bold leading-tight text-slate-955 sm:text-4xl lg:text-5xl">
+              <h2 className="mt-4 text-4xl font-display font-bold leading-tight text-slate-955 sm:text-5xl lg:text-6xl">
                 Your Ecommerce Growth Problem Has A System Behind It.
               </h2>
-              <p className="mt-6 max-w-2xl text-base font-medium leading-relaxed text-slate-600 sm:text-lg">
+              <p className="mt-6 max-w-2xl text-lg font-medium leading-relaxed text-slate-600 sm:text-xl">
                 Find the gaps. Understand the opportunities. Build a stronger commerce foundation.
               </p>
             </div>

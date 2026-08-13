@@ -240,220 +240,377 @@ export const BusinessCommunication = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans selection:bg-brand-terracotta selection:text-white pt-24">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans selection:bg-brand-terracotta selection:text-white pt-28 sm:pt-32 lg:pt-36">
 
       {/* =========================================================================
           HERO SECTION (High-Fidelity White Light Enterprise Design)
           ========================================================================= */}
-      <section className="relative z-10 pt-10 pb-20 border-b border-slate-200/80 bg-white overflow-hidden">
+      <section className="relative z-10 pt-4 sm:pt-8 pb-16 lg:pb-20 border-b border-slate-200/80 bg-white overflow-hidden">
         {/* Soft Modern Gradient Mesh Background */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(0,51,102,0.08),_transparent_45%),radial-gradient(circle_at_80%_20%,_rgba(153,51,0,0.08),_transparent_35%),linear-gradient(180deg,_#ffffff_0%,_#f8fafc_100%)] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          
-          {/* Top Pill Badge */}
-          <div className="text-center mb-6">
+
+          {/* 2-Column Hero Grid: Left Content (Heading & Story), Right Live Simulator Visual */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-12">
+
+            {/* Left Column: Top Pill Badge, Heading, Subtitle, Problem Story & CTAs */}
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900 text-white text-xs font-bold uppercase tracking-widest shadow-md"
-            >
-              <Sparkles className="w-4 h-4 text-amber-400" />
-              <span>inaiwazhi • SoftClinch Enterprise Platform</span>
-            </motion.div>
-          </div>
-
-          {/* Main Title & Subtitle Header */}
-          <div className="text-center max-w-4xl mx-auto mb-14">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.08] mb-6"
-            >
-              Business Communication &{" "}
-              <span className="bg-gradient-to-r from-brand-navy via-slate-800 to-brand-terracotta bg-clip-text text-transparent">
-                Workflow Automation Platform
-              </span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-lg sm:text-2xl font-semibold text-slate-600 max-w-3xl mx-auto"
-            >
-              Connect Customers, Support Teams, Employees, Partners & Business Systems
-            </motion.p>
-          </div>
-
-          {/* 2-Column Hero Grid: Left Content & Story, Right Live Simulator */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-14">
-            
-            {/* Left Column: Problem Story & CTAs */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
-              className="lg:col-span-7 space-y-6"
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="lg:col-span-7 space-y-6 text-left"
             >
-              <div className="bg-slate-50 border border-slate-200 p-6 sm:p-8 rounded-3xl text-slate-800 shadow-sm space-y-4">
-                <p className="text-base sm:text-lg leading-relaxed font-medium">
+              {/* Top Pill Badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
+                <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900 text-white text-xs font-bold uppercase tracking-widest shadow-md hover:bg-slate-800 transition-colors">
+                  <Sparkles className="w-4 h-4 text-amber-400 animate-spin-slow" />
+                  <span>inaiwazhi • SoftClinch Enterprise Platform</span>
+                </div>
+              </motion.div>
+
+              {/* Main Title Header */}
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="font-extrabold text-slate-900 leading-tight"
+                style={{ fontSize: "clamp(2rem, 3.6vw, 3.4rem)", lineHeight: 1.15, letterSpacing: "-0.03em" }}
+              >
+                Business Communication &{" "}
+                <span className="bg-gradient-to-r from-brand-navy via-slate-800 to-brand-terracotta bg-clip-text text-transparent">
+                  Workflow Automation Platform
+                </span>
+              </motion.h1>
+
+              {/* Subtitle */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="text-base sm:text-lg text-slate-600 font-medium leading-relaxed"
+              >
+                Connect Customers, Support Teams, Employees, Partners & Business Systems
+              </motion.p>
+
+              {/* Problem Story Box */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="bg-slate-50 border border-slate-200 p-5 sm:p-6 rounded-3xl text-slate-800 shadow-sm space-y-3.5"
+              >
+                <p className="text-sm sm:text-base leading-relaxed font-medium">
                   Your business already has core systems for <span className="text-brand-navy font-bold">sales, operations, finance, production, service and CRM</span>.
                 </p>
-                
-                <div className="p-4 rounded-2xl bg-brand-navy/5 border-l-4 border-brand-terracotta text-brand-navy font-bold text-base sm:text-lg leading-snug">
+
+                <div className="p-3.5 rounded-2xl bg-brand-navy/5 border-l-4 border-brand-terracotta text-brand-navy font-bold text-sm sm:text-base leading-snug">
                   What happens between those systems and the people who need to act?
                 </div>
 
-                <div className="text-xs font-bold text-slate-500 uppercase tracking-wider pt-2">
+                <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider pt-1">
                   Real-time Event Triggers Connected:
                 </div>
 
                 {/* Event Trigger Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {[
                     { event: "Customer WhatsApp Request", target: "Support Desk" },
                     { event: "Support Ticket Escalation", target: "Plant QA & Ops" },
                     { event: "Production Order Completed", target: "Dispatch & SAP" },
                     { event: "Dealer Shipment Dispatched", target: "WhatsApp ETA" },
                   ].map((item, idx) => (
-                    <div key={idx} className="p-3 rounded-xl bg-white border border-slate-200 flex items-center justify-between text-xs shadow-2xs">
+                    <motion.div
+                      key={idx}
+                      whileHover={{ scale: 1.01, x: 2 }}
+                      className="p-2.5 rounded-xl bg-white border border-slate-200 flex items-center justify-between text-xs shadow-2xs"
+                    >
                       <span className="font-bold text-slate-900">{item.event}</span>
                       <span className="text-[10px] font-bold text-brand-navy bg-brand-navy/10 px-2 py-0.5 rounded">
                         {item.target}
                       </span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
 
-                <div className="pt-2 text-xs text-slate-600 font-semibold flex items-center gap-2">
+                <div className="pt-1 text-xs text-slate-600 font-semibold flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                   <span>Your SAP / ERP holds the data. inaiwazhi connects that data to the people who need to act.</span>
                 </div>
-              </div>
+              </motion.div>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row items-center gap-4 pt-2">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="flex flex-col sm:flex-row items-center gap-4 pt-1"
+              >
                 <Link
                   href="/contact"
-                  className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-brand-navy hover:bg-brand-navy/90 text-white font-bold text-sm transition-all shadow-lg hover:shadow-brand-navy/20 flex items-center justify-center gap-3"
+                  className="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-brand-navy hover:bg-brand-navy/90 text-white font-bold text-sm transition-all shadow-lg hover:shadow-brand-navy/20 flex items-center justify-center gap-2.5 hover:scale-[1.02]"
                 >
                   <span>See How It Works</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <button
                   onClick={() => openDemoModal("Enterprise Main Demo")}
-                  className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-brand-terracotta hover:bg-brand-terracotta/90 text-white font-bold text-sm transition-all shadow-lg hover:shadow-brand-terracotta/20 flex items-center justify-center gap-3"
+                  className="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-brand-terracotta hover:bg-brand-terracotta/90 text-white font-bold text-sm transition-all shadow-lg hover:shadow-brand-terracotta/20 flex items-center justify-center gap-2.5 hover:scale-[1.02]"
                 >
                   <Sparkles className="w-4 h-4" />
                   <span>Book an Enterprise Demo</span>
                 </button>
-              </div>
+              </motion.div>
             </motion.div>
 
-            {/* Right Column: Live Orchestration Bus Interactive Simulator */}
+            {/* Right Column: Animated Live Orchestration Bus Visual Card */}
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4 }}
-              className="lg:col-span-5 bg-slate-900 rounded-3xl p-6 sm:p-7 text-white shadow-2xl border border-slate-800 relative overflow-hidden"
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="lg:col-span-5 bg-slate-900 rounded-3xl p-6 sm:p-7 text-white shadow-2xl border border-slate-800 relative overflow-hidden group flex flex-col justify-between self-stretch"
             >
-              {/* Header Ticker */}
-              <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-5">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-xs font-mono font-bold text-slate-300 uppercase tracking-wider">
-                    ORCHESTRATION BUS ACTIVE
-                  </span>
-                </div>
-                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                  REAL-TIME
-                </span>
-              </div>
+              {/* Vertical Traveling Energy Orb Ball */}
+              <motion.div
+                animate={{
+                  top: ["16%", "38%", "62%", "84%", "16%"]
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="absolute left-[34px] w-3.5 h-3.5 rounded-full bg-emerald-400 shadow-[0_0_15px_#34d399,#0_0_30px_#10b981] z-30 pointer-events-none -translate-x-1/2 hidden sm:block"
+              />
 
-              {/* Connected Stage Nodes Visual Flow */}
-              <div className="space-y-3.5 relative">
-                
-                {/* Node 1 */}
-                <div className="p-3.5 rounded-2xl bg-slate-800/80 border border-slate-700/80 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">
-                      💬
-                    </div>
-                    <div>
-                      <div className="text-xs font-bold text-white">Inbound WhatsApp Request</div>
-                      <div className="text-[10px] text-slate-400">“Need stock update for Order #9021”</div>
-                    </div>
+              {/* Animated Glow Background Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-navy/40 via-slate-900 to-brand-terracotta/20 opacity-80 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+              <div>
+                {/* Header Ticker */}
+                <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-5 relative z-10">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="text-xs font-mono font-bold text-slate-300 uppercase tracking-wider">
+                      ORCHESTRATION ENGINE
+                    </span>
                   </div>
-                  <span className="text-[9px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">
-                    INGESTED
+                  <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    LIVE AUTOMATION
                   </span>
                 </div>
 
-                {/* Connecting Arrow */}
-                <div className="text-center py-0.5">
-                  <ArrowRight className="w-4 h-4 text-amber-400 mx-auto rotate-90" />
-                </div>
+                {/* Connected Stage Nodes Visual Flow */}
+                <div className="space-y-3 relative z-10">
 
-                {/* Node 2: Core Routing */}
-                <div className="p-3.5 rounded-2xl bg-gradient-to-r from-brand-navy to-slate-800 border border-brand-navy/60 flex items-center justify-between shadow-md">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-amber-400/20 text-amber-300 flex items-center justify-center font-bold text-xs">
-                      ⚡
+                  {/* Node 1 */}
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    className="p-3.5 rounded-2xl bg-slate-800/90 border border-slate-700/80 flex items-center justify-between transition-all"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">
+                        💬
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-white">Inbound WhatsApp Trigger</div>
+                        <div className="text-[10px] text-slate-400">“Need stock update for Order #9021”</div>
+                      </div>
                     </div>
-                    <div>
-                      <div className="text-xs font-bold text-amber-300">inaiwazhi AI Engine</div>
-                      <div className="text-[10px] text-slate-300">Routes request to SAP ERP & Sales Team</div>
-                    </div>
+                    <span className="text-[9px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded animate-pulse">
+                      INGESTED
+                    </span>
+                  </motion.div>
+
+                  {/* Flow Arrow */}
+                  <div className="text-center py-0.5">
+                    <motion.div
+                      animate={{ y: [0, 3, 0] }}
+                      transition={{ repeat: Infinity, duration: 1.5 }}
+                    >
+                      <ArrowRight className="w-4 h-4 text-amber-400 mx-auto rotate-90" />
+                    </motion.div>
                   </div>
-                  <span className="text-[9px] font-bold text-amber-300 bg-amber-400/10 px-2 py-0.5 rounded">
-                    ROUTED
-                  </span>
-                </div>
 
-                {/* Connecting Arrow */}
-                <div className="text-center py-0.5">
-                  <ArrowRight className="w-4 h-4 text-emerald-400 mx-auto rotate-90" />
-                </div>
+                  {/* Node 2: AI Engine */}
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    className="p-3.5 rounded-2xl bg-gradient-to-r from-brand-navy to-slate-800 border border-brand-navy/60 flex items-center justify-between shadow-md transition-all"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-xl bg-amber-400/20 text-amber-300 flex items-center justify-center font-bold text-xs">
+                        ⚡
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-amber-300">inaiwazhi Workflow Engine</div>
+                        <div className="text-[10px] text-slate-300">Classifies intent & checks SAP inventory API</div>
+                      </div>
+                    </div>
+                    <span className="text-[9px] font-bold text-amber-300 bg-amber-400/10 px-2 py-0.5 rounded animate-pulse">
+                      ROUTED
+                    </span>
+                  </motion.div>
 
-                {/* Node 3: System Sync */}
-                <div className="p-3.5 rounded-2xl bg-slate-800/80 border border-slate-700/80 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold text-xs">
-                      ⚙️
-                    </div>
-                    <div>
-                      <div className="text-xs font-bold text-white">SAP / ERP Updated</div>
-                      <div className="text-[10px] text-slate-400">Order dispatch status synced & customer notified</div>
-                    </div>
+                  {/* Flow Arrow */}
+                  <div className="text-center py-0.5">
+                    <motion.div
+                      animate={{ y: [0, 3, 0] }}
+                      transition={{ repeat: Infinity, duration: 1.5, delay: 0.5 }}
+                    >
+                      <ArrowRight className="w-4 h-4 text-emerald-400 mx-auto rotate-90" />
+                    </motion.div>
                   </div>
-                  <span className="text-[9px] font-bold text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded">
-                    SYNCED
-                  </span>
-                </div>
 
+                  {/* Node 3: System Sync */}
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    className="p-3.5 rounded-2xl bg-slate-800/90 border border-slate-700/80 flex items-center justify-between transition-all"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold text-xs">
+                        ⚙️
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-white">SAP / ERP & CRM Synced</div>
+                        <div className="text-[10px] text-slate-400">Order status updated & notification sent</div>
+                      </div>
+                    </div>
+                    <span className="text-[9px] font-bold text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded animate-pulse">
+                      SYNCED
+                    </span>
+                  </motion.div>
+
+                  {/* Flow Arrow */}
+                  <div className="text-center py-0.5">
+                    <motion.div
+                      animate={{ y: [0, 3, 0] }}
+                      transition={{ repeat: Infinity, duration: 1.5, delay: 0.8 }}
+                    >
+                      <ArrowRight className="w-4 h-4 text-emerald-400 mx-auto rotate-90" />
+                    </motion.div>
+                  </div>
+
+                  {/* Node 4: Action Completed */}
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    className="p-3.5 rounded-2xl bg-emerald-950/40 border border-emerald-500/30 flex items-center justify-between transition-all"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-bold text-xs">
+                        ✅
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-emerald-300">Customer & Team Notified</div>
+                        <div className="text-[10px] text-slate-300">Instant WhatsApp confirmation dispatched</div>
+                      </div>
+                    </div>
+                    <span className="text-[9px] font-bold text-emerald-300 bg-emerald-500/20 px-2 py-0.5 rounded">
+                      RESOLVED
+                    </span>
+                  </motion.div>
+
+                </div>
               </div>
 
               {/* Bottom Ticker */}
-              <div className="mt-5 pt-3 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400 font-medium">
-                <span>Zero manual emails</span>
-                <span className="text-amber-400 font-bold">100% Automated Loop</span>
+              <div className="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400 font-medium relative z-10">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                  Latency: &lt; 1.2s
+                </span>
+                <span className="text-amber-400 font-bold">100% Automated Workflow</span>
               </div>
             </motion.div>
-
           </div>
 
-          {/* System Connector Pills Ticker Bar */}
-          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/90 flex flex-wrap items-center justify-between gap-3 text-xs">
-            <span className="font-extrabold uppercase tracking-widest text-slate-500 font-mono text-[10px]">
-              Pre-built Integrations:
-            </span>
-            {["SAP S/4HANA", "Oracle ERP", "Salesforce CRM", "Zendesk", "WhatsApp Business API", "Custom Webhooks"].map((sys, idx) => (
-              <span key={idx} className="px-3 py-1 rounded-xl bg-white border border-slate-200 text-slate-800 font-bold shadow-2xs">
-                ⚡ {sys}
+          {/* System Connector Pills Ticker Bar (Ball-Driven Text Reveal Animation) */}
+          <div className="relative p-4 rounded-2xl bg-white border border-slate-200/90 text-slate-900 shadow-sm overflow-hidden flex flex-col sm:flex-row items-center justify-between gap-4 min-h-[72px]">
+
+            {/* Soft Brand Gradient Track Line */}
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-brand-navy/10 via-brand-terracotta/40 to-brand-navy/10" />
+
+            {/* Traveling Laser Energy Orb Ball (Moves from Left to Right, Revealing Pills Behind It) */}
+            <motion.div
+              animate={{
+                left: ["0%", "100%"]
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                repeatDelay: 1,
+                ease: "easeInOut"
+              }}
+              className="absolute top-1/2 -translate-y-1/2 w-8 h-8 pointer-events-none z-30 flex items-center justify-center -ml-4"
+            >
+              {/* Sleek Glowing Orb Ball */}
+              <div className="w-3.5 h-3.5 rounded-full bg-brand-terracotta shadow-[0_0_12px_#993300,#0_0_24px_#003366] animate-pulse" />
+            </motion.div>
+
+            {/* Label */}
+            <div className="flex items-center gap-2.5 shrink-0 relative z-20">
+              <span className="w-2.5 h-2.5 rounded-full bg-brand-terracotta animate-ping" />
+              <span className="font-mono font-extrabold uppercase tracking-widest text-brand-navy text-[11px]">
+                PRE-BUILT INTEGRATIONS:
               </span>
-            ))}
+            </div>
+
+            {/* Integration Pills Revealed Sequentially Behind Traveling Ball */}
+            <div className="flex flex-wrap sm:flex-nowrap items-center gap-2.5 overflow-x-auto w-full relative z-20 py-1 scrollbar-none">
+              {[
+                { name: "SAP S/4HANA", icon: "⚡" },
+                { name: "Oracle ERP", icon: "⚡" },
+                { name: "Salesforce CRM", icon: "⚡" },
+                { name: "Zendesk", icon: "⚡" },
+                { name: "WhatsApp Business API", icon: "💬" },
+                { name: "Custom Webhooks", icon: "🔗" }
+              ].map((sys, idx) => {
+                const startFraction = (idx * 0.13) + 0.08;
+                return (
+                  <motion.div
+                    key={idx}
+                    animate={{
+                      opacity: [0, 0, 1, 1, 0],
+                      scale: [0.85, 0.85, 1, 1, 0.85],
+                      y: [4, 4, 0, 0, 4],
+                      borderColor: [
+                        "rgba(226, 232, 240, 1)",
+                        "rgba(153, 51, 0, 0.6)",
+                        "rgba(226, 232, 240, 1)",
+                        "rgba(226, 232, 240, 1)",
+                        "rgba(226, 232, 240, 1)"
+                      ],
+                      boxShadow: [
+                        "0 0 0px rgba(0,0,0,0)",
+                        "0 0 15px rgba(153,51,0,0.3)",
+                        "0 1px 2px rgba(0,0,0,0.03)",
+                        "0 1px 2px rgba(0,0,0,0.03)",
+                        "0 0 0px rgba(0,0,0,0)"
+                      ]
+                    }}
+                    transition={{
+                      duration: 7,
+                      repeat: Infinity,
+                      times: [
+                        0,
+                        startFraction,
+                        startFraction + 0.08,
+                        0.88,
+                        1
+                      ],
+                      ease: "easeInOut"
+                    }}
+                    className="px-3.5 py-1.5 rounded-xl bg-white border border-slate-200 text-slate-800 font-bold text-xs shrink-0 flex items-center gap-2 transition-all cursor-default shadow-2xs hover:border-brand-navy/40"
+                  >
+                    <span className="text-brand-terracotta font-semibold">{sys.icon}</span>
+                    <span className="text-slate-800 font-bold">{sys.name}</span>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
 
         </div>
@@ -466,14 +623,14 @@ export const BusinessCommunication = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Header */}
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-navy bg-brand-navy/10 px-4 py-1.5 rounded-full inline-block mb-3">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-navy bg-brand-navy/10 border border-brand-navy/20 px-4 py-1.5 rounded-full inline-block mb-3">
               Diagnostic Communication Flow
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
               Is Your Business Communication Still Fragmented?
             </h2>
-            <p className="text-base sm:text-lg text-slate-600 font-medium mt-3">
+            <p className="text-base sm:text-lg text-slate-600 font-semibold mt-3">
               Your Systems Work. Your Teams Work. But Communication Gets Lost Between Them.
             </p>
           </div>
@@ -482,11 +639,13 @@ export const BusinessCommunication = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
 
             {/* Left Column: Fragmented Chain Step-by-Step */}
-            <div className="lg:col-span-7 bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-sm">
+            <div className="lg:col-span-7 bg-slate-50 border-2 border-slate-300/80 rounded-3xl p-6 sm:p-7 flex flex-col justify-between shadow-sm">
               <div>
-                <div className="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
-                  <span className="text-xs font-bold text-rose-600 uppercase tracking-wider">The Communication Gap</span>
-                  <span className="text-xs text-slate-500 font-medium">6 Fragmented Touchpoints</span>
+                <div className="flex items-center justify-between mb-5 pb-3 border-b-2 border-slate-200">
+                  <span className="text-xs sm:text-sm font-extrabold text-rose-600 uppercase tracking-wider">The Communication Gap</span>
+                  <span className="text-xs text-slate-600 font-bold bg-white px-2.5 py-1 rounded-lg border border-slate-300">
+                    6 Fragmented Touchpoints
+                  </span>
                 </div>
 
                 <div className="space-y-3 relative">
@@ -498,76 +657,80 @@ export const BusinessCommunication = () => {
                     { step: "05", title: "External Partner / Dealer", action: "Needs an update on shipment/status", icon: Network, status: "Calling Back" },
                     { step: "06", title: "Customer", action: "Awaiting final status & resolution", icon: CheckCircle2, status: "Delayed" },
                   ].map((node, i) => (
-                    <div key={i} className="flex items-center gap-3.5 p-3 rounded-2xl bg-white border border-slate-200 shadow-xs">
-                      <div className="w-8 h-8 rounded-xl bg-slate-100 border border-slate-200 text-brand-navy flex items-center justify-center font-mono text-xs font-bold flex-shrink-0">
+                    <div key={i} className="flex items-center gap-3.5 p-3 sm:p-3.5 rounded-2xl bg-white border-2 border-slate-300/80 shadow-2xs hover:border-brand-navy/60 transition-all">
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-brand-navy/5 border-2 border-brand-navy/20 text-brand-navy flex items-center justify-center font-mono text-xs sm:text-sm font-extrabold flex-shrink-0">
                         {node.step}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between">
-                          <h4 className="font-bold text-slate-900 text-sm truncate">{node.title}</h4>
-                          <span className="text-[10px] font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-100">
+                        <div className="flex items-center justify-between gap-2">
+                          <h4 className="font-extrabold text-slate-900 text-sm sm:text-base truncate">{node.title}</h4>
+                          <span className="text-[11px] sm:text-xs font-bold text-rose-700 bg-rose-50 px-2.5 py-0.5 rounded-md border border-rose-200 flex-shrink-0">
                             {node.status}
                           </span>
                         </div>
-                        <p className="text-xs text-slate-500 font-medium truncate">{node.action}</p>
+                        <p className="text-xs sm:text-sm text-slate-500 font-medium truncate mt-0.5">{node.action}</p>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-slate-200 text-xs text-slate-500 font-semibold flex items-center justify-between">
-                <span>⚠️ Information gets lost at every handover</span>
-                <span className="text-rose-600 font-bold">Unconnected Process</span>
+              <div className="mt-6 pt-4 border-t-2 border-slate-200 text-xs sm:text-sm text-slate-600 font-bold flex items-center justify-between">
+                <span className="flex items-center gap-1.5">
+                  <span className="text-sm">⚠️</span> Information gets lost at every handover
+                </span>
+                <span className="text-rose-600 font-extrabold uppercase tracking-wide bg-rose-50 px-2.5 py-0.5 rounded border border-rose-200 text-xs">
+                  Unconnected Process
+                </span>
               </div>
             </div>
 
             {/* Right Column: The inaiwazhi Orchestration Solution */}
-            <div className="lg:col-span-5 bg-gradient-to-b from-brand-navy via-slate-900 to-brand-navy text-white rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xl relative overflow-hidden">
+            <div className="lg:col-span-5 bg-gradient-to-b from-brand-navy via-slate-900 to-brand-navy text-white rounded-3xl p-6 sm:p-7 flex flex-col justify-between shadow-xl relative overflow-hidden border-2 border-slate-800">
               <div className="relative z-10">
                 <span className="text-xs font-mono uppercase font-bold text-amber-400 tracking-widest block mb-2">
                   The Solution
                 </span>
-                <h3 className="text-2xl font-extrabold mb-4">
+                <h3 className="text-2xl font-extrabold mb-3 leading-tight">
                   One Unified Communication Layer
                 </h3>
 
-                <p className="text-sm text-slate-300 font-medium leading-relaxed mb-6">
-                  The problem isn’t always the system. The problem is the <strong className="text-white">communication between the systems, teams and people</strong>.
+                <p className="text-sm sm:text-base text-slate-200 font-medium leading-relaxed mb-5">
+                  The problem isn’t always the system. The problem is the <strong className="text-amber-300 font-bold">communication between systems, teams and people</strong>.
                 </p>
 
-                <div className="p-4 rounded-2xl bg-white/10 border border-white/15 space-y-3 mb-6 backdrop-blur">
+                <div className="p-4 rounded-2xl bg-white/10 border-2 border-white/15 space-y-3 mb-5 backdrop-blur">
                   <div className="text-xs font-bold text-amber-300 uppercase tracking-wider">
                     How inaiwazhi Fixes It:
                   </div>
-                  <ul className="space-y-2 text-xs text-slate-200 font-semibold">
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                  <ul className="space-y-2.5 text-xs sm:text-sm text-slate-100 font-semibold">
+                    <li className="flex items-center gap-2.5">
+                      <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 flex-shrink-0" />
                       <span>Captures customer WhatsApp request instantly</span>
                     </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                    <li className="flex items-center gap-2.5">
+                      <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 flex-shrink-0" />
                       <span>Triggers automated ticket routing to internal team</span>
                     </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                    <li className="flex items-center gap-2.5">
+                      <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 flex-shrink-0" />
                       <span>Updates SAP / ERP system automatically</span>
                     </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                    <li className="flex items-center gap-2.5">
+                      <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 flex-shrink-0" />
                       <span>Notifies customer & dealer with zero manual delay</span>
                     </li>
                   </ul>
                 </div>
               </div>
 
-              <div className="relative z-10 pt-4 border-t border-white/10">
+              <div className="relative z-10 pt-4 border-t border-white/15">
                 <button
                   onClick={() => openDemoModal("Fragmented Communication Walkthrough")}
-                  className="w-full py-3.5 rounded-xl bg-brand-terracotta hover:bg-brand-terracotta/90 text-white font-bold text-sm transition-all shadow-lg flex items-center justify-center gap-2"
+                  className="w-full py-3.5 rounded-xl bg-brand-terracotta hover:bg-brand-terracotta/90 text-white font-extrabold text-sm sm:text-base transition-all shadow-lg flex items-center justify-center gap-2 hover:scale-[1.01]"
                 >
                   <span>Connect My Communication Flow</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
               </div>
             </div>
@@ -578,117 +741,217 @@ export const BusinessCommunication = () => {
       </section>
 
       {/* =========================================================================
-          SECTION 2: What Happens When a Customer Raises an Issue? (NEAT REDESIGN)
+          SECTION 2: What Happens When a Customer Raises an Issue? (DUAL-DIRECTION MARQUEE)
           ========================================================================= */}
-      <section className="py-20 border-b border-slate-200/80 bg-[#F8FAFC]">
+      <section className="py-20 border-b border-slate-200/80 bg-gradient-to-b from-slate-50 via-white to-slate-50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          {/* Header */}
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-terracotta bg-brand-terracotta/10 px-4 py-1.5 rounded-full inline-block mb-3">
-              End-to-End Resolution Lifecycle
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          {/* Section Header */}
+          <div className="text-center max-w-4xl mx-auto mb-12">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-terracotta/10 text-brand-terracotta border border-brand-terracotta/20 text-xs font-bold uppercase tracking-widest mb-4"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-brand-terracotta" />
+              <span>End-to-End Resolution Lifecycle</span>
+            </motion.div>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4"
+              style={{ letterSpacing: "-0.03em" }}
+            >
               What Happens When a Customer Raises an Issue?
-            </h2>
-            <p className="text-base sm:text-lg text-slate-600 font-medium mt-3">
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-base sm:text-xl text-slate-600 font-medium max-w-3xl mx-auto leading-relaxed"
+            >
               Turn One Customer Request Into a Complete Business Workflow
-            </p>
+            </motion.p>
           </div>
 
-          {/* Stepper Container */}
-          <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm space-y-8">
+          {/* Stepper Outer Card Wrapper */}
+          <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-xl space-y-10 overflow-hidden">
 
-            {/* Phase 1: Ingestion & Routing (Steps 1 to 5) */}
+            {/* TOP ROW: Phase 1 • Ingestion & Internal Routing (SCROLLS SLOWLY TO THE RIGHT) */}
             <div>
-              <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
-                <span className="text-xs font-bold text-brand-navy uppercase tracking-wider">Phase 1 • Ingestion & Internal Routing</span>
-                <span className="text-xs text-slate-400 font-mono">Steps 01 - 05</span>
+              <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-200">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-brand-navy animate-pulse" />
+                  <span className="text-xs font-extrabold text-brand-navy uppercase tracking-wider font-mono">
+                    Phase 1 • Ingestion & Internal Routing
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-bold font-mono text-brand-navy bg-brand-navy/10 px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                    <ArrowRight className="w-3 h-3 text-brand-navy" /> Moving Right →
+                  </span>
+                  <span className="text-xs text-slate-500 font-mono font-bold">Steps 01 - 05</span>
+                </div>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
-                {[
-                  { step: "01", actor: "Customer", action: "“My machine is not working.”", badge: "Trigger", icon: MessageSquare },
-                  { step: "02", actor: "inaiwazhi", action: "Request captured & parsed", badge: "System", icon: Zap },
-                  { step: "03", actor: "Support", action: "Ticket & case created", badge: "Auto Ticket", icon: Headphones },
-                  { step: "04", actor: "Service Team", action: "Assigned to specialist", badge: "Routing", icon: Users },
-                  { step: "05", actor: "Internal Team", action: "Technical data shared", badge: "Collaboration", icon: Building2 },
-                ].map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-navy/30 transition-all flex flex-col justify-between"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs font-mono font-bold text-slate-400">{item.step}</span>
-                        <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-brand-navy/10 text-brand-navy">
-                          {item.badge}
-                        </span>
+
+              {/* Marquee Right Container */}
+              <div className="relative overflow-hidden group">
+                <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+                <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
+                <motion.div
+                  className="flex gap-4 w-max py-2"
+                  animate={{ x: ["-33.33%", "0%"] }}
+                  transition={{
+                    repeat: Infinity,
+                    ease: "linear",
+                    duration: 28,
+                  }}
+                >
+                  {[
+                    { step: "01", actor: "Customer", action: "“My machine is not working.”", badge: "Trigger", icon: MessageSquare },
+                    { step: "02", actor: "inaiwazhi", action: "Request captured & parsed", badge: "System", icon: Zap },
+                    { step: "03", actor: "Support", action: "Ticket & case created", badge: "Auto Ticket", icon: Headphones },
+                    { step: "04", actor: "Service Team", action: "Assigned to specialist", badge: "Routing", icon: Users },
+                    { step: "05", actor: "Internal Team", action: "Technical data shared", badge: "Collaboration", icon: Building2 },
+                    { step: "01", actor: "Customer", action: "“My machine is not working.”", badge: "Trigger", icon: MessageSquare },
+                    { step: "02", actor: "inaiwazhi", action: "Request captured & parsed", badge: "System", icon: Zap },
+                    { step: "03", actor: "Support", action: "Ticket & case created", badge: "Auto Ticket", icon: Headphones },
+                    { step: "04", actor: "Service Team", action: "Assigned to specialist", badge: "Routing", icon: Users },
+                    { step: "05", actor: "Internal Team", action: "Technical data shared", badge: "Collaboration", icon: Building2 },
+                    { step: "01", actor: "Customer", action: "“My machine is not working.”", badge: "Trigger", icon: MessageSquare },
+                    { step: "02", actor: "inaiwazhi", action: "Request captured & parsed", badge: "System", icon: Zap },
+                    { step: "03", actor: "Support", action: "Ticket & case created", badge: "Auto Ticket", icon: Headphones },
+                    { step: "04", actor: "Service Team", action: "Assigned to specialist", badge: "Routing", icon: Users },
+                    { step: "05", actor: "Internal Team", action: "Technical data shared", badge: "Collaboration", icon: Building2 },
+                  ].map((item, idx) => (
+                    <motion.div
+                      key={idx}
+                      whileHover={{ scale: 1.03, y: -2 }}
+                      className="w-64 p-4 rounded-2xl bg-slate-50 border border-slate-200/90 hover:bg-white hover:border-brand-navy hover:shadow-md transition-all flex flex-col justify-between flex-shrink-0"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-xs font-mono font-bold text-slate-400">{item.step}</span>
+                          <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-brand-navy/10 text-brand-navy">
+                            {item.badge}
+                          </span>
+                        </div>
+                        <div className="font-extrabold text-slate-900 text-sm flex items-center gap-2">
+                          <item.icon className="w-4 h-4 text-brand-navy flex-shrink-0" />
+                          <span>{item.actor}</span>
+                        </div>
+                        <div className="text-xs text-slate-600 font-medium mt-1.5">{item.action}</div>
                       </div>
-                      <div className="font-bold text-slate-900 text-sm flex items-center gap-2">
-                        <item.icon className="w-4 h-4 text-brand-navy flex-shrink-0" />
-                        <span>{item.actor}</span>
+                      <div className="mt-3 pt-2 border-t border-slate-200/80 flex justify-end">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                       </div>
-                      <div className="text-xs text-slate-600 font-medium mt-1.5">{item.action}</div>
-                    </div>
-                    <div className="mt-3 pt-2 border-t border-slate-200/80 flex justify-end">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                    </div>
-                  </div>
-                ))}
+                    </motion.div>
+                  ))}
+                </motion.div>
               </div>
             </div>
 
-            {/* Phase 2: Action & Resolution (Steps 6 to 11) */}
+            {/* BOTTOM ROW: Phase 2 • Field Execution & Resolution (SCROLLS SLOWLY TO THE LEFT) */}
             <div>
-              <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
-                <span className="text-xs font-bold text-brand-terracotta uppercase tracking-wider">Phase 2 • Field Execution & Resolution</span>
-                <span className="text-xs text-slate-400 font-mono">Steps 06 - 11</span>
+              <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-200">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-brand-terracotta animate-pulse" />
+                  <span className="text-xs font-extrabold text-brand-terracotta uppercase tracking-wider font-mono">
+                    Phase 2 • Field Execution & Resolution
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-bold font-mono text-brand-terracotta bg-brand-terracotta/10 px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                    ← Moving Left
+                  </span>
+                  <span className="text-xs text-slate-500 font-mono font-bold">Steps 06 - 11</span>
+                </div>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3.5">
-                {[
-                  { step: "06", actor: "Field Employee", action: "Task dispatched", badge: "Dispatch", icon: Wrench },
-                  { step: "07", actor: "Operations", action: "Status updated live", badge: "Realtime", icon: Activity },
-                  { step: "08", actor: "Customer", action: "WhatsApp notification", badge: "WhatsApp", icon: Smartphone },
-                  { step: "09", actor: "Support", action: "Resolution confirmed", badge: "Quality", icon: ShieldCheck },
-                  { step: "10", actor: "Customer", action: "Issue fulfilled", badge: "Fulfilled", icon: CheckCircle2 },
-                  { step: "11", actor: "Feedback", action: "Automated survey", badge: "Analytics", icon: Sparkles },
-                ].map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-terracotta/30 transition-all flex flex-col justify-between"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs font-mono font-bold text-slate-400">{item.step}</span>
-                        <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-brand-terracotta/10 text-brand-terracotta">
-                          {item.badge}
-                        </span>
+
+              {/* Marquee Left Container */}
+              <div className="relative overflow-hidden group">
+                <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+                <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
+                <motion.div
+                  className="flex gap-4 w-max py-2"
+                  animate={{ x: ["0%", "-33.33%"] }}
+                  transition={{
+                    repeat: Infinity,
+                    ease: "linear",
+                    duration: 32,
+                  }}
+                >
+                  {[
+                    { step: "06", actor: "Field Employee", action: "Task dispatched", badge: "Dispatch", icon: Wrench },
+                    { step: "07", actor: "Operations", action: "Status updated live", badge: "Realtime", icon: Activity },
+                    { step: "08", actor: "Customer", action: "WhatsApp notification", badge: "WhatsApp", icon: Smartphone },
+                    { step: "09", actor: "Support", action: "Resolution confirmed", badge: "Quality", icon: ShieldCheck },
+                    { step: "10", actor: "Customer", action: "Issue fulfilled", badge: "Fulfilled", icon: CheckCircle2 },
+                    { step: "11", actor: "Feedback", action: "Automated survey", badge: "Analytics", icon: Sparkles },
+                    { step: "06", actor: "Field Employee", action: "Task dispatched", badge: "Dispatch", icon: Wrench },
+                    { step: "07", actor: "Operations", action: "Status updated live", badge: "Realtime", icon: Activity },
+                    { step: "08", actor: "Customer", action: "WhatsApp notification", badge: "WhatsApp", icon: Smartphone },
+                    { step: "09", actor: "Support", action: "Resolution confirmed", badge: "Quality", icon: ShieldCheck },
+                    { step: "10", actor: "Customer", action: "Issue fulfilled", badge: "Fulfilled", icon: CheckCircle2 },
+                    { step: "11", actor: "Feedback", action: "Automated survey", badge: "Analytics", icon: Sparkles },
+                    { step: "06", actor: "Field Employee", action: "Task dispatched", badge: "Dispatch", icon: Wrench },
+                    { step: "07", actor: "Operations", action: "Status updated live", badge: "Realtime", icon: Activity },
+                    { step: "08", actor: "Customer", action: "WhatsApp notification", badge: "WhatsApp", icon: Smartphone },
+                    { step: "09", actor: "Support", action: "Resolution confirmed", badge: "Quality", icon: ShieldCheck },
+                    { step: "10", actor: "Customer", action: "Issue fulfilled", badge: "Fulfilled", icon: CheckCircle2 },
+                    { step: "11", actor: "Feedback", action: "Automated survey", badge: "Analytics", icon: Sparkles },
+                  ].map((item, idx) => (
+                    <motion.div
+                      key={idx}
+                      whileHover={{ scale: 1.03, y: -2 }}
+                      className="w-64 p-4 rounded-2xl bg-slate-50 border border-slate-200/90 hover:bg-white hover:border-brand-terracotta hover:shadow-md transition-all flex flex-col justify-between flex-shrink-0"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-xs font-mono font-bold text-slate-400">{item.step}</span>
+                          <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-brand-terracotta/10 text-brand-terracotta">
+                            {item.badge}
+                          </span>
+                        </div>
+                        <div className="font-extrabold text-slate-900 text-sm flex items-center gap-2">
+                          <item.icon className="w-4 h-4 text-brand-terracotta flex-shrink-0" />
+                          <span>{item.actor}</span>
+                        </div>
+                        <div className="text-xs text-slate-600 font-medium mt-1.5">{item.action}</div>
                       </div>
-                      <div className="font-bold text-slate-900 text-sm flex items-center gap-2">
-                        <item.icon className="w-4 h-4 text-brand-terracotta flex-shrink-0" />
-                        <span>{item.actor}</span>
+                      <div className="mt-3 pt-2 border-t border-slate-200/80 flex justify-end">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                       </div>
-                      <div className="text-xs text-slate-600 font-medium mt-1.5">{item.action}</div>
-                    </div>
-                    <div className="mt-3 pt-2 border-t border-slate-200/80 flex justify-end">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                    </div>
-                  </div>
-                ))}
+                    </motion.div>
+                  ))}
+                </motion.div>
               </div>
             </div>
 
             {/* Bottom Summary Banner */}
-            <div className="p-6 rounded-2xl bg-gradient-to-r from-brand-navy via-slate-900 to-brand-navy text-white flex flex-col md:flex-row items-center justify-between gap-4 shadow-md">
-              <div className="text-left">
-                <div className="text-xs font-bold text-amber-400 uppercase tracking-wider">End-to-End SLA Resolution</div>
-                <div className="text-lg font-bold mt-0.5">From message → ticket → team → action → resolution.</div>
+            <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-brand-navy via-slate-900 to-brand-navy text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl border border-slate-800">
+              <div className="text-left space-y-1">
+                <div className="text-xs font-mono font-bold text-amber-400 uppercase tracking-widest">
+                  End-to-End SLA Resolution
+                </div>
+                <div className="text-lg sm:text-xl font-extrabold text-white">
+                  From message → ticket → team → action → resolution.
+                </div>
               </div>
               <button
                 onClick={() => openDemoModal("Build Support Workflow")}
-                className="px-6 py-3 rounded-xl bg-brand-terracotta hover:bg-brand-terracotta/90 text-white font-bold text-xs transition-all whitespace-nowrap shadow-sm"
+                className="px-8 py-4 rounded-2xl bg-brand-terracotta hover:bg-brand-terracotta/90 text-white font-bold text-sm transition-all whitespace-nowrap shadow-lg shadow-brand-terracotta/20 flex items-center gap-2"
               >
-                Build Support Workflow
+                <span>Build Support Workflow</span>
+                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
 
@@ -697,179 +960,509 @@ export const BusinessCommunication = () => {
       </section>
 
       {/* =========================================================================
-          SECTION 3: How Can I Connect Customers With My Support Team?
+          SECTION 3: How Can I Connect Customers With My Support Team? (RADIAL HUB DESIGN)
           ========================================================================= */}
-      <section className="py-20 border-b border-slate-200/80 bg-white">
+      <section className="py-20 border-b border-slate-200/80 bg-gradient-to-br from-[#F8FAFC] via-white to-[#F8FAFC] overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+
+          {/* Section Header */}
+          <div className="text-center max-w-4xl mx-auto mb-14">
+            <motion.h2
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4"
+              style={{ letterSpacing: "-0.03em" }}
+            >
               How Can I Connect Customers With My Support Team?
-            </h2>
-            <p className="text-lg text-slate-600 font-medium">
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-base sm:text-xl text-slate-600 font-medium max-w-3xl mx-auto leading-relaxed"
+            >
               Give Every Customer Request a Clear Path
-            </p>
+            </motion.p>
           </div>
 
-          <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 max-w-4xl mx-auto shadow-md">
-            <p className="text-center text-slate-700 text-lg font-medium mb-8">
-              Customers should not have to repeat the same problem to multiple employees.
-            </p>
+          {/* Main 2-Column Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-12">
 
-            {/* Path Diagram */}
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 py-6 border-y border-slate-200">
-              {["Customer", "Support", "Technical Team", "Operations", "Field Team", "Management", "Customer"].map((node, i, arr) => (
-                <React.Fragment key={i}>
-                  <span className="px-4 py-2 rounded-xl bg-white border border-slate-200 text-brand-navy font-bold text-sm shadow-sm">
-                    {node}
-                  </span>
-                  {i < arr.length - 1 && (
-                    <ArrowRight className="w-5 h-5 text-brand-terracotta flex-shrink-0" />
-                  )}
-                </React.Fragment>
-              ))}
+            {/* Left Side: Original Description Card */}
+            <div className="lg:col-span-5">
+              <div className="p-8 rounded-3xl bg-slate-900 text-white shadow-2xl border border-slate-800 space-y-6 relative overflow-hidden">
+                <div className="text-xs font-mono font-bold text-amber-400 uppercase tracking-widest">
+                  Central Support Architecture
+                </div>
+
+                <p className="text-lg text-slate-200 font-medium leading-relaxed">
+                  Customers should not have to repeat the same problem to multiple employees.
+                </p>
+
+                <div className="pt-4 border-t border-slate-800 space-y-3">
+                  <div className="text-xs font-mono text-slate-400 mb-2">Connected Support Network:</div>
+                  <div className="flex flex-wrap gap-2 text-xs font-bold text-amber-300">
+                    {["Customer", "Support", "Technical Team", "Operations", "Field Team", "Management"].map((node, i) => (
+                      <span key={i} className="px-3 py-1.5 rounded-xl bg-slate-800 border border-slate-700">
+                        ● {node}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => openDemoModal("Connect Customer Support")}
+                  className="w-full py-4 rounded-2xl bg-brand-terracotta hover:bg-brand-terracotta/90 text-white font-bold text-xs transition-all shadow-lg flex items-center justify-center gap-2"
+                >
+                  <span>Connect Customer Support Flow</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
             </div>
 
-            <div className="mt-8 text-center">
-              <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-navy/5 border border-brand-navy/15 text-brand-navy font-bold text-sm">
-                <CheckCircle2 className="w-4 h-4 text-brand-terracotta" />
-                Every request can be routed to the right person, team or workflow automatically.
-              </span>
+            {/* Right Side: Radial Central Hub Diagram (Brand Logo Colors & Smooth Animations) */}
+            <div className="lg:col-span-7 relative py-8 flex items-center justify-center">
+
+              {/* Radial Container */}
+              <div className="relative w-full max-w-[500px] aspect-square flex items-center justify-center">
+
+                {/* Animated Background SVG Connector Lines with Moving Data Pulses */}
+                <svg
+                  className="absolute inset-0 w-full h-full pointer-events-none z-0"
+                  viewBox="0 0 500 500"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  {/* Lines radiating from Center (250,250) to 6 Points */}
+                  {[
+                    { x2: 250, y2: 70 },   // Top
+                    { x2: 410, y2: 150 },  // Top-Right
+                    { x2: 410, y2: 350 },  // Bottom-Right
+                    { x2: 250, y2: 430 },  // Bottom
+                    { x2: 90, y2: 350 },   // Bottom-Left
+                    { x2: 90, y2: 150 },   // Top-Left
+                  ].map((pt, i) => (
+                    <g key={i}>
+                      {/* Base Line with Brand Navy / Terracotta styling */}
+                      <line
+                        x1="250"
+                        y1="250"
+                        x2={pt.x2}
+                        y2={pt.y2}
+                        stroke={i % 2 === 0 ? "#003366" : "#993300"}
+                        strokeWidth="3"
+                        strokeDasharray="6 6"
+                        className="opacity-40"
+                      />
+                      {/* Pulsing Animated Stream Flow along connector */}
+                      <motion.line
+                        x1="250"
+                        y1="250"
+                        x2={pt.x2}
+                        y2={pt.y2}
+                        stroke={i % 2 === 0 ? "#993300" : "#003366"}
+                        strokeWidth="3"
+                        strokeDasharray="12 24"
+                        initial={{ strokeDashoffset: 36 }}
+                        animate={{ strokeDashoffset: 0 }}
+                        transition={{
+                          repeat: Infinity,
+                          ease: "linear",
+                          duration: 2 + i * 0.3,
+                        }}
+                      />
+                    </g>
+                  ))}
+                </svg>
+
+                {/* CENTER HUB CIRCLE (Brand Logo Navy & Terracotta) */}
+                <div className="relative z-10">
+                  {/* Pulsing Radar Aura Ring in Brand Terracotta */}
+                  <div className="absolute -inset-4 rounded-full bg-brand-terracotta/20 animate-ping opacity-75 pointer-events-none" />
+                  <div className="absolute -inset-2 rounded-full bg-brand-navy/30 animate-pulse pointer-events-none" />
+
+                  <motion.div
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    className="relative z-10 w-40 h-40 sm:w-48 sm:h-48 rounded-full bg-gradient-to-br from-brand-navy via-[#0A192F] to-[#040D1A] text-white shadow-2xl border-4 border-brand-terracotta flex flex-col items-center justify-center text-center p-4 ring-8 ring-brand-terracotta/20"
+                  >
+                    <span className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-none mb-1 drop-shadow-md">
+                      6
+                    </span>
+                    <span className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-amber-300">
+                      Connected
+                    </span>
+                    <span className="text-[10px] font-bold text-white uppercase tracking-widest bg-brand-terracotta/80 px-2.5 py-0.5 rounded-full mt-1">
+                      Support Hub
+                    </span>
+                  </motion.div>
+                </div>
+
+                {/* 6 RADIAL NODES WITH BRAND LOGO COLORS & GENTLE FLOATING ANIMATION */}
+                {[
+                  {
+                    name: "Customer",
+                    icon: MessageSquare,
+                    pos: "top-0 left-1/2 -translate-x-1/2",
+                    color: "bg-brand-navy border-brand-terracotta text-white",
+                    accent: "border-brand-navy/20",
+                    delay: 0.1,
+                  },
+                  {
+                    name: "Support",
+                    icon: Headphones,
+                    pos: "top-12 right-2 sm:right-6",
+                    color: "bg-brand-terracotta border-brand-navy text-white",
+                    accent: "border-brand-terracotta/20",
+                    delay: 0.2,
+                  },
+                  {
+                    name: "Technical Team",
+                    icon: Zap,
+                    pos: "bottom-12 right-2 sm:right-6",
+                    color: "bg-brand-navy border-brand-terracotta text-white",
+                    accent: "border-brand-navy/20",
+                    delay: 0.3,
+                  },
+                  {
+                    name: "Operations",
+                    icon: Activity,
+                    pos: "bottom-0 left-1/2 -translate-x-1/2",
+                    color: "bg-brand-terracotta border-brand-navy text-white",
+                    accent: "border-brand-terracotta/20",
+                    delay: 0.4,
+                  },
+                  {
+                    name: "Field Team",
+                    icon: Wrench,
+                    pos: "bottom-12 left-2 sm:left-6",
+                    color: "bg-brand-navy border-brand-terracotta text-white",
+                    accent: "border-brand-navy/20",
+                    delay: 0.5,
+                  },
+                  {
+                    name: "Management",
+                    icon: Building2,
+                    pos: "top-12 left-2 sm:left-6",
+                    color: "bg-brand-terracotta border-brand-navy text-white",
+                    accent: "border-brand-terracotta/20",
+                    delay: 0.6,
+                  },
+                ].map((node, i) => {
+                  const Icon = node.icon;
+                  return (
+                    <motion.div
+                      key={i}
+                      initial={{ scale: 0, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      viewport={{ once: true }}
+                      animate={{ y: [-4, 4, -4] }}
+                      transition={{
+                        delay: node.delay,
+                        duration: 0.4,
+                        y: {
+                          repeat: Infinity,
+                          duration: 3 + i * 0.4,
+                          ease: "easeInOut",
+                        },
+                      }}
+                      whileHover={{ scale: 1.15 }}
+                      className={`absolute ${node.pos} z-20 flex flex-col items-center cursor-pointer group`}
+                    >
+                      <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full ${node.color} shadow-xl border-3 flex items-center justify-center transition-all duration-300 group-hover:shadow-brand-terracotta/40 ring-4 ring-white`}>
+                        <Icon className="w-8 h-8 sm:w-10 sm:h-10 text-white group-hover:rotate-12 transition-transform" />
+                      </div>
+                      <span className="text-xs sm:text-sm font-extrabold text-slate-900 mt-2 bg-white/95 backdrop-blur-xs px-3 py-1 rounded-full shadow-md border border-slate-200 tracking-tight font-sans">
+                        {node.name}
+                      </span>
+                    </motion.div>
+                  );
+                })}
+
+              </div>
+
             </div>
+
           </div>
+
+          {/* Bottom Banner with Exact Original Text */}
+          <div className="p-6 rounded-3xl bg-slate-900 border border-slate-800 text-white text-center shadow-xl">
+            <span className="inline-flex items-center gap-2 text-sm sm:text-base font-extrabold text-white">
+              <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+              Every request can be routed to the right person, team or workflow automatically.
+            </span>
+          </div>
+
         </div>
       </section>
 
       {/* =========================================================================
-          SECTION 4: What If the Support Team Needs Another Department? (NEW MATRIX DESIGN)
+          SECTION 4: What If the Support Team Needs Another Department? (3D DRIBBBLE ANIMATED HUB)
           ========================================================================= */}
-      <section className="py-20 border-b border-slate-200/80 bg-[#F8FAFC]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-24 border-b border-slate-200/80 bg-gradient-to-b from-slate-50 via-slate-100/70 to-slate-50 relative overflow-hidden">
+
+        {/* Subtle Isometric Canvas Background Pattern */}
+        <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:32px_32px] opacity-60 pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
           {/* Header */}
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-terracotta bg-brand-terracotta/10 px-4 py-1.5 rounded-full inline-block mb-3">
-              Inter-Departmental Automation
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-brand-terracotta bg-brand-terracotta/10 border border-brand-terracotta/20 px-5 py-2 rounded-full inline-block mb-3 shadow-xs">
+              3D Inter-Departmental Orchestration
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-              What If the Support Team Needs Another Department?
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+              What If Support Needs Another Department?
             </h2>
-            <p className="text-base sm:text-lg text-slate-600 font-medium mt-3">
-              Automatic escalation paths that route support requests directly into department queues.
+            <p className="text-base sm:text-xl text-slate-600 font-semibold mt-4">
+              Requests automatically flow from central support into target department queues in slow-motion real time.
             </p>
           </div>
 
-          {/* Central Support Hub Status Banner */}
-          <div className="mb-8 p-5 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-brand-navy text-white flex items-center justify-center font-bold text-sm">
-                <Headphones className="w-5 h-5" />
-              </div>
-              <div>
-                <div className="font-bold text-slate-900 text-sm">Central Support Hub</div>
-                <div className="text-xs text-slate-500 font-medium">Customer ticket categorized & matched to escalation rule</div>
-              </div>
+          {/* DRIBBBLE-STYLE 3D ISOMETRIC NETWORK CANVAS */}
+          <div className="relative py-8 my-4">
+
+            {/* SVG Glowing Connection Lines (Connecting Central Hub to 4 Radial Department Nodes) */}
+            <div className="hidden lg:block absolute inset-0 pointer-events-none z-0">
+              <svg className="w-full h-full" viewBox="0 0 1200 500" fill="none">
+                {/* Path 1: Central to Top Left (Engineering) */}
+                <path d="M 600 250 C 450 250, 350 120, 250 120" stroke="url(#lineGradientBlue)" strokeWidth="3" strokeDasharray="6 6" className="animate-pulse" />
+                {/* Path 2: Central to Top Right (Warehouse) */}
+                <path d="M 600 250 C 750 250, 850 120, 950 120" stroke="url(#lineGradientAmber)" strokeWidth="3" strokeDasharray="6 6" className="animate-pulse" />
+                {/* Path 3: Central to Bottom Left (Field Service) */}
+                <path d="M 600 250 C 450 250, 350 380, 250 380" stroke="url(#lineGradientEmerald)" strokeWidth="3" strokeDasharray="6 6" className="animate-pulse" />
+                {/* Path 4: Central to Bottom Right (Finance) */}
+                <path d="M 600 250 C 750 250, 850 380, 950 380" stroke="url(#lineGradientPurple)" strokeWidth="3" strokeDasharray="6 6" className="animate-pulse" />
+
+                {/* Animated Slow-Motion Laser Orbs */}
+                <motion.circle
+                  r="6"
+                  fill="#3b82f6"
+                  animate={{ offsetDistance: ["0%", "100%"] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                />
+
+                <defs>
+                  <linearGradient id="lineGradientBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#003366" />
+                    <stop offset="100%" stopColor="#3b82f6" />
+                  </linearGradient>
+                  <linearGradient id="lineGradientAmber" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#003366" />
+                    <stop offset="100%" stopColor="#f59e0b" />
+                  </linearGradient>
+                  <linearGradient id="lineGradientEmerald" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#003366" />
+                    <stop offset="100%" stopColor="#10b981" />
+                  </linearGradient>
+                  <linearGradient id="lineGradientPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#003366" />
+                    <stop offset="100%" stopColor="#a855f7" />
+                  </linearGradient>
+                </defs>
+              </svg>
             </div>
 
-            <div className="flex items-center gap-2 text-xs font-mono font-bold text-brand-terracotta bg-brand-terracotta/5 px-4 py-2 rounded-xl border border-brand-terracotta/15">
-              <span>Automatic Escalation Matrix Active</span>
-              <Zap className="w-4 h-4 text-brand-terracotta" />
-            </div>
-          </div>
-
-          {/* 4 Department Escalation Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                dept: "Engineering & Tech",
-                tag: "Technical Issue",
-                badgeBg: "bg-blue-600 text-white",
-                borderColor: "hover:border-blue-300",
-                icon: Wrench,
-                trigger: "Hardware failure or bug report detected",
-                action: "Auto-creates engineering work item & links SAP tech manuals.",
-                sla: "< 30 mins routing",
-              },
-              {
-                dept: "Warehouse & Ops",
-                tag: "Dispatch Delay",
-                badgeBg: "bg-amber-600 text-white",
-                borderColor: "hover:border-amber-300",
-                icon: Building2,
-                trigger: "Stock shortage or shipment tracking query",
-                action: "Triggers live ERP inventory check & alerts dispatch team.",
-                sla: "< 15 mins update",
-              },
-              {
-                dept: "Field Service Team",
-                tag: "On-Site Visit",
-                badgeBg: "bg-emerald-600 text-white",
-                borderColor: "hover:border-emerald-300",
-                icon: Users,
-                trigger: "Field service request or installation issue",
-                action: "Dispatches nearest technician with customer GPS & job spec.",
-                sla: "Instant assignment",
-              },
-              {
-                dept: "Finance & Accounts",
-                tag: "Billing & Refund",
-                badgeBg: "bg-purple-600 text-white",
-                borderColor: "hover:border-purple-300",
-                icon: Database,
-                trigger: "Invoice discrepancy or refund approval query",
-                action: "Syncs ERP ledger & delivers verified credit note to customer.",
-                sla: "Auto-verification",
-              },
-            ].map((card, idx) => (
-              <div
-                key={idx}
-                className={`bg-white border border-slate-200 rounded-2xl p-6 shadow-sm ${card.borderColor} transition-all flex flex-col justify-between`}
+            {/* Central 3D Core Hub (Center Pedestal) */}
+            <div className="flex justify-center mb-12 lg:mb-16 relative z-20">
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0, y: 30 }}
+                whileInView={{ scale: 1, opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="relative group"
               >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 text-brand-navy flex items-center justify-center font-bold">
-                      <card.icon className="w-5 h-5" />
+                {/* Multi-Ring Pulsing Radar Aura */}
+                <div className="absolute -inset-4 bg-brand-navy/20 rounded-3xl blur-xl group-hover:bg-brand-terracotta/40 transition-all duration-700 pointer-events-none" />
+
+                <div className="relative bg-gradient-to-b from-brand-navy via-slate-900 to-brand-navy border-4 border-brand-terracotta/30 rounded-3xl p-6 sm:p-8 text-white shadow-2xl backdrop-blur-xl flex flex-col items-center text-center max-w-sm">
+
+                  {/* Glowing 3D Glass Badge */}
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-brand-terracotta to-rose-600 p-0.5 shadow-lg mb-4 transform -rotate-3 group-hover:rotate-0 transition-transform duration-500">
+                    <div className="w-full h-full rounded-[14px] bg-slate-900 flex items-center justify-center">
+                      <Headphones className="w-8 h-8 sm:w-10 sm:h-10 text-brand-terracotta animate-bounce" />
                     </div>
-                    <span className={`text-[10px] font-bold uppercase px-2.5 py-1 rounded-full ${card.badgeBg}`}>
-                      {card.tag}
+                  </div>
+
+                  <span className="text-xs font-mono font-extrabold uppercase tracking-widest text-white bg-brand-terracotta/90 border border-brand-terracotta/40 px-3.5 py-1 rounded-full mb-2 shadow-xs">
+                    Central Support Core
+                  </span>
+
+                  <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white">
+                    inaiwazhi Orchestrator
+                  </h3>
+
+                  <p className="text-xs sm:text-sm text-slate-300 font-medium mt-2 leading-relaxed">
+                    Auto-categorizes inbound tickets & dispatches execution triggers instantly across department APIs.
+                  </p>
+
+                  <div className="mt-4 pt-3 border-t border-white/15 w-full flex items-center justify-between text-xs text-slate-200 font-bold">
+                    <span className="flex items-center gap-1.5 text-emerald-400">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                      Live Routing Active
                     </span>
-                  </div>
-
-                  <h3 className="font-bold text-slate-900 text-base mb-2">{card.dept}</h3>
-
-                  <div className="space-y-2.5 text-xs text-slate-600">
-                    <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
-                      <span className="text-[10px] font-bold uppercase text-slate-400 block mb-0.5">Trigger</span>
-                      <span className="font-semibold text-slate-800">{card.trigger}</span>
-                    </div>
-
-                    <div className="p-2.5 rounded-xl bg-emerald-50/60 border border-emerald-100">
-                      <span className="text-[10px] font-bold uppercase text-emerald-700 block mb-0.5">Automated Action</span>
-                      <span className="font-bold text-slate-900">{card.action}</span>
-                    </div>
+                    <span className="font-mono text-white/90">0.4s SLA</span>
                   </div>
                 </div>
+              </motion.div>
+            </div>
 
-                <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
-                  <span>Routing Speed</span>
-                  <span className="font-bold text-brand-navy">{card.sla}</span>
-                </div>
-              </div>
-            ))}
+            {/* 4 Radial 3D Floating Department Cards (Staggered Slow Motion Entrance) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 relative z-10">
+              {[
+                {
+                  id: "tech",
+                  dept: "Engineering & Tech",
+                  tag: "Technical Issue",
+                  accentColor: "from-blue-600 to-indigo-700",
+                  badgeBg: "bg-blue-600 text-white",
+                  borderColor: "border-blue-300/80 hover:border-blue-500",
+                  iconBg: "bg-blue-50 text-blue-700 border-blue-200",
+                  icon: Wrench,
+                  trigger: "Hardware failure or bug report detected",
+                  action: "Auto-creates engineering work item & links SAP tech manuals.",
+                  sla: "< 30 mins routing",
+                  delay: 0.2,
+                },
+                {
+                  id: "ops",
+                  dept: "Warehouse & Ops",
+                  tag: "Dispatch Delay",
+                  accentColor: "from-amber-500 to-orange-600",
+                  badgeBg: "bg-amber-600 text-white",
+                  borderColor: "border-amber-300/80 hover:border-amber-500",
+                  iconBg: "bg-amber-50 text-amber-700 border-amber-200",
+                  icon: Building2,
+                  trigger: "Stock shortage or shipment tracking query",
+                  action: "Triggers live ERP inventory check & alerts dispatch team.",
+                  sla: "< 15 mins update",
+                  delay: 0.4,
+                },
+                {
+                  id: "field",
+                  dept: "Field Service Team",
+                  tag: "On-Site Visit",
+                  accentColor: "from-emerald-500 to-teal-700",
+                  badgeBg: "bg-emerald-600 text-white",
+                  borderColor: "border-emerald-300/80 hover:border-emerald-500",
+                  iconBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
+                  icon: Users,
+                  trigger: "Field service request or installation issue",
+                  action: "Dispatches nearest technician with customer GPS & job spec.",
+                  sla: "Instant assignment",
+                  delay: 0.6,
+                },
+                {
+                  id: "finance",
+                  dept: "Finance & Accounts",
+                  tag: "Billing & Refund",
+                  accentColor: "from-purple-600 to-violet-700",
+                  badgeBg: "bg-purple-600 text-white",
+                  borderColor: "border-purple-300/80 hover:border-purple-500",
+                  iconBg: "bg-purple-50 text-purple-700 border-purple-200",
+                  icon: Database,
+                  trigger: "Invoice discrepancy or refund approval query",
+                  action: "Syncs ERP ledger & delivers verified credit note to customer.",
+                  sla: "Auto-verification",
+                  delay: 0.8,
+                },
+              ].map((card, idx) => {
+                const CardIcon = card.icon;
+                return (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: false, amount: 0.2 }}
+                    transition={{
+                      duration: 1.1,
+                      delay: card.delay,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                    className={`bg-white border-2 ${card.borderColor} rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all flex flex-col justify-between relative group overflow-hidden`}
+                  >
+                    {/* Top 3D Color Pill Stripe */}
+                    <div className={`absolute top-0 left-0 right-0 h-2 bg-gradient-to-r ${card.accentColor}`} />
+
+                    <div>
+                      <div className="flex items-center justify-between mb-5 pt-2">
+                        <div className={`w-12 h-12 rounded-2xl ${card.iconBg} border-2 flex items-center justify-center font-extrabold shadow-sm group-hover:scale-110 transition-transform`}>
+                          <CardIcon className="w-6 h-6" />
+                        </div>
+                        <span className={`text-[10px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-full shadow-xs ${card.badgeBg}`}>
+                          {card.tag}
+                        </span>
+                      </div>
+
+                      <h3 className="font-extrabold text-slate-900 text-lg mb-3 tracking-tight">
+                        {card.dept}
+                      </h3>
+
+                      <div className="space-y-3 text-xs">
+                        <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200/90">
+                          <span className="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider block mb-1">
+                            Inbound Trigger
+                          </span>
+                          <span className="font-semibold text-slate-800 leading-snug block">
+                            {card.trigger}
+                          </span>
+                        </div>
+
+                        <div className="p-3 rounded-2xl bg-emerald-50/70 border border-emerald-200">
+                          <span className="text-[10px] font-extrabold uppercase text-emerald-800 tracking-wider block mb-1">
+                            Automated Orchestration
+                          </span>
+                          <span className="font-extrabold text-slate-900 leading-snug block">
+                            {card.action}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-6 pt-3.5 border-t-2 border-slate-100 flex items-center justify-between text-xs font-bold">
+                      <span className="text-slate-500">Target SLA</span>
+                      <span className="text-brand-navy bg-brand-navy/5 px-2.5 py-1 rounded-lg border border-brand-navy/15 font-mono">
+                        {card.sla}
+                      </span>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+
           </div>
 
-          {/* Bottom Summary Bar */}
-          <div className="mt-10 p-6 rounded-2xl bg-white border border-slate-200 text-center shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4 max-w-4xl mx-auto">
+          {/* Bottom Dribbble-Style Summary Banner */}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="mt-12 p-6 sm:p-8 rounded-3xl bg-white border-2 border-slate-300/90 text-center shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 max-w-5xl mx-auto"
+          >
             <div className="text-left">
-              <div className="font-bold text-slate-900 text-base">Zero lost messages. Zero manual emails.</div>
-              <div className="text-xs text-slate-500 font-medium">Support becomes a connected business workflow across all departments.</div>
+              <div className="font-extrabold text-slate-900 text-lg sm:text-xl flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-brand-terracotta" />
+                <span>Zero lost messages. Zero manual emails.</span>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-600 font-semibold mt-1">
+                Support becomes a unified automated workflow across engineering, operations, field teams and ERP finance.
+              </p>
             </div>
+
             <button
               onClick={() => openDemoModal("Inter-Departmental Escalation")}
-              className="px-6 py-3 rounded-xl bg-brand-navy hover:bg-brand-navy/90 text-white font-bold text-xs transition-all whitespace-nowrap shadow-sm"
+              className="px-7 py-4 rounded-2xl bg-brand-navy hover:bg-brand-navy/90 text-white font-extrabold text-xs sm:text-sm transition-all whitespace-nowrap shadow-lg hover:scale-105 flex items-center gap-2"
             >
-              Setup Departmental Workflows
+              <span>Setup Departmental Workflows</span>
+              <ArrowRight className="w-4 h-4" />
             </button>
-          </div>
+          </motion.div>
 
         </div>
       </section>
@@ -1015,120 +1608,654 @@ export const BusinessCommunication = () => {
       </section>
 
       {/* =========================================================================
-          SECTION 7: How Can I Manage Internal Team Communication?
+          SECTION 7: How Can I Manage Internal Team Communication? (RADIAL FLOWCHART - SOFTCLINCH BRANDED)
           ========================================================================= */}
-      <section className="py-20 border-b border-slate-200/80 bg-white">
+      <section className="py-24 border-b border-slate-200/80 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+            <span className="text-xs font-mono font-extrabold uppercase tracking-widest text-brand-terracotta bg-brand-terracotta/10 border border-brand-terracotta/20 px-5 py-2 rounded-full inline-block mb-3 shadow-xs">
+              Internal Event Orchestration
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
               How Can I Manage Internal Team Communication?
             </h2>
-            <p className="text-lg text-slate-600 font-medium">
-              Automatically Send Business Information to the Right Employee
+            <p className="text-base sm:text-xl text-slate-600 font-semibold mt-4">
+              Automatically trigger structured communication and assign tasks when key business events occur.
             </p>
           </div>
 
-          {/* Where info gets stuck */}
-          <div className="mb-12 bg-slate-50 border border-slate-200 rounded-3xl p-6 text-center shadow-sm">
-            <div className="text-xs uppercase font-bold text-amber-700 mb-3 tracking-wider">The Internal Communication Silo Problem</div>
-            <p className="text-sm text-slate-600 font-medium mb-4">Internal communication problems happen when important information stays inside:</p>
-            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 text-xs font-bold text-slate-700">
-              {["Personal messages", "Email threads", "Phone calls", "Separate team chats", "Manual spreadsheets", "Unassigned requests"].map((item, idx) => (
-                <span key={idx} className="px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-slate-600 shadow-sm">
-                  ⚠️ {item}
+          {/* Silo Problem Banner */}
+          <div className="mb-14 bg-slate-50 border-2 border-slate-200/80 rounded-3xl p-6 sm:p-8 text-center shadow-xs">
+            <div className="text-xs font-mono uppercase font-extrabold text-brand-terracotta mb-3 tracking-widest">
+              The Internal Communication Silo Problem
+            </div>
+            <p className="text-sm sm:text-base text-slate-700 font-semibold mb-5">
+              Internal communication bottlenecks occur when critical business information stays trapped in:
+            </p>
+            <div className="flex flex-wrap justify-center gap-2.5 sm:gap-3 text-xs font-extrabold text-slate-700">
+              {[
+                "Personal WhatsApp Chats",
+                "Unread Email Threads",
+                "Verbal Phone Calls",
+                "Isolated Team Channels",
+                "Manual Spreadsheets",
+                "Unassigned Requests",
+              ].map((item, idx) => (
+                <span
+                  key={idx}
+                  className="px-4 py-2.5 rounded-xl bg-white border border-slate-300 text-slate-700 shadow-xs flex items-center gap-2"
+                >
+                  <span className="text-amber-500">⚠️</span>
+                  <span>{item}</span>
                 </span>
               ))}
             </div>
           </div>
 
-          <div className="text-center text-slate-700 text-lg font-medium mb-8">
-            <span className="text-slate-900 font-bold">inaiwazhi</span> can trigger structured communication when a business event occurs:
-          </div>
+          {/* RADIAL FLOWCHART CANVAS (MATCHING USER REFERENCE DIAGRAM WITH SOFTCLINCH LOGO BRAND COLORS & ORIGINAL EVENT CONTENT) */}
+          <div className="bg-slate-50 border-2 border-slate-200/90 rounded-3xl p-6 sm:p-12 shadow-xl relative overflow-hidden my-6">
 
-          {/* 8 Event Trigger Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-            {eventTriggers.map((item, idx) => (
-              <div
-                key={idx}
-                className={`p-5 rounded-2xl border ${item.color} shadow-sm flex items-center justify-between hover:scale-[1.02] transition-transform`}
-              >
-                <div>
-                  <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Business Event</div>
-                  <div className="text-base font-bold text-slate-900 mt-0.5">{item.event}</div>
-                  <div className="text-xs text-brand-navy font-bold mt-2 flex items-center gap-1.5">
-                    <ArrowRight className="w-3.5 h-3.5 text-brand-terracotta" />
-                    <span>Assigned to: <strong className="text-slate-900">{item.team}</strong></span>
+            {/* SVG Orthogonal Branching Lines in SoftClinch Brand Palette */}
+            <div className="hidden lg:block absolute inset-0 pointer-events-none z-0">
+              <svg className="w-full h-full" viewBox="0 0 1000 600" fill="none">
+                <defs>
+                  {/* SoftClinch Terracotta Arrowhead */}
+                  <marker
+                    id="brandTerracottaArrow"
+                    viewBox="0 0 10 10"
+                    refX="6"
+                    refY="5"
+                    markerWidth="8"
+                    markerHeight="8"
+                    orient="auto-start-reverse"
+                  >
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#a23b2a" />
+                  </marker>
+                </defs>
+
+                {/* Main Central Trunk Lines (Brand Navy & Terracotta) */}
+                {/* Top Vertical Trunk */}
+                <path d="M 500 300 V 160" stroke="#0A192F" strokeWidth="3" />
+                {/* Top Left Branch */}
+                <path d="M 500 160 H 320 V 95" stroke="#0A192F" strokeWidth="3" markerEnd="url(#brandTerracottaArrow)" />
+                {/* Top Right Branch */}
+                <path d="M 500 160 H 680 V 95" stroke="#0A192F" strokeWidth="3" markerEnd="url(#brandTerracottaArrow)" />
+
+                {/* Left Horizontal Trunk */}
+                <path d="M 500 300 H 290" stroke="#0A192F" strokeWidth="3" />
+                {/* Left Top Branch */}
+                <path d="M 290 300 V 210 H 210" stroke="#0A192F" strokeWidth="3" markerEnd="url(#brandTerracottaArrow)" />
+                {/* Left Bottom Branch */}
+                <path d="M 290 300 V 390 H 210" stroke="#0A192F" strokeWidth="3" markerEnd="url(#brandTerracottaArrow)" />
+
+                {/* Right Horizontal Trunk */}
+                <path d="M 500 300 H 710" stroke="#0A192F" strokeWidth="3" />
+                {/* Right Top Branch */}
+                <path d="M 710 300 V 210 H 790" stroke="#0A192F" strokeWidth="3" markerEnd="url(#brandTerracottaArrow)" />
+                {/* Right Bottom Branch */}
+                <path d="M 710 300 V 390 H 790" stroke="#0A192F" strokeWidth="3" markerEnd="url(#brandTerracottaArrow)" />
+
+                {/* Bottom Vertical Trunk */}
+                <path d="M 500 300 V 440" stroke="#0A192F" strokeWidth="3" />
+                {/* Bottom Left Branch */}
+                <path d="M 500 440 H 320 V 505" stroke="#0A192F" strokeWidth="3" markerEnd="url(#brandTerracottaArrow)" />
+                {/* Bottom Right Branch */}
+                <path d="M 500 440 H 680 V 505" stroke="#0A192F" strokeWidth="3" markerEnd="url(#brandTerracottaArrow)" />
+              </svg>
+            </div>
+
+            {/* Responsive Grid Layout */}
+            <div className="relative z-10 space-y-8 lg:space-y-0">
+
+              {/* TOP ROW NODES: Event 1 (New Lead) & Event 2 (New Order) */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 lg:gap-64 lg:mb-16">
+                {/* Node 1: New Lead */}
+                <motion.div
+                  initial={{ opacity: 0, y: -30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.7, delay: 0.1 }}
+                  whileHover={{ scale: 1.05 }}
+                  className="w-full sm:w-64 bg-slate-900 hover:bg-slate-800 text-white p-5 rounded-2xl shadow-xl border-2 border-brand-terracotta/40 text-center transition-all cursor-pointer group"
+                >
+                  <div className="flex items-center justify-center gap-2 mb-1">
+                    <Users className="w-4 h-4 text-brand-terracotta" />
+                    <span className="font-extrabold text-base sm:text-lg tracking-tight">New Lead</span>
                   </div>
-                </div>
-                <item.icon className="w-8 h-8 text-slate-400 opacity-80" />
+                  <div className="text-xs text-emerald-400 font-extrabold mt-1">
+                    Assigned to: <span className="text-white">Sales Team</span>
+                  </div>
+                </motion.div>
+
+                {/* Node 2: New Order */}
+                <motion.div
+                  initial={{ opacity: 0, y: -30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.7, delay: 0.2 }}
+                  whileHover={{ scale: 1.05 }}
+                  className="w-full sm:w-64 bg-slate-900 hover:bg-slate-800 text-white p-5 rounded-2xl shadow-xl border-2 border-brand-terracotta/40 text-center transition-all cursor-pointer group"
+                >
+                  <div className="flex items-center justify-center gap-2 mb-1">
+                    <ShoppingBag className="w-4 h-4 text-brand-terracotta" />
+                    <span className="font-extrabold text-base sm:text-lg tracking-tight">New Order</span>
+                  </div>
+                  <div className="text-xs text-emerald-400 font-extrabold mt-1">
+                    Assigned to: <span className="text-white">Operations</span>
+                  </div>
+                </motion.div>
               </div>
-            ))}
+
+              {/* MIDDLE ROW NODES: Left (Production Completed, Service Request) + CENTER CORE + Right (High-Priority Ticket, Field Job Created) */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-6 lg:gap-4 lg:my-10">
+
+                {/* Left Column (2 Nodes) */}
+                <div className="lg:col-span-3 space-y-6 flex flex-col items-center lg:items-end">
+                  {/* Node 3: Production Completed */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: false, amount: 0.2 }}
+                    transition={{ duration: 0.7, delay: 0.3 }}
+                    whileHover={{ scale: 1.05 }}
+                    className="w-full sm:w-64 bg-slate-900 hover:bg-slate-800 text-white p-5 rounded-2xl shadow-xl border-2 border-brand-terracotta/40 text-center transition-all cursor-pointer group"
+                  >
+                    <div className="flex items-center justify-center gap-2 mb-1">
+                      <Factory className="w-4 h-4 text-brand-terracotta" />
+                      <span className="font-extrabold text-base sm:text-lg tracking-tight">Production Completed</span>
+                    </div>
+                    <div className="text-xs text-emerald-400 font-extrabold mt-1">
+                      Assigned to: <span className="text-white">Dispatch Team</span>
+                    </div>
+                  </motion.div>
+
+                  {/* Node 4: Service Request */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: false, amount: 0.2 }}
+                    transition={{ duration: 0.7, delay: 0.4 }}
+                    whileHover={{ scale: 1.05 }}
+                    className="w-full sm:w-64 bg-slate-900 hover:bg-slate-800 text-white p-5 rounded-2xl shadow-xl border-2 border-brand-terracotta/40 text-center transition-all cursor-pointer group"
+                  >
+                    <div className="flex items-center justify-center gap-2 mb-1">
+                      <Headphones className="w-4 h-4 text-brand-terracotta" />
+                      <span className="font-extrabold text-base sm:text-lg tracking-tight">Service Request</span>
+                    </div>
+                    <div className="text-xs text-emerald-400 font-extrabold mt-1">
+                      Assigned to: <span className="text-white">Support Team</span>
+                    </div>
+                  </motion.div>
+                </div>
+
+                {/* CENTER CORE NODE: Internal Team Communication */}
+                <div className="lg:col-span-6 flex justify-center py-4 my-2 lg:my-0">
+                  <motion.div
+                    initial={{ scale: 0.85, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: false, amount: 0.2 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className="w-full max-w-sm bg-gradient-to-br from-brand-navy via-slate-900 to-brand-navy text-white p-7 sm:p-9 rounded-3xl shadow-2xl border-4 border-brand-terracotta text-center relative group"
+                  >
+                    <div className="w-14 h-14 rounded-2xl bg-brand-terracotta/20 border border-brand-terracotta/40 mx-auto flex items-center justify-center mb-3">
+                      <Workflow className="w-8 h-8 text-brand-terracotta animate-pulse" />
+                    </div>
+                    <h3 className="font-extrabold text-xl sm:text-2xl tracking-tight text-white">
+                      Internal Team Communication
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-300 font-semibold mt-2">
+                      inaiwazhi Automated Event Router
+                    </p>
+                  </motion.div>
+                </div>
+
+                {/* Right Column (2 Nodes) */}
+                <div className="lg:col-span-3 space-y-6 flex flex-col items-center lg:items-start">
+                  {/* Node 5: High-Priority Ticket */}
+                  <motion.div
+                    initial={{ opacity: 0, x: 40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: false, amount: 0.2 }}
+                    transition={{ duration: 0.7, delay: 0.5 }}
+                    whileHover={{ scale: 1.05 }}
+                    className="w-full sm:w-64 bg-slate-900 hover:bg-slate-800 text-white p-5 rounded-2xl shadow-xl border-2 border-brand-terracotta/40 text-center transition-all cursor-pointer group"
+                  >
+                    <div className="flex items-center justify-center gap-2 mb-1">
+                      <ShieldCheck className="w-4 h-4 text-brand-terracotta" />
+                      <span className="font-extrabold text-base sm:text-lg tracking-tight">High-Priority Ticket</span>
+                    </div>
+                    <div className="text-xs text-emerald-400 font-extrabold mt-1">
+                      Assigned to: <span className="text-white">Manager Escalation</span>
+                    </div>
+                  </motion.div>
+
+                  {/* Node 6: Field Job Created */}
+                  <motion.div
+                    initial={{ opacity: 0, x: 40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: false, amount: 0.2 }}
+                    transition={{ duration: 0.7, delay: 0.6 }}
+                    whileHover={{ scale: 1.05 }}
+                    className="w-full sm:w-64 bg-slate-900 hover:bg-slate-800 text-white p-5 rounded-2xl shadow-xl border-2 border-brand-terracotta/40 text-center transition-all cursor-pointer group"
+                  >
+                    <div className="flex items-center justify-center gap-2 mb-1">
+                      <Wrench className="w-4 h-4 text-brand-terracotta" />
+                      <span className="font-extrabold text-base sm:text-lg tracking-tight">Field Job Created</span>
+                    </div>
+                    <div className="text-xs text-emerald-400 font-extrabold mt-1">
+                      Assigned to: <span className="text-white">Field Technician</span>
+                    </div>
+                  </motion.div>
+                </div>
+
+              </div>
+
+              {/* BOTTOM ROW NODES: Event 7 (Payment Issue) & Event 8 (Delivery Delay) */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 lg:gap-64 lg:mt-16">
+                {/* Node 7: Payment Issue */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.7, delay: 0.7 }}
+                  whileHover={{ scale: 1.05 }}
+                  className="w-full sm:w-64 bg-slate-900 hover:bg-slate-800 text-white p-5 rounded-2xl shadow-xl border-2 border-brand-terracotta/40 text-center transition-all cursor-pointer group"
+                >
+                  <div className="flex items-center justify-center gap-2 mb-1">
+                    <Database className="w-4 h-4 text-brand-terracotta" />
+                    <span className="font-extrabold text-base sm:text-lg tracking-tight">Payment Issue</span>
+                  </div>
+                  <div className="text-xs text-emerald-400 font-extrabold mt-1">
+                    Assigned to: <span className="text-white">Finance Team</span>
+                  </div>
+                </motion.div>
+
+                {/* Node 8: Delivery Delay */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.7, delay: 0.8 }}
+                  whileHover={{ scale: 1.05 }}
+                  className="w-full sm:w-64 bg-slate-900 hover:bg-slate-800 text-white p-5 rounded-2xl shadow-xl border-2 border-brand-terracotta/40 text-center transition-all cursor-pointer group"
+                >
+                  <div className="flex items-center justify-center gap-2 mb-1">
+                    <Truck className="w-4 h-4 text-brand-terracotta" />
+                    <span className="font-extrabold text-base sm:text-lg tracking-tight">Delivery Delay</span>
+                  </div>
+                  <div className="text-xs text-emerald-400 font-extrabold mt-1">
+                    Assigned to: <span className="text-white">Ops + Support</span>
+                  </div>
+                </motion.div>
+              </div>
+
+            </div>
+
           </div>
 
-          <div className="p-6 rounded-2xl bg-slate-900 text-white text-center shadow-lg">
-            <span className="text-lg sm:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-300 to-sky-300">
-              Business Event → Right Team → Right Action
-            </span>
-          </div>
+          {/* Bottom Execution Banner */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="mt-10 p-6 rounded-3xl bg-brand-navy text-white text-center shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4 max-w-5xl mx-auto border-2 border-brand-terracotta/30"
+          >
+            <div className="text-left">
+              <div className="text-xs font-mono uppercase font-extrabold text-brand-terracotta tracking-widest">
+                Automated Internal Routing Engine
+              </div>
+              <div className="text-base sm:text-lg font-extrabold text-white mt-1">
+                Business Event ➔ Target Team ➔ Immediate Action
+              </div>
+            </div>
+            <button
+              onClick={() => openDemoModal("Internal Team Communication")}
+              className="px-6 py-3.5 rounded-2xl bg-brand-terracotta hover:bg-brand-terracotta/90 text-white font-extrabold text-xs sm:text-sm transition-all whitespace-nowrap shadow-md hover:scale-105"
+            >
+              Configure Internal Workflows
+            </button>
+          </motion.div>
+
         </div>
       </section>
 
       {/* =========================================================================
-          SECTION 8: Can External Teams & Partners Be Connected Too?
+          SECTION 8: Can External Teams & Partners Be Connected Too? (CLEAN WHITE & TERRACOTTA DESIGN)
           ========================================================================= */}
-      <section className="py-20 border-b border-slate-200/80 bg-[#F8FAFC]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+      <section className="py-24 border-b border-slate-200/80 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+          {/* Section Header */}
+          <div className="text-center max-w-4xl mx-auto mb-16">
+            <motion.span
+              initial={{ opacity: 0, y: -15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+              className="text-xs font-mono font-extrabold uppercase tracking-widest text-brand-terracotta bg-brand-terracotta/10 border border-brand-terracotta/20 px-5 py-2 rounded-full inline-block mb-4 shadow-xs"
+            >
+              Cross-Enterprise Ecosystem Engine
+            </motion.span>
+            <motion.h2
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4"
+            >
               Can External Teams & Partners Be Connected Too?
-            </h2>
-            <p className="text-lg text-slate-600 font-medium">
-              Connect Employees, Dealers, Vendors, Contractors & Field Teams
-            </p>
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-base sm:text-xl text-slate-600 font-semibold max-w-3xl mx-auto leading-relaxed"
+            >
+              Connect Employees, Dealers, Vendors, Contractors & Field Teams in One Unified Real-Time Network.
+            </motion.p>
           </div>
 
-          <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-lg">
-            <p className="text-center text-slate-700 text-lg font-medium mb-8">
-              Your communication network doesn’t stop with internal employees. Businesses work with a vast ecosystem:
-            </p>
+          {/* 8 BUSINESS EVENTS SERPENTINE S-CURVE STEPPER FLOWCHART (MATCHING USER REFERENCE DESIGN) */}
+          <div className="bg-slate-50 border-2 border-slate-200/90 rounded-3xl p-6 sm:p-14 shadow-xl relative overflow-hidden mb-12">
 
-            {/* Stakeholder Network Pills */}
-            <div className="flex flex-wrap justify-center gap-3 mb-10">
-              {[
-                "Customers", "Dealers", "Distributors", "Suppliers",
-                "Service Partners", "Technicians", "Delivery Teams",
-                "Contractors", "Field Employees"
-              ].map((partner, idx) => (
-                <span key={idx} className="px-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-brand-navy font-bold text-sm shadow-sm">
-                  🤝 {partner}
-                </span>
-              ))}
+            {/* Section Stage Title */}
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                Automated Event-Driven <span className="text-brand-terracotta">Routing Pipeline</span>
+              </h3>
+              <p className="text-sm text-slate-600 font-medium mt-2">
+                Real-time trigger pathing connecting business actions directly to target operational teams.
+              </p>
             </div>
 
-            {/* Dealer Workflow Example */}
-            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200">
-              <div className="text-xs font-bold text-brand-terracotta uppercase tracking-wider mb-4 text-center">Dealer Order Workflow Example</div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 text-center">
-                {[
-                  { step: "Dealer", desc: "Places order" },
-                  { step: "Sales", desc: "Confirms order" },
-                  { step: "Operations", desc: "Processes order" },
-                  { step: "Warehouse", desc: "Prepares shipment" },
-                  { step: "Logistics Partner", desc: "Receives dispatch info" },
-                  { step: "Dealer", desc: "Receives delivery update" },
-                ].map((item, idx) => (
-                  <div key={idx} className="p-3 rounded-xl bg-white border border-slate-200 shadow-sm">
-                    <div className="font-bold text-slate-900 text-sm">{item.step}</div>
-                    <div className="text-xs text-slate-500 font-medium">{item.desc}</div>
+            {/* Dotted Trajectory Connector Lines (Desktop SVG Serpentine S-Curve Path) */}
+            <div className="hidden lg:block absolute inset-0 pointer-events-none z-0">
+              <svg className="w-full h-full" viewBox="0 0 1000 560" fill="none">
+                {/* Row 1 Path: Event 1 ➔ Event 2 ➔ Event 3 ➔ Event 4 */}
+                <path
+                  d="M 180 180 H 350 M 430 180 H 600 M 680 180 H 850"
+                  stroke="#0A192F"
+                  strokeWidth="3"
+                  strokeDasharray="6 6"
+                />
+                <circle cx="180" cy="180" r="5" fill="#a23b2a" />
+                <circle cx="350" cy="180" r="5" fill="#a23b2a" />
+                <circle cx="430" cy="180" r="5" fill="#a23b2a" />
+                <circle cx="600" cy="180" r="5" fill="#a23b2a" />
+                <circle cx="680" cy="180" r="5" fill="#a23b2a" />
+                <circle cx="850" cy="180" r="5" fill="#a23b2a" />
+
+                {/* Serpentine Drop Line from Event 4 down & left to Event 5 */}
+                <path
+                  d="M 890 220 V 320 H 130 V 420"
+                  stroke="#0A192F"
+                  strokeWidth="3"
+                  strokeDasharray="6 6"
+                />
+                <circle cx="890" cy="220" r="5" fill="#a23b2a" />
+                <circle cx="130" cy="420" r="5" fill="#a23b2a" />
+
+                {/* Row 2 Path: Event 5 ➔ Event 6 ➔ Event 7 ➔ Event 8 */}
+                <path
+                  d="M 180 435 H 350 M 430 435 H 600 M 680 435 H 850"
+                  stroke="#0A192F"
+                  strokeWidth="3"
+                  strokeDasharray="6 6"
+                />
+                <circle cx="180" cy="435" r="5" fill="#a23b2a" />
+                <circle cx="350" cy="435" r="5" fill="#a23b2a" />
+                <circle cx="430" cy="435" r="5" fill="#a23b2a" />
+                <circle cx="600" cy="435" r="5" fill="#a23b2a" />
+                <circle cx="680" cy="435" r="5" fill="#a23b2a" />
+                <circle cx="850" cy="435" r="5" fill="#a23b2a" />
+              </svg>
+            </div>
+
+            {/* 8 EVENTS 2-ROW STEPPER FLOW LAYOUT */}
+            <div className="relative z-10 space-y-12 lg:space-y-16">
+
+              {/* ROW 1: Events 1 to 4 */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+
+                {/* Event 1: New Lead */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: 0.05 }}
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  className="bg-blue-50/70 border-2 border-blue-200/90 hover:border-brand-terracotta rounded-3xl p-6 shadow-md text-center flex flex-col items-center justify-between transition-all cursor-pointer group"
+                >
+                  <div className="w-16 h-16 rounded-2xl bg-blue-100/90 border border-blue-300 text-blue-700 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform shadow-xs">
+                    👥
                   </div>
-                ))}
+                  <div>
+                    <span className="text-[11px] font-mono font-bold uppercase text-blue-800 bg-blue-100 px-3 py-1 rounded-full border border-blue-200 inline-block mb-2">
+                      Event 01
+                    </span>
+                    <h4 className="text-lg sm:text-xl font-bold text-slate-800 tracking-tight">
+                      New Lead
+                    </h4>
+                    <p className="text-xs text-blue-900/80 font-medium mt-2 pt-2 border-t border-blue-200/70">
+                      ➔ Assigned to: <span className="font-bold text-slate-900">Sales</span>
+                    </p>
+                  </div>
+                </motion.div>
+
+                {/* Event 2: New Order */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  className="bg-emerald-50/70 border-2 border-emerald-200/90 hover:border-brand-terracotta rounded-3xl p-6 shadow-md text-center flex flex-col items-center justify-between transition-all cursor-pointer group"
+                >
+                  <div className="w-16 h-16 rounded-2xl bg-emerald-100/90 border border-emerald-300 text-emerald-700 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform shadow-xs">
+                    🛍️
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-mono font-bold uppercase text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200 inline-block mb-2">
+                      Event 02
+                    </span>
+                    <h4 className="text-lg sm:text-xl font-bold text-slate-800 tracking-tight">
+                      New Order
+                    </h4>
+                    <p className="text-xs text-emerald-900/80 font-medium mt-2 pt-2 border-t border-emerald-200/70">
+                      ➔ Assigned to: <span className="font-bold text-slate-900">Operations</span>
+                    </p>
+                  </div>
+                </motion.div>
+
+                {/* Event 3: Production Completed */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: 0.15 }}
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  className="bg-purple-50/70 border-2 border-purple-200/90 hover:border-brand-terracotta rounded-3xl p-6 shadow-md text-center flex flex-col items-center justify-between transition-all cursor-pointer group"
+                >
+                  <div className="w-16 h-16 rounded-2xl bg-purple-100/90 border border-purple-300 text-purple-700 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform shadow-xs">
+                    🏭
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-mono font-bold uppercase text-purple-800 bg-purple-100 px-3 py-1 rounded-full border border-purple-200 inline-block mb-2">
+                      Event 03
+                    </span>
+                    <h4 className="text-lg sm:text-xl font-bold text-slate-800 tracking-tight">
+                      Production Completed
+                    </h4>
+                    <p className="text-xs text-purple-900/80 font-medium mt-2 pt-2 border-t border-purple-200/70">
+                      ➔ Assigned to: <span className="font-bold text-slate-900">Dispatch</span>
+                    </p>
+                  </div>
+                </motion.div>
+
+                {/* Event 4: Service Request */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  className="bg-amber-50/70 border-2 border-amber-200/90 hover:border-brand-terracotta rounded-3xl p-6 shadow-md text-center flex flex-col items-center justify-between transition-all cursor-pointer group"
+                >
+                  <div className="w-16 h-16 rounded-2xl bg-amber-100/90 border border-amber-300 text-amber-700 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform shadow-xs">
+                    🎧
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-mono font-bold uppercase text-amber-800 bg-amber-100 px-3 py-1 rounded-full border border-amber-200 inline-block mb-2">
+                      Event 04
+                    </span>
+                    <h4 className="text-lg sm:text-xl font-bold text-slate-800 tracking-tight">
+                      Service Request
+                    </h4>
+                    <p className="text-xs text-amber-900/80 font-medium mt-2 pt-2 border-t border-amber-200/70">
+                      ➔ Assigned to: <span className="font-bold text-slate-900">Support</span>
+                    </p>
+                  </div>
+                </motion.div>
+
+              </div>
+
+              {/* ROW 2: Events 5 to 8 */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+
+                {/* Event 5: High-Priority Ticket */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: 0.25 }}
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  className="bg-rose-50/70 border-2 border-rose-200/90 hover:border-brand-terracotta rounded-3xl p-6 shadow-md text-center flex flex-col items-center justify-between transition-all cursor-pointer group"
+                >
+                  <div className="w-16 h-16 rounded-2xl bg-rose-100/90 border border-rose-300 text-rose-700 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform shadow-xs">
+                    🛡️
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-mono font-bold uppercase text-rose-800 bg-rose-100 px-3 py-1 rounded-full border border-rose-200 inline-block mb-2">
+                      Event 05
+                    </span>
+                    <h4 className="text-lg sm:text-xl font-bold text-slate-800 tracking-tight">
+                      High-Priority Ticket
+                    </h4>
+                    <p className="text-xs text-rose-900/80 font-medium mt-2 pt-2 border-t border-rose-200/70">
+                      ➔ Assigned to: <span className="font-bold text-slate-900">Manager</span>
+                    </p>
+                  </div>
+                </motion.div>
+
+                {/* Event 6: Field Job Created */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  className="bg-cyan-50/70 border-2 border-cyan-200/90 hover:border-brand-terracotta rounded-3xl p-6 shadow-md text-center flex flex-col items-center justify-between transition-all cursor-pointer group"
+                >
+                  <div className="w-16 h-16 rounded-2xl bg-cyan-100/90 border border-cyan-300 text-cyan-700 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform shadow-xs">
+                    🔧
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-mono font-bold uppercase text-cyan-800 bg-cyan-100 px-3 py-1 rounded-full border border-cyan-200 inline-block mb-2">
+                      Event 06
+                    </span>
+                    <h4 className="text-lg sm:text-xl font-bold text-slate-800 tracking-tight">
+                      Field Job Created
+                    </h4>
+                    <p className="text-xs text-cyan-900/80 font-medium mt-2 pt-2 border-t border-cyan-200/70">
+                      ➔ Assigned to: <span className="font-bold text-slate-900">Technician</span>
+                    </p>
+                  </div>
+                </motion.div>
+
+                {/* Event 7: Payment Issue */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: 0.35 }}
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  className="bg-teal-50/70 border-2 border-teal-200/90 hover:border-brand-terracotta rounded-3xl p-6 shadow-md text-center flex flex-col items-center justify-between transition-all cursor-pointer group"
+                >
+                  <div className="w-16 h-16 rounded-2xl bg-teal-100/90 border border-teal-300 text-teal-700 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform shadow-xs">
+                    💳
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-mono font-bold uppercase text-teal-800 bg-teal-100 px-3 py-1 rounded-full border border-teal-200 inline-block mb-2">
+                      Event 07
+                    </span>
+                    <h4 className="text-lg sm:text-xl font-bold text-slate-800 tracking-tight">
+                      Payment Issue
+                    </h4>
+                    <p className="text-xs text-teal-900/80 font-medium mt-2 pt-2 border-t border-teal-200/70">
+                      ➔ Assigned to: <span className="font-bold text-slate-900">Finance</span>
+                    </p>
+                  </div>
+                </motion.div>
+
+                {/* Event 8: Delivery Delay */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  className="bg-orange-50/70 border-2 border-orange-200/90 hover:border-brand-terracotta rounded-3xl p-6 shadow-md text-center flex flex-col items-center justify-between transition-all cursor-pointer group"
+                >
+                  <div className="w-16 h-16 rounded-2xl bg-orange-100/90 border border-orange-300 text-orange-700 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform shadow-xs">
+                    🚚
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-mono font-bold uppercase text-orange-800 bg-orange-100 px-3 py-1 rounded-full border border-orange-200 inline-block mb-2">
+                      Event 08
+                    </span>
+                    <h4 className="text-lg sm:text-xl font-bold text-slate-800 tracking-tight">
+                      Delivery Delay
+                    </h4>
+                    <p className="text-xs text-orange-900/80 font-medium mt-2 pt-2 border-t border-orange-200/70">
+                      ➔ Assigned to: <span className="font-bold text-slate-900">Ops + Support</span>
+                    </p>
+                  </div>
+                </motion.div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* Bottom Execution Banner in SoftClinch Navy & Terracotta */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.6 }}
+            className="p-6 rounded-3xl bg-brand-navy border-2 border-brand-terracotta/30 text-white shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4 max-w-5xl mx-auto"
+          >
+            <div className="text-left">
+              <div className="text-xs font-mono font-extrabold text-brand-terracotta uppercase tracking-widest">
+                Unified Enterprise Ecosystem
+              </div>
+              <div className="text-base sm:text-xl font-extrabold text-white mt-1">
+                Internal Teams + External Partners = 1 Unified Real-Time Workflow
               </div>
             </div>
+            <button
+              onClick={() => openDemoModal("External Partner Ecosystem")}
+              className="px-7 py-4 rounded-2xl bg-brand-terracotta hover:bg-brand-terracotta/90 text-white font-extrabold text-xs sm:text-sm transition-all whitespace-nowrap shadow-lg hover:scale-105"
+            >
+              Connect Partner Ecosystem
+            </button>
+          </motion.div>
 
-            <div className="mt-8 text-center text-slate-800 font-bold text-lg">
-              Connect your internal and external business network in one seamless layer.
-            </div>
-          </div>
         </div>
       </section>
 
@@ -1172,8 +2299,8 @@ export const BusinessCommunication = () => {
                     { node: "Customer / Dealer", action: "WhatsApp update delivered in real-time" },
                   ].map((row, idx) => (
                     <div key={idx} className="p-3 rounded-xl bg-white border border-slate-200 flex items-center justify-between shadow-sm">
-                      <span className="font-bold text-slate-900 text-xs">{row.node}</span>
-                      <span className="text-xs text-slate-600 font-medium">{row.action}</span>
+                      <span className="font-bold text-slate-900 text-sm">{row.node}</span>
+                      <span className="text-sm text-slate-600 font-medium">{row.action}</span>
                     </div>
                   ))}
                 </div>
@@ -1207,8 +2334,8 @@ export const BusinessCommunication = () => {
                     { node: "Customer", action: "Receives progress update on WhatsApp" },
                   ].map((row, idx) => (
                     <div key={idx} className="p-3 rounded-xl bg-white border border-slate-200 flex items-center justify-between shadow-sm">
-                      <span className="font-bold text-slate-900 text-xs">{row.node}</span>
-                      <span className="text-xs text-slate-600 font-medium">{row.action}</span>
+                      <span className="font-bold text-slate-900 text-sm">{row.node}</span>
+                      <span className="text-sm text-slate-600 font-medium">{row.action}</span>
                     </div>
                   ))}
                 </div>
@@ -1234,7 +2361,7 @@ export const BusinessCommunication = () => {
           ========================================================================= */}
       <section id="how-it-works" className="py-20 border-b border-slate-200/80 bg-[#F8FAFC]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-14">
             <span className="text-xs font-bold uppercase tracking-widest text-brand-navy bg-brand-navy/10 px-4 py-1.5 rounded-full inline-block mb-3">
@@ -1250,7 +2377,7 @@ export const BusinessCommunication = () => {
 
           {/* 4-Stage Interconnected Bus Architecture Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch mb-10">
-            
+
             {/* Stage 1: External Network & Channels */}
             <div className="lg:col-span-3 bg-white border border-slate-200 rounded-3xl p-6 flex flex-col justify-between shadow-xs">
               <div>
@@ -1258,7 +2385,7 @@ export const BusinessCommunication = () => {
                   <span className="text-xs font-bold uppercase tracking-wider text-blue-700">1. External Network</span>
                   <Users className="w-4 h-4 text-blue-600" />
                 </div>
-                
+
                 <div className="space-y-2 mb-6">
                   {["Customers", "Dealers & Outlets", "Distributors", "Vendors & Partners"].map((item, idx) => (
                     <div key={idx} className="p-3 rounded-2xl bg-slate-50 border border-slate-200 font-bold text-xs text-slate-800 text-center shadow-2xs">
@@ -1283,7 +2410,7 @@ export const BusinessCommunication = () => {
 
             {/* Stage 2: Central inaiwazhi Core Orchestration Engine */}
             <div className="lg:col-span-4 bg-gradient-to-b from-brand-navy via-slate-900 to-brand-navy text-white rounded-3xl p-6 flex flex-col justify-between shadow-xl relative border border-slate-800 ring-1 ring-amber-400/20">
-              
+
               <div>
                 <div className="text-center mb-4 pb-3 border-b border-slate-800">
                   <span className="px-3.5 py-1 bg-brand-terracotta text-white font-bold text-[10px] uppercase rounded-full tracking-widest inline-block shadow-xs mb-3">
@@ -1392,7 +2519,7 @@ export const BusinessCommunication = () => {
           ========================================================================= */}
       <section className="py-20 border-b border-slate-200/80 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-14">
             <span className="text-xs font-bold uppercase tracking-widest text-brand-navy bg-brand-navy/10 px-4 py-1.5 rounded-full inline-block mb-3">
@@ -1403,7 +2530,7 @@ export const BusinessCommunication = () => {
             </h2>
             <p className="text-base sm:text-lg text-slate-600 font-medium mt-3">
               Transform
-                Fragmented Communication Into Automated Enterprise Workflows
+              Fragmented Communication Into Automated Enterprise Workflows
             </p>
           </div>
 
@@ -1423,7 +2550,7 @@ export const BusinessCommunication = () => {
 
           {/* 2-Column High-Fidelity Diagnostic Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mb-16">
-            
+
             {/* Left Column: Traditional Problem Log */}
             <div className="bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs">
               <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-200">
@@ -1587,33 +2714,56 @@ export const BusinessCommunication = () => {
                 solution: "Monitors response times, department bottlenecks, and end-to-end SLA fulfillment.",
               },
             ].map((row, idx) => (
-              <div
+              <motion.div
                 key={idx}
-                className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm hover:border-brand-navy/30 transition-all grid grid-cols-1 md:grid-cols-12 gap-4 items-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.45, delay: idx * 0.07 }}
+                whileHover={{
+                  y: -5,
+                  scale: 1.012,
+                  boxShadow: "0 12px 40px -8px rgba(0,51,102,0.18)",
+                  borderColor: "rgba(0,51,102,0.35)",
+                  transition: { duration: 0.25, ease: "easeOut" },
+                }}
+                className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm transition-colors grid grid-cols-1 md:grid-cols-12 gap-4 items-center cursor-pointer group"
               >
                 {/* Col 1: Title & Icon */}
                 <div className="md:col-span-4 flex items-center gap-4">
-                  <div className="w-11 h-11 rounded-xl bg-slate-100 border border-slate-200 text-brand-navy flex items-center justify-center flex-shrink-0 font-bold">
-                    <row.icon className="w-5 h-5" />
-                  </div>
+                  <motion.div
+                    whileHover={{ rotate: 8, scale: 1.15 }}
+                    transition={{ duration: 0.25 }}
+                    className="w-11 h-11 rounded-xl bg-slate-100 border border-slate-200 text-brand-navy flex items-center justify-center flex-shrink-0 font-bold group-hover:bg-brand-navy/10 group-hover:border-brand-navy/30 transition-colors duration-300"
+                  >
+                    <row.icon className="w-5 h-5 group-hover:text-brand-terracotta transition-colors duration-300" />
+                  </motion.div>
                   <div>
-                    <h3 className="font-bold text-slate-900 text-base leading-snug">{row.title}</h3>
-                    <p className="text-xs text-slate-500 font-medium mt-0.5">{row.desc}</p>
+                    <h3 className="font-bold text-slate-900 text-base leading-snug group-hover:text-brand-navy transition-colors duration-300">{row.title}</h3>
+                    <p className="text-xs text-slate-500 font-medium mt-0.5 group-hover:text-slate-600 transition-colors duration-300">{row.desc}</p>
                   </div>
                 </div>
 
                 {/* Col 2: Traditional Gap */}
-                <div className="md:col-span-4 bg-rose-50/60 border border-rose-100 rounded-xl p-3.5 text-xs text-slate-700 font-medium flex items-start gap-2.5">
-                  <X className="w-4 h-4 text-rose-500 flex-shrink-0 mt-0.5" />
+                <motion.div
+                  whileHover={{ x: -3 }}
+                  transition={{ duration: 0.2 }}
+                  className="md:col-span-4 bg-rose-50/60 border border-rose-100 rounded-xl p-3.5 text-xs text-slate-700 font-medium flex items-start gap-2.5 group-hover:bg-rose-50 group-hover:border-rose-200 transition-colors duration-300"
+                >
+                  <X className="w-4 h-4 text-rose-500 flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform duration-300" />
                   <span>{row.traditional}</span>
-                </div>
+                </motion.div>
 
                 {/* Col 3: inaiwazhi Solution */}
-                <div className="md:col-span-4 bg-slate-50 border border-brand-navy/20 rounded-xl p-3.5 text-xs text-slate-900 font-semibold flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
-                  <span>{row.solution}</span>
-                </div>
-              </div>
+                <motion.div
+                  whileHover={{ x: 3 }}
+                  transition={{ duration: 0.2 }}
+                  className="md:col-span-4 bg-slate-50 border border-brand-navy/20 rounded-xl p-3.5 text-xs text-slate-900 font-semibold flex items-start gap-2.5 group-hover:bg-emerald-50/60 group-hover:border-emerald-300 group-hover:shadow-[0_0_14px_-4px_rgba(16,185,129,0.25)] transition-all duration-300"
+                >
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform duration-300" />
+                  <span className="group-hover:text-emerald-900 transition-colors duration-300">{row.solution}</span>
+                </motion.div>
+              </motion.div>
             ))}
           </div>
 
@@ -1796,10 +2946,10 @@ export const BusinessCommunication = () => {
 
             {/* Core Idea Box */}
             <div className="max-w-4xl mx-auto mb-12">
-              <span className="text-xs font-mono uppercase tracking-widest text-amber-400 font-bold">The Core Philosophy</span>
+              <span className="text-xs font-mono uppercase tracking-widest text-white font-bold">The Core Philosophy</span>
               <h2 className="text-3xl sm:text-5xl font-extrabold mt-2 mb-6">
                 Your Business Already Has the Systems. <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-300">
+                <span className="text-white">
                   inaiwazhi Connects the Communication.
                 </span>
               </h2>
@@ -1809,7 +2959,7 @@ export const BusinessCommunication = () => {
                 {["Customer", "Support", "Sales", "Operations", "Production", "Field Team", "Dealer / Partner", "SAP / ERP / CRM"].map((n, idx, arr) => (
                   <React.Fragment key={idx}>
                     <span className="px-2.5 py-1 rounded bg-white/10 text-sky-200 border border-white/10">{n}</span>
-                    {idx < arr.length - 1 && <span className="text-amber-400 font-bold">↕</span>}
+                    {idx < arr.length - 1 && <span className="text-white font-bold">↕</span>}
                   </React.Fragment>
                 ))}
               </div>
@@ -1827,7 +2977,7 @@ export const BusinessCommunication = () => {
               <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-medium mb-8">
                 Don’t Let Business Information Stop at a Message. <br />
                 A customer message should create a response. A support request should create a ticket. A ticket should reach the right team. A business event should notify the right department. An ERP update should reach the right customer or partner. A completed task should trigger the next action. <br />
-                <span className="text-amber-400 font-extrabold">That’s the role of inaiwazhi. Connect. Automate. Route. Support. Act.</span>
+                <span className="text-white font-extrabold">That’s the role of inaiwazhi. Connect. Automate. Route. Support. Act.</span>
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -1942,3 +3092,5 @@ export const BusinessCommunication = () => {
     </div>
   );
 };
+
+export default BusinessCommunication;
