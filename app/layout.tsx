@@ -1,0 +1,94 @@
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
+import "./globals.css";
+import { AppShell } from "@/components/AppShell";
+import { SeoJsonLd } from "@/components/SeoJsonLd";
+import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, SITE_NAME, getSiteUrl } from "@/lib/site";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/schema";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  metadataBase: new URL(getSiteUrl()),
+  title: {
+    default: DEFAULT_TITLE,
+    template: "%s",
+  },
+  description: DEFAULT_DESCRIPTION,
+  verification: {
+    google: "HH9wAKOxxeKPnKdd6bFt2WQzP7BgLV4wZsLLCz-Vwzc",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
+  openGraph: {
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    siteName: SITE_NAME,
+    url: getSiteUrl(),
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
+}
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-LWBC6JQ9XS"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-LWBC6JQ9XS');
+          `}
+        </Script>
+        <Script id="microsoft-clarity" strategy="afterInteractive">
+          {`
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "sn0ywdf2ed");
+          `}
+        </Script>
+        <SeoJsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
+        <AppShell>{children}</AppShell>
+      </body>
+    </html>
+  );
+}
