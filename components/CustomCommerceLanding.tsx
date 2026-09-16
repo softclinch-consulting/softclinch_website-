@@ -161,116 +161,15 @@ export function CustomCommerceLanding() {
 
   return (
     <div className="commerce-readable bg-white text-[17px] text-slate-900">
-      <section className="relative overflow-hidden bg-[linear-gradient(180deg,#f8fbff_0%,#eef5ff_42%,#ffffff_100%)]">
-        <div className="absolute inset-0 opacity-80" style={{ background: "radial-gradient(circle at 15% 20%, rgba(59,130,246,0.14), transparent 28%), radial-gradient(circle at 75% 10%, rgba(147,197,253,0.18), transparent 30%)" }} />
-        <div className="relative mx-auto max-w-7xl px-4 pb-16 pt-8 sm:px-6 lg:px-8 lg:pb-24">
-          <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_1.25fr]">
-            <div>
-              <SectionBadge>CUSTOM COMMERCE ENGINEERING</SectionBadge>
-              <h1 className="mt-6 max-w-xl text-5xl font-display font-bold leading-tight tracking-tight text-slate-900 lg:text-6xl">
-                Your eCommerce Business Has Grown.<br />Has Your Technology?
-              </h1>
-              <p className="mt-6 max-w-xl text-xl leading-relaxed text-slate-600">
-                Custom eCommerce platforms and applications built around the way your business actually operates.
-              </p>
-              <p className="mt-4 max-w-xl text-lg text-slate-700">
-                Build a new commerce platform. Upgrade your existing store. Connect ERP, CRM, inventory and payments. Automate WhatsApp. Add AI where it creates real business value.
-              </p>
-
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <ButtonPrimary href="/contact" className="rounded-full bg-blue-600 px-7 py-4 text-base hover:bg-blue-700">Book a Free eCommerce Consultation</ButtonPrimary>
-                <ButtonSecondary href="https://wa.me/919876543210" className="rounded-full border-blue-200 bg-white px-7 py-4 text-base text-blue-700 hover:bg-blue-50">Talk to Our Commerce Team on WhatsApp</ButtonSecondary>
-              </div>
-
-              <p className="mt-5 text-sm text-slate-500">
-                Tell us what you're building, fixing or trying to automate. We'll help identify the right solution.
-              </p>
-            </div>
-
-            <div className="relative mx-auto w-full max-w-[900px] lg:scale-[1.04]">
-              <img
-                src={assetPath("/images/01-hero-commerce-journey.png")}
-                alt="Commerce journey from product discovery through order, inventory, ERP, CRM and customer communication"
-                className="mb-6 h-auto w-full rounded-[28px] border border-blue-200 bg-white object-cover shadow-[0_30px_80px_rgba(13,43,35,0.14)]"
-              />
-              <div className="relative overflow-hidden rounded-[32px] border border-blue-200 bg-slate-900 p-4 shadow-[0_40px_100px_rgba(37,99,235,0.18)] ring-1 ring-blue-100 sm:p-6">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(59,130,246,0.22),transparent_22%)]" />
-                <div className="relative rounded-[24px] border border-blue-200 bg-slate-900 p-4 sm:p-5">
-                  <div className="mb-4 flex items-center justify-between rounded-xl border border-blue-200 bg-slate-100 px-3 py-2.5">
-                    <div className="flex items-center gap-2">
-                      <span className="h-2.5 w-2.5 rounded-full bg-blue-600" />
-                      <span className="text-[12px] text-slate-500">SoftClinch commerce flow</span>
-                    </div>
-                    <span className="rounded-full border border-blue-200 bg-blue-50 px-2 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-blue-700">LIVE</span>
-                  </div>
-
-                  <div className="rounded-[20px] border border-slate-200 bg-white p-4 sm:p-5">
-                    <div className="flex items-center gap-2 rounded-xl bg-slate-100 px-3 py-2.5">
-                      <svg className="h-4 w-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 100-15 7.5 7.5 0 000 15z" /></svg>
-                      <span className="text-sm text-slate-700">Running Shoes</span>
-                      <span className="ml-auto text-blue-600">|</span>
-                    </div>
-
-                    <div className="mt-4 grid grid-cols-3 gap-2">
-                      {[{ name: "Trail Runner X", price: "₹4,299", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=300&q=80" }, { name: "Speed Boost V2", price: "₹3,499", image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?auto=format&fit=crop&w=300&q=80" }, { name: "Urban Stride", price: "₹2,899", image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=300&q=80" }].map((product, index) => (
-                        <div key={product.name} className={`overflow-hidden rounded-2xl border ${index === 0 ? "border-blue-200 bg-blue-50" : "border-slate-200 bg-slate-50"}`}>
-                          <div className="aspect-square overflow-hidden">
-                            <img src={product.image} alt={product.name} className="h-full w-full object-cover" />
-                          </div>
-                          <div className="p-2.5">
-                            <div className="truncate text-[10px] text-white/70">{product.name}</div>
-                            <div className="mt-1 text-[12px] font-bold text-blue-700">{product.price}</div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-3.5">
-                      <div className="mb-3 flex items-center justify-between text-[11px] text-slate-500">
-                        <span>Shopping Cart</span>
-                        <span className="rounded-full bg-blue-600 px-2 py-1 text-[10px] font-black text-white">3</span>
-                      </div>
-                      <div className="space-y-2.5">
-                        {[
-                          { name: "Trail Runner X", price: "₹4,299" },
-                          { name: "Sport Socks 3pk", price: "₹499" },
-                        ].map((item) => (
-                          <div key={item.name} className="flex items-center gap-2.5 rounded-xl border border-slate-200 bg-white p-2">
-                            <div className="h-9 w-9 overflow-hidden rounded-lg bg-white/5">
-                              <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=200&q=80" alt={item.name} className="h-full w-full object-cover" />
-                            </div>
-                            <div className="min-w-0 flex-1">
-                              <div className="truncate text-[10px] text-slate-700">{item.name}</div>
-                              <div className="text-[9px] text-slate-500">UK 9</div>
-                            </div>
-                            <div className="text-[10px] font-bold text-slate-700">{item.price}</div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-5 grid gap-3 sm:grid-cols-3">
-                    <div className="rounded-2xl border border-blue-200 bg-blue-50 p-3 text-center">
-                      <div className="text-[10px] uppercase tracking-[0.18em] text-blue-700">Payment</div>
-                      <div className="mt-2 text-lg font-black text-blue-700">SUCCESSFUL</div>
-                    </div>
-                    <div className="rounded-2xl border border-slate-200 bg-white p-3 text-center">
-                      <div className="text-[10px] uppercase tracking-[0.18em] text-slate-500">Order</div>
-                      <div className="mt-2 text-lg font-black text-slate-800">#SC10482</div>
-                    </div>
-                    <div className="rounded-2xl border border-slate-200 bg-white p-3 text-center">
-                      <div className="text-[10px] uppercase tracking-[0.18em] text-slate-500">Shipping</div>
-                      <div className="mt-2 text-lg font-black text-blue-700">Tomorrow</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <section className="border-b border-[#dcebe2] bg-[#f3f5f1]">
+        <div className="mx-auto max-w-[1600px] px-4 py-5 sm:px-6 lg:px-8 lg:py-8">
+          <img
+            src={assetPath("/images/commerce-custom-hero.jpeg")}
+            alt="Connected eCommerce platform across storefront, customer communication, fulfillment, and AI"
+            className="h-auto w-full rounded-[28px] border border-[#dcebe2] bg-white object-cover shadow-[0_24px_60px_rgba(30,52,42,0.10)]"
+          />
         </div>
       </section>
-
       <section className="border-y border-blue-100 bg-blue-50/80">
         <div className="overflow-hidden py-6">
           <div className="commerce-trust-track flex w-max items-center text-center text-sm font-semibold uppercase tracking-[0.22em] text-blue-700">
