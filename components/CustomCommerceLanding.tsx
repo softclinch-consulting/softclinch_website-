@@ -161,8 +161,25 @@ export function CustomCommerceLanding() {
 
   return (
     <div className="commerce-readable bg-white text-[17px] text-slate-900">
-      <section className="border-b border-[#dcebe2] bg-[#f3f5f1]">
-        <div className="mx-auto max-w-[1600px] px-4 py-5 sm:px-6 lg:px-8 lg:py-8">
+      <section className="border-b border-[#dcebe2] bg-[linear-gradient(180deg,#f3f8f5_0%,#ffffff_100%)]">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[0.88fr_1.12fr] lg:px-8 lg:py-20">
+          <div className="max-w-xl">
+            <SectionBadge>CUSTOM COMMERCE ENGINEERING</SectionBadge>
+            <h1 className="mt-6 text-4xl font-black leading-[1.08] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+              Your eCommerce Business Has Grown. Has Your Technology?
+            </h1>
+            <p className="mt-6 text-lg leading-relaxed text-slate-600 sm:text-xl">
+              Custom eCommerce platforms and applications built around the way your business actually operates.
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-slate-700">
+              Build a new commerce platform. Upgrade your existing store. Connect ERP, CRM, inventory and payments. Automate WhatsApp. Add AI where it creates real business value.
+            </p>
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              <ButtonPrimary href="/contact" className="rounded-full px-7 py-4 text-base">Book a Free eCommerce Consultation</ButtonPrimary>
+              <ButtonSecondary href="https://wa.me/919876543210" className="rounded-full px-7 py-4 text-base">Talk to Our Commerce Team on WhatsApp</ButtonSecondary>
+            </div>
+          </div>
+
           <img
             src={assetPath("/images/commerce-custom-hero.jpeg")}
             alt="Connected eCommerce platform across storefront, customer communication, fulfillment, and AI"
