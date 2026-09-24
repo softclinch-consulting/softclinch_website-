@@ -330,6 +330,7 @@ export function CustomDevelopment() {
                 <p>
                   Whether you're launching a SaaS product, building a customer portal, modernizing existing software, or developing a custom business application, our team delivers technology solutions designed for performance, security, and long-term scalability.
                 </p>
+
               </div>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
@@ -395,7 +396,7 @@ export function CustomDevelopment() {
                 At SoftClinch, we develop applications that solve real business challenges while providing the scalability needed for future growth.
               </p>
             </div>
-            
+
             <div className="mt-10 rounded-[32px] border border-slate-200 bg-slate-50 p-6 md:p-8">
               <h3 className="text-lg font-bold text-slate-950 flex items-center gap-2">
                 <HelpCircle className="h-5 w-5 text-brand-terracotta" />
@@ -406,7 +407,7 @@ export function CustomDevelopment() {
               </p>
             </div>
           </div>
-          
+
           <div className="rounded-[32px] border border-slate-200 bg-white p-8 shadow-sm">
             <h3 className="text-xl font-bold text-slate-950 mb-6">Our Expertise Includes</h3>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
@@ -419,7 +420,7 @@ export function CustomDevelopment() {
                 "Customer Portals",
                 "API Development & Integrations",
                 "Workflow Automation Systems",
-                "Cloud Applications", 
+                "Cloud Applications",
                 "Analytics & Reporting Platforms",
               ].map((item) => (
                 <div
@@ -462,7 +463,7 @@ export function CustomDevelopment() {
                   </div>
                   <h3 className="mt-6 text-2xl font-bold text-slate-950">{service.title}</h3>
                   <p className="mt-3 text-sm leading-6 text-slate-500 font-medium">{service.tagline}</p>
-                  
+
                   {service.description && (
                     <p className="mt-3 text-xs leading-5 text-slate-600 bg-slate-50 p-3 rounded-xl border border-slate-100">
                       {service.description}
@@ -575,7 +576,7 @@ export function CustomDevelopment() {
       <section className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
         <div className="rounded-[40px] border border-slate-200 bg-white p-6 shadow-sm md:p-12 relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(194,94,63,0.04),transparent_40%)]" />
-          
+
           <div className="relative z-10 grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-terracotta">
@@ -635,7 +636,7 @@ export function CustomDevelopment() {
               <div>
                 <h3 className="text-xl font-bold text-slate-900">{activeCategory.title}</h3>
                 <p className="mt-2 text-sm leading-6 text-slate-600">{activeCategory.description}</p>
-                
+
                 <div className="mt-8 grid gap-4 sm:grid-cols-2">
                   {activeCategory.items.map((tech) => (
                     <div
@@ -657,7 +658,7 @@ export function CustomDevelopment() {
                   ))}
                 </div>
               </div>
-              
+
               <div className="mt-8 border-t border-slate-200 pt-6 flex flex-wrap gap-4 items-center justify-between">
                 <span className="text-xs font-medium text-slate-400">
                   Select a category on the left to explore our full stack expertise.
@@ -842,9 +843,13 @@ export function CustomDevelopment() {
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center rounded-xl border border-white/30 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10"
+              className="inline-flex items-center rounded-xl bor
+    
+              der border-white/30 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10"
             >
-              Schedule a Free Consultation
+              der border-white/30 px-6 py-3.5 text-sm font-semibold text-white transitions hover:bg-white /10
+              6
+              chedule a Free Consultation
             </Link>
           </div>
         </div>
