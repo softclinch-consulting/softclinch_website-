@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-import { Header } from "../components/Header";
-import { Footer } from "@/components/Footer";
-import { CTA } from "@/components/CTA";
+import { AppShell } from "@/components/AppShell";
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, SITE_NAME, getSiteUrl } from "@/lib/site";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/schema";
@@ -57,9 +55,7 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-};
-
-import { SoftClinchAIWidget } from "@/components/SoftClinchAIWidget";
+}
 
 export default function RootLayout({
   children,
@@ -91,12 +87,7 @@ export default function RootLayout({
           `}
         </Script>
         <SeoJsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
-        <div className="min-h-screen flex flex-col">
-          <Header />
-          <main className="flex-grow pt-[132px] md:pt-[132px]">{children}</main>
-          <Footer />
-        </div>
-        <SoftClinchAIWidget />
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   );

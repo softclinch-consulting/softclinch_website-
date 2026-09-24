@@ -30,6 +30,7 @@ export const Header = () => {
                 { name: 'SAP Implementation & Rollout', path: '/services/sap-consulting' },
                 { name: 'SAP AMS Support', path: '/sap-ams-support' },
                 { name: 'Custom App Development', path: '/custom-application-development' },
+                { name: 'Custom Ecommerce', path: '/custom-commerce-development' },
                 { name: 'AI-Powered Business Systems', path: '/services/ai-powered-business-systems' },
                 { name: 'Commerce Enablement', path: '/commerce-enablement' },
                 { name: 'Digital Marketing', path: '/digital-marketing' },
