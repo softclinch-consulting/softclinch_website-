@@ -1090,15 +1090,12 @@ const relatedServiceLinks = [
 
 type CustomAppTestimonial = {
   id: string;
+  businessTitle: string;
   category: string;
-  categoryKey: "electrical" | "tyre" | "media" | "fashion" | "chemical";
   tag: string;
   icon: React.ComponentType<{ className?: string }>;
   accentGradient: string;
   badgeBg: string;
-  clientName: string;
-  clientRole: string;
-  companyName: string;
   location: string;
   rating: number;
   highlightMetric: string;
@@ -1110,16 +1107,32 @@ type CustomAppTestimonial = {
 
 const customAppTestimonials: CustomAppTestimonial[] = [
   {
+    id: "womens-wear",
+    businessTitle: "Women's Wear & Ethnic Fashion Retail",
+    category: "Fashion, Apparel & Boutique Manufacturing",
+    tag: "Design Matrix & Multi-Store Inventory",
+    icon: Shirt,
+    accentGradient: "from-fuchsia-500/10 via-fuchsia-500/5 to-transparent border-fuchsia-500/30 text-fuchsia-600",
+    badgeBg: "bg-fuchsia-50 text-fuchsia-700 border-fuchsia-200",
+    location: "Tirupur & Chennai, Tamil Nadu",
+    rating: 5,
+    highlightMetric: "92% Less Stock Outages · 4hr Fast Reorder Cycle",
+    problem:
+      "Off-the-shelf software failed to handle our women's ethnic wear catalog—with complex combinations of 6 sizes (XS–3XL), 45+ embroidery designs, seasonal dyes, and fabric lots across 3 manufacturing units and 12 boutique outlets. We faced frequent stockouts on popular lines and overproduced slow-moving styles.",
+    solution:
+      "SoftClinch developed a bespoke fashion ERP and mobile B2B ordering catalog. Boutique retail store managers order restocks with a visual matrix on mobile, factory cutters receive prioritized batch orders automatically, and barcoded SKU tracking ensures zero dispatch errors.",
+    quote:
+      "Standard retail software couldn't handle our multi-size, multi-color women's wear production matrix. SoftClinch created a custom app tailored for our fashion line that lets boutique buyers order on mobile and keeps our factory inventory 100% accurate.",
+    techStack: ["React Native Mobile App", "Cloud Inventory Matrix", "B2B Boutique Portal", "Automated Barcode Tagging"],
+  },
+  {
     id: "electrical-wholesale",
+    businessTitle: "Electrical Wholesale & Showroom Network",
     category: "Electrical Wholesale & B2B Distribution",
-    categoryKey: "electrical",
     tag: "Tally ERP & WhatsApp Integrated",
     icon: Zap,
     accentGradient: "from-amber-500/10 via-amber-500/5 to-transparent border-amber-500/30 text-amber-600",
     badgeBg: "bg-amber-50 text-amber-700 border-amber-200",
-    clientName: "R. Shanmugam & Partners",
-    clientRole: "Managing Director",
-    companyName: "MahaShree Electricals & Industrial Supplies",
     location: "Chennai & Coimbatore, Tamil Nadu",
     rating: 5,
     highlightMetric: "80% Less Tally Re-work · Instant WhatsApp Invoicing",
@@ -1133,15 +1146,12 @@ const customAppTestimonials: CustomAppTestimonial[] = [
   },
   {
     id: "tyre-republic",
+    businessTitle: "Tyre Republic & Commercial Retreading",
     category: "Automotive & Fleet Tyre Services",
-    categoryKey: "tyre",
     tag: "Tyre Tracking & Plant Workflow",
     icon: ScanLine,
     accentGradient: "from-blue-500/10 via-blue-500/5 to-transparent border-blue-500/30 text-blue-600",
     badgeBg: "bg-blue-50 text-blue-700 border-blue-200",
-    clientName: "K. Vigneshwar & Operations Team",
-    clientRole: "Head of Plant Operations",
-    companyName: "Tyre Republic & Commercial Retreading Solutions",
     location: "Salem & Madurai, Tamil Nadu",
     rating: 5,
     highlightMetric: "0% Missing Tyres · 100% Casing Traceability",
@@ -1154,60 +1164,13 @@ const customAppTestimonials: CustomAppTestimonial[] = [
     techStack: ["Mobile Barcode Scanner", "Real-Time Plant Dashboard", "Internal Team Push Alerts", "Audit Trail DB"],
   },
   {
-    id: "news-channel",
-    category: "Broadcast Media & Journalism",
-    categoryKey: "media",
-    tag: "Automated YouTube Video Pipeline",
-    icon: Video,
-    accentGradient: "from-rose-500/10 via-rose-500/5 to-transparent border-rose-500/30 text-rose-600",
-    badgeBg: "bg-rose-50 text-rose-700 border-rose-200",
-    clientName: "S. K. Ramanathan",
-    clientRole: "Chief Technology Officer & Digital Head",
-    companyName: "Metro News 24x7 Digital Media Network",
-    location: "Chennai, Tamil Nadu",
-    rating: 5,
-    highlightMetric: "90s Breaking News Speed · 100% Automated YouTube Upload",
-    problem:
-      "Breaking news demands unmatched speed. When video editors finished cutting breaking news clips, the manual workflow of exporting, manually logging into YouTube Studio, re-typing bilingual SEO tags, uploading thumbnails, and posting to our website CMS took 20 to 30 minutes—costing us early viewership.",
-    solution:
-      "SoftClinch engineered a custom automated newsroom media pipeline. The moment video editors finish and save a news story in the edit suite, our custom application automatically ingests the media, formats metadata, publishes directly to our YouTube channel, updates our website ticker, and pushes breaking news notifications to our mobile app subscribers.",
-    quote:
-      "In broadcast journalism, every second counts. SoftClinch connected our editing desks directly to our YouTube channels. Our custom application automatically publishes news clips the instant our editors finish cutting them, completely eliminating manual uploading.",
-    techStack: ["YouTube Data API v3", "Automated Video Transcoding", "Webhooks Pipeline", "Push Notification Engine"],
-  },
-  {
-    id: "womens-wear",
-    category: "Fashion, Apparel & Retail",
-    categoryKey: "fashion",
-    tag: "Design Matrix & Multi-Store Inventory",
-    icon: Shirt,
-    accentGradient: "from-fuchsia-500/10 via-fuchsia-500/5 to-transparent border-fuchsia-500/30 text-fuchsia-600",
-    badgeBg: "bg-fuchsia-50 text-fuchsia-700 border-fuchsia-200",
-    clientName: "P. Priyadarshini",
-    clientRole: "Founder & Creative Director",
-    companyName: "Vastraa Living Women's Wear & Ethnic Fashion",
-    location: "Tirupur & Chennai, Tamil Nadu",
-    rating: 5,
-    highlightMetric: "92% Less Stock Outages · 4hr Fast Reorder Cycle",
-    problem:
-      "Off-the-shelf software failed to handle our women's ethnic wear catalog—with complex combinations of 6 sizes (XS–3XL), 45+ embroidery designs, seasonal dyes, and fabric lots across 3 manufacturing units and 12 boutique outlets. We faced frequent stockouts on popular lines and overproduced slow-moving styles.",
-    solution:
-      "SoftClinch developed a bespoke fashion ERP and mobile B2B ordering catalog. Boutique retail store managers order restocks with a visual matrix on mobile, factory cutters receive prioritized batch orders automatically, and barcoded SKU tracking ensures zero dispatch errors.",
-    quote:
-      "Standard retail software couldn't handle our multi-size, multi-color women's wear production matrix. SoftClinch created a custom app tailored for our fashion line that lets boutique buyers order on mobile and keeps our factory inventory 100% accurate.",
-    techStack: ["React Native Mobile App", "Cloud Inventory Matrix", "B2B Boutique Portal", "Automated Barcode Tagging"],
-  },
-  {
     id: "chemical-company",
+    businessTitle: "Specialty Chemical & Formulation Plant",
     category: "Chemical Manufacturing & Formulations",
-    categoryKey: "chemical",
     tag: "Formulation Locks & QC Compliance",
     icon: FlaskConical,
     accentGradient: "from-emerald-500/10 via-emerald-500/5 to-transparent border-emerald-500/30 text-emerald-600",
     badgeBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
-    clientName: "Dr. A. Sundaram, Ph.D.",
-    clientRole: "Director of Technical Operations",
-    companyName: "Apex Specialty Chemicals & Industrial Formulations Ltd.",
     location: "Ranipet & Guindy Industrial Estate, Chennai",
     rating: 5,
     highlightMetric: "Zero Batch Scrap · 100% Regulatory QC Compliance",
@@ -1219,16 +1182,26 @@ const customAppTestimonials: CustomAppTestimonial[] = [
       "In chemical manufacturing, one ratio mistake costs lakhs in ruined raw materials. SoftClinch's custom application digitized our complete batch lifecycle and QC verification, saving us lakhs in scrapped batches and making our regulatory compliance effortless.",
     techStack: ["Next.js Enterprise", "Automated COA Engine", "Batch Formulation Locks", "Encrypted Audit Logs"],
   },
+  {
+    id: "news-channel",
+    businessTitle: "24x7 Digital News & Media Broadcast",
+    category: "Broadcast Media & Journalism",
+    tag: "Automated YouTube Video Pipeline",
+    icon: Video,
+    accentGradient: "from-rose-500/10 via-rose-500/5 to-transparent border-rose-500/30 text-rose-600",
+    badgeBg: "bg-rose-50 text-rose-700 border-rose-200",
+    location: "Chennai, Tamil Nadu",
+    rating: 5,
+    highlightMetric: "90s Breaking News Speed · 100% Automated YouTube Upload",
+    problem:
+      "Breaking news demands unmatched speed. When video editors finished cutting breaking news clips, the manual workflow of exporting, manually logging into YouTube Studio, re-typing bilingual SEO tags, uploading thumbnails, and posting to our website CMS took 20 to 30 minutes—costing us early viewership.",
+    solution:
+      "SoftClinch engineered a custom automated newsroom media pipeline. The moment video editors finish and save a news story in the edit suite, our custom application automatically ingests the media, formats metadata, publishes directly to our YouTube channel, updates our website ticker, and pushes breaking news notifications to our mobile app subscribers.",
+    quote:
+      "In broadcast journalism, every second counts. SoftClinch connected our editing desks directly to our YouTube channels. Our custom application automatically publishes news clips the instant our editors finish cutting them, completely eliminating manual uploading.",
+    techStack: ["YouTube Data API v3", "Automated Video Transcoding", "Webhooks Pipeline", "Push Notification Engine"],
+  },
 ];
-
-const testimonialFilters = [
-  { key: "all", label: "All Client Stories (5)", icon: Sparkles },
-  { key: "electrical", label: "Electrical Wholesale & Tally", icon: Zap },
-  { key: "tyre", label: "Tyre Republic & Tracking", icon: ScanLine },
-  { key: "media", label: "News & YouTube Automation", icon: Video },
-  { key: "fashion", label: "Women's Fashion & Wear", icon: Shirt },
-  { key: "chemical", label: "Chemical & Batch QC", icon: FlaskConical },
-] as const;
 
 const INITIAL_CUSTOM_APP_FORM_DATA: ContactFormData = {
   name: "",
@@ -1632,7 +1605,6 @@ function CustomAppContactForm() {
 
 export function CustomDevelopment() {
   const [currentHeroSlide, setCurrentHeroSlide] = useState(0);
-  const [selectedTestimonialFilter, setSelectedTestimonialFilter] = useState<string>("all");
 
   // Automatic moving carousel timer (changes every 5 seconds)
   useEffect(() => {
@@ -1643,11 +1615,6 @@ export function CustomDevelopment() {
   }, []);
 
   const activeSlide = heroSlides[currentHeroSlide];
-
-  const filteredTestimonials =
-    selectedTestimonialFilter === "all"
-      ? customAppTestimonials
-      : customAppTestimonials.filter((item) => item.categoryKey === selectedTestimonialFilter);
 
   return (
     <div className="bg-white text-slate-900 selection:bg-brand-navy selection:text-white overflow-hidden">
@@ -2784,16 +2751,16 @@ export function CustomDevelopment() {
 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Section Header */}
-          <div className="max-w-3xl mx-auto text-center">
+          <div className="max-w-3xl mx-auto text-center mb-12">
             <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 border border-emerald-200 px-3.5 py-1 text-xs font-bold text-emerald-800">
               <Sparkles className="h-3.5 w-3.5 text-emerald-600" />
-              <span>Verified Client Success Stories</span>
+              <span>Proven Industry Applications</span>
             </div>
             <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl leading-tight">
               Real Businesses. Custom Software That Solved Real Problems.
             </h2>
             <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-              From reducing Tally paperwork in wholesale showrooms to tracking commercial tyres, automating YouTube news broadcasting, organizing fashion lines, and locking chemical formulas—see what our custom applications deliver.
+              From eliminating Tally paperwork in wholesale showrooms to tracking commercial tyres, automating YouTube news publishing, organizing apparel lines, and locking chemical formulas.
             </p>
 
             {/* Trust Rating Bar */}
@@ -2807,146 +2774,145 @@ export function CustomDevelopment() {
               <span className="text-slate-300">|</span>
               <span className="font-semibold text-slate-800">100% Practical Implementation</span>
               <span className="text-slate-300">|</span>
-              <span className="font-semibold text-slate-800">Built for Exact Business Workflows</span>
+              <span className="font-semibold text-slate-800">Hover Over Any Card to Pause</span>
             </div>
           </div>
+        </div>
 
-          {/* Interactive Filter Pills */}
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
-            {testimonialFilters.map((tab) => {
-              const TabIcon = tab.icon;
-              const isActive = selectedTestimonialFilter === tab.key;
-              return (
-                <button
-                  key={tab.key}
-                  type="button"
-                  onClick={() => setSelectedTestimonialFilter(tab.key)}
-                  className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition ${
-                    isActive
-                      ? "bg-brand-navy text-white shadow-md scale-105"
-                      : "bg-white text-slate-700 border border-slate-200 hover:border-brand-navy hover:text-brand-navy shadow-sm"
-                  }`}
-                >
-                  <TabIcon className="h-4 w-4" />
-                  <span>{tab.label}</span>
-                </button>
-              );
-            })}
-          </div>
+        {/* Continuous Right-to-Left Infinite Moving Slider Track */}
+        <div className="relative w-full mt-2">
+          {/* Edge Blur / Gradient Fades */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-slate-50 via-slate-50/80 to-transparent z-20 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-slate-50 via-slate-50/80 to-transparent z-20 pointer-events-none" />
 
-          {/* Testimonial Cards Grid */}
-          <div className="mt-12 grid gap-8 lg:grid-cols-2">
-            {filteredTestimonials.map((item) => {
-              const ItemIcon = item.icon;
-              return (
-                <TiltCard
-                  key={item.id}
-                  className="rounded-3xl border border-slate-200 bg-white p-7 sm:p-9 shadow-sm hover:shadow-xl transition flex flex-col justify-between"
-                >
-                  <div>
-                    {/* Header: Category Badge + Rating */}
-                    <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-navy/5 text-brand-navy shadow-sm">
-                          <ItemIcon className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <span className={`inline-block rounded-full border px-2.5 py-0.5 text-[11px] font-bold ${item.badgeBg}`}>
-                            {item.tag}
-                          </span>
-                          <div className="text-xs font-semibold text-slate-500 mt-0.5">
-                            {item.category}
+          <style>{`
+            @keyframes customAppSliderMarquee {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .custom-app-slider-track {
+              display: flex;
+              width: max-content;
+              animation: customAppSliderMarquee 42s linear infinite;
+            }
+            .custom-app-slider-track:hover {
+              animation-play-state: paused;
+            }
+          `}</style>
+
+          <div className="overflow-hidden w-full py-4">
+            <div className="custom-app-slider-track gap-6 px-4">
+              {[...customAppTestimonials, ...customAppTestimonials].map((item, idx) => {
+                const ItemIcon = item.icon;
+                return (
+                  <div
+                    key={`${item.id}-${idx}`}
+                    className="w-[360px] sm:w-[420px] md:w-[460px] shrink-0 rounded-3xl border border-slate-200 bg-white p-7 sm:p-8 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between group"
+                  >
+                    <div>
+                      {/* Header: Category Badge + Rating */}
+                      <div className="flex items-center justify-between gap-3 mb-4">
+                        <div className="flex items-center gap-3">
+                          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-navy/5 text-brand-navy shadow-sm group-hover:bg-brand-navy group-hover:text-white transition-colors">
+                            <ItemIcon className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <span className={`inline-block rounded-full border px-2.5 py-0.5 text-[11px] font-bold ${item.badgeBg}`}>
+                              {item.tag}
+                            </span>
+                            <div className="text-xs font-semibold text-slate-500 mt-0.5">
+                              {item.category}
+                            </div>
                           </div>
                         </div>
+
+                        {/* 5 Stars */}
+                        <div className="flex items-center gap-1 bg-amber-50 border border-amber-200/80 px-2 py-0.5 rounded-full shrink-0">
+                          {[...Array(item.rating)].map((_, s) => (
+                            <Star key={s} className="h-3 w-3 fill-amber-400 text-amber-400" />
+                          ))}
+                          <span className="text-[11px] font-bold text-amber-800 ml-0.5">5.0</span>
+                        </div>
                       </div>
 
-                      {/* 5 Stars */}
-                      <div className="flex items-center gap-1 bg-amber-50 border border-amber-200/80 px-2.5 py-1 rounded-full">
-                        {[...Array(item.rating)].map((_, s) => (
-                          <Star key={s} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
-                        ))}
-                        <span className="text-xs font-bold text-amber-800 ml-1">5.0</span>
+                      {/* Business Title (No personal names or roles) */}
+                      <div className="mb-4">
+                        <h3 className="text-lg font-bold text-slate-950 group-hover:text-brand-navy transition-colors">
+                          {item.businessTitle}
+                        </h3>
+                        <div className="text-xs text-slate-500 mt-0.5 font-medium">
+                          {item.location}
+                        </div>
                       </div>
-                    </div>
 
-                    {/* Highlight Metric Banner */}
-                    <div className="rounded-2xl border border-emerald-200 bg-emerald-50/80 p-3 text-xs sm:text-sm font-bold text-emerald-900 flex items-center gap-2.5 mb-5 shadow-xs">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-600 flex-shrink-0" />
-                      <span>{item.highlightMetric}</span>
-                    </div>
-
-                    {/* Client Quote */}
-                    <div className="relative mb-6">
-                      <Quote className="h-7 w-7 text-brand-navy/15 absolute -top-2 -left-1 pointer-events-none" />
-                      <p className="text-slate-800 text-sm sm:text-base leading-relaxed pl-5 font-medium italic">
-                        "{item.quote}"
-                      </p>
-                    </div>
-
-                    {/* Operational Bottleneck vs Custom Solution Box */}
-                    <div className="space-y-3 rounded-2xl bg-slate-50 border border-slate-200 p-4 text-xs sm:text-sm text-slate-700 mb-6">
-                      <div>
-                        <span className="font-bold text-rose-800 uppercase tracking-wide text-[11px] block mb-1">
-                          The Operational Bottleneck:
-                        </span>
-                        <p className="text-slate-600 leading-relaxed">{item.problem}</p>
+                      {/* Highlight Metric Banner */}
+                      <div className="rounded-2xl border border-emerald-200 bg-emerald-50/80 p-3 text-xs sm:text-sm font-bold text-emerald-900 flex items-center gap-2.5 mb-5 shadow-xs">
+                        <CheckCircle2 className="h-4 w-4 text-emerald-600 flex-shrink-0" />
+                        <span>{item.highlightMetric}</span>
                       </div>
-                      <div className="pt-2 border-t border-slate-200">
-                        <span className="font-bold text-emerald-800 uppercase tracking-wide text-[11px] block mb-1">
-                          Custom Software Built:
-                        </span>
-                        <p className="text-slate-600 leading-relaxed">{item.solution}</p>
-                      </div>
-                    </div>
 
-                    {/* Tech Stack Pills */}
-                    <div className="flex flex-wrap gap-1.5 mb-6">
-                      {item.techStack.map((tech) => (
-                        <span
-                          key={tech}
-                          className="rounded-lg bg-slate-100 border border-slate-200 px-2.5 py-1 text-[10px] font-semibold text-slate-700"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Footer: Client Info & CTA */}
-                  <div className="pt-5 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-navy to-slate-900 text-white font-bold text-sm shadow-md shrink-0">
-                        {item.clientName.charAt(0)}
+                      {/* Client Quote */}
+                      <div className="relative mb-5">
+                        <Quote className="h-6 w-6 text-brand-navy/15 absolute -top-1 -left-1 pointer-events-none" />
+                        <p className="text-slate-800 text-xs sm:text-sm leading-relaxed pl-5 font-medium italic">
+                          "{item.quote}"
+                        </p>
                       </div>
-                      <div>
-                        <div className="flex items-center gap-1.5 font-bold text-slate-950 text-sm">
-                          <span>{item.clientName}</span>
-                          <span className="inline-flex items-center gap-0.5 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded-full border border-emerald-200">
-                            Verified <CheckCircle2 className="h-2.5 w-2.5 text-emerald-600" />
+
+                      {/* Operational Bottleneck vs Custom Solution Box */}
+                      <div className="space-y-2.5 rounded-2xl bg-slate-50 border border-slate-200 p-3.5 text-xs text-slate-700 mb-5">
+                        <div>
+                          <span className="font-bold text-rose-800 uppercase tracking-wide text-[10px] block mb-0.5">
+                            The Operational Bottleneck:
                           </span>
+                          <p className="text-slate-600 leading-relaxed text-[11px] sm:text-xs">{item.problem}</p>
                         </div>
-                        <div className="text-xs text-slate-600 font-medium">{item.clientRole}</div>
-                        <div className="text-[11px] text-slate-500 font-normal">
-                          {item.companyName} · {item.location}
+                        <div className="pt-2 border-t border-slate-200">
+                          <span className="font-bold text-emerald-800 uppercase tracking-wide text-[10px] block mb-0.5">
+                            Custom Software Built:
+                          </span>
+                          <p className="text-slate-600 leading-relaxed text-[11px] sm:text-xs">{item.solution}</p>
                         </div>
+                      </div>
+
+                      {/* Tech Stack Pills */}
+                      <div className="flex flex-wrap gap-1.5 mb-5">
+                        {item.techStack.map((tech) => (
+                          <span
+                            key={tech}
+                            className="rounded-lg bg-slate-100 border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700"
+                          >
+                            {tech}
+                          </span>
+                        ))}
                       </div>
                     </div>
 
-                    <Link
-                      href="#contact-form"
-                      className="inline-flex items-center justify-center rounded-xl bg-brand-navy/5 hover:bg-brand-navy hover:text-white px-3.5 py-2 text-xs font-bold text-brand-navy transition group shrink-0"
-                    >
-                      <span>Discuss Similar Solution</span>
-                      <ArrowRight className="ml-1.5 h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
-                    </Link>
-                  </div>
-                </TiltCard>
-              );
-            })}
-          </div>
+                    {/* Footer: Verified Company & CTA Button */}
+                    <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+                      <div className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                        <CheckCircle2 className="h-3 w-3 text-emerald-600" />
+                        <span>Verified Implementation</span>
+                      </div>
 
-          {/* Bottom Callout Banner */}
-          <div className="mt-14 rounded-3xl bg-gradient-to-r from-brand-navy to-slate-900 p-8 sm:p-10 text-white shadow-xl flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                      <Link
+                        href="#contact-form"
+                        className="inline-flex items-center justify-center rounded-xl bg-brand-navy/5 hover:bg-brand-navy hover:text-white px-3 py-1.5 text-xs font-bold text-brand-navy transition group shrink-0"
+                      >
+                        <span>Discuss Similar</span>
+                        <ArrowRight className="ml-1 h-3 w-3 group-hover:translate-x-0.5 transition-transform" />
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Callout Banner */}
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-12 relative z-10">
+          <div className="rounded-3xl bg-gradient-to-r from-brand-navy to-slate-900 p-8 sm:p-10 text-white shadow-xl flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
               <span className="text-xs font-bold uppercase tracking-widest text-emerald-400">
                 Custom Tailored For Your Workflow
