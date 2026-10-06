@@ -211,3 +211,70 @@ body {
   100% { transform: translateY(0) scale(1); opacity: 1; }
 }
 
+/* 3D Perspective & Hover Keyframes */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-2000 {
+  perspective: 2000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.translate-z-10 {
+  transform: translateZ(10px);
+}
+
+.translate-z-20 {
+  transform: translateZ(20px);
+}
+
+.translate-z-30 {
+  transform: translateZ(30px);
+}
+
+@keyframes float3dSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.8deg);
+  }
+}
+
+@keyframes float3dReverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(8px) rotate(-0.8deg);
+  }
+}
+
+.animate-float-3d {
+  animation: float3dSlow 6s ease-in-out infinite;
+}
+
+.animate-float-3d-reverse {
+  animation: float3dReverse 7s ease-in-out infinite;
+}
+
+@keyframes pulseGlow3d {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.08);
+  }
+}
+
+.animate-glow-3d {
+  animation: pulseGlow3d 4s ease-in-out infinite;
+}
+
+

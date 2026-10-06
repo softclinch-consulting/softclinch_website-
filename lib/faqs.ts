@@ -134,36 +134,47 @@ export const sapAmsFaq: FaqItem[] = [
 
 export const customDevelopmentFaq: FaqItem[] = [
   {
-    question: "What is custom software development?",
+    question: "Do I need to know exactly what software I need?",
     answer:
-      "Custom software development involves creating software tailored specifically to a business's unique needs, workflows, and objectives. It provides greater flexibility, scalability, and integration capabilities than generic software solutions.",
+      "No. You can simply explain your business, current process, and the problem you are facing. We can help you identify what type of software or application could solve it.",
   },
   {
-    question: "Do you develop both web and mobile-ready applications?",
+    question: "Can you build both web and mobile applications?",
     answer:
-      "Yes. We build responsive web applications and Progressive Web Apps (PWAs) that provide seamless experiences across desktop, tablet, and mobile devices.",
+      "Yes. Depending on the requirement, we can develop web applications, mobile applications, or a combination of both.",
   },
   {
-    question: "Can you integrate with existing business systems?",
+    question: "Can you connect my existing software?",
     answer:
-      "Yes. We integrate applications with CRM platforms, ERP systems, payment gateways, SAP environments, marketing platforms, and third-party services through secure APIs.",
+      "Yes. Where suitable, we can connect applications with existing CRM, ERP, SAP, payment systems, WhatsApp Business, ecommerce platforms, APIs, databases, and other business systems.",
   },
   {
-    question: "How long does a custom software development project take?",
+    question: "Can you build software from my business idea?",
     answer:
-      "Most projects take between 8 and 24 weeks depending on complexity, feature requirements, and integration needs.",
+      "Yes. If you have an idea but don't know how to turn it into software, we can understand the concept, define the requirements, and plan the application.",
   },
   {
-    question: "Do you provide ongoing support and maintenance?",
+    question: "Can you improve software that is already built?",
     answer:
-      "Yes. We offer continuous maintenance, security updates, performance optimization, monitoring, and feature enhancements after deployment.",
+      "Yes. We can work on existing applications for new features, improvements, integrations, redesign, performance, maintenance, and other requirements.",
   },
   {
-    question: "What technologies do you use?",
+    question: "How long does custom application development take?",
     answer:
-      "We work with Next.js, React, Node.js, Python, PostgreSQL, MongoDB, Docker, Kubernetes, AWS, Azure, and Google Cloud technologies.",
+      "The timeline depends on the size and complexity of the application, number of features, integrations, design requirements, and other project factors. After understanding your requirement, we can provide a more realistic development timeline.",
+  },
+  {
+    question: "Do you provide support after launch?",
+    answer:
+      "Yes. We can provide ongoing support, maintenance, improvements, and new feature development based on your requirements.",
+  },
+  {
+    question: "Do you work only with businesses in Chennai?",
+    answer:
+      "No. SoftClinch works with businesses across Tamil Nadu, including Chennai, Coimbatore, Madurai, Tiruchirappalli, Salem, Tiruppur, Erode, Hosur, Vellore, and other locations.",
   },
 ];
+
 
 export const whatsappAutomationFaq: FaqItem[] = [
   {

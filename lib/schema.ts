@@ -41,9 +41,15 @@ export function websiteJsonLd() {
 export function webpageJsonLd({
   canonicalPath,
   title,
+  description,
+  keywords,
+  image,
 }: {
   canonicalPath: string;
   title: string;
+  description?: string;
+  keywords?: string[];
+  image?: string;
 }) {
   const siteUrl = getSiteUrl();
   return {
@@ -52,6 +58,10 @@ export function webpageJsonLd({
     "@id": `${siteUrl}${canonicalPath}#webpage`,
     url: `${siteUrl}${canonicalPath}`,
     name: title,
+    ...(description ? { description } : {}),
+    ...(keywords && keywords.length > 0 ? { keywords: keywords.join(", ") } : {}),
+    ...(image ? { primaryImageOfPage: image } : {}),
+    inLanguage: "en-US",
     isPartOf: { "@id": `${siteUrl}/#website` },
     about: { "@id": `${siteUrl}/#organization` },
   };
@@ -61,12 +71,29 @@ export function serviceJsonLd({
   canonicalPath,
   name,
   description,
+  serviceType,
+  areaServed,
+  offers,
+  hasOfferCatalog,
 }: {
   canonicalPath: string;
   name: string;
   description: string;
+  serviceType?: string;
+  areaServed?: string | string[] | Array<{ "@type": string; name: string }>;
+  offers?: Record<string, unknown> | Array<Record<string, unknown>>;
+  hasOfferCatalog?: Record<string, unknown>;
 }) {
   const siteUrl = getSiteUrl();
+  let areas: unknown = "IN";
+  if (Array.isArray(areaServed)) {
+    areas = areaServed.map((item) =>
+      typeof item === "string" ? { "@type": "AdministrativeArea", name: item } : item
+    );
+  } else if (areaServed) {
+    areas = areaServed;
+  }
+
   return {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -74,8 +101,82 @@ export function serviceJsonLd({
     name,
     description,
     provider: { "@id": `${siteUrl}/#organization` },
-    areaServed: "IN",
+    ...(serviceType ? { serviceType } : {}),
+    areaServed: areas,
     url: `${siteUrl}${canonicalPath}`,
+    ...(offers ? { offers } : {}),
+    ...(hasOfferCatalog ? { hasOfferCatalog } : {}),
+  };
+}
+
+export function professionalServiceJsonLd({
+  canonicalPath,
+  name,
+  description,
+  priceRange = "₹₹",
+  areaServed = [
+    "Tamil Nadu",
+    "Chennai",
+    "Coimbatore",
+    "Madurai",
+    "Salem",
+    "Tiruppur",
+    "Erode",
+    "Hosur",
+    "Vellore",
+    "Tiruchirappalli",
+  ],
+}: {
+  canonicalPath: string;
+  name: string;
+  description: string;
+  priceRange?: string;
+  areaServed?: string[];
+}) {
+  const siteUrl = getSiteUrl();
+  return {
+    "@context": "https://schema.org",
+    "@type": ["ProfessionalService", "LocalBusiness"],
+    "@id": `${siteUrl}${canonicalPath}#professionalservice`,
+    name,
+    description,
+    url: `${siteUrl}${canonicalPath}`,
+    telephone: CONTACT.phone,
+    email: CONTACT.email,
+    priceRange,
+    image: `${siteUrl}/logo.png`,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: CONTACT.address,
+      addressLocality: "Chennai",
+      addressRegion: "Tamil Nadu",
+      postalCode: "600083",
+      addressCountry: "IN",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: "13.0368",
+      longitude: "80.2114",
+    },
+    areaServed: areaServed.map((area) => ({
+      "@type": "AdministrativeArea",
+      name: area,
+    })),
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ],
+        opens: "09:00",
+        closes: "19:00",
+      },
+    ],
   };
 }
 

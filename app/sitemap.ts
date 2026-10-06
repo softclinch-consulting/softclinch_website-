@@ -100,6 +100,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/meta-ads-management",
     "/social-media-marketing",
     "/branding",
+    "/custom-application-development",
     "/custom-software-development",
     "/whatsapp-business-api",
     "/whatsapp-automation",
