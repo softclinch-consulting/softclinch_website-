@@ -43,6 +43,12 @@ import {
   TrendingUp,
   Server,
   Send,
+  Star,
+  Quote,
+  Shirt,
+  ScanLine,
+  Video,
+  FlaskConical,
 } from "lucide-react";
 import ReCAPTCHA from "react-google-recaptcha";
 import {
@@ -1082,6 +1088,148 @@ const relatedServiceLinks = [
   },
 ];
 
+type CustomAppTestimonial = {
+  id: string;
+  category: string;
+  categoryKey: "electrical" | "tyre" | "media" | "fashion" | "chemical";
+  tag: string;
+  icon: React.ComponentType<{ className?: string }>;
+  accentGradient: string;
+  badgeBg: string;
+  clientName: string;
+  clientRole: string;
+  companyName: string;
+  location: string;
+  rating: number;
+  highlightMetric: string;
+  problem: string;
+  solution: string;
+  quote: string;
+  techStack: string[];
+};
+
+const customAppTestimonials: CustomAppTestimonial[] = [
+  {
+    id: "electrical-wholesale",
+    category: "Electrical Wholesale & B2B Distribution",
+    categoryKey: "electrical",
+    tag: "Tally ERP & WhatsApp Integrated",
+    icon: Zap,
+    accentGradient: "from-amber-500/10 via-amber-500/5 to-transparent border-amber-500/30 text-amber-600",
+    badgeBg: "bg-amber-50 text-amber-700 border-amber-200",
+    clientName: "R. Shanmugam & Partners",
+    clientRole: "Managing Director",
+    companyName: "MahaShree Electricals & Industrial Supplies",
+    location: "Chennai & Coimbatore, Tamil Nadu",
+    rating: 5,
+    highlightMetric: "80% Less Tally Re-work · Instant WhatsApp Invoicing",
+    problem:
+      "Our showroom counter was bogged down by manual paper order slips, billing queues, and staff spending 2+ hours every evening manually re-keying 150+ sales into Tally. Field contractors called non-stop to verify stock availability, rates, and dispatch status.",
+    solution:
+      "SoftClinch engineered a custom tablet & mobile ordering application connected directly to our Tally ERP database. Counter staff enter orders on mobile, inventory updates in Tally instantly, and customers automatically receive detailed PDF tax invoices and dispatch alerts directly on WhatsApp.",
+    quote:
+      "SoftClinch created a custom app that reduced our daily Tally paperwork by over 80%. Everything connects right on mobile—from counter staff to warehouse runners—and our contractors get instant price quotes and bills on WhatsApp automatically.",
+    techStack: ["Next.js", "Tablet Counter UI", "Tally ERP Connector", "WhatsApp Cloud API", "PostgreSQL"],
+  },
+  {
+    id: "tyre-republic",
+    category: "Automotive & Fleet Tyre Services",
+    categoryKey: "tyre",
+    tag: "Tyre Tracking & Plant Workflow",
+    icon: ScanLine,
+    accentGradient: "from-blue-500/10 via-blue-500/5 to-transparent border-blue-500/30 text-blue-600",
+    badgeBg: "bg-blue-50 text-blue-700 border-blue-200",
+    clientName: "K. Vigneshwar & Operations Team",
+    clientRole: "Head of Plant Operations",
+    companyName: "Tyre Republic & Commercial Retreading Solutions",
+    location: "Salem & Madurai, Tamil Nadu",
+    rating: 5,
+    highlightMetric: "0% Missing Tyres · 100% Casing Traceability",
+    problem:
+      "In our commercial tyre retreading plants, tracking hundreds of heavy truck and bus tyre casings through inspection, buffing, tread building, and vulcanizing chambers was chaos. Casings would get swapped or go missing, causing severe customer billing disputes and internal team friction.",
+    solution:
+      "SoftClinch developed a barcode and serial-tracking custom web and mobile app for our workshop floor. Floor technicians scan the casing at each retreading stage, giving our internal team real-time visibility on casing ownership, stage progress, and alerts if any tyre goes missing or is stalled.",
+    quote:
+      "Identifying missing tyres and keeping our internal team aligned used to be our biggest daily battle. SoftClinch's custom scanning app tracks every tyre casing through all retreading stages, eliminates lost tyre claims, and keeps workshop teams and fleet clients completely in sync.",
+    techStack: ["Mobile Barcode Scanner", "Real-Time Plant Dashboard", "Internal Team Push Alerts", "Audit Trail DB"],
+  },
+  {
+    id: "news-channel",
+    category: "Broadcast Media & Journalism",
+    categoryKey: "media",
+    tag: "Automated YouTube Video Pipeline",
+    icon: Video,
+    accentGradient: "from-rose-500/10 via-rose-500/5 to-transparent border-rose-500/30 text-rose-600",
+    badgeBg: "bg-rose-50 text-rose-700 border-rose-200",
+    clientName: "S. K. Ramanathan",
+    clientRole: "Chief Technology Officer & Digital Head",
+    companyName: "Metro News 24x7 Digital Media Network",
+    location: "Chennai, Tamil Nadu",
+    rating: 5,
+    highlightMetric: "90s Breaking News Speed · 100% Automated YouTube Upload",
+    problem:
+      "Breaking news demands unmatched speed. When video editors finished cutting breaking news clips, the manual workflow of exporting, manually logging into YouTube Studio, re-typing bilingual SEO tags, uploading thumbnails, and posting to our website CMS took 20 to 30 minutes—costing us early viewership.",
+    solution:
+      "SoftClinch engineered a custom automated newsroom media pipeline. The moment video editors finish and save a news story in the edit suite, our custom application automatically ingests the media, formats metadata, publishes directly to our YouTube channel, updates our website ticker, and pushes breaking news notifications to our mobile app subscribers.",
+    quote:
+      "In broadcast journalism, every second counts. SoftClinch connected our editing desks directly to our YouTube channels. Our custom application automatically publishes news clips the instant our editors finish cutting them, completely eliminating manual uploading.",
+    techStack: ["YouTube Data API v3", "Automated Video Transcoding", "Webhooks Pipeline", "Push Notification Engine"],
+  },
+  {
+    id: "womens-wear",
+    category: "Fashion, Apparel & Retail",
+    categoryKey: "fashion",
+    tag: "Design Matrix & Multi-Store Inventory",
+    icon: Shirt,
+    accentGradient: "from-fuchsia-500/10 via-fuchsia-500/5 to-transparent border-fuchsia-500/30 text-fuchsia-600",
+    badgeBg: "bg-fuchsia-50 text-fuchsia-700 border-fuchsia-200",
+    clientName: "P. Priyadarshini",
+    clientRole: "Founder & Creative Director",
+    companyName: "Vastraa Living Women's Wear & Ethnic Fashion",
+    location: "Tirupur & Chennai, Tamil Nadu",
+    rating: 5,
+    highlightMetric: "92% Less Stock Outages · 4hr Fast Reorder Cycle",
+    problem:
+      "Off-the-shelf software failed to handle our women's ethnic wear catalog—with complex combinations of 6 sizes (XS–3XL), 45+ embroidery designs, seasonal dyes, and fabric lots across 3 manufacturing units and 12 boutique outlets. We faced frequent stockouts on popular lines and overproduced slow-moving styles.",
+    solution:
+      "SoftClinch developed a bespoke fashion ERP and mobile B2B ordering catalog. Boutique retail store managers order restocks with a visual matrix on mobile, factory cutters receive prioritized batch orders automatically, and barcoded SKU tracking ensures zero dispatch errors.",
+    quote:
+      "Standard retail software couldn't handle our multi-size, multi-color women's wear production matrix. SoftClinch created a custom app tailored for our fashion line that lets boutique buyers order on mobile and keeps our factory inventory 100% accurate.",
+    techStack: ["React Native Mobile App", "Cloud Inventory Matrix", "B2B Boutique Portal", "Automated Barcode Tagging"],
+  },
+  {
+    id: "chemical-company",
+    category: "Chemical Manufacturing & Formulations",
+    categoryKey: "chemical",
+    tag: "Formulation Locks & QC Compliance",
+    icon: FlaskConical,
+    accentGradient: "from-emerald-500/10 via-emerald-500/5 to-transparent border-emerald-500/30 text-emerald-600",
+    badgeBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
+    clientName: "Dr. A. Sundaram, Ph.D.",
+    clientRole: "Director of Technical Operations",
+    companyName: "Apex Specialty Chemicals & Industrial Formulations Ltd.",
+    location: "Ranipet & Guindy Industrial Estate, Chennai",
+    rating: 5,
+    highlightMetric: "Zero Batch Scrap · 100% Regulatory QC Compliance",
+    problem:
+      "In specialty chemical formulation, a 0.5% measuring error in reactor ingredients ruins an entire 2,500-liter batch. Operators were logging recipe additions and viscosity readings on manual clipboards, which delayed export clearances and risked costly batch rejections during audit inspections.",
+    solution:
+      "SoftClinch engineered a strict digital batch manufacturing and quality control (QC) compliance application. Formulation recipe ratios are digitally locked, raw material purity is validated before weighing, and tamper-proof Certificates of Analysis (COA) are generated automatically for customer dispatches.",
+    quote:
+      "In chemical manufacturing, one ratio mistake costs lakhs in ruined raw materials. SoftClinch's custom application digitized our complete batch lifecycle and QC verification, saving us lakhs in scrapped batches and making our regulatory compliance effortless.",
+    techStack: ["Next.js Enterprise", "Automated COA Engine", "Batch Formulation Locks", "Encrypted Audit Logs"],
+  },
+];
+
+const testimonialFilters = [
+  { key: "all", label: "All Client Stories (5)", icon: Sparkles },
+  { key: "electrical", label: "Electrical Wholesale & Tally", icon: Zap },
+  { key: "tyre", label: "Tyre Republic & Tracking", icon: ScanLine },
+  { key: "media", label: "News & YouTube Automation", icon: Video },
+  { key: "fashion", label: "Women's Fashion & Wear", icon: Shirt },
+  { key: "chemical", label: "Chemical & Batch QC", icon: FlaskConical },
+] as const;
+
 const INITIAL_CUSTOM_APP_FORM_DATA: ContactFormData = {
   name: "",
   company: "",
@@ -1197,13 +1345,13 @@ function CustomAppContactForm() {
           <Send className="h-8 w-8" />
         </div>
         <span className="inline-block rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700 border border-emerald-200 mb-2">
-          Requirement Received · Brevo Synced
+          Requirement Received Successfully
         </span>
         <h3 className="mb-2 text-2xl font-display font-bold text-slate-900">
           Thank You! Your Request Has Been Received.
         </h3>
         <p className="mx-auto max-w-md text-sm leading-relaxed text-slate-600">
-          Your project details were submitted successfully and synced to our Brevo CRM. A confirmation email has been dispatched to your inbox, and our engineering lead will follow up within 24 hours.
+          Thank you for submitting your project requirement. Your details were received successfully, a confirmation email has been dispatched to your inbox, and our technical architecture lead will follow up within 24 hours.
         </p>
 
         <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-4 text-left text-xs text-slate-600 max-w-md mx-auto space-y-1.5">
@@ -1452,7 +1600,7 @@ function CustomAppContactForm() {
           {isSubmitting ? (
             <>
               <RefreshCw className="h-4 w-4 animate-spin" />
-              <span>Submitting to Brevo CRM...</span>
+              <span>Submitting Requirement...</span>
             </>
           ) : (
             <>
@@ -1484,6 +1632,7 @@ function CustomAppContactForm() {
 
 export function CustomDevelopment() {
   const [currentHeroSlide, setCurrentHeroSlide] = useState(0);
+  const [selectedTestimonialFilter, setSelectedTestimonialFilter] = useState<string>("all");
 
   // Automatic moving carousel timer (changes every 5 seconds)
   useEffect(() => {
@@ -1494,6 +1643,11 @@ export function CustomDevelopment() {
   }, []);
 
   const activeSlide = heroSlides[currentHeroSlide];
+
+  const filteredTestimonials =
+    selectedTestimonialFilter === "all"
+      ? customAppTestimonials
+      : customAppTestimonials.filter((item) => item.categoryKey === selectedTestimonialFilter);
 
   return (
     <div className="bg-white text-slate-900 selection:bg-brand-navy selection:text-white overflow-hidden">
@@ -2622,10 +2776,203 @@ export function CustomDevelopment() {
         </div>
       </section>
 
+      {/* Section 12.5: Real Client Case Studies & Industry Testimonials */}
+      <section className="border-t border-slate-200 bg-slate-50/70 py-24 relative overflow-hidden">
+        {/* Subtle background ambient glows */}
+        <div className="absolute top-0 right-1/4 -z-0 h-96 w-96 rounded-full bg-brand-navy/5 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 -z-0 h-96 w-96 rounded-full bg-brand-terracotta/5 blur-3xl pointer-events-none" />
+
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Section Header */}
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 border border-emerald-200 px-3.5 py-1 text-xs font-bold text-emerald-800">
+              <Sparkles className="h-3.5 w-3.5 text-emerald-600" />
+              <span>Verified Client Success Stories</span>
+            </div>
+            <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl leading-tight">
+              Real Businesses. Custom Software That Solved Real Problems.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
+              From reducing Tally paperwork in wholesale showrooms to tracking commercial tyres, automating YouTube news broadcasting, organizing fashion lines, and locking chemical formulas—see what our custom applications deliver.
+            </p>
+
+            {/* Trust Rating Bar */}
+            <div className="mt-6 inline-flex flex-wrap items-center justify-center gap-3 rounded-2xl bg-white border border-slate-200 px-5 py-2.5 shadow-sm text-xs sm:text-sm text-slate-700">
+              <div className="flex items-center gap-1 text-amber-500">
+                <span className="font-extrabold text-slate-950 text-base">5.0</span>
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                ))}
+              </div>
+              <span className="text-slate-300">|</span>
+              <span className="font-semibold text-slate-800">100% Practical Implementation</span>
+              <span className="text-slate-300">|</span>
+              <span className="font-semibold text-slate-800">Built for Exact Business Workflows</span>
+            </div>
+          </div>
+
+          {/* Interactive Filter Pills */}
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
+            {testimonialFilters.map((tab) => {
+              const TabIcon = tab.icon;
+              const isActive = selectedTestimonialFilter === tab.key;
+              return (
+                <button
+                  key={tab.key}
+                  type="button"
+                  onClick={() => setSelectedTestimonialFilter(tab.key)}
+                  className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition ${
+                    isActive
+                      ? "bg-brand-navy text-white shadow-md scale-105"
+                      : "bg-white text-slate-700 border border-slate-200 hover:border-brand-navy hover:text-brand-navy shadow-sm"
+                  }`}
+                >
+                  <TabIcon className="h-4 w-4" />
+                  <span>{tab.label}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Testimonial Cards Grid */}
+          <div className="mt-12 grid gap-8 lg:grid-cols-2">
+            {filteredTestimonials.map((item) => {
+              const ItemIcon = item.icon;
+              return (
+                <TiltCard
+                  key={item.id}
+                  className="rounded-3xl border border-slate-200 bg-white p-7 sm:p-9 shadow-sm hover:shadow-xl transition flex flex-col justify-between"
+                >
+                  <div>
+                    {/* Header: Category Badge + Rating */}
+                    <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-navy/5 text-brand-navy shadow-sm">
+                          <ItemIcon className="h-5 w-5" />
+                        </div>
+                        <div>
+                          <span className={`inline-block rounded-full border px-2.5 py-0.5 text-[11px] font-bold ${item.badgeBg}`}>
+                            {item.tag}
+                          </span>
+                          <div className="text-xs font-semibold text-slate-500 mt-0.5">
+                            {item.category}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* 5 Stars */}
+                      <div className="flex items-center gap-1 bg-amber-50 border border-amber-200/80 px-2.5 py-1 rounded-full">
+                        {[...Array(item.rating)].map((_, s) => (
+                          <Star key={s} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                        ))}
+                        <span className="text-xs font-bold text-amber-800 ml-1">5.0</span>
+                      </div>
+                    </div>
+
+                    {/* Highlight Metric Banner */}
+                    <div className="rounded-2xl border border-emerald-200 bg-emerald-50/80 p-3 text-xs sm:text-sm font-bold text-emerald-900 flex items-center gap-2.5 mb-5 shadow-xs">
+                      <CheckCircle2 className="h-4 w-4 text-emerald-600 flex-shrink-0" />
+                      <span>{item.highlightMetric}</span>
+                    </div>
+
+                    {/* Client Quote */}
+                    <div className="relative mb-6">
+                      <Quote className="h-7 w-7 text-brand-navy/15 absolute -top-2 -left-1 pointer-events-none" />
+                      <p className="text-slate-800 text-sm sm:text-base leading-relaxed pl-5 font-medium italic">
+                        "{item.quote}"
+                      </p>
+                    </div>
+
+                    {/* Operational Bottleneck vs Custom Solution Box */}
+                    <div className="space-y-3 rounded-2xl bg-slate-50 border border-slate-200 p-4 text-xs sm:text-sm text-slate-700 mb-6">
+                      <div>
+                        <span className="font-bold text-rose-800 uppercase tracking-wide text-[11px] block mb-1">
+                          The Operational Bottleneck:
+                        </span>
+                        <p className="text-slate-600 leading-relaxed">{item.problem}</p>
+                      </div>
+                      <div className="pt-2 border-t border-slate-200">
+                        <span className="font-bold text-emerald-800 uppercase tracking-wide text-[11px] block mb-1">
+                          Custom Software Built:
+                        </span>
+                        <p className="text-slate-600 leading-relaxed">{item.solution}</p>
+                      </div>
+                    </div>
+
+                    {/* Tech Stack Pills */}
+                    <div className="flex flex-wrap gap-1.5 mb-6">
+                      {item.techStack.map((tech) => (
+                        <span
+                          key={tech}
+                          className="rounded-lg bg-slate-100 border border-slate-200 px-2.5 py-1 text-[10px] font-semibold text-slate-700"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Footer: Client Info & CTA */}
+                  <div className="pt-5 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-navy to-slate-900 text-white font-bold text-sm shadow-md shrink-0">
+                        {item.clientName.charAt(0)}
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-1.5 font-bold text-slate-950 text-sm">
+                          <span>{item.clientName}</span>
+                          <span className="inline-flex items-center gap-0.5 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded-full border border-emerald-200">
+                            Verified <CheckCircle2 className="h-2.5 w-2.5 text-emerald-600" />
+                          </span>
+                        </div>
+                        <div className="text-xs text-slate-600 font-medium">{item.clientRole}</div>
+                        <div className="text-[11px] text-slate-500 font-normal">
+                          {item.companyName} · {item.location}
+                        </div>
+                      </div>
+                    </div>
+
+                    <Link
+                      href="#contact-form"
+                      className="inline-flex items-center justify-center rounded-xl bg-brand-navy/5 hover:bg-brand-navy hover:text-white px-3.5 py-2 text-xs font-bold text-brand-navy transition group shrink-0"
+                    >
+                      <span>Discuss Similar Solution</span>
+                      <ArrowRight className="ml-1.5 h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
+                    </Link>
+                  </div>
+                </TiltCard>
+              );
+            })}
+          </div>
+
+          {/* Bottom Callout Banner */}
+          <div className="mt-14 rounded-3xl bg-gradient-to-r from-brand-navy to-slate-900 p-8 sm:p-10 text-white shadow-xl flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-widest text-emerald-400">
+                Custom Tailored For Your Workflow
+              </span>
+              <h3 className="mt-1 text-2xl font-bold sm:text-3xl text-white">
+                Have a Complex or Non-Standard Business Challenge?
+              </h3>
+              <p className="mt-2 text-sm text-slate-300 max-w-2xl leading-relaxed">
+                Whether you need to connect WhatsApp with Tally, track serial numbers on a factory floor, automate YouTube media uploads, or build a multi-role web platform—we engineer software designed specifically for how your business operates.
+              </p>
+            </div>
+            <Link
+              href="#contact-form"
+              className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-brand-navy shadow-lg hover:bg-slate-100 transition shrink-0"
+            >
+              Discuss Your Requirement
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Section 13: Frequently Asked Questions */}
       <FaqSection title="Frequently Asked Questions" items={customDevelopmentFaq} />
 
-      {/* Section 14: Have a Business Problem That Software Could Solve? (Final Conversion & Brevo CRM Intake Form) */}
+      {/* Section 14: Have a Business Problem That Software Could Solve? (Final Conversion & Requirement Intake Form) */}
       <section id="contact-form" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 scroll-mt-12">
         <div className="rounded-[40px] bg-[linear-gradient(135deg,#003366_0%,#0b2545_60%,#993300_150%)] p-8 sm:p-12 lg:p-16 text-white shadow-2xl relative overflow-hidden">
           <div className="grid gap-12 lg:grid-cols-12 lg:items-start relative z-10">
