@@ -607,53 +607,67 @@ function TiltImagePanel({
 // 7 Problem Cards for "YOUR BUSINESS PROBLEM"
 const problemCards = [
   {
+    id: "01",
     title: "Still Using Spreadsheets?",
     description:
       "Important business information is spread across Excel, Google Sheets, files, and different systems.",
     icon: FileSpreadsheet,
     badge: "Spreadsheet Overload",
+    symptom: "Missing data, sync conflicts & manual copy-paste errors",
   },
   {
+    id: "02",
     title: "Too Much Manual Work?",
     description:
       "Your team spends too much time entering information, sending updates, preparing reports, or repeating the same tasks.",
     icon: Clock,
     badge: "Manual Bottlenecks",
+    symptom: "Hours wasted each day on repeated entries & phone updates",
   },
   {
+    id: "03",
     title: "Using Too Many Software Tools?",
     description:
       "Your business uses different tools for different tasks, making it difficult to keep everything organised.",
     icon: Layers,
     badge: "Fragmented Tools",
+    symptom: "Paying multiple subscriptions that don't speak to each other",
   },
   {
+    id: "04",
     title: "Can't Find the Right Software?",
     description:
       "Ready-made software doesn't match the way your business actually works.",
     icon: AlertCircle,
     badge: "Off-the-Shelf Limitations",
+    symptom: "Generic templates forcing your team to change processes",
   },
   {
+    id: "05",
     title: "Have a New Business Idea?",
     description:
       "You have an idea for an app, website, platform, or business system but don't know how to turn it into a working product.",
     icon: Lightbulb,
     badge: "New Ventures & MVPs",
+    symptom: "Need an agile MVP engineered to test the market rapidly",
   },
   {
+    id: "06",
     title: "Already Have Software?",
     description:
       "Your existing application may be outdated, difficult to use, slow, or missing the features your business now needs.",
     icon: Wrench,
     badge: "Outdated / Slow Systems",
+    symptom: "Sluggish UI, broken mobile view & high maintenance costs",
   },
   {
+    id: "07",
     title: "Need a Customer Portal?",
     description:
       "Give your customers an easier way to place requests, track orders, access information, manage accounts, or communicate with your team.",
     icon: Globe,
     badge: "Self-Service Portals",
+    symptom: "Continuous customer phone calls for everyday status queries",
   },
 ];
 
@@ -1983,28 +1997,15 @@ export function CustomDevelopment() {
       </section>
 
       {/* 2. YOUR BUSINESS PROBLEM */}
-      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto">
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-terracotta">
-            Your Business Problem
-          </span>
-          <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
-            Is Your Business Facing Any of These Problems?
-          </h2>
-          <p className="mt-4 text-lg text-slate-600 leading-relaxed">
-            You don't need to know exactly what software you need.{" "}
-            <span className="font-semibold text-slate-900">Start with the problem.</span>
-          </p>
-        </div>
-
-        {/* Centralized Problem Diagram */}
-        <div className="mt-12 flex justify-center w-full">
-          <div className="w-full max-w-4xl mx-auto">
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:py-20 sm:px-6 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12 lg:items-start">
+          {/* LEFT SIDE: Problem Breakdown Visual & Diagnostic Impact Panel (Sticky on Desktop) */}
+          <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-6">
             <TiltImagePanel
               src={assetPath("/images/02-problem-disconnected-systems.png")}
               alt="Disconnected Systems and Manual Process Bottlenecks"
               badgeText="Problem Breakdown"
-              className="mx-auto"
+              className="w-full shadow-2xl"
               floatingLabel1={{
                 text: "Replace Spreadsheet Chaos",
                 sub: "Single unified system",
@@ -2016,68 +2017,187 @@ export function CustomDevelopment() {
                 icon: <Workflow className="h-5 w-5" />,
               }}
             />
-          </div>
-        </div>
 
-        {/* 7 Problem Cards with 3D Tilt */}
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {problemCards.map((problem) => (
-            <TiltCard
-              key={problem.title}
-              className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm hover:shadow-xl transition flex flex-col justify-between"
-            >
-              <div>
-                <span
-                  style={{ transform: "translateZ(15px)" }}
-                  className="inline-block rounded-full bg-brand-terracotta/10 px-3 py-1 text-xs font-bold text-brand-terracotta mb-4"
-                >
-                  {problem.badge}
+            {/* Diagnostic Impact Panel */}
+            <div className="rounded-3xl border border-slate-200/90 bg-gradient-to-br from-slate-900 via-slate-950 to-brand-navy p-6 text-white shadow-xl">
+              <div className="flex items-center justify-between">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-500/15 border border-rose-500/30 px-3 py-1 text-xs font-bold text-rose-300 uppercase tracking-wider">
+                  <span className="h-1.5 w-1.5 rounded-full bg-rose-400 animate-ping" />
+                  Operational Friction
                 </span>
-                <div
-                  style={{ transform: "translateZ(20px)" }}
-                  className="flex items-center gap-3"
-                >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-brand-navy">
-                    <problem.icon className="h-5 w-5" />
-                  </div>
-                  <h3 className="text-lg font-bold text-slate-950">{problem.title}</h3>
-                </div>
-                <p
-                  style={{ transform: "translateZ(10px)" }}
-                  className="mt-4 text-sm leading-6 text-slate-600"
-                >
-                  {problem.description}
-                </p>
+                <span className="text-xs font-mono text-amber-400 font-semibold">Real-World Impact</span>
               </div>
-            </TiltCard>
-          ))}
-        </div>
 
-        {/* Problem Bottom Callout & CTA */}
-        <div className="mt-12 rounded-3xl bg-slate-50 border border-slate-200 p-8 text-center sm:p-10">
-          <h3 className="text-xl font-bold text-slate-950 sm:text-2xl">
-            You don't need to know exactly what software you need. Start with the problem.
-          </h3>
-          <p className="mt-2 text-sm text-slate-600 max-w-xl mx-auto">
-            Tell us what your team is struggling with, and we'll help design a solution that works for you.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <Link
-              href="#contact-form"
-              className="inline-flex items-center justify-center rounded-xl bg-brand-navy px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-brand-navy/20 transition hover:bg-brand-navy/90 hover:scale-[1.02]"
-            >
-              Discuss Your Requirement
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-            <a
-              href={WHATSAPP_LINK}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-700 hover:scale-[1.02]"
-            >
-              <MessageCircle className="mr-2 h-4 w-4" />
-              WhatsApp Us
-            </a>
+              <h3 className="mt-4 text-base font-bold text-white">
+                The Hidden Cost of Fragmented Workflows
+              </h3>
+              <p className="mt-1.5 text-xs text-slate-300 leading-relaxed">
+                When tools don't communicate, your team becomes the copy-paste bridge. Softclinch replaces this friction with one cohesive, custom-engineered platform.
+              </p>
+
+              <div className="mt-5 grid grid-cols-2 gap-3 border-t border-slate-800 pt-4">
+                <div className="rounded-xl bg-slate-900/80 border border-slate-800 p-3">
+                  <div className="text-xl font-black text-rose-400">15+ hrs</div>
+                  <div className="text-[11px] text-slate-400 mt-0.5 leading-tight">Wasted every week per employee</div>
+                </div>
+                <div className="rounded-xl bg-slate-900/80 border border-slate-800 p-3">
+                  <div className="text-xl font-black text-emerald-400">0 Silos</div>
+                  <div className="text-[11px] text-slate-400 mt-0.5 leading-tight">When unified in custom software</div>
+                </div>
+              </div>
+
+              <div className="mt-5 flex items-center justify-between pt-2">
+                <span className="text-xs text-slate-400">Ready to streamline?</span>
+                <Link
+                  href="#contact-form"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-300 hover:text-amber-200 transition"
+                >
+                  Request Architecture Plan <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT SIDE: Problem Diagnostic & 7 Cards */}
+          <div className="lg:col-span-7 space-y-6">
+            {/* Header Block */}
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-2 rounded-full bg-brand-terracotta/10 px-3.5 py-1 text-xs font-bold text-brand-terracotta border border-brand-terracotta/20">
+                <AlertCircle className="h-3.5 w-3.5" />
+                <span>Your Business Problem</span>
+              </div>
+              <h2 className="text-2xl font-extrabold tracking-tight text-slate-950 sm:text-3xl lg:text-4xl leading-tight">
+                Is Your Business Facing Any of These Problems?
+              </h2>
+              <p className="text-base text-slate-600 leading-relaxed">
+                You don't need to know exactly what software you need.{" "}
+                <span className="font-semibold text-slate-900">Start with the problem.</span> We turn everyday bottlenecks into high-efficiency automated tools.
+              </p>
+            </div>
+
+            {/* Differentiated Problem Cards Grid */}
+            <div className="grid gap-4 sm:grid-cols-2">
+              {problemCards.map((problem, index) => {
+                const isFeatured = index === problemCards.length - 1; // Card 7 spans full width
+                return (
+                  <TiltCard
+                    key={problem.title}
+                    className={`rounded-2xl border transition-all duration-300 p-5 flex flex-col justify-between ${
+                      isFeatured
+                        ? "sm:col-span-2 bg-gradient-to-br from-slate-900 via-brand-navy to-slate-950 text-white border-slate-800 shadow-xl"
+                        : "bg-white border-slate-200/90 hover:border-brand-terracotta/40 hover:shadow-lg text-slate-900 shadow-sm"
+                    }`}
+                  >
+                    <div>
+                      {/* Top Row: Badge, ID, and Icon */}
+                      <div className="flex items-center justify-between gap-2 mb-3.5">
+                        <span
+                          style={{ transform: "translateZ(15px)" }}
+                          className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-bold ${
+                            isFeatured
+                              ? "bg-amber-400/20 text-amber-300 border border-amber-400/30"
+                              : "bg-brand-terracotta/10 text-brand-terracotta"
+                          }`}
+                        >
+                          <span className="h-1.5 w-1.5 rounded-full bg-current" />
+                          {problem.badge}
+                        </span>
+                        <span
+                          style={{ transform: "translateZ(10px)" }}
+                          className={`text-xs font-mono font-bold ${
+                            isFeatured ? "text-slate-400" : "text-slate-400"
+                          }`}
+                        >
+                          {problem.id || `0${index + 1}`}
+                        </span>
+                      </div>
+
+                      {/* Title & Icon */}
+                      <div
+                        style={{ transform: "translateZ(20px)" }}
+                        className="flex items-start gap-3"
+                      >
+                        <div
+                          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${
+                            isFeatured
+                              ? "bg-white/10 text-cyan-300 border border-white/15"
+                              : "bg-slate-100 text-brand-navy"
+                          }`}
+                        >
+                          <problem.icon className="h-5 w-5" />
+                        </div>
+                        <div>
+                          <h3
+                            className={`text-base font-bold ${
+                              isFeatured ? "text-white" : "text-slate-950"
+                            }`}
+                          >
+                            {problem.title}
+                          </h3>
+                        </div>
+                      </div>
+
+                      {/* Description */}
+                      <p
+                        style={{ transform: "translateZ(10px)" }}
+                        className={`mt-3 text-xs sm:text-sm leading-relaxed ${
+                          isFeatured ? "text-slate-300" : "text-slate-600"
+                        }`}
+                      >
+                        {problem.description}
+                      </p>
+                    </div>
+
+                    {/* Symptom Micro-Indicator */}
+                    {problem.symptom && (
+                      <div
+                        style={{ transform: "translateZ(12px)" }}
+                        className={`mt-4 pt-3 border-t text-[11px] font-medium flex items-center gap-1.5 ${
+                          isFeatured
+                            ? "border-white/10 text-slate-400"
+                            : "border-slate-100 text-slate-500"
+                        }`}
+                      >
+                        <span className="text-amber-500 font-bold">Key Friction:</span>
+                        <span>{problem.symptom}</span>
+                      </div>
+                    )}
+                  </TiltCard>
+                );
+              })}
+            </div>
+
+            {/* Bottom Callout & Direct Actions */}
+            <div className="rounded-2xl border border-slate-200 bg-gradient-to-r from-slate-50 via-white to-slate-50 p-6 shadow-sm">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                  <h3 className="text-base font-bold text-slate-950 sm:text-lg">
+                    You don't need to know the software. Start with the problem.
+                  </h3>
+                  <p className="mt-1 text-xs sm:text-sm text-slate-600">
+                    Tell us what your team is struggling with, and we'll help design a solution that fits your exact workflow.
+                  </p>
+                </div>
+                <div className="flex flex-wrap sm:flex-nowrap gap-2.5 shrink-0">
+                  <Link
+                    href="#contact-form"
+                    className="inline-flex items-center justify-center rounded-xl bg-brand-navy px-5 py-3 text-xs sm:text-sm font-bold text-white shadow-md shadow-brand-navy/20 transition hover:bg-brand-navy/90 hover:scale-[1.02]"
+                  >
+                    Discuss Requirement
+                    <ArrowRight className="ml-1.5 h-4 w-4" />
+                  </Link>
+                  <a
+                    href={WHATSAPP_LINK}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-4 py-3 text-xs sm:text-sm font-bold text-white shadow-md shadow-emerald-600/20 transition hover:bg-emerald-700 hover:scale-[1.02]"
+                  >
+                    <MessageCircle className="mr-1.5 h-4 w-4" />
+                    WhatsApp
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
