@@ -15,11 +15,11 @@ const canonicalPath = "/custom-application-development/";
 const pagePath = "/services/custom-development/";
 
 // High-Intent Search Query Meta Title
-const title = "Custom Application Development Company in Tamil Nadu | SoftClinch";
+const title = "Custom Application & Software Development Company in Tamil Nadu | SoftClinch";
 
 // High-Intent Search Query Meta Description
 const description =
-  "Leading custom application & software development company in Tamil Nadu. We build tailored ERP, CRM, web apps, SaaS & workflow automation. Get a free proposal!";
+  "Custom application & software development company in Tamil Nadu. We build tailored web & mobile apps, CRM, ERP & automation for your business. Get a free consultation!";
 
 // High-Intent Search Query Clusters
 const highIntentKeywords = [

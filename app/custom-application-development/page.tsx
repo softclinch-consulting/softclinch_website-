@@ -13,14 +13,14 @@ import { customDevelopmentFaq } from "@/lib/faqs";
 // Primary Canonical Path & Slug
 const canonicalPath = "/custom-application-development/";
 
-// High-Intent Search Query Meta Title
-const title = "Custom Application Development Company in Tamil Nadu | SoftClinch";
+// High-Intent Search Query Meta Title (High-CTR Commercial Intent)
+const title = "Custom Application & Software Development Company in Tamil Nadu | SoftClinch";
 
-// High-Intent Search Query Meta Description
+// High-Intent Search Query Meta Description (High CTR & Action Oriented)
 const description =
-  "Leading custom application & software development company in Tamil Nadu. We build tailored ERP, CRM, web apps, SaaS & workflow automation. Get a free proposal!";
+  "Custom application & software development company in Tamil Nadu. We build tailored web & mobile apps, CRM, ERP & automation for your business. Get a free consultation!";
 
-// High-Intent Search Query Clusters (Commercial, Transactional & Local Tamil Nadu Intent)
+// High-Intent Search Query Clusters (Commercial, Transactional & Local Tamil Nadu Intent for Maximum Clicks)
 const highIntentKeywords = [
   // Core High-Intent Commercial Queries
   "custom application development company",
@@ -31,8 +31,12 @@ const highIntentKeywords = [
   "enterprise custom software development company",
   "custom web application development company",
   "bespoke software development company",
+  "hire custom software developers in tamil nadu",
+  "build custom software for my business",
 
-  // Solution-Specific High-Intent Commercial Queries
+  // Solution & Problem Solving Queries (High Buyer Click Intent)
+  "replace spreadsheets with custom software",
+  "custom business software for tamil nadu businesses",
   "custom erp development company",
   "custom crm software development company",
   "custom customer portal development",
@@ -42,6 +46,7 @@ const highIntentKeywords = [
   "legacy software modernization services",
   "custom mobile app development for business",
   "workflow automation software developers",
+  "custom internal tools and operations software",
 
   // Regional Commercial Search Queries (Tamil Nadu Key Industrial & Tech Hubs)
   "custom software developers in chennai",
@@ -55,8 +60,8 @@ const highIntentKeywords = [
   "software development company tiruchirappalli",
 
   // Buyer / Transactional Intent Queries
-  "hire custom software developers tamil nadu",
-  "custom application development cost and pricing",
+  "custom software development cost and timeline",
+  "custom application development pricing in tamil nadu",
   "off the shelf vs custom software development",
   "custom business automation solutions",
   "api integration and cloud application development",

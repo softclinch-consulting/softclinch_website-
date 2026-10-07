@@ -136,42 +136,42 @@ export const customDevelopmentFaq: FaqItem[] = [
   {
     question: "Do I need to know exactly what software I need?",
     answer:
-      "No. You can simply explain your business, current process, and the problem you are facing. We can help you identify what type of software or application could solve it.",
+      "No. You can simply explain your business problem, current process, or idea. We'll help you understand what kind of solution may work for you.",
   },
   {
     question: "Can you build both web and mobile applications?",
     answer:
-      "Yes. Depending on the requirement, we can develop web applications, mobile applications, or a combination of both.",
+      "Yes. We can build websites, web applications, mobile applications, and business software based on your requirements.",
   },
   {
     question: "Can you connect my existing software?",
     answer:
-      "Yes. Where suitable, we can connect applications with existing CRM, ERP, SAP, payment systems, WhatsApp Business, ecommerce platforms, APIs, databases, and other business systems.",
+      "Yes. We can discuss the systems you already use and determine how they can work together.",
   },
   {
     question: "Can you build software from my business idea?",
     answer:
-      "Yes. If you have an idea but don't know how to turn it into software, we can understand the concept, define the requirements, and plan the application.",
+      "Yes. Tell us about your idea and what you want it to achieve. We can discuss how it could be turned into a working application or platform.",
   },
   {
     question: "Can you improve software that is already built?",
     answer:
-      "Yes. We can work on existing applications for new features, improvements, integrations, redesign, performance, maintenance, and other requirements.",
+      "Yes. We can help improve existing applications, add features, connect systems, and make the software more useful for your business.",
   },
   {
     question: "How long does custom application development take?",
     answer:
-      "The timeline depends on the size and complexity of the application, number of features, integrations, design requirements, and other project factors. After understanding your requirement, we can provide a more realistic development timeline.",
+      "The timeline depends on what you want to build, the number of features, and the complexity of the project. We can provide a clearer estimate after understanding your requirements.",
   },
   {
     question: "Do you provide support after launch?",
     answer:
-      "Yes. We can provide ongoing support, maintenance, improvements, and new feature development based on your requirements.",
+      "Yes. We can continue to support improvements, maintenance, new features, and changing business requirements.",
   },
   {
     question: "Do you work only with businesses in Chennai?",
     answer:
-      "No. SoftClinch works with businesses across Tamil Nadu, including Chennai, Coimbatore, Madurai, Tiruchirappalli, Salem, Tiruppur, Erode, Hosur, Vellore, and other locations.",
+      "No. SoftClinch works with businesses across Tamil Nadu, including Chennai, Coimbatore, Madurai, Salem, Tiruppur, Erode, Hosur, Vellore, Tiruchirappalli, and other locations.",
   },
 ];
 
