@@ -1765,19 +1765,19 @@ export function CustomDevelopment() {
                   {activeSlide.badge}
                 </div>
 
-                <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl leading-[1.1]">
+                <h1 className="mt-5 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.14]">
                   {activeSlide.title}
                 </h1>
 
-                <p className="mt-6 text-xl font-semibold leading-relaxed text-brand-navy">
+                <p className="mt-4 text-lg sm:text-xl font-bold leading-snug text-brand-navy">
                   {activeSlide.subtitle}
                 </p>
 
-                <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg">
+                <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-600 sm:text-lg">
                   {activeSlide.description}
                 </p>
 
-                <p className="mt-4 text-sm leading-6 text-slate-700 bg-slate-50 border border-slate-200 rounded-2xl p-4">
+                <p className="mt-4 text-xs sm:text-sm leading-relaxed text-slate-700 bg-slate-50/90 border border-slate-200/90 rounded-2xl p-4 shadow-2xs">
                   {activeSlide.highlight}
                 </p>
 
@@ -2190,14 +2190,14 @@ export function CustomDevelopment() {
       {/* 4. WHAT WE BUILD */}
       <section className="border-t border-slate-200 bg-slate-50 py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-terracotta">
+          <div className="text-center max-w-3xl mx-auto">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-terracotta/10 border border-brand-terracotta/20 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-brand-terracotta mb-2">
               What We Build
             </span>
-            <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
+            <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-950 leading-tight">
               What Can We Build for You?
             </h2>
-            <p className="mt-4 text-lg text-slate-600 leading-relaxed">
+            <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
               We build custom software based on your business requirements — from a simple internal application to a complete business platform.
             </p>
           </div>
@@ -2364,14 +2364,14 @@ export function CustomDevelopment() {
       {/* 6. BUSINESS AREAS */}
       <section className="border-t border-slate-200 bg-slate-50 py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-terracotta">
+          <div className="text-center max-w-3xl mx-auto">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-terracotta/10 border border-brand-terracotta/20 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-brand-terracotta mb-2">
               Business Areas
             </span>
-            <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
+            <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-950 leading-tight">
               Software Built Around Your Business
             </h2>
-            <p className="mt-4 text-lg text-slate-600 leading-relaxed">
+            <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
               Your application can be designed around the areas where your business needs improvement.
             </p>
           </div>
@@ -2565,14 +2565,14 @@ export function CustomDevelopment() {
 
       {/* 9. INDUSTRIES */}
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="max-w-3xl">
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-terracotta">
+        <div className="text-center max-w-3xl mx-auto">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-terracotta/10 border border-brand-terracotta/20 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-brand-terracotta mb-2">
             Industries
           </span>
-          <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
+          <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-950 leading-tight">
             Built for Different Types of Businesses
           </h2>
-          <p className="mt-4 text-lg text-slate-600 leading-relaxed">
+          <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
             Custom software can be developed for different industries and business models.
           </p>
         </div>
@@ -2960,14 +2960,11 @@ export function CustomDevelopment() {
                         </div>
                       </div>
 
-                      {/* Business Title (Industry Name Only, No personal name or role) */}
+                      {/* Business Title (Industry Name Only, No personal name, role or location) */}
                       <div className="mb-4">
                         <h3 className="text-lg font-bold text-slate-950 group-hover:text-brand-navy transition-colors">
                           {item.businessTitle}
                         </h3>
-                        <div className="text-xs text-slate-500 mt-0.5 font-medium">
-                          {item.location}
-                        </div>
                       </div>
 
                       {/* Highlight Metric */}
