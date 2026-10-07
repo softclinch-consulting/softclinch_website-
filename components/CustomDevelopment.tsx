@@ -1997,205 +1997,337 @@ export function CustomDevelopment() {
       </section>
 
       {/* 2. YOUR BUSINESS PROBLEM */}
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:py-20 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12 lg:items-start">
-          {/* LEFT SIDE: Problem Breakdown Visual & Diagnostic Impact Panel (Sticky on Desktop) */}
-          <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-6">
-            <TiltImagePanel
-              src={assetPath("/images/02-problem-disconnected-systems.png")}
-              alt="Disconnected Systems and Manual Process Bottlenecks"
-              badgeText="Problem Breakdown"
-              className="w-full shadow-2xl"
-              floatingLabel1={{
-                text: "Replace Spreadsheet Chaos",
-                sub: "Single unified system",
-                icon: <FileSpreadsheet className="h-5 w-5" />,
-              }}
-              floatingLabel2={{
-                text: "End Disconnected Systems",
-                sub: "Unified data pipeline",
-                icon: <Workflow className="h-5 w-5" />,
-              }}
-            />
+      <section className="relative mx-auto max-w-7xl px-4 py-16 sm:py-20 sm:px-6 lg:px-8">
+        {/* Header Block */}
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <div className="inline-flex items-center gap-2 rounded-full bg-brand-terracotta/10 px-4 py-1.5 text-xs font-bold text-brand-terracotta border border-brand-terracotta/20 mb-3.5">
+            <AlertCircle className="h-3.5 w-3.5" />
+            <span>YOUR BUSINESS PROBLEM</span>
+          </div>
+          <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl leading-tight">
+            Is Your Business Facing Any of These Problems?
+          </h2>
+          <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
+            You don't need to know exactly what software you need.{" "}
+            <span className="font-semibold text-slate-900">Start with the problem.</span> We engineer practical digital systems built specifically around your day-to-day workflow.
+          </p>
+        </div>
 
-            {/* Diagnostic Impact Panel */}
-            <div className="rounded-3xl border border-slate-200/90 bg-gradient-to-br from-slate-900 via-slate-950 to-brand-navy p-6 text-white shadow-xl">
-              <div className="flex items-center justify-between">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-500/15 border border-rose-500/30 px-3 py-1 text-xs font-bold text-rose-300 uppercase tracking-wider">
-                  <span className="h-1.5 w-1.5 rounded-full bg-rose-400 animate-ping" />
-                  Operational Friction
-                </span>
-                <span className="text-xs font-mono text-amber-400 font-semibold">Real-World Impact</span>
+        {/* Master Bento Grid Matrix — Zero White Space, Perfectly Balanced */}
+        <div className="space-y-5">
+          {/* Row 1: Left Showcase Diagram (7 cols) + Right Cards 01 & 02 (5 cols) */}
+          <div className="grid gap-5 lg:grid-cols-12 lg:items-stretch">
+            {/* Left Flagship Card with Diagram */}
+            <TiltCard className="lg:col-span-7 rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-500/10 border border-rose-500/20 px-3 py-1 text-xs font-bold text-rose-600">
+                    <span className="h-2 w-2 rounded-full bg-rose-500 animate-pulse" />
+                    Problem Breakdown
+                  </span>
+                  <span className="text-xs font-mono font-bold text-slate-400">
+                    SYSTEM BOTTLENECKS
+                  </span>
+                </div>
+
+                <div className="rounded-2xl overflow-hidden bg-slate-950 p-2 sm:p-3 shadow-inner">
+                  <TiltImagePanel
+                    src={assetPath("/images/02-problem-disconnected-systems.png")}
+                    alt="Disconnected Systems and Manual Process Bottlenecks"
+                    badgeText="Operational Friction"
+                    className="w-full"
+                    floatingLabel1={{
+                      text: "Replace Spreadsheet Chaos",
+                      sub: "Single unified system",
+                      icon: <FileSpreadsheet className="h-5 w-5" />,
+                    }}
+                    floatingLabel2={{
+                      text: "End Disconnected Systems",
+                      sub: "Unified data pipeline",
+                      icon: <Workflow className="h-5 w-5" />,
+                    }}
+                  />
+                </div>
               </div>
 
-              <h3 className="mt-4 text-base font-bold text-white">
-                The Hidden Cost of Fragmented Workflows
-              </h3>
-              <p className="mt-1.5 text-xs text-slate-300 leading-relaxed">
-                When tools don't communicate, your team becomes the copy-paste bridge. Softclinch replaces this friction with one cohesive, custom-engineered platform.
-              </p>
-
-              <div className="mt-5 grid grid-cols-2 gap-3 border-t border-slate-800 pt-4">
-                <div className="rounded-xl bg-slate-900/80 border border-slate-800 p-3">
-                  <div className="text-xl font-black text-rose-400">15+ hrs</div>
-                  <div className="text-[11px] text-slate-400 mt-0.5 leading-tight">Wasted every week per employee</div>
+              <div className="mt-5 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+                <div className="flex items-center gap-4 text-slate-600">
+                  <span className="inline-flex items-center gap-1.5 font-medium">
+                    <span className="h-1.5 w-1.5 rounded-full bg-rose-500" />
+                    Manual Data Re-Entry
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 font-medium">
+                    <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
+                    Unsynced Tools
+                  </span>
                 </div>
-                <div className="rounded-xl bg-slate-900/80 border border-slate-800 p-3">
-                  <div className="text-xl font-black text-emerald-400">0 Silos</div>
-                  <div className="text-[11px] text-slate-400 mt-0.5 leading-tight">When unified in custom software</div>
-                </div>
-              </div>
-
-              <div className="mt-5 flex items-center justify-between pt-2">
-                <span className="text-xs text-slate-400">Ready to streamline?</span>
                 <Link
                   href="#contact-form"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-300 hover:text-amber-200 transition"
+                  className="inline-flex items-center gap-1 font-bold text-brand-terracotta hover:underline"
                 >
-                  Request Architecture Plan <ArrowRight className="h-3.5 w-3.5" />
+                  Diagnose My Workflow <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
               </div>
+            </TiltCard>
+
+            {/* Right Stack: Card 01 & Card 02 */}
+            <div className="lg:col-span-5 flex flex-col gap-5">
+              {/* Card 01 */}
+              <TiltCard className="flex-1 rounded-3xl border border-slate-200/90 bg-white p-6 shadow-sm hover:shadow-xl hover:border-brand-terracotta/40 transition-all duration-300 flex flex-col justify-between group">
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-terracotta/10 px-2.5 py-0.5 text-xs font-bold text-brand-terracotta">
+                      <span className="h-1.5 w-1.5 rounded-full bg-brand-terracotta" />
+                      {problemCards[0].badge}
+                    </span>
+                    <span className="text-xs font-mono font-bold text-slate-400 group-hover:text-brand-terracotta transition-colors">
+                      {problemCards[0].id}
+                    </span>
+                  </div>
+
+                  <div className="flex items-start gap-3 mt-1">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-brand-navy group-hover:bg-brand-navy group-hover:text-white transition-all duration-300">
+                      <FileSpreadsheet className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-slate-950 group-hover:text-brand-navy transition-colors">
+                        {problemCards[0].title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <p className="mt-3 text-sm text-slate-600 leading-relaxed">
+                    {problemCards[0].description}
+                  </p>
+                </div>
+
+                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                  <span className="text-slate-400 font-medium">Bottleneck:</span>
+                  <span className="font-semibold text-slate-700 truncate max-w-[70%] text-right">
+                    {problemCards[0].symptom}
+                  </span>
+                </div>
+              </TiltCard>
+
+              {/* Card 02 */}
+              <TiltCard className="flex-1 rounded-3xl border border-slate-200/90 bg-white p-6 shadow-sm hover:shadow-xl hover:border-brand-terracotta/40 transition-all duration-300 flex flex-col justify-between group">
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-terracotta/10 px-2.5 py-0.5 text-xs font-bold text-brand-terracotta">
+                      <span className="h-1.5 w-1.5 rounded-full bg-brand-terracotta" />
+                      {problemCards[1].badge}
+                    </span>
+                    <span className="text-xs font-mono font-bold text-slate-400 group-hover:text-brand-terracotta transition-colors">
+                      {problemCards[1].id}
+                    </span>
+                  </div>
+
+                  <div className="flex items-start gap-3 mt-1">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-brand-navy group-hover:bg-brand-navy group-hover:text-white transition-all duration-300">
+                      <Clock className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-slate-950 group-hover:text-brand-navy transition-colors">
+                        {problemCards[1].title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <p className="mt-3 text-sm text-slate-600 leading-relaxed">
+                    {problemCards[1].description}
+                  </p>
+                </div>
+
+                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                  <span className="text-slate-400 font-medium">Bottleneck:</span>
+                  <span className="font-semibold text-slate-700 truncate max-w-[70%] text-right">
+                    {problemCards[1].symptom}
+                  </span>
+                </div>
+              </TiltCard>
             </div>
           </div>
 
-          {/* RIGHT SIDE: Problem Diagnostic & 7 Cards */}
-          <div className="lg:col-span-7 space-y-6">
-            {/* Header Block */}
-            <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 rounded-full bg-brand-terracotta/10 px-3.5 py-1 text-xs font-bold text-brand-terracotta border border-brand-terracotta/20">
-                <AlertCircle className="h-3.5 w-3.5" />
-                <span>Your Business Problem</span>
-              </div>
-              <h2 className="text-2xl font-extrabold tracking-tight text-slate-950 sm:text-3xl lg:text-4xl leading-tight">
-                Is Your Business Facing Any of These Problems?
-              </h2>
-              <p className="text-base text-slate-600 leading-relaxed">
-                You don't need to know exactly what software you need.{" "}
-                <span className="font-semibold text-slate-900">Start with the problem.</span> We turn everyday bottlenecks into high-efficiency automated tools.
-              </p>
-            </div>
-
-            {/* Differentiated Problem Cards Grid */}
-            <div className="grid gap-4 sm:grid-cols-2">
-              {problemCards.map((problem, index) => {
-                const isFeatured = index === problemCards.length - 1; // Card 7 spans full width
-                return (
-                  <TiltCard
-                    key={problem.title}
-                    className={`rounded-2xl border transition-all duration-300 p-5 flex flex-col justify-between ${
-                      isFeatured
-                        ? "sm:col-span-2 bg-gradient-to-br from-slate-900 via-brand-navy to-slate-950 text-white border-slate-800 shadow-xl"
-                        : "bg-white border-slate-200/90 hover:border-brand-terracotta/40 hover:shadow-lg text-slate-900 shadow-sm"
-                    }`}
-                  >
-                    <div>
-                      {/* Top Row: Badge, ID, and Icon */}
-                      <div className="flex items-center justify-between gap-2 mb-3.5">
-                        <span
-                          style={{ transform: "translateZ(15px)" }}
-                          className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-bold ${
-                            isFeatured
-                              ? "bg-amber-400/20 text-amber-300 border border-amber-400/30"
-                              : "bg-brand-terracotta/10 text-brand-terracotta"
-                          }`}
-                        >
-                          <span className="h-1.5 w-1.5 rounded-full bg-current" />
-                          {problem.badge}
-                        </span>
-                        <span
-                          style={{ transform: "translateZ(10px)" }}
-                          className={`text-xs font-mono font-bold ${
-                            isFeatured ? "text-slate-400" : "text-slate-400"
-                          }`}
-                        >
-                          {problem.id || `0${index + 1}`}
-                        </span>
-                      </div>
-
-                      {/* Title & Icon */}
-                      <div
-                        style={{ transform: "translateZ(20px)" }}
-                        className="flex items-start gap-3"
-                      >
-                        <div
-                          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${
-                            isFeatured
-                              ? "bg-white/10 text-cyan-300 border border-white/15"
-                              : "bg-slate-100 text-brand-navy"
-                          }`}
-                        >
-                          <problem.icon className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <h3
-                            className={`text-base font-bold ${
-                              isFeatured ? "text-white" : "text-slate-950"
-                            }`}
-                          >
-                            {problem.title}
-                          </h3>
-                        </div>
-                      </div>
-
-                      {/* Description */}
-                      <p
-                        style={{ transform: "translateZ(10px)" }}
-                        className={`mt-3 text-xs sm:text-sm leading-relaxed ${
-                          isFeatured ? "text-slate-300" : "text-slate-600"
-                        }`}
-                      >
-                        {problem.description}
-                      </p>
+          {/* Row 2: 3 Balanced Problem Cards (Cards 03, 04, 05) */}
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {[problemCards[2], problemCards[3], problemCards[4]].map((problem) => {
+              const Icon = problem.icon;
+              return (
+                <TiltCard
+                  key={problem.title}
+                  className="rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-sm hover:shadow-xl hover:border-brand-terracotta/40 transition-all duration-300 flex flex-col justify-between group"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-3.5">
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-terracotta/10 px-2.5 py-0.5 text-xs font-bold text-brand-terracotta">
+                        <span className="h-1.5 w-1.5 rounded-full bg-brand-terracotta" />
+                        {problem.badge}
+                      </span>
+                      <span className="text-xs font-mono font-bold text-slate-400 group-hover:text-brand-terracotta transition-colors">
+                        {problem.id}
+                      </span>
                     </div>
 
-                    {/* Symptom Micro-Indicator */}
-                    {problem.symptom && (
-                      <div
-                        style={{ transform: "translateZ(12px)" }}
-                        className={`mt-4 pt-3 border-t text-[11px] font-medium flex items-center gap-1.5 ${
-                          isFeatured
-                            ? "border-white/10 text-slate-400"
-                            : "border-slate-100 text-slate-500"
-                        }`}
-                      >
-                        <span className="text-amber-500 font-bold">Key Friction:</span>
-                        <span>{problem.symptom}</span>
+                    <div className="flex items-start gap-3 mt-2">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-brand-navy group-hover:bg-brand-navy group-hover:text-white transition-all duration-300">
+                        <Icon className="h-5 w-5" />
                       </div>
-                    )}
-                  </TiltCard>
-                );
-              })}
-            </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-slate-950 group-hover:text-brand-navy transition-colors">
+                          {problem.title}
+                        </h3>
+                      </div>
+                    </div>
 
-            {/* Bottom Callout & Direct Actions */}
-            <div className="rounded-2xl border border-slate-200 bg-gradient-to-r from-slate-50 via-white to-slate-50 p-6 shadow-sm">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <p className="mt-3 text-sm text-slate-600 leading-relaxed">
+                      {problem.description}
+                    </p>
+                  </div>
+
+                  <div className="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs">
+                    <span className="text-slate-400 font-medium">Bottleneck:</span>
+                    <span className="font-semibold text-slate-700 truncate max-w-[70%] text-right">
+                      {problem.symptom}
+                    </span>
+                  </div>
+                </TiltCard>
+              );
+            })}
+          </div>
+
+          {/* Row 3: Card 06 (5 cols) + Featured Card 07 (7 cols) */}
+          <div className="grid gap-5 lg:grid-cols-12 lg:items-stretch">
+            {/* Card 06 */}
+            <div className="lg:col-span-5 flex">
+              <TiltCard className="w-full rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-sm hover:shadow-xl hover:border-brand-terracotta/40 transition-all duration-300 flex flex-col justify-between group">
                 <div>
-                  <h3 className="text-base font-bold text-slate-950 sm:text-lg">
-                    You don't need to know the software. Start with the problem.
-                  </h3>
-                  <p className="mt-1 text-xs sm:text-sm text-slate-600">
-                    Tell us what your team is struggling with, and we'll help design a solution that fits your exact workflow.
+                  <div className="flex items-center justify-between gap-2 mb-3.5">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-terracotta/10 px-2.5 py-0.5 text-xs font-bold text-brand-terracotta">
+                      <span className="h-1.5 w-1.5 rounded-full bg-brand-terracotta" />
+                      {problemCards[5].badge}
+                    </span>
+                    <span className="text-xs font-mono font-bold text-slate-400 group-hover:text-brand-terracotta transition-colors">
+                      {problemCards[5].id}
+                    </span>
+                  </div>
+
+                  <div className="flex items-start gap-3 mt-2">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-brand-navy group-hover:bg-brand-navy group-hover:text-white transition-all duration-300">
+                      <Wrench className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-slate-950 group-hover:text-brand-navy transition-colors">
+                        {problemCards[5].title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <p className="mt-3 text-sm text-slate-600 leading-relaxed">
+                    {problemCards[5].description}
                   </p>
                 </div>
-                <div className="flex flex-wrap sm:flex-nowrap gap-2.5 shrink-0">
+
+                <div className="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs">
+                  <span className="text-slate-400 font-medium">Bottleneck:</span>
+                  <span className="font-semibold text-slate-700 truncate max-w-[70%] text-right">
+                    {problemCards[5].symptom}
+                  </span>
+                </div>
+              </TiltCard>
+            </div>
+
+            {/* Featured Card 07: Need a Customer Portal? */}
+            <div className="lg:col-span-7 flex">
+              <TiltCard className="w-full rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-950 via-brand-navy to-slate-900 p-6 sm:p-7 text-white shadow-xl flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-4">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30 px-3 py-1 text-xs font-bold">
+                      <span className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse" />
+                      {problemCards[6].badge}
+                    </span>
+                    <span className="text-xs font-mono font-bold text-slate-400">
+                      07
+                    </span>
+                  </div>
+
+                  <div className="flex items-start gap-3.5">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/10 text-cyan-300 border border-white/15">
+                      <Globe className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white">
+                        {problemCards[6].title}
+                      </h3>
+                      <p className="mt-2 text-sm text-slate-300 leading-relaxed">
+                        {problemCards[6].description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Feature chips */}
+                  <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs text-slate-200">
+                    <div className="rounded-xl bg-white/5 border border-white/10 p-2.5 flex items-center gap-2">
+                      <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                      <span>Self-Service Portal</span>
+                    </div>
+                    <div className="rounded-xl bg-white/5 border border-white/10 p-2.5 flex items-center gap-2">
+                      <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                      <span>Order & Status Tracking</span>
+                    </div>
+                    <div className="rounded-xl bg-white/5 border border-white/10 p-2.5 flex items-center gap-2">
+                      <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                      <span>Instant WhatsApp Sync</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-5 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs">
+                  <div className="text-slate-400">
+                    <span className="text-amber-400 font-bold">Key Friction: </span>
+                    {problemCards[6].symptom}
+                  </div>
                   <Link
                     href="#contact-form"
-                    className="inline-flex items-center justify-center rounded-xl bg-brand-navy px-5 py-3 text-xs sm:text-sm font-bold text-white shadow-md shadow-brand-navy/20 transition hover:bg-brand-navy/90 hover:scale-[1.02]"
+                    className="inline-flex items-center gap-1.5 font-bold text-cyan-300 hover:text-cyan-200 transition"
                   >
-                    Discuss Requirement
-                    <ArrowRight className="ml-1.5 h-4 w-4" />
+                    Build Customer Portal <ArrowRight className="h-3.5 w-3.5" />
                   </Link>
-                  <a
-                    href={WHATSAPP_LINK}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-4 py-3 text-xs sm:text-sm font-bold text-white shadow-md shadow-emerald-600/20 transition hover:bg-emerald-700 hover:scale-[1.02]"
-                  >
-                    <MessageCircle className="mr-1.5 h-4 w-4" />
-                    WhatsApp
-                  </a>
                 </div>
+              </TiltCard>
+            </div>
+          </div>
+
+          {/* Row 4: High-Conversion Problem Bottom Callout & Actions */}
+          <div className="rounded-3xl border border-slate-200 bg-gradient-to-r from-slate-50 via-white to-slate-50 p-6 sm:p-8 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-brand-terracotta">
+                  Take the Next Step
+                </span>
+                <h3 className="text-xl font-bold text-slate-950 sm:text-2xl mt-1">
+                  You don't need to know the software. Start with the problem.
+                </h3>
+                <p className="mt-1.5 text-sm text-slate-600 max-w-2xl">
+                  Tell us what your team is struggling with, and we'll help design a solution that fits your exact workflow.
+                </p>
+              </div>
+              <div className="flex flex-wrap sm:flex-nowrap gap-3 shrink-0">
+                <Link
+                  href="#contact-form"
+                  className="inline-flex items-center justify-center rounded-xl bg-brand-navy px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-brand-navy/20 transition hover:bg-brand-navy/90 hover:scale-[1.02]"
+                >
+                  Discuss Your Requirement
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+                <a
+                  href={WHATSAPP_LINK}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-700 hover:scale-[1.02]"
+                >
+                  <MessageCircle className="mr-2 h-4 w-4" />
+                  WhatsApp Us
+                </a>
               </div>
             </div>
           </div>
