@@ -61,7 +61,7 @@ import { CONTACT } from "@/lib/contact";
 import { assetPath } from "@/lib/asset";
 
 // Communication URLs
-const WHATSAPP_LINK = `https://wa.me/919445179931?text=${encodeURIComponent(
+const WHATSAPP_LINK = `https://wa.me/919445679878?text=${encodeURIComponent(
   "Hi SoftClinch, I would like to discuss our custom software / application requirement."
 )}`;
 const EMAIL_LINK = `mailto:${CONTACT.email}?subject=${encodeURIComponent(
@@ -1585,7 +1585,7 @@ function CustomAppContactForm() {
               value={formData.phone}
               onChange={handleChange}
               className={`${inputClassName} ${getInputStateClassName(fieldErrors.phone)}`}
-              placeholder="+91 94451 79931"
+              placeholder="+91 94456 79878"
               aria-invalid={Boolean(fieldErrors.phone)}
               aria-describedby={fieldErrors.phone ? "custom-app-phone-error" : undefined}
             />
@@ -1814,7 +1814,7 @@ function QuickHeroForm() {
 
   const handleWhatsAppDirect = () => {
     const text = `Hi SoftClinch, my name is ${name.trim() || "Business Owner"}. My Phone/WhatsApp is ${phone.trim() || ""}. Requirement: ${requirement.trim() || "Custom Software / Application Development"}.`;
-    const url = `https://wa.me/919445179931?text=${encodeURIComponent(text)}`;
+    const url = `https://wa.me/919445679878?text=${encodeURIComponent(text)}`;
     window.open(url, "_blank");
   };
 
@@ -1840,11 +1840,11 @@ function QuickHeroForm() {
             Open WhatsApp Chat Now
           </button>
           <a
-            href="tel:+919445179931"
+            href="tel:+919445679878"
             className="inline-flex items-center gap-1.5 rounded-xl bg-white/10 border border-white/20 px-4 py-2 text-xs font-bold text-white hover:bg-white/20 transition"
           >
             <Phone className="h-3.5 w-3.5 text-emerald-400" />
-            Call +91 94451 79931
+            Call +91 94456 79878
           </a>
         </div>
       </div>
@@ -1939,11 +1939,11 @@ function QuickHeroForm() {
           <span>🔒 Strict NDA</span>
           <span>·</span>
           <a
-            href="tel:+919445179931"
+            href="tel:+919445679878"
             className="text-amber-400 hover:underline font-bold inline-flex items-center gap-1"
           >
             <Phone className="h-3 w-3" />
-            +91 94451 79931
+            +91 94456 79878
           </a>
         </div>
       </div>
@@ -1991,12 +1991,12 @@ export function CustomDevelopment() {
               {CONTACT.email}
             </a>
             <a
-              href="tel:+919445179931"
+              href="tel:+919445679878"
               className="inline-flex items-center gap-1.5 font-bold text-emerald-400 hover:text-emerald-300 transition-colors"
-              aria-label="Call +91 94451 79931"
+              aria-label="Call +91 94456 79878"
             >
               <Phone className="h-3.5 w-3.5 text-emerald-400 animate-pulse" />
-              <span>+91 94451 79931</span>
+              <span>+91 94456 79878</span>
             </a>
           </div>
         </div>
@@ -2084,12 +2084,12 @@ export function CustomDevelopment() {
                   )}
 
                   <a
-                    href="tel:+919445179931"
+                    href="tel:+919445679878"
                     className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3.5 text-sm font-bold text-slate-800 transition hover:border-emerald-600 hover:text-emerald-700 hover:scale-[1.02] shadow-sm"
-                    aria-label="Direct Call SoftClinch Helpline at +91 94451 79931"
+                    aria-label="Direct Call SoftClinch Helpline at +91 94456 79878"
                   >
                     <Phone className="mr-2 h-4 w-4 text-emerald-600 animate-pulse" />
-                    Call +91 94451 79931
+                    Call +91 94456 79878
                   </a>
 
                   <a
@@ -2113,12 +2113,12 @@ export function CustomDevelopment() {
                     </p>
                   </div>
                   <a
-                    href="tel:+919445179931"
+                    href="tel:+919445679878"
                     className="inline-flex items-center gap-1.5 rounded-xl bg-white border border-slate-200 px-3.5 py-1.5 text-xs font-bold text-slate-900 hover:border-emerald-600 hover:text-emerald-700 transition shrink-0 shadow-xs"
-                    aria-label="Direct Helpline +91 94451 79931"
+                    aria-label="Direct Helpline +91 94456 79878"
                   >
                     <Phone className="h-3.5 w-3.5 text-emerald-600 animate-pulse" />
-                    <span>Helpline: +91 94451 79931</span>
+                    <span>Helpline: +91 94456 79878</span>
                   </a>
                 </div>
 

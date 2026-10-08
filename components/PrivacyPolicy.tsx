@@ -319,8 +319,8 @@ export const PrivacyPolicy = () => {
                                     </div>
                                     <div className="flex items-center gap-3 text-slate-300">
                                         <Phone size={18} className="text-brand-terracotta flex-shrink-0" />
-                                        <a href="tel:+919445179931" className="hover:text-white transition-colors">
-                                            +91-9445179931
+                                        <a href="tel:+919445679878" className="hover:text-white transition-colors">
+                                            +91-9445679878
                                         </a>
                                     </div>
                                     <div className="flex items-center gap-3 text-slate-300">

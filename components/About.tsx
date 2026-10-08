@@ -563,7 +563,7 @@ export const About = () => {
                 Our focus is scalability, integration, and measurable digital performance. Every system we architect, every platform we build, is designed to make your business move faster and smarter.
               </p>
               <a
-                href="https://wa.me/919445179931"
+                href="https://wa.me/919445679878"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 text-brand-navy font-bold text-lg group"
