@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, Phone } from 'lucide-react';
 import { assetPath } from "@/lib/asset";
 
 export const Header = () => {
@@ -123,6 +123,14 @@ export const Header = () => {
                                 )}
                             </div>
                         ))}
+                        <a
+                            href="tel:+919445179931"
+                            className="hidden lg:flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-brand-navy transition-colors whitespace-nowrap"
+                            aria-label="Call SoftClinch at +91 94451 79931"
+                        >
+                            <Phone className="w-4 h-4 text-emerald-600 animate-pulse" />
+                            <span>+91 94451 79931</span>
+                        </a>
                         <Link
                             href="/contact"
                             className="bg-brand-navy text-white px-8 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-navy/90 transition-all shadow-md hover:shadow-lg"
@@ -131,13 +139,26 @@ export const Header = () => {
                         </Link>
                     </nav>
 
-                    {/* Mobile Menu Button */}
-                    <button
-                        className="md:hidden p-2 text-slate-600"
-                        onClick={() => setIsOpen(!isOpen)}
-                    >
-                        {isOpen ? <X size={24} /> : <Menu size={24} />}
-                    </button>
+                    {/* Mobile Header Quick Actions */}
+                    <div className="flex md:hidden items-center gap-2">
+                        <a
+                            href="tel:+919445179931"
+                            className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-3 py-1.5 text-xs font-bold text-emerald-700 shadow-xs active:scale-95 transition-transform"
+                            aria-label="Call +91 94451 79931"
+                        >
+                            <Phone className="w-3.5 h-3.5 text-emerald-600 animate-pulse" />
+                            <span>Call Now</span>
+                        </a>
+
+                        {/* Mobile Menu Button */}
+                        <button
+                            className="p-2 text-slate-600"
+                            onClick={() => setIsOpen(!isOpen)}
+                            aria-label="Toggle navigation menu"
+                        >
+                            {isOpen ? <X size={24} /> : <Menu size={24} />}
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -214,6 +235,13 @@ export const Header = () => {
                             >
                                 Request Consultation
                             </Link>
+                            <a
+                                href="tel:+919445179931"
+                                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3.5 rounded-xl text-center font-bold flex items-center justify-center gap-2 shadow-sm transition-colors"
+                            >
+                                <Phone className="w-4 h-4 animate-pulse" />
+                                Call Us: +91 94451 79931
+                            </a>
                         </div>
                     </motion.div>
                 )}

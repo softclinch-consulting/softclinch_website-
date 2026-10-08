@@ -1706,6 +1706,251 @@ function CustomAppContactForm() {
   );
 }
 
+// Sticky Floating WhatsApp Button for Mobile and Desktop (Positioned on Bottom-Left to avoid overlap with AI widget)
+function FloatingWhatsAppButton() {
+  return (
+    <div
+      className="fixed bottom-6 left-5 z-50 transition-all duration-300"
+      role="region"
+      aria-label="WhatsApp quick contact"
+    >
+      <a
+        href={WHATSAPP_LINK}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Chat with SoftClinch on WhatsApp"
+        className="group flex items-center gap-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-3 shadow-2xl shadow-emerald-950/40 hover:shadow-emerald-600/50 hover:scale-105 active:scale-95 transition-all duration-200 border border-emerald-400/40"
+      >
+        <div className="relative flex items-center justify-center">
+          <MessageCircle className="h-5 w-5 fill-current" />
+          <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-200" />
+          </span>
+        </div>
+        <div className="flex flex-col text-left">
+          <span className="text-xs font-bold leading-tight tracking-wide">
+            Chat on WhatsApp
+          </span>
+          <span className="text-[10px] text-emerald-100/90 leading-none hidden sm:inline">
+            Direct Tech Team · 15 Min
+          </span>
+        </div>
+      </a>
+    </div>
+  );
+}
+
+// Quick 3-Field Consultation Form Above The Fold
+function QuickHeroForm() {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [requirement, setRequirement] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+
+    const trimmedName = name.trim();
+    const trimmedPhone = phone.trim();
+    const trimmedReq = requirement.trim();
+
+    if (!trimmedName || trimmedName.length < 2) {
+      setError("Please enter your full name (minimum 2 characters).");
+      return;
+    }
+
+    const digitCount = trimmedPhone.replace(/\D/g, "").length;
+    if (digitCount < 7 || digitCount > 15) {
+      setError("Please enter a valid 10-digit mobile or WhatsApp number.");
+      return;
+    }
+
+    if (!trimmedReq || trimmedReq.length < 5) {
+      setError("Please briefly describe your requirement (minimum 5 characters).");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const cleanPhoneDigits = trimmedPhone.replace(/\D/g, "");
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: trimmedName,
+          phone: trimmedPhone,
+          company: "Quick Inquiry",
+          email: `quicklead.${cleanPhoneDigits || "inquiry"}@softclinch.com`,
+          service: "Custom Application Development",
+          message: `[Above-The-Fold Quick Lead]\nPhone/WhatsApp: ${trimmedPhone}\nRequirement: ${trimmedReq}`,
+          formId: 1,
+          formStartedAt: Date.now() - 5000,
+        }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        throw new Error(data.error || "Unable to submit your inquiry right now.");
+      }
+
+      setSubmitted(true);
+      setName("");
+      setPhone("");
+      setRequirement("");
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Unable to submit right now. You can chat directly via WhatsApp below!"
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleWhatsAppDirect = () => {
+    const text = `Hi SoftClinch, my name is ${name.trim() || "Business Owner"}. My Phone/WhatsApp is ${phone.trim() || ""}. Requirement: ${requirement.trim() || "Custom Software / Application Development"}.`;
+    const url = `https://wa.me/919445179931?text=${encodeURIComponent(text)}`;
+    window.open(url, "_blank");
+  };
+
+  if (submitted) {
+    return (
+      <div className="rounded-2xl bg-emerald-950/80 border border-emerald-500/40 p-6 text-center text-white mt-4">
+        <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 mb-3">
+          <CheckCircle2 className="h-6 w-6" />
+        </div>
+        <h4 className="text-lg font-bold text-white">
+          Requirement Received! Thank You!
+        </h4>
+        <p className="mt-1 text-xs text-slate-300 max-w-lg mx-auto">
+          Our technical engineering lead will review your requirement and call or WhatsApp you within 15 minutes.
+        </p>
+        <div className="mt-4 flex flex-wrap justify-center gap-3">
+          <button
+            type="button"
+            onClick={handleWhatsAppDirect}
+            className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-600 px-4 py-2 text-xs font-bold text-white hover:bg-emerald-500 transition cursor-pointer"
+          >
+            <MessageCircle className="h-3.5 w-3.5" />
+            Open WhatsApp Chat Now
+          </button>
+          <a
+            href="tel:+919445179931"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-white/10 border border-white/20 px-4 py-2 text-xs font-bold text-white hover:bg-white/20 transition"
+          >
+            <Phone className="h-3.5 w-3.5 text-emerald-400" />
+            Call +91 94451 79931
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="mt-5 space-y-3" noValidate>
+      {error && (
+        <div className="rounded-xl bg-rose-500/20 border border-rose-500/40 px-3.5 py-2 text-xs text-rose-300 font-medium">
+          {error}
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div>
+          <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">
+            1. Full Name <span className="text-amber-400">*</span>
+          </label>
+          <input
+            type="text"
+            required
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="e.g. Rajesh Kumar"
+            className="w-full rounded-xl border border-slate-700 bg-slate-900/90 px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 transition"
+          />
+        </div>
+
+        <div>
+          <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">
+            2. Phone / WhatsApp <span className="text-amber-400">*</span>
+          </label>
+          <input
+            type="tel"
+            required
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder="e.g. +91 98765 43210"
+            className="w-full rounded-xl border border-slate-700 bg-slate-900/90 px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 transition"
+          />
+        </div>
+
+        <div>
+          <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">
+            3. Brief Requirement <span className="text-amber-400">*</span>
+          </label>
+          <input
+            type="text"
+            required
+            value={requirement}
+            onChange={(e) => setRequirement(e.target.value)}
+            placeholder="e.g. ERP for retail, CRM, customer portal"
+            className="w-full rounded-xl border border-slate-700 bg-slate-900/90 px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 transition"
+          />
+        </div>
+      </div>
+
+      <div className="pt-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="inline-flex items-center justify-center rounded-xl bg-brand-terracotta px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-lg shadow-brand-terracotta/30 hover:bg-brand-terracotta/90 hover:scale-[1.02] active:scale-95 transition disabled:opacity-60 cursor-pointer"
+          >
+            {isSubmitting ? (
+              <span className="flex items-center gap-1.5">
+                <span className="h-3 w-3 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                Submitting...
+              </span>
+            ) : (
+              <span className="flex items-center gap-1.5">
+                Get Instant Estimate
+                <ArrowRight className="h-3.5 w-3.5" />
+              </span>
+            )}
+          </button>
+
+          <button
+            type="button"
+            onClick={handleWhatsAppDirect}
+            className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-4 py-2.5 text-xs sm:text-sm font-bold text-white shadow-md shadow-emerald-600/30 hover:bg-emerald-500 hover:scale-[1.02] active:scale-95 transition cursor-pointer"
+          >
+            <MessageCircle className="mr-1.5 h-3.5 w-3.5" />
+            WhatsApp Details
+          </button>
+        </div>
+
+        <div className="flex items-center gap-3 text-[11px] text-slate-400 font-mono">
+          <span>⚡ 15-Min Response</span>
+          <span>·</span>
+          <span>🔒 Strict NDA</span>
+          <span>·</span>
+          <a
+            href="tel:+919445179931"
+            className="text-amber-400 hover:underline font-bold inline-flex items-center gap-1"
+          >
+            <Phone className="h-3 w-3" />
+            +91 94451 79931
+          </a>
+        </div>
+      </div>
+    </form>
+  );
+}
+
 export function CustomDevelopment() {
   const [currentHeroSlide, setCurrentHeroSlide] = useState(0);
 
@@ -1728,7 +1973,7 @@ export function CustomDevelopment() {
             <span className="inline-block h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
             <span>Serving businesses across Tamil Nadu with custom software, websites & apps</span>
           </div>
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-4 sm:gap-5">
             <a
               href={WHATSAPP_LINK}
               target="_blank"
@@ -1740,17 +1985,18 @@ export function CustomDevelopment() {
             </a>
             <a
               href={EMAIL_LINK}
-              className="inline-flex items-center gap-1.5 font-semibold text-slate-200 hover:text-white transition-colors"
+              className="hidden sm:inline-flex items-center gap-1.5 font-semibold text-slate-200 hover:text-white transition-colors"
             >
               <Mail className="h-4 w-4 text-brand-terracotta" />
               {CONTACT.email}
             </a>
             <a
-              href={PHONE_LINK}
-              className="hidden sm:inline-flex items-center gap-1.5 font-semibold text-slate-200 hover:text-white transition-colors"
+              href="tel:+919445179931"
+              className="inline-flex items-center gap-1.5 font-bold text-emerald-400 hover:text-emerald-300 transition-colors"
+              aria-label="Call +91 94451 79931"
             >
-              <Phone className="h-4 w-4 text-blue-400" />
-              {CONTACT.phone}
+              <Phone className="h-3.5 w-3.5 text-emerald-400 animate-pulse" />
+              <span>+91 94451 79931</span>
             </a>
           </div>
         </div>
@@ -1838,6 +2084,15 @@ export function CustomDevelopment() {
                   )}
 
                   <a
+                    href="tel:+919445179931"
+                    className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3.5 text-sm font-bold text-slate-800 transition hover:border-emerald-600 hover:text-emerald-700 hover:scale-[1.02] shadow-sm"
+                    aria-label="Direct Call SoftClinch Helpline at +91 94451 79931"
+                  >
+                    <Phone className="mr-2 h-4 w-4 text-emerald-600 animate-pulse" />
+                    Call +91 94451 79931
+                  </a>
+
+                  <a
                     href={EMAIL_LINK}
                     className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3.5 text-sm font-semibold text-slate-700 transition hover:border-brand-terracotta hover:text-brand-terracotta shadow-sm"
                   >
@@ -1846,15 +2101,25 @@ export function CustomDevelopment() {
                   </a>
                 </div>
 
-                {/* Tamil Nadu Coverage Bar */}
-                <div className="mt-7 rounded-2xl border border-slate-200 bg-slate-50/90 p-3.5 shadow-xs">
-                  <div className="flex items-center gap-2 text-xs font-bold text-slate-900">
-                    <MapPin className="h-4 w-4 text-brand-terracotta" />
-                    <span>Serving businesses across Tamil Nadu</span>
+                {/* Tamil Nadu Coverage Bar with Click-to-Call Helpline */}
+                <div className="mt-7 rounded-2xl border border-slate-200 bg-slate-50/90 p-3.5 shadow-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5">
+                  <div>
+                    <div className="flex items-center gap-2 text-xs font-bold text-slate-900">
+                      <MapPin className="h-4 w-4 text-brand-terracotta" />
+                      <span>Serving businesses across Tamil Nadu</span>
+                    </div>
+                    <p className="mt-1 text-[11px] text-slate-600 leading-relaxed font-mono">
+                      Chennai · Coimbatore · Madurai · Salem · Tiruppur · Erode · Hosur · Vellore · Tiruchirappalli & more
+                    </p>
                   </div>
-                  <p className="mt-1 text-[11px] text-slate-600 leading-relaxed font-mono">
-                    Chennai · Coimbatore · Madurai · Salem · Tiruppur · Erode · Hosur · Vellore · Tiruchirappalli & more
-                  </p>
+                  <a
+                    href="tel:+919445179931"
+                    className="inline-flex items-center gap-1.5 rounded-xl bg-white border border-slate-200 px-3.5 py-1.5 text-xs font-bold text-slate-900 hover:border-emerald-600 hover:text-emerald-700 transition shrink-0 shadow-xs"
+                    aria-label="Direct Helpline +91 94451 79931"
+                  >
+                    <Phone className="h-3.5 w-3.5 text-emerald-600 animate-pulse" />
+                    <span>Helpline: +91 94451 79931</span>
+                  </a>
                 </div>
 
                 {/* 5-Second Carousel Indicators */}
@@ -1890,6 +2155,36 @@ export function CustomDevelopment() {
                 <HeroBentoMatrix activeSlide={activeSlide} />
               </motion.div>
             </AnimatePresence>
+          </div>
+
+          {/* ABOVE-THE-FOLD QUICK 3-FIELD INQUIRY CARD */}
+          <div className="mt-10 lg:mt-12 rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-950 via-brand-navy to-slate-900 p-6 sm:p-8 text-white shadow-2xl relative overflow-hidden">
+            <div className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-brand-terracotta/20 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-emerald-500/15 blur-3xl" />
+
+            <div className="relative z-10">
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 pb-4 border-b border-white/10">
+                <div>
+                  <div className="inline-flex items-center gap-2 rounded-full bg-amber-400/15 border border-amber-400/30 px-3 py-1 text-xs font-bold text-amber-300">
+                    <Zap className="h-3.5 w-3.5 text-amber-400" />
+                    <span>Quick 30-Second Consultation</span>
+                  </div>
+                  <h3 className="mt-2 text-xl font-bold sm:text-2xl text-white">
+                    Tell Us Your Requirement — Get Instant Architecture & Cost Estimate
+                  </h3>
+                  <p className="mt-1 text-xs sm:text-sm text-slate-300">
+                    High-intent inquiry? Skip the full form. Our technical team reviews and responds within 15 minutes.
+                  </p>
+                </div>
+                <div className="flex items-center gap-3 shrink-0 text-xs font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 rounded-xl px-3 py-2">
+                  <Activity className="h-4 w-4 animate-pulse" />
+                  <span>Guaranteed 15-Min Response</span>
+                </div>
+              </div>
+
+              {/* The 3-Field Quick Form */}
+              <QuickHeroForm />
+            </div>
           </div>
         </div>
       </section>
@@ -3470,6 +3765,9 @@ export function CustomDevelopment() {
           </div>
         </div>
       </section>
+
+      {/* Sticky Floating WhatsApp Button for Instant Mobile/Desktop Inquiries */}
+      <FloatingWhatsAppButton />
     </div>
   );
 }
