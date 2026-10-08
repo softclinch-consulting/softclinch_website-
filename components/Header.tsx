@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, MessageCircle } from 'lucide-react';
 import { assetPath } from "@/lib/asset";
 
 export const Header = () => {
@@ -123,22 +123,46 @@ export const Header = () => {
                                 )}
                             </div>
                         ))}
-                        <Link
-                            href="/contact"
-                            className="bg-brand-navy text-white px-8 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-navy/90 transition-all shadow-md hover:shadow-lg"
-                        >
-                            Request Consultation
-                        </Link>
+                        <div className="flex items-center gap-3">
+                            <a
+                                href="https://wa.me/919445679878?text=Hi%20SoftClinch%2C%20I%20would%20like%20to%20discuss%20a%20requirement."
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="Chat on WhatsApp"
+                                className="flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-full text-sm font-semibold transition-all shadow-sm hover:shadow-md"
+                            >
+                                <MessageCircle className="w-4 h-4" />
+                                <span>WhatsApp</span>
+                            </a>
+                            <Link
+                                href="/contact"
+                                className="bg-brand-navy text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-navy/90 transition-all shadow-md hover:shadow-lg"
+                            >
+                                Request Consultation
+                            </Link>
+                        </div>
                     </nav>
 
-                    {/* Mobile Menu Button */}
-                    <button
-                        className="md:hidden p-2 text-slate-600"
-                        onClick={() => setIsOpen(!isOpen)}
-                        aria-label="Toggle navigation menu"
-                    >
-                        {isOpen ? <X size={24} /> : <Menu size={24} />}
-                    </button>
+                    {/* Mobile Menu Button & Quick WhatsApp Action */}
+                    <div className="flex items-center gap-2 md:hidden">
+                        <a
+                            href="https://wa.me/919445679878?text=Hi%20SoftClinch%2C%20I%20would%20like%20to%20discuss%20a%20requirement."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Chat on WhatsApp"
+                            className="flex items-center gap-1 bg-emerald-600 text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm active:scale-95 transition-transform"
+                        >
+                            <MessageCircle className="w-3.5 h-3.5" />
+                            <span>WhatsApp</span>
+                        </a>
+                        <button
+                            className="p-2 text-slate-600"
+                            onClick={() => setIsOpen(!isOpen)}
+                            aria-label="Toggle navigation menu"
+                        >
+                            {isOpen ? <X size={24} /> : <Menu size={24} />}
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -208,13 +232,25 @@ export const Header = () => {
                                     </AnimatePresence>
                                 </div>
                             ))}
-                            <Link
-                                href="/contact"
-                                className="w-full bg-brand-navy text-white py-4 rounded-xl text-center font-bold block"
-                                onClick={() => setIsOpen(false)}
-                            >
-                                Request Consultation
-                            </Link>
+                            <div className="pt-2 space-y-3">
+                                <a
+                                    href="https://wa.me/919445679878?text=Hi%20SoftClinch%2C%20I%20would%20like%20to%20discuss%20a%20requirement."
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 transition-colors shadow-sm"
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    <MessageCircle className="w-5 h-5" />
+                                    <span>Chat on WhatsApp</span>
+                                </a>
+                                <Link
+                                    href="/contact"
+                                    className="w-full bg-brand-navy text-white py-4 rounded-xl text-center font-bold block"
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    Request Consultation
+                                </Link>
+                            </div>
                         </div>
                     </motion.div>
                 )}

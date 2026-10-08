@@ -18,11 +18,11 @@ const SYSTEM_MSGS = [
 ]
 
 const CARDS = [
-  { id: 'whatsapp',  icon: '💬', label: 'WhatsApp',          sub: 'Message us',          color: '#25D366', href: 'https://wa.me/softclinch' },
+  { id: 'whatsapp',  icon: '💬', label: 'WhatsApp',          sub: 'Message us',          color: '#25D366', href: 'https://wa.me/919445679878' },
   { id: 'website',   icon: '🌐', label: 'Website',           sub: 'softclinch.com',      color: '#2563EB', href: 'https://softclinch.com' },
   { id: 'schedule',  icon: '📅', label: 'Book Consultation', sub: 'Free strategy call',  color: '#00E5FF', href: '#' },
   { id: 'email',     icon: '📧', label: 'Email',             sub: 'hello@softclinch.com',color: '#38BDF8', href: 'mailto:hello@softclinch.com' },
-  { id: 'call',      icon: '📞', label: 'Call',              sub: 'Talk to us now',      color: '#818CF8', href: 'tel:+1' },
+  { id: 'call',      icon: '📞', label: 'Call',              sub: 'Talk to us now',      color: '#818CF8', href: 'tel:+919445679878' },
   { id: 'linkedin',  icon: '💼', label: 'LinkedIn',          sub: '/softclinch',         color: '#0A66C2', href: '#' },
   { id: 'instagram', icon: '📸', label: 'Instagram',         sub: '@softclinch',         color: '#E1306C', href: '#' },
   { id: 'youtube',   icon: '▶',  label: 'YouTube',           sub: 'SoftClinch TV',       color: '#FF0000', href: '#' },

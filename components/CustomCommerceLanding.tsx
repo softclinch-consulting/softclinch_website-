@@ -132,7 +132,7 @@ function ButtonPrimary({ children, href = "/contact", className = "" }: { childr
   );
 }
 
-function ButtonSecondary({ children, href = "https://wa.me/919876543210", className = "" }: { children: React.ReactNode; href?: string; className?: string }) {
+function ButtonSecondary({ children, href = "https://wa.me/919445679878", className = "" }: { children: React.ReactNode; href?: string; className?: string }) {
   return (
     <a
       href={href}
@@ -176,7 +176,7 @@ export function CustomCommerceLanding() {
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <ButtonPrimary href="/contact" className="rounded-full px-7 py-4 text-base">Book a Free eCommerce Consultation</ButtonPrimary>
-              <ButtonSecondary href="https://wa.me/919876543210" className="rounded-full px-7 py-4 text-base">Talk to Our Commerce Team on WhatsApp</ButtonSecondary>
+              <ButtonSecondary href="https://wa.me/919445679878" className="rounded-full px-7 py-4 text-base">Talk to Our Commerce Team on WhatsApp</ButtonSecondary>
             </div>
           </div>
 
@@ -699,7 +699,7 @@ export function CustomCommerceLanding() {
             <p className="mt-6 text-xl text-slate-700">Tell us what you're trying to build, improve or automate. We'll help you figure out the right next step.</p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <ButtonPrimary href="/contact" className="rounded-full px-7 py-4 text-base">Book a Free eCommerce Consultation</ButtonPrimary>
-              <ButtonSecondary href="https://wa.me/919876543210" className="rounded-full px-7 py-4 text-base">Talk to Our Commerce Team on WhatsApp</ButtonSecondary>
+              <ButtonSecondary href="https://wa.me/919445679878" className="rounded-full px-7 py-4 text-base">Talk to Our Commerce Team on WhatsApp</ButtonSecondary>
             </div>
             <div className="mt-6 flex items-center gap-2 text-sm text-slate-600">
               <MapPin className="h-4 w-4 text-[#8ef5a6]" />
