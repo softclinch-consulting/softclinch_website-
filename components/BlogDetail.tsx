@@ -339,6 +339,22 @@ function parseMarkdownToHtml(markdown: string): string {
       closeAll();
       html += `<h4>${parseInlineMarkdown(line.substring(5))}</h4>`;
     }
+    // Blockquote
+    else if (line.startsWith('> ')) {
+      closeAll();
+      const quoteText = line.substring(2).trim();
+      html += `<blockquote class="border-l-4 border-brand-navy bg-slate-100/80 rounded-r-2xl p-5 my-6 text-slate-800 italic shadow-sm">${parseInlineMarkdown(quoteText)}</blockquote>`;
+    }
+    // Images: ![alt](url)
+    else if (line.match(/^!\[([^\]]*)\]\(([^)]+)\)$/)) {
+      closeAll();
+      const match = line.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+      if (match) {
+        const alt = match[1];
+        const src = match[2];
+        html += `<figure class="my-10"><img src="${src}" alt="${alt}" class="w-full rounded-2xl shadow-xl border border-slate-200/80 object-cover" />${alt ? `<figcaption class="mt-2.5 text-center text-xs text-slate-500 font-medium">${alt}</figcaption>` : ''}</figure>`;
+      }
+    }
     // Code blocks
     else if (line.startsWith('```')) {
       closeAll();
@@ -437,6 +453,9 @@ function parseInlineMarkdown(text: string): string {
   // Inline code: `code`
   html = html.replace(/`([^`]+)`/g, '<code class="bg-slate-100 px-1.5 py-0.5 rounded text-sm font-mono text-brand-navy">$1</code>');
   
+  // Images: ![alt](url)
+  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="w-full rounded-2xl shadow-lg border border-slate-200/80 my-8 object-cover" />');
+
   // Links: [text](url)
   html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-brand-navy underline hover:no-underline" target="_blank" rel="noopener noreferrer">$1</a>');
   
@@ -448,6 +467,7 @@ function parseInlineMarkdown(text: string): string {
     .replace(/&lt;\/em&gt;/g, '</em>')
     .replace(/&lt;code([^&]*)&gt;/g, '<code$1>')
     .replace(/&lt;\/code&gt;/g, '</code>')
+    .replace(/&lt;img([^&]*)&gt;/g, '<img$1>')
     .replace(/&lt;a([^&]*)&gt;/g, '<a$1>')
     .replace(/&lt;\/a&gt;/g, '</a>');
 
