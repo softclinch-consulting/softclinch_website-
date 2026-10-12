@@ -4,20 +4,23 @@ import { buildMetadata } from "@/lib/seo";
 import { faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 
 export const metadata = buildMetadata({
-  title:
-    "SAP Consulting, AI Automation & Digital Growth Solutions | SoftClinch",
+  title: "Enterprise Technology & Digital Growth Solutions | SoftClinch",
   description:
-    "SoftClinch helps businesses scale with SAP consulting, WhatsApp automation, SEO, AI-powered marketing, enterprise software development, and digital transformation solutions.",
+    "Scale your enterprise with custom software, SAP consulting, WhatsApp automation & AI-driven digital marketing. Book your free business consultation today!",
   keywords: [
-    "SAP consulting company",
-    "SAP AMS support",
-    "WhatsApp automation company",
-    "AI automation solutions",
-    "SEO services company",
-    "GEO and AEO optimization",
+    "enterprise technology consulting",
     "custom software development company",
-    "SaaS development company",
+    "custom software company tamil nadu",
+    "sap consulting company chennai",
+    "sap ams support services",
+    "whatsapp automation solutions",
+    "official whatsapp business platform",
+    "ai business automation solutions",
+    "performance marketing agency",
+    "seo services company",
     "enterprise digital transformation solutions",
+    "saas development company",
+    "b2b custom software developers",
   ],
   canonicalPath: "/",
 });
@@ -52,14 +55,13 @@ export default function Page() {
         data={[
           webpageJsonLd({
             canonicalPath: "/",
-            title:
-              "SAP Consulting, AI Automation & Digital Growth Solutions | SoftClinch",
+            title: "Enterprise Technology & Digital Growth Solutions | SoftClinch",
           }),
           serviceJsonLd({
             canonicalPath: "/",
-            name: "SAP Consulting and Enterprise Automation Services",
+            name: "SAP Consulting, Custom Software and Enterprise Automation Services",
             description:
-              "SAP consulting, SAP AMS support, AI automation, WhatsApp Business API automation, SEO, GEO, AEO, SaaS development, and enterprise digital transformation solutions.",
+              "Custom software development, SAP consulting, WhatsApp Business API automation, AI business systems, SEO, and enterprise digital transformation solutions.",
           }),
           faqJsonLd(homepageFaqs),
         ]}

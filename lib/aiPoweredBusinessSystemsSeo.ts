@@ -3,11 +3,11 @@ import type { FaqItem } from "@/lib/faqs";
 export const aiPoweredBusinessSystemsSeo = {
   slug: "/services/ai-powered-business-systems",
   seoTitle:
-    "AI Business Automation Solutions & Enterprise Systems | SoftClinch",
+    "AI Business Automation & Enterprise Systems | SoftClinch",
   metaTitle:
-    "AI Business Automation Solutions & Enterprise Systems | SoftClinch",
+    "AI Business Automation & Enterprise Systems | SoftClinch",
   metaDescription:
-    "Transform operations with AI-powered business systems, workflow automation, CRM integrations, AI chatbots, and enterprise automation solutions built for scalable growth.",
+    "Automate repetitive business workflows with custom AI agents, CRM integrations & intelligent process automation. Schedule a consultation with our AI team!",
   focusKeywords: [
     "ai business automation",
     "ai powered business systems",

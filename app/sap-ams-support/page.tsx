@@ -5,24 +5,25 @@ import { faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 import { sapAmsFaq } from "@/lib/faqs";
 
 const canonicalPath = "/sap-ams-support";
-const title = "SAP AMS Support & Enterprise SAP Consulting Services | SoftClinch";
+const title = "SAP AMS Support & Enterprise Consulting Services | SoftClinch";
 const description =
-  "Enterprise SAP AMS support services including SAP implementation, monitoring, optimization, migration, and functional consulting for scalable business operations.";
+  "Maximize SAP uptime with 24/7 SLA-backed AMS support, S/4HANA migration, FICO/MM/SD optimization & managed services. Request your free SAP system audit!";
 
 export const metadata = buildMetadata({
   title,
   description,
   keywords: [
-    "sap ams support",
-    "sap consulting company",
+    "sap ams support services india",
+    "24/7 sap ams support",
+    "sla backed sap support",
+    "sap consulting company chennai",
     "enterprise sap consulting",
     "sap implementation services",
-    "sap support services",
-    "sap migration solutions",
-    "sap mm support",
-    "sap sd support",
-    "sap fico consulting",
-    "sap managed services",
+    "sap s4hana migration support",
+    "sap fico ams consulting",
+    "sap mm sd support company",
+    "cost effective sap ams support",
+    "sap managed services partner",
   ],
   canonicalPath,
 });

@@ -6,13 +6,23 @@ import { SITE_NAME } from "@/lib/site";
 import { sapConsultingFaq } from "@/lib/faqs";
 
 const canonicalPath = "/services/sap-consulting";
-const title = "SAP Consulting, Implementation & Rollout Services";
+const title = "SAP Implementation & Rollout Services | SoftClinch";
 const description =
-  "End-to-end SAP consulting and implementation: S/4HANA migration, rollout services, process optimization, and enterprise integrations.";
+  "Seamless SAP S/4HANA implementations, global rollouts & enterprise integrations. Reduce project risk & accelerate ROI. Talk to our SAP solutions architect!";
 
 export const metadata = buildMetadata({
   title,
   description,
+  keywords: [
+    "sap implementation services",
+    "sap rollout partner india",
+    "sap s4hana implementation consulting",
+    "sap consulting services chennai",
+    "enterprise sap rollout company",
+    "sap process optimization",
+    "sap integration consulting",
+    "sap migration partner",
+  ],
   canonicalPath,
 });
 
@@ -23,7 +33,7 @@ export default function SAPConsultingPage() {
         data={[
           webpageJsonLd({
             canonicalPath,
-            title: `${title} | ${SITE_NAME}`,
+            title,
           }),
           serviceJsonLd({ canonicalPath, name: title, description }),
           faqJsonLd(sapConsultingFaq),

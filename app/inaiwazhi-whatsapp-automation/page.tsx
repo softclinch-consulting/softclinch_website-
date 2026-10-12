@@ -5,18 +5,23 @@ import { faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 import { whatsappAutomationFaq } from "@/lib/faqs";
 
 const canonicalPath = "/inaiwazhi-whatsapp-automation";
-const title = "Inaiwazhi WhatsApp Automation | AI WhatsApp Marketing Platform";
+const title = "Inaiwazhi WhatsApp Automation & AI Chatbots | SoftClinch";
 const description =
-  "Automate customer communication with Inaiwazhi WhatsApp automation platform. Manage leads, follow-ups, campaigns and AI chat responses.";
+  "Official Meta WhatsApp Business Platform solution. Automate customer support, lead qualification, broadcast campaigns & CRM sync. Start your free trial!";
 
 export const metadata = buildMetadata({
   title,
   description,
   keywords: [
-    "WhatsApp automation tool",
-    "WhatsApp marketing software",
-    "WhatsApp chatbot platform",
-    "business WhatsApp automation",
+    "official whatsapp business platform api",
+    "whatsapp automation platform india",
+    "whatsapp ai chatbot for business",
+    "whatsapp marketing software",
+    "whatsapp crm integration",
+    "whatsapp broadcast software",
+    "inaiwazhi whatsapp automation",
+    "automated customer support whatsapp",
+    "whatsapp lead qualification bot",
   ],
   canonicalPath,
 });

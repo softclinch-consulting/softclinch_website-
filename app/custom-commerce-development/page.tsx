@@ -3,26 +3,30 @@ import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { webpageJsonLd } from "@/lib/schema";
 import { CustomCommerceLanding } from "@/components/CustomCommerceLanding";
 
+const title = "Custom eCommerce Development & Engineering | SoftClinch";
+const description =
+  "Scale online sales with custom eCommerce engineering, ERP/CRM integrations, headless stores & WhatsApp automation. Book your free eCommerce tech audit!";
+
 export const metadata = buildMetadata({
-  title: "Custom Commerce Engineering | SoftClinch",
-  description:
-    "Need a better eCommerce system? SoftClinch builds custom commerce experiences, upgrades existing stores, connects ERP/CRM workflows, automates WhatsApp, and adds AI to streamline operations.",
+  title,
+  description,
   canonicalPath: "/custom-commerce-development",
   keywords: [
+    "custom ecommerce development company",
+    "headless ecommerce development services",
+    "b2b ecommerce portal development",
+    "ecommerce erp integration",
+    "custom shopify development company",
+    "woocommerce custom development",
+    "ecommerce whatsapp automation",
     "custom commerce engineering",
-    "custom ecommerce development",
-    "ecommerce consulting company",
-    "shopify woo commerce improvements",
-    "erp crm integration",
-    "whatsapp automation for commerce",
-    "ai for ecommerce",
   ],
 });
 
 export default function CustomCommerceDevelopmentPage() {
   return (
     <>
-      <SeoJsonLd data={[webpageJsonLd({ canonicalPath: "/custom-commerce-development", title: "Custom Commerce Engineering | SoftClinch" })]} />
+      <SeoJsonLd data={[webpageJsonLd({ canonicalPath: "/custom-commerce-development", title })]} />
       <CustomCommerceLanding />
     </>
   );

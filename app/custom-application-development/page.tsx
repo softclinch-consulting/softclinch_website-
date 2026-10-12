@@ -14,11 +14,11 @@ import { customDevelopmentFaq } from "@/lib/faqs";
 const canonicalPath = "/custom-application-development/";
 
 // High-Intent Search Query Meta Title (High-CTR Commercial Intent)
-const title = "Custom Application & Software Development Company in Tamil Nadu | SoftClinch";
+const title = "Custom Software & App Development in Tamil Nadu | SoftClinch";
 
 // High-Intent Search Query Meta Description (High CTR & Action Oriented)
 const description =
-  "Custom application & software development company in Tamil Nadu. We build tailored web & mobile apps, CRM, ERP & automation for your business. Get a free consultation!";
+  "Build custom business software, ERP, CRM & mobile apps tailored to your workflows. Eliminate manual spreadsheets. Get your free discovery consultation today!";
 
 // High-Intent Search Query Clusters (Commercial, Transactional & Local Tamil Nadu Intent for Maximum Clicks)
 const highIntentKeywords = [

@@ -5,17 +5,19 @@ import { webpageJsonLd } from "@/lib/schema";
 import { SITE_NAME } from "@/lib/site";
 
 const canonicalPath = "/softclinch-ai";
-const title = "SoftClinch AI Intelligence Network | Connected AI & Enterprise Systems";
+const title = "SoftClinch AI | Connected Enterprise Intelligence";
 const description =
-  "Experience SoftClinch AI Intelligence Network. Connect seamlessly with Digital Marketing, Enterprise SaaS, AI Custom Apps, and Instant Communication Channels.";
+  "Explore the SoftClinch AI platform: unify digital marketing, enterprise SaaS, custom AI agents & instant messaging in one ecosystem. Launch your demo now!";
 
 export const metadata = buildMetadata({
   title,
   description,
   keywords: [
+    "softclinch ai platform",
+    "enterprise ai intelligence network",
+    "connected ai enterprise systems",
+    "ai business automation hub",
     "SoftClinch AI",
-    "SoftClinch Intelligence Network",
-    "AI Business Platform",
     "Enterprise AI Solutions",
   ],
   canonicalPath,

@@ -4,11 +4,20 @@ import { buildMetadata } from "@/lib/seo";
 import { webpageJsonLd } from "@/lib/schema";
 import { SITE_NAME } from "@/lib/site";
 
+const title = "About SoftClinch | Enterprise Tech & Consulting Partner";
+const description =
+  "Discover how SoftClinch empowers businesses across India & globally with custom software engineering, SAP consulting, automation & performance marketing.";
+
 export const metadata = buildMetadata({
-  title: "About SoftClinch | Technology & Digital Solutions Company",
-  description:
-    "Learn about SoftClinch, a technology company delivering digital marketing, enterprise software and automation solutions.",
-  keywords: ["about SoftClinch", "technology consulting company", "digital solutions provider"],
+  title,
+  description,
+  keywords: [
+    "about softclinch consulting",
+    "technology consulting company chennai",
+    "software engineering partner india",
+    "enterprise digital transformation experts",
+    "custom software company profile",
+  ],
   canonicalPath: "/about",
 });
 
@@ -18,7 +27,7 @@ export default function AboutPage() {
       <SeoJsonLd
         data={webpageJsonLd({
           canonicalPath: "/about",
-          title: `About | ${SITE_NAME}`,
+          title,
         })}
       />
       <About />

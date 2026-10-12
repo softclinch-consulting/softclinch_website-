@@ -5,9 +5,9 @@ import { buildMetadata } from "@/lib/seo";
 import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 
 const canonicalPath = "/commerce-enablement";
-const title = "Ecommerce Consulting Services & Growth Strategy | SoftClinch";
+const title = "eCommerce Consulting & 90-Day Growth Plan | SoftClinch";
 const description =
-  "Scale your ecommerce business with expert consulting, platform optimization, CRO, marketing analytics, automation and a prioritized 90-day growth roadmap.";
+  "Accelerate store revenue with conversion rate optimization (CRO), marketing analytics & technical audits. Get your custom 90-day eCommerce growth roadmap!";
 
 export const metadata = buildMetadata({
   title,

@@ -4,9 +4,9 @@ import { buildMetadata } from "@/lib/seo";
 import { breadcrumbJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 
 const canonicalPath = "/business-communication";
-const title = "Business Communication & Workflow Automation | inaiwazhi";
+const title = "Business Communication & Workflow Automation | SoftClinch";
 const description =
-  "Connect customers, support teams, employees and partners with workflow automation, WhatsApp, ticketing and SAP, ERP & CRM integrations using inaiwazhi.";
+  "Streamline customer communication & internal operations. Connect WhatsApp, support ticketing, SAP & CRM workflows seamlessly. Request an interactive demo!";
 
 export const metadata = buildMetadata({
   title,

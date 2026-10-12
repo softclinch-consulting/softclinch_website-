@@ -4,13 +4,20 @@ import { buildMetadata } from "@/lib/seo";
 import { webpageJsonLd } from "@/lib/schema";
 import { SITE_NAME } from "@/lib/site";
 
+const title = "Contact SoftClinch | Book a Free Tech Consultation";
+const description =
+  "Have a project requirement? Contact our technology consultants in Chennai for custom software, SAP consulting, WhatsApp automation & marketing solutions.";
+
 export const metadata = buildMetadata({
-  title: "Contact SoftClinch | Get in Touch for Business Solutions",
-  description: "Contact SoftClinch for digital marketing, software development and automation services.",
+  title,
+  description,
   keywords: [
-    "contact SoftClinch",
+    "contact softclinch consulting",
+    "hire software development company chennai",
+    "schedule sap consulting call",
+    "request custom software quote",
+    "whatsapp automation consultation",
     "digital marketing consultation",
-    "software development company contact",
   ],
   canonicalPath: "/contact",
 });
@@ -21,7 +28,7 @@ export default function ContactPage() {
       <SeoJsonLd
         data={webpageJsonLd({
           canonicalPath: "/contact",
-          title: `Contact | ${SITE_NAME}`,
+          title,
         })}
       />
       <Contact />

@@ -4,9 +4,9 @@ import { buildMetadata } from "@/lib/seo";
 import { faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 
 const canonicalPath = "/services/enterprise-software";
-const title = "AI-Powered Enterprise & eCommerce Application Development | SoftClinch";
+const title = "Custom Enterprise Software Development Company | SoftClinch";
 const description =
-  "Build scalable AI applications, enterprise software, automation systems, and custom eCommerce platforms with secure cloud architecture, analytics, and enterprise-grade development.";
+  "Develop secure, scalable enterprise software, cloud-native applications & SaaS platforms built for complex business operations. Request an architecture review!";
 
 const enterpriseFaq = [
   {

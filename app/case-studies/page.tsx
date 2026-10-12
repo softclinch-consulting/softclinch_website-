@@ -3,15 +3,19 @@ import { ArrowRight } from "lucide-react";
 import { buildMetadata } from "@/lib/seo";
 
 const canonicalPath = "/case-studies";
-const title = "Digital Marketing Success Stories | SoftClinch";
+const title = "Client Case Studies & Growth Success Stories | SoftClinch";
 const description =
-  "Explore how SoftClinch helps businesses grow with SEO, AI search optimization, paid media, funnels, and performance marketing systems.";
+  "Discover real-world results: how businesses scaled with SoftClinch custom software, SAP implementations, SEO visibility & performance marketing systems.";
 
 export const metadata = buildMetadata({
   title,
   description,
   canonicalPath,
   keywords: [
+    "software development case studies",
+    "sap implementation success stories",
+    "digital marketing client results",
+    "b2b growth case studies",
     "digital marketing case studies",
     "seo success stories",
     "performance marketing results",

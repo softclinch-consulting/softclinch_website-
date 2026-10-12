@@ -4,10 +4,23 @@ import { buildMetadata } from "@/lib/seo";
 import { faqJsonLd, webpageJsonLd } from "@/lib/schema";
 import { SITE_NAME } from "@/lib/site";
 
+const title = "Enterprise Technology & Software Services | SoftClinch";
+const description =
+  "Explore our end-to-end technology services: SAP consulting, bespoke software development, WhatsApp automation & performance marketing. Get a tailored quote!";
+
 export const metadata = buildMetadata({
-  title: "Services",
-  description:
-    "Explore SoftClinch services: SAP consulting, custom application development, and digital marketing built for enterprise scale.",
+  title,
+  description,
+  keywords: [
+    "enterprise technology services",
+    "b2b it consulting services",
+    "custom software development services",
+    "enterprise sap services",
+    "whatsapp marketing automation",
+    "digital marketing consulting",
+    "enterprise automation solutions",
+    "software consulting company chennai",
+  ],
   canonicalPath: "/services",
 });
 
@@ -36,7 +49,7 @@ export default function ServicesPage() {
         data={[
           webpageJsonLd({
             canonicalPath: "/services",
-            title: `Services | ${SITE_NAME}`,
+            title,
           }),
           faqJsonLd(servicesFaq),
         ]}
