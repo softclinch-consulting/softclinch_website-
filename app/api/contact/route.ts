@@ -82,7 +82,7 @@ export const dynamic = "force-dynamic";
 const MAX_SUBMISSIONS_PER_WINDOW = 5;
 const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
 const DUPLICATE_WINDOW_MS = 5 * 60 * 1000;
-const MIN_FORM_FILL_MS = 3000;
+const MIN_FORM_FILL_MS = 600;
 
 const rateLimitStore = new Map<string, number[]>();
 const duplicateSubmissionStore = new Map<string, number>();

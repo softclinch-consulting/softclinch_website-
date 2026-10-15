@@ -2,7 +2,7 @@ import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { BlogDetail } from "@/components/BlogDetail";
 import { buildMetadata } from "@/lib/seo";
 import { blogPosts } from "@/lib/blog";
-import { SITE_NAME } from "@/lib/site";
+import { SITE_NAME, getSiteUrl } from "@/lib/site";
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -50,7 +50,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     );
   }
 
-  const blogUrl = `https://softclinch.com/blog/${post.slug}`;
+  const siteUrl = getSiteUrl();
+  const blogUrl = `${siteUrl}/blog/${post.slug}/`;
+  const postImage = post.image?.startsWith("http")
+    ? post.image
+    : `${siteUrl}${post.image.startsWith("/") ? post.image : `/${post.image}`}`;
 
   return (
     <>
@@ -60,11 +64,25 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           "@type": "BlogPosting",
           headline: post.title,
           description: post.metaDescription,
-          image: `https://picsum.photos/seed/${post.slug}-featured/1200/600`,
+          image: postImage,
           datePublished: post.publishedDate,
           author: {
-            "@type": "Person",
+            "@type": "Organization",
             name: post.author,
+            url: siteUrl,
+          },
+          publisher: {
+            "@type": "Organization",
+            name: SITE_NAME,
+            url: siteUrl,
+            logo: {
+              "@type": "ImageObject",
+              url: `${siteUrl}/logo.png`,
+            },
+          },
+          mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": blogUrl,
           },
           keywords: post.keywords.join(", "),
           url: blogUrl,

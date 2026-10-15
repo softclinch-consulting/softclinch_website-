@@ -5,6 +5,9 @@ function buildCanonicalUrl(canonicalPathOrUrl: string, siteUrl: string) {
   const url = new URL(canonicalPathOrUrl, siteUrl);
   url.search = "";
   url.hash = "";
+  if (url.pathname !== "/" && !url.pathname.endsWith("/")) {
+    url.pathname = `${url.pathname}/`;
+  }
   return url.toString();
 }
 

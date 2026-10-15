@@ -5,7 +5,7 @@ import { Breadcrumbs } from './Breadcrumbs';
 import { SocialShare } from './SocialShare';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Calendar, Clock, User, ArrowRight, BookOpen, Sparkles } from 'lucide-react';
+import { Calendar, Clock, User, ArrowRight, BookOpen, Sparkles, MessageCircle } from 'lucide-react';
 
 interface BlogDetailProps {
   slug: string;
@@ -176,6 +176,37 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
               "
             >
               <div dangerouslySetInnerHTML={{ __html: parseMarkdownToHtml(post.content) }} />
+
+              {/* In-Article Conversion Card */}
+              <div className="mt-14 not-prose p-8 rounded-3xl bg-gradient-to-br from-slate-900 via-brand-navy to-slate-950 text-white shadow-2xl border border-white/10">
+                <span className="inline-block px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold uppercase tracking-wider mb-3">
+                  Free Technology Consultation
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-bold font-display text-white mb-3">
+                  Ready to Implement This in Your Business?
+                </h3>
+                <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-6 max-w-2xl">
+                  Connect directly with our engineering team at SoftClinch. We evaluate your existing setup, architect the right solution, and ensure seamless delivery with guaranteed business ROI.
+                </p>
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                  <a
+                    href={`https://wa.me/919445679878?text=Hi%20SoftClinch%2C%20I%20read%20your%20article%20on%20${encodeURIComponent(post.title)}%20and%20would%20like%20to%20discuss%20a%20requirement.`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold px-6 py-3.5 rounded-full text-sm shadow-lg transition-transform hover:scale-105 active:scale-95"
+                  >
+                    <MessageCircle size={18} />
+                    <span>Chat on WhatsApp</span>
+                  </a>
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center justify-center gap-2 bg-white text-brand-navy hover:bg-slate-100 font-bold px-6 py-3.5 rounded-full text-sm shadow-lg transition-transform hover:scale-105 active:scale-95"
+                  >
+                    <span>Request Discovery Call</span>
+                    <ArrowRight size={16} />
+                  </Link>
+                </div>
+              </div>
             </motion.div>
           </div>
 
@@ -213,12 +244,23 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
                 <p className="text-slate-300 text-xs leading-relaxed mb-6">
                   Discuss how our team can help you automate workflows, integrate SAP systems, customize applications, and accelerate organic visibility.
                 </p>
-                <Link
-                  href="/contact"
-                  className="w-full bg-white text-brand-navy py-3 px-4 rounded-xl text-center text-xs font-bold block hover:bg-slate-100 transition-colors shadow-md"
-                >
-                  Schedule Consultation
-                </Link>
+                <div className="space-y-3">
+                  <a
+                    href={`https://wa.me/919445679878?text=Hi%20SoftClinch%2C%20I%20would%20like%20to%20discuss%20a%20requirement.`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full bg-[#25D366] hover:bg-[#20ba59] text-white py-3 px-4 rounded-xl text-center text-xs font-bold flex items-center justify-center gap-1.5 transition-colors shadow-md"
+                  >
+                    <MessageCircle size={15} />
+                    <span>Chat on WhatsApp</span>
+                  </a>
+                  <Link
+                    href="/contact"
+                    className="w-full bg-white text-brand-navy py-3 px-4 rounded-xl text-center text-xs font-bold block hover:bg-slate-100 transition-colors shadow-md"
+                  >
+                    Schedule Consultation
+                  </Link>
+                </div>
               </div>
 
             </div>

@@ -14,7 +14,8 @@ interface SitemapContentItem {
 
 function toCanonicalUrl(path: string, baseUrl: string): string {
   const normalizedBase = baseUrl.replace(/\/+$/, "");
-  const normalizedPath = path === "/" ? "/" : `/${path.replace(/^\/+|\/+$/g, "")}`;
+  const cleanPath = path.replace(/^\/+|\/+$/g, "");
+  const normalizedPath = cleanPath === "" ? "/" : `/${cleanPath}/`;
   return `${normalizedBase}${normalizedPath}`;
 }
 
@@ -76,44 +77,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticRoutes = [
     "/",
-    "/about-us",
+    "/about",
+    "/contact",
     "/services",
-    "/contact-us",
-    "/portfolio",
-    "/case-studies",
-    "/careers",
-    "/faqs",
-    "/privacy-policy",
-    "/terms-and-conditions",
-    "/refund-policy",
-    "/web-development",
-    "/wordpress-development",
-    "/shopify-development",
-    "/ecommerce-development",
-    "/commerce-enablement",
-    "/business-communication",
-    "/mobile-app-development",
-    "/ui-ux-design",
-    "/digital-marketing",
-    "/seo-services",
-    "/google-ads-management",
-    "/meta-ads-management",
-    "/social-media-marketing",
-    "/branding",
+    "/sap-ams-support",
+    "/services/sap-consulting",
     "/custom-application-development",
-    "/custom-software-development",
-    "/whatsapp-business-api",
+    "/services/custom-development",
+    "/services/ai-powered-business-systems",
+    "/services/enterprise-software",
+    "/digital-marketing",
+    "/services/digital-marketing",
+    "/inaiwazhi-whatsapp-automation",
     "/whatsapp-automation",
-    "/crm-integration",
-    "/ai-automation",
-    "/industries/ecommerce",
-    "/industries/retail",
-    "/industries/education",
-    "/industries/healthcare",
-    "/industries/manufacturing",
-    "/industries/real-estate",
-    "/industries/logistics",
-    "/industries/finance",
+    "/custom-commerce-development",
+    "/commerce-enablement",
+    "/commerce-custom",
+    "/business-communication",
+    "/softclinch-ai",
+    "/case-studies",
+    "/blog",
+    "/privacy-policy",
+    "/terms-of-use",
   ];
 
   const entries: MetadataRoute.Sitemap = [];
@@ -134,18 +119,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   };
 
   staticRoutes.forEach((route) => {
-    let changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] = "monthly";
-    let priority = 0.7;
+    let changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] = "weekly";
+    let priority = 0.8;
 
     if (route === "/") {
       changeFrequency = "weekly";
-      priority = 1;
-    } else if (route.startsWith("/services") || route.startsWith("/industries")) {
-      changeFrequency = "monthly";
-      priority = 0.8;
-    } else if (route.startsWith("/blog") || route === "/case-studies") {
+      priority = 1.0;
+    } else if (
+      route === "/sap-ams-support" ||
+      route === "/custom-application-development" ||
+      route === "/digital-marketing" ||
+      route === "/inaiwazhi-whatsapp-automation" ||
+      route === "/contact"
+    ) {
       changeFrequency = "weekly";
-      priority = 0.8;
+      priority = 0.95;
+    } else if (route.startsWith("/services")) {
+      changeFrequency = "weekly";
+      priority = 0.9;
+    } else if (route === "/blog" || route === "/case-studies") {
+      changeFrequency = "daily";
+      priority = 0.85;
+    } else if (route === "/privacy-policy" || route === "/terms-of-use") {
+      changeFrequency = "yearly";
+      priority = 0.3;
     }
 
     addEntry(route, now, changeFrequency, priority);

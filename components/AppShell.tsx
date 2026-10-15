@@ -5,6 +5,7 @@ import { ReactNode } from "react";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SoftClinchAIWidget } from "@/components/SoftClinchAIWidget";
+import { WhatsAppFloatingButton } from "@/components/WhatsAppFloatingButton";
 
 export function AppShell({ children }: { children: ReactNode }) {
   return (
@@ -13,6 +14,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       <main className="flex-grow pt-[132px] md:pt-[132px]">{children}</main>
       <Footer />
       <SoftClinchAIWidget />
+      <WhatsAppFloatingButton />
     </div>
   );
 }

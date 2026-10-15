@@ -158,9 +158,9 @@ export const SAPConsulting = () => {
                 transition={{ delay: 0.2 }}
                 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-[1.12] mb-6 tracking-tight font-display"
               >
-                Seamless SAP Operations for <br />
+                SAP AMS Support &amp; Managed <br />
                 <span className="bg-gradient-to-r from-brand-navy to-brand-terracotta bg-clip-text text-transparent">
-                  Uninterrupted Growth
+                  ERP Consulting Services
                 </span>
               </motion.h1>
 

@@ -1,7 +1,7 @@
 "use client";
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Globe, Cpu, Database, ChevronRight, ArrowRight, CheckCircle, Zap, Users, Code, Smartphone, Cloud, Building2 } from 'lucide-react';
+import { Globe, Cpu, Database, ChevronRight, ArrowRight, CheckCircle, Zap, Users, Code, Smartphone, Cloud, Building2, MessageSquare } from 'lucide-react';
 
 const ServiceCard = ({ title, description, icon: Icon, path, index }: any) => (
   <motion.div
@@ -145,6 +145,12 @@ export const Services = () => {
       description: "AI-enabled workflows, automation systems, and business applications built to modernize operations.",
       icon: Zap,
       path: "/services/ai-powered-business-systems"
+    },
+    {
+      title: "Inaiwazhi WhatsApp Automation",
+      description: "Official Meta Cloud API automation, bulk broadcasts, automated drip campaigns, and CRM-connected AI chat support.",
+      icon: MessageSquare,
+      path: "/inaiwazhi-whatsapp-automation"
     },
     {
       title: "Digital Marketing",
