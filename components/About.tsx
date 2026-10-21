@@ -1,6 +1,7 @@
 "use client";
 import { motion } from 'framer-motion';
-import { Shield, Cpu, Database, MessageSquare, CheckCircle2, Plug, TrendingUp, Settings, Zap } from 'lucide-react';
+import Link from 'next/link';
+import { Shield, Cpu, Database, MessageSquare, CheckCircle2, Plug, TrendingUp, Settings, Zap, ArrowRight, MessageCircle } from 'lucide-react';
 import { assetPath } from '@/lib/asset';
 
 const MissionVision = () => (
@@ -573,6 +574,41 @@ export const About = () => {
               </a>
             </div>
 
+          </div>
+        </div>
+
+        {/* Final Enterprise Partnership CTA */}
+        <div className="mt-20 rounded-[3rem] bg-gradient-to-br from-brand-navy via-slate-900 to-brand-navy p-10 sm:p-14 text-white text-center relative overflow-hidden shadow-2xl border border-white/10">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-[#A23B2A]/20 blur-[100px] rounded-full pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-500/10 blur-[100px] rounded-full pointer-events-none" />
+          <div className="relative z-10 max-w-3xl mx-auto">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-emerald-400 text-xs font-bold uppercase tracking-widest mb-6 border border-white/10">
+              Partner with SoftClinch
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-white mb-6 leading-tight">
+              Ready to Accelerate Your Enterprise Digital Infrastructure?
+            </h2>
+            <p className="text-slate-300 text-base sm:text-lg leading-relaxed mb-10 max-w-2xl mx-auto">
+              Whether you need 24/7 SLA-backed SAP AMS support, bespoke enterprise software, or automated WhatsApp communication workflows, our engineering team in Chennai is ready to deliver.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a
+                href="https://wa.me/919445679878?text=Hi%20SoftClinch%2C%20I%20would%20like%20to%20discuss%20an%20enterprise%20partnership."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold px-8 py-4 rounded-full text-base shadow-xl hover:scale-105 active:scale-95 transition-all"
+              >
+                <MessageCircle size={20} />
+                <span>Chat on WhatsApp</span>
+              </a>
+              <Link
+                href="/contact"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white text-brand-navy hover:bg-slate-100 font-bold px-8 py-4 rounded-full text-base shadow-xl hover:scale-105 active:scale-95 transition-all"
+              >
+                <span>Request Consultation</span>
+                <ArrowRight size={18} />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
