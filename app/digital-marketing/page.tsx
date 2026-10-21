@@ -39,8 +39,18 @@ export default function DigitalMarketingPage() {
           }),
           serviceJsonLd({
             canonicalPath,
-            name: "SEO, Google Ads and Performance Marketing Services",
+            name: "B2B Digital Marketing, SEO & Performance Marketing Services",
             description,
+            serviceType: "SEO Services, Google Ads Management, Meta Ads, B2B Performance Marketing, GEO, AEO",
+            areaServed: [
+              "Chennai",
+              "Tamil Nadu",
+              "Coimbatore",
+              "Madurai",
+              "Salem",
+              "Hosur",
+              "India",
+            ],
           }),
           faqJsonLd(digitalMarketingFaq),
         ]}

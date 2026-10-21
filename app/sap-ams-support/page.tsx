@@ -1,7 +1,7 @@
 import { SAPConsulting } from "@/components/SAPConsulting";
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { buildMetadata } from "@/lib/seo";
-import { faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
+import { faqJsonLd, professionalServiceJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 import { sapAmsFaq } from "@/lib/faqs";
 
 const canonicalPath = "/sap-ams-support";
@@ -40,6 +40,19 @@ export default function SAPAmsSupportPage() {
           serviceJsonLd({
             canonicalPath,
             name: "SAP AMS Support and Enterprise SAP Consulting Services",
+            description,
+            serviceType: "SAP Application Management Support, ERP Managed Services, S/4HANA Support",
+            areaServed: [
+              "Chennai",
+              "Tamil Nadu",
+              "Coimbatore",
+              "Hosur",
+              "India",
+            ],
+          }),
+          professionalServiceJsonLd({
+            canonicalPath,
+            name: "SAP AMS Support & ERP Consulting Services - Chennai",
             description,
           }),
           faqJsonLd(sapAmsFaq),

@@ -5,7 +5,7 @@ export function organizationJsonLd() {
   const siteUrl = getSiteUrl();
   return {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
     "@id": `${siteUrl}/#organization`,
     name: SITE_NAME,
     url: siteUrl,
@@ -18,11 +18,99 @@ export function organizationJsonLd() {
     image: `${siteUrl}/logo.png`,
     email: CONTACT.email,
     telephone: CONTACT.phone,
+    priceRange: "₹₹",
     address: {
       "@type": "PostalAddress",
-      streetAddress: CONTACT.address,
+      streetAddress: "No: 30, 53rd St, opposite to Anjaneyar Temple, Ashok Nagar",
+      addressLocality: "Chennai",
+      addressRegion: "Tamil Nadu",
+      postalCode: "600083",
       addressCountry: "IN",
     },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: "13.0368",
+      longitude: "80.2114",
+    },
+    areaServed: [
+      { "@type": "City", name: "Chennai" },
+      { "@type": "City", name: "Coimbatore" },
+      { "@type": "AdministrativeArea", name: "Tamil Nadu" },
+      { "@type": "Country", name: "India" },
+    ],
+    sameAs: [
+      "https://www.facebook.com/profile.php?id=61585112649434",
+      "https://www.instagram.com/softclinch/?hl=en",
+      "https://www.threads.com/@softclinch?xmt=AQG0YGTQNLGQmWquCThvASSNbce7sVucAGgXk2vRRy9dXOE",
+    ],
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ],
+        opens: "09:00",
+        closes: "19:00",
+      },
+    ],
+  };
+}
+
+export function localBusinessJsonLd(canonicalPath = "/contact/") {
+  const siteUrl = getSiteUrl();
+  return {
+    "@context": "https://schema.org",
+    "@type": ["LocalBusiness", "ProfessionalService"],
+    "@id": `${siteUrl}${canonicalPath}#localbusiness`,
+    name: `${SITE_NAME} - Chennai`,
+    url: `${siteUrl}${canonicalPath}`,
+    telephone: CONTACT.phone,
+    email: CONTACT.email,
+    priceRange: "₹₹",
+    image: `${siteUrl}/logo.png`,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "No: 30, 53rd St, opposite to Anjaneyar Temple, Ashok Nagar",
+      addressLocality: "Chennai",
+      addressRegion: "Tamil Nadu",
+      postalCode: "600083",
+      addressCountry: "IN",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: "13.0368",
+      longitude: "80.2114",
+    },
+    areaServed: [
+      "Chennai",
+      "Tamil Nadu",
+      "Coimbatore",
+      "Madurai",
+      "Salem",
+      "Tiruppur",
+      "Hosur",
+      "India",
+    ],
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ],
+        opens: "09:00",
+        closes: "19:00",
+      },
+    ],
   };
 }
 
@@ -85,7 +173,11 @@ export function serviceJsonLd({
   hasOfferCatalog?: Record<string, unknown>;
 }) {
   const siteUrl = getSiteUrl();
-  let areas: unknown = "IN";
+  let areas: unknown = [
+    { "@type": "City", name: "Chennai" },
+    { "@type": "AdministrativeArea", name: "Tamil Nadu" },
+    { "@type": "Country", name: "India" },
+  ];
   if (Array.isArray(areaServed)) {
     areas = areaServed.map((item) =>
       typeof item === "string" ? { "@type": "AdministrativeArea", name: item } : item

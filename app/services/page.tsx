@@ -1,7 +1,7 @@
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { Services } from "@/components/Services";
 import { buildMetadata } from "@/lib/seo";
-import { faqJsonLd, webpageJsonLd } from "@/lib/schema";
+import { faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 import { SITE_NAME } from "@/lib/site";
 
 const title = "Enterprise Technology & Software Services | SoftClinch";
@@ -50,6 +50,18 @@ export default function ServicesPage() {
           webpageJsonLd({
             canonicalPath: "/services",
             title,
+          }),
+          serviceJsonLd({
+            canonicalPath: "/services",
+            name: "Enterprise IT, SAP Consulting & Software Development Services",
+            description,
+            serviceType: "Enterprise IT Consulting, SAP Services, Custom Software, WhatsApp Automation, Digital Marketing",
+            areaServed: [
+              "Chennai",
+              "Tamil Nadu",
+              "India",
+              "Global",
+            ],
           }),
           faqJsonLd(servicesFaq),
         ]}

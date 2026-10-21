@@ -1,7 +1,7 @@
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { About } from "@/components/About";
 import { buildMetadata } from "@/lib/seo";
-import { webpageJsonLd } from "@/lib/schema";
+import { localBusinessJsonLd, webpageJsonLd } from "@/lib/schema";
 import { SITE_NAME } from "@/lib/site";
 
 const title = "About SoftClinch | Enterprise Tech & Consulting Partner";
@@ -25,10 +25,13 @@ export default function AboutPage() {
   return (
     <>
       <SeoJsonLd
-        data={webpageJsonLd({
-          canonicalPath: "/about",
-          title,
-        })}
+        data={[
+          webpageJsonLd({
+            canonicalPath: "/about",
+            title,
+          }),
+          localBusinessJsonLd("/about"),
+        ]}
       />
       <About />
     </>

@@ -37,8 +37,15 @@ export default function WhatsAppAutomationPage() {
           }),
           serviceJsonLd({
             canonicalPath,
-            name: "Inaiwazhi WhatsApp Automation",
+            name: "Inaiwazhi Enterprise WhatsApp Automation Platform",
             description,
+            serviceType: "WhatsApp Business API, WhatsApp Chatbot Automation, Customer Support Automation, CRM Integration",
+            areaServed: [
+              "Chennai",
+              "Tamil Nadu",
+              "India",
+              "Global",
+            ],
           }),
           faqJsonLd(whatsappAutomationFaq),
         ]}

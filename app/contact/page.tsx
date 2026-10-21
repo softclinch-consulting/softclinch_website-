@@ -1,7 +1,7 @@
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { Contact } from "@/components/Contact";
 import { buildMetadata } from "@/lib/seo";
-import { webpageJsonLd } from "@/lib/schema";
+import { localBusinessJsonLd, webpageJsonLd } from "@/lib/schema";
 import { SITE_NAME } from "@/lib/site";
 
 const title = "Contact SoftClinch | Book a Free Tech Consultation";
@@ -26,10 +26,13 @@ export default function ContactPage() {
   return (
     <>
       <SeoJsonLd
-        data={webpageJsonLd({
-          canonicalPath: "/contact",
-          title,
-        })}
+        data={[
+          webpageJsonLd({
+            canonicalPath: "/contact",
+            title,
+          }),
+          localBusinessJsonLd("/contact"),
+        ]}
       />
       <Contact />
     </>

@@ -1,7 +1,7 @@
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { Home } from "@/components/Home";
 import { buildMetadata } from "@/lib/seo";
-import { faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
+import { faqJsonLd, localBusinessJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 
 export const metadata = buildMetadata({
   title: "Enterprise Technology & Digital Growth Solutions | SoftClinch",
@@ -57,6 +57,7 @@ export default function Page() {
             canonicalPath: "/",
             title: "Enterprise Technology & Digital Growth Solutions | SoftClinch",
           }),
+          localBusinessJsonLd("/"),
           serviceJsonLd({
             canonicalPath: "/",
             name: "SAP Consulting, Custom Software and Enterprise Automation Services",
