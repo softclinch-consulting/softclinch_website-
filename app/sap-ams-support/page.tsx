@@ -1,7 +1,13 @@
 import { SAPConsulting } from "@/components/SAPConsulting";
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { buildMetadata } from "@/lib/seo";
-import { faqJsonLd, professionalServiceJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
+import {
+  breadcrumbJsonLd,
+  faqJsonLd,
+  professionalServiceJsonLd,
+  serviceJsonLd,
+  webpageJsonLd,
+} from "@/lib/schema";
 import { sapAmsFaq } from "@/lib/faqs";
 
 const canonicalPath = "/sap-ams-support";
@@ -55,6 +61,11 @@ export default function SAPAmsSupportPage() {
             name: "SAP AMS Support & ERP Consulting Services - Chennai",
             description,
           }),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: "SAP AMS Support", path: canonicalPath },
+          ]),
           faqJsonLd(sapAmsFaq),
         ]}
       />

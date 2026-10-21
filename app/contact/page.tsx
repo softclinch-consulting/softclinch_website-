@@ -1,7 +1,7 @@
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { Contact } from "@/components/Contact";
 import { buildMetadata } from "@/lib/seo";
-import { localBusinessJsonLd, webpageJsonLd } from "@/lib/schema";
+import { breadcrumbJsonLd, localBusinessJsonLd, webpageJsonLd } from "@/lib/schema";
 import { SITE_NAME } from "@/lib/site";
 
 const title = "Contact SoftClinch | Book a Free Tech Consultation";
@@ -32,6 +32,10 @@ export default function ContactPage() {
             title,
           }),
           localBusinessJsonLd("/contact"),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Contact", path: "/contact" },
+          ]),
         ]}
       />
       <Contact />

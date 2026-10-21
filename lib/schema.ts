@@ -122,6 +122,8 @@ export function websiteJsonLd() {
     "@id": `${siteUrl}/#website`,
     url: siteUrl,
     name: SITE_NAME,
+    alternateName: ["SoftClinch", "SoftClinch Consulting", "SoftClinch IT Services"],
+    inLanguage: "en-US",
     publisher: { "@id": `${siteUrl}/#organization` },
   };
 }

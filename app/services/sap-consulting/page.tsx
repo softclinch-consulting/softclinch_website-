@@ -1,7 +1,7 @@
 import { SAPConsultingServices } from '@/components/SAPConsultingServices';
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { buildMetadata } from "@/lib/seo";
-import { faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
+import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 import { SITE_NAME } from "@/lib/site";
 import { sapConsultingFaq } from "@/lib/faqs";
 
@@ -36,6 +36,11 @@ export default function SAPConsultingPage() {
             title,
           }),
           serviceJsonLd({ canonicalPath, name: title, description }),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: "SAP Implementation", path: canonicalPath },
+          ]),
           faqJsonLd(sapConsultingFaq),
         ]}
       />

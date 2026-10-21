@@ -66,11 +66,11 @@ export const Footer = () => {
                             {[
                                 { name: 'SAP Implementation & Rollout', path: '/services/sap-consulting' },
                                 { name: 'SAP AMS Support', path: '/sap-ams-support' },
+                                { name: 'Inaiwazhi WhatsApp Automation', path: '/inaiwazhi-whatsapp-automation' },
                                 { name: 'Custom App Development', path: '/custom-application-development' },
                                 { name: 'Custom Commerce Engineering', path: '/custom-commerce-development' },
                                 { name: 'AI-Powered Business Systems', path: '/services/ai-powered-business-systems' },
-                                { name: 'Business Communication', path: '/business-communication' },
-                                { name: 'Digital Marketing', path: '/digital-marketing' },
+                                { name: 'Digital Marketing & SEO', path: '/digital-marketing' },
                             ].map((link) => (
                                 <li key={link.name}>
                                     <Link

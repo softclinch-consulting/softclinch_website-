@@ -1,7 +1,7 @@
 import { DigitalMarketing } from "@/components/DigitalMarketing";
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { buildMetadata } from "@/lib/seo";
-import { faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
+import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 import { digitalMarketingFaq } from "@/lib/faqs";
 
 const canonicalPath = "/digital-marketing";
@@ -52,6 +52,11 @@ export default function DigitalMarketingPage() {
               "India",
             ],
           }),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: "Digital Marketing", path: canonicalPath },
+          ]),
           faqJsonLd(digitalMarketingFaq),
         ]}
       />

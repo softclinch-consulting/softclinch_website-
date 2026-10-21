@@ -1,7 +1,7 @@
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { WhatsAppAutomation } from "@/components/WhatsAppAutomation";
 import { buildMetadata } from "@/lib/seo";
-import { faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
+import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 import { whatsappAutomationFaq } from "@/lib/faqs";
 
 const canonicalPath = "/inaiwazhi-whatsapp-automation";
@@ -47,6 +47,11 @@ export default function WhatsAppAutomationPage() {
               "Global",
             ],
           }),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: "WhatsApp Automation", path: canonicalPath },
+          ]),
           faqJsonLd(whatsappAutomationFaq),
         ]}
       />

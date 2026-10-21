@@ -1,6 +1,6 @@
 import { buildMetadata } from "@/lib/seo";
 import { SeoJsonLd } from "@/components/SeoJsonLd";
-import { webpageJsonLd } from "@/lib/schema";
+import { breadcrumbJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 import { CustomCommerceLanding } from "@/components/CustomCommerceLanding";
 
 const title = "Custom eCommerce Development & Engineering | SoftClinch";
@@ -26,7 +26,22 @@ export const metadata = buildMetadata({
 export default function CustomCommerceDevelopmentPage() {
   return (
     <>
-      <SeoJsonLd data={[webpageJsonLd({ canonicalPath: "/custom-commerce-development", title })]} />
+      <SeoJsonLd
+        data={[
+          webpageJsonLd({ canonicalPath: "/custom-commerce-development", title }),
+          serviceJsonLd({
+            canonicalPath: "/custom-commerce-development",
+            name: "Custom eCommerce Development & Engineering",
+            description,
+            serviceType: "Headless eCommerce Development, B2B eCommerce, ERP Integration",
+          }),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: "Custom eCommerce Development", path: "/custom-commerce-development" },
+          ]),
+        ]}
+      />
       <CustomCommerceLanding />
     </>
   );

@@ -20,7 +20,7 @@ export const metadata = buildMetadata({
     "inaiwazhi whatsapp software",
     "ai whatsapp customer support bot",
   ],
-  canonicalPath: "/whatsapp-automation",
+  canonicalPath: "/inaiwazhi-whatsapp-automation",
 });
 
 export default function WhatsAppAutomationPage() {

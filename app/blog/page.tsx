@@ -1,7 +1,7 @@
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { Blog } from "@/components/Blog";
 import { buildMetadata } from "@/lib/seo";
-import { webpageJsonLd } from "@/lib/schema";
+import { breadcrumbJsonLd, webpageJsonLd } from "@/lib/schema";
 import { SITE_NAME } from "@/lib/site";
 
 const title = "Technology, SAP & AI Automation Blog | SoftClinch";
@@ -26,10 +26,16 @@ export default function BlogPage() {
   return (
     <>
       <SeoJsonLd
-        data={webpageJsonLd({
-          canonicalPath: "/blog",
-          title,
-        })}
+        data={[
+          webpageJsonLd({
+            canonicalPath: "/blog",
+            title,
+          }),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Blog", path: "/blog" },
+          ]),
+        ]}
       />
       <Blog />
     </>

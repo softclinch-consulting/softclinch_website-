@@ -2,6 +2,7 @@ import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { BlogDetail } from "@/components/BlogDetail";
 import { buildMetadata } from "@/lib/seo";
 import { blogPosts } from "@/lib/blog";
+import { breadcrumbJsonLd } from "@/lib/schema";
 import { SITE_NAME, getSiteUrl } from "@/lib/site";
 
 interface BlogPostPageProps {
@@ -59,34 +60,41 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   return (
     <>
       <SeoJsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "BlogPosting",
-          headline: post.title,
-          description: post.metaDescription,
-          image: postImage,
-          datePublished: post.publishedDate,
-          author: {
-            "@type": "Organization",
-            name: post.author,
-            url: siteUrl,
-          },
-          publisher: {
-            "@type": "Organization",
-            name: SITE_NAME,
-            url: siteUrl,
-            logo: {
-              "@type": "ImageObject",
-              url: `${siteUrl}/logo.png`,
+        data={[
+          {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: post.title,
+            description: post.metaDescription,
+            image: postImage,
+            datePublished: post.publishedDate,
+            author: {
+              "@type": "Organization",
+              name: post.author,
+              url: siteUrl,
             },
+            publisher: {
+              "@type": "Organization",
+              name: SITE_NAME,
+              url: siteUrl,
+              logo: {
+                "@type": "ImageObject",
+                url: `${siteUrl}/logo.png`,
+              },
+            },
+            mainEntityOfPage: {
+              "@type": "WebPage",
+              "@id": blogUrl,
+            },
+            keywords: post.keywords.join(", "),
+            url: blogUrl,
           },
-          mainEntityOfPage: {
-            "@type": "WebPage",
-            "@id": blogUrl,
-          },
-          keywords: post.keywords.join(", "),
-          url: blogUrl,
-        }}
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Blog", path: "/blog" },
+            { name: post.title, path: `/blog/${post.slug}` },
+          ]),
+        ]}
       />
       <BlogDetail slug={slug} />
     </>
