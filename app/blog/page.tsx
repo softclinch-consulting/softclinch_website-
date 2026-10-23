@@ -1,17 +1,19 @@
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { Blog } from "@/components/Blog";
 import { buildMetadata } from "@/lib/seo";
-import { breadcrumbJsonLd, webpageJsonLd } from "@/lib/schema";
+import { breadcrumbJsonLd, webpageJsonLd, blogCollectionJsonLd } from "@/lib/schema";
+import { blogPosts } from "@/lib/blog";
 import { SITE_NAME } from "@/lib/site";
 
 const title = "Technology, SAP & AI Automation Blog | SoftClinch";
 const description =
-  "Actionable technology insights for business leaders: AI agents, custom software engineering, SAP rollout strategies, WhatsApp automation & modern SEO/AEO.";
+  "Actionable technology insights for business leaders: Google AI search R&D, AI agents, custom software engineering, SAP rollout strategies, WhatsApp automation & modern SEO/AEO.";
 
 export const metadata = buildMetadata({
   title,
   description,
   keywords: [
+    "Google AI search research",
     "enterprise technology blog",
     "ai automation articles",
     "sap consulting insights",
@@ -35,9 +37,11 @@ export default function BlogPage() {
             { name: "Home", path: "/" },
             { name: "Blog", path: "/blog" },
           ]),
+          blogCollectionJsonLd(blogPosts),
         ]}
       />
       <Blog />
     </>
   );
 }
+

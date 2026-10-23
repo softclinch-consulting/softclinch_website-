@@ -303,3 +303,27 @@ export function breadcrumbJsonLd(
     })),
   };
 }
+
+export function blogCollectionJsonLd(
+  posts: Array<{ title: string; slug: string; publishedDate: string }>
+) {
+  const siteUrl = getSiteUrl();
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${siteUrl}/blog#collection`,
+    url: `${siteUrl}/blog`,
+    name: "SoftClinch Engineering & Technology Insights",
+    description: "In-depth insights, case studies, and engineering guides on SAP, AI agents, custom software development, and digital marketing.",
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: posts.map((post, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: post.title,
+        url: `${siteUrl}/blog/${post.slug}`,
+      })),
+    },
+  };
+}
+
