@@ -6,9 +6,9 @@ import { SAPAModelSections } from "@/components/SAPAModelSections";
 import { ServiceMediaPanel } from "@/components/ServiceMediaPanel";
 
 const sapSupportCoverage = [
-  "S/4HANA and On-Premise",
-  "S/4HANA and Private",
-  "S/4HANA and Public",
+  "S/4HANA On-Premise",
+  "S/4HANA Private Cloud",
+  "S/4HANA Public Cloud",
   "ECC support coverage",
 ];
 
