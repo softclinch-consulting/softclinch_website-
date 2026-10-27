@@ -81,6 +81,27 @@ body {
   }
 }
 
+@keyframes sapSupportCoverageMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.sap-support-marquee {
+  display: flex;
+  width: max-content;
+  animation: sapSupportCoverageMarquee 28s linear infinite;
+}
+
+.sap-support-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sap-support-marquee {
+    animation: none;
+  }
+}
+
 @layer base {
   body {
     @apply font-sans text-slate-900 bg-white;
@@ -276,5 +297,4 @@ body {
 .animate-glow-3d {
   animation: pulseGlow3d 4s ease-in-out infinite;
 }
-
 
