@@ -73,7 +73,7 @@ export const SAPConsulting = () => {
                   <ArrowRight className="h-5 w-5" />
                 </Link>
                 <a
-                  href="mailto:venkat@softclinch.com"
+                  href="mailto:venkat@softclinch.com?subject=SAP%20AMS%20Support%20Request"
                   className="inline-flex items-center gap-2 rounded-2xl border border-brand-terracotta bg-white px-8 py-4 font-bold text-brand-terracotta transition hover:bg-brand-terracotta/5 hover:-translate-y-0.5"
                 >
                   Email Support Team
