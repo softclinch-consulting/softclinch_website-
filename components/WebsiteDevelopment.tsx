@@ -25,6 +25,7 @@ import {
   Wrench,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { CONTACT } from "@/lib/contact";
@@ -289,58 +290,14 @@ export function WebsiteDevelopment({ faqs }: { faqs: FaqItem[] }) {
 
           <Reveal className="relative mx-auto w-full max-w-[540px]">
             <div className="absolute -inset-8 rounded-[3rem] bg-blue-500/10 blur-3xl" />
-            <div className="relative rounded-[1.75rem] border border-white/15 bg-white/[0.08] p-3 shadow-2xl shadow-black/30 backdrop-blur-md">
-              <div className="overflow-hidden rounded-[1.25rem] bg-[#f7f9fc] text-[#0b2742]">
-                <div className="flex items-center justify-between border-b border-slate-200 bg-white px-4 py-3">
-                  <div className="flex gap-1.5">
-                    <span className="h-2.5 w-2.5 rounded-full bg-red-300" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-amber-300" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-emerald-300" />
-                  </div>
-                  <div className="rounded-full bg-slate-100 px-7 py-1 text-[9px] text-slate-500">yourbusiness.in</div>
-                  <MonitorSmartphone size={15} className="text-slate-400" />
-                </div>
-                <div className="p-5 sm:p-7">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="grid h-8 w-8 place-items-center rounded-lg bg-[#0b3154] text-xs font-bold text-white">B</div>
-                      <div className="h-2 w-20 rounded-full bg-[#0b3154]" />
-                    </div>
-                    <div className="hidden gap-3 sm:flex">
-                      <span className="h-1.5 w-10 rounded-full bg-slate-300" />
-                      <span className="h-1.5 w-10 rounded-full bg-slate-300" />
-                      <span className="h-1.5 w-10 rounded-full bg-slate-300" />
-                    </div>
-                    <div className="h-7 w-16 rounded-full bg-[#993300]" />
-                  </div>
-                  <div className="mt-7 grid gap-5 sm:grid-cols-[1.1fr_.9fr] sm:items-center">
-                    <div>
-                      <div className="mb-3 h-2 w-16 rounded-full bg-[#c7774c]" />
-                      <div className="h-4 w-full rounded-full bg-[#143b5d]" />
-                      <div className="mt-2 h-4 w-4/5 rounded-full bg-[#143b5d]" />
-                      <div className="mt-4 h-2 w-full rounded-full bg-slate-300" />
-                      <div className="mt-2 h-2 w-5/6 rounded-full bg-slate-300" />
-                      <div className="mt-5 h-8 w-28 rounded-full bg-[#993300]" />
-                    </div>
-                    <div className="relative grid aspect-square place-items-center overflow-hidden rounded-2xl bg-gradient-to-br from-[#dceaf2] via-[#f2e7dc] to-[#e9d8c6]">
-                      <div className="absolute h-28 w-28 rounded-full bg-white/70 blur-sm" />
-                      <div className="relative grid h-20 w-20 place-items-center rounded-[1.5rem] bg-white/75 shadow-xl">
-                        <Sparkles size={32} className="text-[#993300]" />
-                      </div>
-                      <span className="absolute bottom-3 right-3 rounded-full bg-white px-2.5 py-1 text-[9px] font-semibold text-slate-600 shadow-sm">Thoughtful design</span>
-                    </div>
-                  </div>
-                  <div className="mt-6 grid grid-cols-3 gap-2">
-                    {["Easy to explore", "Built for mobile", "Ready to grow"].map((item, index) => (
-                      <div key={item} className="rounded-xl border border-slate-200 bg-white p-2.5 sm:p-3">
-                        <span className={`mb-2 block h-1.5 w-5 rounded-full ${index === 1 ? "bg-[#c56b3c]" : "bg-[#153d5d]"}`} />
-                        <span className="text-[8px] font-semibold text-slate-600 sm:text-[10px]">{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Image
+              src="/website-development-hero.svg"
+              alt="Responsive business website preview shown on desktop and mobile screens"
+              width={900}
+              height={680}
+              priority
+              className="relative h-auto w-full drop-shadow-2xl"
+            />
             <motion.div
               animate={{ y: [0, -7, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
