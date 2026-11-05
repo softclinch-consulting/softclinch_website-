@@ -80,6 +80,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/about",
     "/contact",
     "/services",
+    "/website-development",
     "/sap-ams-support",
     "/services/sap-consulting",
     "/custom-application-development",
