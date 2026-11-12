@@ -7,22 +7,11 @@ import { whatsappAutomationFaq } from "@/lib/faqs";
 const canonicalPath = "/inaiwazhi-whatsapp-automation";
 const title = "Inaiwazhi WhatsApp Automation & AI Chatbots | SoftClinch";
 const description =
-  "Official Meta WhatsApp Business Platform solution. Automate customer support, lead qualification, broadcast campaigns & CRM sync. Start your free trial!";
+  "Official Meta WhatsApp Business Platform solution. Automate customer support, lead qualification, broadcast campaigns & CRM sync. Book a free demo!";
 
 export const metadata = buildMetadata({
   title,
   description,
-  keywords: [
-    "official whatsapp business platform api",
-    "whatsapp automation platform india",
-    "whatsapp ai chatbot for business",
-    "whatsapp marketing software",
-    "whatsapp crm integration",
-    "whatsapp broadcast software",
-    "inaiwazhi whatsapp automation",
-    "automated customer support whatsapp",
-    "whatsapp lead qualification bot",
-  ],
   canonicalPath,
 });
 

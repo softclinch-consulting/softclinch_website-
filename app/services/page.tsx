@@ -6,21 +6,11 @@ import { SITE_NAME } from "@/lib/site";
 
 const title = "Enterprise Technology & Software Services | SoftClinch";
 const description =
-  "Explore our end-to-end technology services: SAP consulting, bespoke software development, WhatsApp automation & performance marketing. Get a tailored quote!";
+  "Explore our end-to-end technology services: SAP consulting, bespoke software development, WhatsApp automation & performance marketing. Book a free consultation.";
 
 export const metadata = buildMetadata({
   title,
   description,
-  keywords: [
-    "enterprise technology services",
-    "b2b it consulting services",
-    "custom software development services",
-    "enterprise sap services",
-    "whatsapp marketing automation",
-    "digital marketing consulting",
-    "enterprise automation solutions",
-    "software consulting company chennai",
-  ],
   canonicalPath: "/services",
 });
 

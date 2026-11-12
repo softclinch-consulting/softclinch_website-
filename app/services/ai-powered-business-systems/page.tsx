@@ -5,7 +5,7 @@ import {
   aiPoweredBusinessSystemsSeo,
 } from "@/lib/aiPoweredBusinessSystemsSeo";
 import { buildMetadata } from "@/lib/seo";
-import { faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
+import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 
 const canonicalPath = aiPoweredBusinessSystemsSeo.slug;
 const title = aiPoweredBusinessSystemsSeo.metaTitle;
@@ -15,7 +15,6 @@ export const metadata = buildMetadata({
   title,
   description,
   canonicalPath,
-  keywords: aiPoweredBusinessSystemsSeo.focusKeywords,
 });
 
 export default function AIPoweredBusinessSystemsPage() {
@@ -32,6 +31,11 @@ export default function AIPoweredBusinessSystemsPage() {
             name: "AI-Powered Business Systems",
             description,
           }),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: "AI-Powered Business Systems", path: canonicalPath },
+          ]),
           faqJsonLd(
             aiPoweredBusinessSystemsFaq.map((item) => ({
               question: item.question,

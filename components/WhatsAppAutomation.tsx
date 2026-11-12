@@ -15,7 +15,7 @@ const WhatsAppCampaignsWithoutManualWorkSection = () => {
     {
       id: 'broadcast',
       label: 'Bulk Broadcasts',
-      badge: 'Zero Ban Risk',
+      badge: 'Built on the official Meta Cloud API to follow WhatsApp policies',
       icon: Send,
       headline: 'Send 20,000+ Personalized Messages in One Click',
       desc: 'No manual number copying or manual CSV formatting. Connect your database or upload your audience to dispatch Meta-approved WhatsApp broadcasts with dynamic customer variables.',
@@ -236,7 +236,7 @@ const WhatsAppCampaignsWithoutManualWorkSection = () => {
                     <div className="h-full bg-gradient-to-r from-emerald-500 to-teal-300 rounded-full animate-pulse w-[94.7%]" />
                   </div>
                   <div className="flex justify-between text-[10px] text-slate-400">
-                    <span>Speed: 1,200 msg/min</span>
+                    <span>Speed: 1,000 messages/min</span>
                     <span className="text-emerald-400 font-bold">Manual work saved: 100%</span>
                   </div>
                 </div>
@@ -401,7 +401,8 @@ export const WhatsAppAutomation = () => {
               <div className="space-y-4">
                 {[
                   "Official Meta Business API Integration",
-                  "SOC2 Compliant Data Handling",
+                  // TODO: Re-add SOC2 compliance claim only with official audit report
+                  "Enterprise Data Protection & Privacy Controls",
                   "Custom Webhook & API Routing",
                   "Multi-agent Shared Inbox",
                   "Automated Template Management"

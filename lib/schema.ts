@@ -203,6 +203,44 @@ export function serviceJsonLd({
   };
 }
 
+export function sitewideProfessionalServiceJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": "https://softclinch.com/#professionalservice",
+    name: "SoftClinch Consulting Services",
+    url: "https://softclinch.com/",
+    logo: "https://softclinch.com/logo.png",
+    image: "https://softclinch.com/logo.png",
+    telephone: "+91-94456-79878",
+    email: "info@softclinch.com",
+    foundingDate: "2016",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "No: 30, 53rd St, Ashok Nagar",
+      addressLocality: "Chennai",
+      addressRegion: "Tamil Nadu",
+      postalCode: "600083",
+      addressCountry: "IN",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: "13.0368",
+      longitude: "80.2114",
+    },
+    areaServed: {
+      "@type": "Country",
+      name: "IN",
+    },
+    sameAs: [
+      "https://www.instagram.com/softclinch",
+      "https://www.facebook.com/profile.php?id=61585112649434",
+      "https://www.linkedin.com/company/softclinch", // TODO: Add real LinkedIn company page URL
+    ],
+    priceRange: "₹₹",
+  };
+}
+
 export function professionalServiceJsonLd({
   canonicalPath,
   name,

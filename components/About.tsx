@@ -146,9 +146,9 @@ const ClientLogos = () => {
     { name: 'Rane', logoPath: '/client-logos/sc-clients-002.jpg', bg: 'bg-white' },
     { name: 'NTT DATA', logoPath: '/client-logos/sc-clients-003.jpg', bg: 'bg-white' },
     { name: 'Fujitsu', logoPath: '/client-logos/sc-clients-004.jpg', bg: 'bg-white' },
-    { name: 'Star Eltech', logoPath: '/client-logos/sc-clients-005.jpg', bg: 'bg-white' },
-    { name: 'Client Logo 007', logoPath: '/client-logos/client-logo-007.jpeg', bg: 'bg-white' },
-    { name: 'Client Logo 008', logoPath: '/client-logos/client-logo-008.jpeg', bg: 'bg-white' },
+    // TODO: Replace with verified real client names once confirmed with client permissions
+    { name: 'Digitide', logoPath: '/client-logos/client-logo-007.jpeg', bg: 'bg-white' },
+    { name: 'Stobay', logoPath: '/client-logos/client-logo-008.jpeg', bg: 'bg-white' },
   ];
 
   return (
@@ -173,6 +173,7 @@ const ClientLogos = () => {
             {[...clients, ...clients].map((client, index) => (
               <div
                 key={`${client.name}-${index}`}
+                aria-hidden={index >= clients.length ? "true" : undefined}
                 className="flex min-w-[180px] items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 px-6 py-5"
               >
                 <img
@@ -230,7 +231,7 @@ const Timeline = () => (
               trend: 'Cloud-Native Solutions'
             },
             {
-              year: '2025',
+              year: '2026',
               title: 'Inaiwazhi Product Launch',
               desc: 'Launched proprietary WhatsApp automation platform for enterprise communication.',
               status: 'active',
@@ -320,7 +321,7 @@ const Timeline = () => (
           </div>
           <div className="flex-grow">
             <h3 className="text-2xl font-display font-bold text-slate-900 mb-3">
-              2025: Accelerating AI-Powered Innovation
+              2026: Accelerating AI-Powered Innovation
             </h3>
             <p className="text-slate-600 leading-relaxed mb-4">
               We're doubling down on automation, AI integration, and enterprise-grade WhatsApp solutions. Our focus is on helping enterprises streamline communication, reduce operational costs, and improve customer engagement through intelligent automation platforms.
@@ -383,7 +384,7 @@ const OfficeSection = () => (
           </div>
 
           <p className="text-slate-600 leading-relaxed mb-8">
-            Softclinch operates from Chennai, delivering cutting-edge SAP consulting, digital marketing, and custom software solutions across India and globally.
+            SoftClinch operates from Chennai, delivering cutting-edge SAP consulting, digital marketing, and custom software solutions across India and globally.
           </p>
 
           <div className="space-y-3 mb-8">
@@ -524,9 +525,9 @@ export const About = () => {
                   </div>
                 ))}
               </div>
-              <a href="/whatsapp-automation" className="inline-flex items-center gap-2 bg-[#A23B2A] hover:bg-[#c0483a] text-white font-bold text-sm px-6 py-3 rounded-full transition-colors">
+              <Link href="/inaiwazhi-whatsapp-automation/" className="inline-flex items-center gap-2 bg-[#A23B2A] hover:bg-[#c0483a] text-white font-bold text-sm px-6 py-3 rounded-full transition-colors">
                 Explore Inaiwazhi →
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -542,7 +543,7 @@ export const About = () => {
               <span className="block text-xs font-black uppercase tracking-[0.2em] text-[#A23B2A] mb-4">— The SoftClinch Way</span>
               <div className="space-y-4">
                 {[
-                  { value: '150+', label: 'Enterprise Clients Served', border: 'border-brand-navy' },
+                  { value: '150+', label: 'Projects Delivered', border: 'border-brand-navy' },
                   { value: '10+', label: 'Years of Engineering Excellence', border: 'border-[#A23B2A]' },
                   { value: '99.9%', label: 'Platform Uptime Guaranteed', border: 'border-brand-navy' },
                 ].map((s, i) => (

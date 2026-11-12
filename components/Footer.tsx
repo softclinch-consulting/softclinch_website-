@@ -2,8 +2,8 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Mail, Phone, MapPin, ChevronRight, Instagram, Facebook } from "lucide-react";
-import { CONTACT } from "@/lib/contact";
+import { Mail, Phone, MapPin, ChevronRight, Instagram, Facebook, Linkedin } from "lucide-react";
+import { CONTACT, siteConfig } from "@/lib/siteConfig";
 import { assetPath } from "@/lib/asset";
 
 const ThreadsIcon = ({ size = 24, ...props }: React.ComponentProps<"svg"> & { size?: number }) => (
@@ -42,9 +42,11 @@ export const Footer = () => {
                         </p>
                         <div className="flex gap-4">
                             {[
-                                { Icon: Facebook, href: 'https://www.facebook.com/profile.php?id=61585112649434', label: 'Facebook' },
-                                { Icon: Instagram, href: 'https://www.instagram.com/softclinch/?hl=en', label: 'Instagram' },
-                                { Icon: ThreadsIcon, href: 'https://www.threads.com/@softclinch?xmt=AQG0YGTQNLGQmWquCThvASSNbce7sVucAGgXk2vRRy9dXOE', label: 'Threads' },
+                                { Icon: Facebook, href: siteConfig.socials.facebook, label: 'Facebook' },
+                                { Icon: Instagram, href: siteConfig.socials.instagram, label: 'Instagram' },
+                                { Icon: ThreadsIcon, href: siteConfig.socials.threads, label: 'Threads' },
+                                // TODO: Replace with official verified LinkedIn company profile URL once active
+                                { Icon: Linkedin, href: siteConfig.socials.linkedin, label: 'LinkedIn' },
                             ].map(({ Icon, href, label }) => (
                                 <a
                                     key={label}
@@ -67,6 +69,9 @@ export const Footer = () => {
                                 { name: 'SAP Implementation & Rollout', path: '/services/sap-consulting' },
                                 { name: 'SAP AMS Support', path: '/sap-ams-support' },
                                 { name: 'Inaiwazhi WhatsApp Automation', path: '/inaiwazhi-whatsapp-automation' },
+                                { name: 'Website Development', path: '/website-development' },
+                                { name: 'Website Development Chennai', path: '/website-development-chennai' },
+                                { name: 'Commerce Enablement', path: '/commerce-enablement' },
                                 { name: 'Custom App Development', path: '/custom-application-development' },
                                 { name: 'Custom Commerce Engineering', path: '/custom-commerce-development' },
                                 { name: 'AI-Powered Business Systems', path: '/services/ai-powered-business-systems' },

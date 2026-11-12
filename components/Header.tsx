@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
@@ -31,6 +32,7 @@ export const Header = () => {
                 { name: 'SAP AMS Support', path: '/sap-ams-support' },
                 { name: 'Custom App Development', path: '/custom-application-development' },
                 { name: 'Website Development', path: '/website-development' },
+                { name: 'Website Development Chennai', path: '/website-development-chennai' },
                 { name: 'Custom Ecommerce', path: '/custom-commerce-development' },
                 { name: 'AI-Powered Business Systems', path: '/services/ai-powered-business-systems' },
                 { name: 'Commerce Enablement', path: '/commerce-enablement' },
@@ -68,15 +70,14 @@ export const Header = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center">
                     <Link href="/" className="flex items-center gap-3">
-                        <img
+                        <Image
                             src={assetPath("/softclinch.jpeg")}
                             alt="SoftClinch Logo"
                             width={220}
                             height={80}
                             className="object-contain"
+                            priority
                         />
-
-
                     </Link>
 
                     {/* Desktop Navigation */}

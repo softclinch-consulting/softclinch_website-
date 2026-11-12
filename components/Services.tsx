@@ -89,7 +89,7 @@ const CaseStudyBlock = ({ title, description, image, results, index }: any) => (
           <div className="bg-white rounded-2xl p-6 shadow-lg overflow-hidden">
             <img
               src={image}
-              alt={`${title} mockup`}
+              alt={title}
               className="w-full h-64 object-cover rounded-xl shadow-md transition-transform duration-500 group-hover:scale-105"
             />
           </div>
@@ -222,6 +222,7 @@ export const Services = () => {
 
   const caseStudies = [
     {
+      // TODO: Add real client name/industry for this case study
       title: "E-commerce Platform Transformation",
       description: "Complete digital overhaul for a retail client, resulting in 300% increase in online sales and improved customer experience.",
       image: "/custom_app_dev_hero.png",
@@ -232,6 +233,7 @@ export const Services = () => {
       ]
     },
     {
+      // TODO: Add real client name/industry for this case study
       title: "SAP Implementation Success",
       description: "End-to-end SAP deployment for manufacturing company, streamlining operations and reducing costs by 40%.",
       image: "/sap_consulting_hero.png",
@@ -274,7 +276,7 @@ export const Services = () => {
               </span>
             </h1>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-12 leading-relaxed">
-              We provide specialized technology consulting and engineering services designed to scale with your business. Click on a service to explore our full capabilities.
+              We provide specialized technology consulting, custom software, and <Link href="/sap-ams-support" className="text-brand-terracotta hover:underline font-semibold">SAP AMS support services</Link> designed to scale with your business. Click on a service to explore our full capabilities.
             </p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}

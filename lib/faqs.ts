@@ -81,54 +81,28 @@ export const sapConsultingFaq: FaqItem[] = [
 
 export const sapAmsFaq: FaqItem[] = [
   {
-    question: "What is SAP Application Management Services (AMS)?",
+    question: "What is SAP AMS support?",
     answer:
-      "SAP AMS is a comprehensive post-implementation support service that ensures your SAP system continues to operate efficiently through issue resolution, system maintenance, change management, and functional support.",
+      "SAP Application Management Services (AMS) is ongoing post-implementation support that maintains, optimizes, and manages your SAP ERP landscape. It covers incident resolution, user support, functional and technical enhancements, configuration updates, and proactive system health monitoring to ensure uninterrupted business continuity.",
   },
   {
-    question: "What services are included in SAP AMS?",
-    answer:
-      "Our AMS services include Incident Management, Change Requests, Functional Support, Configuration Support, User Assistance, Performance Optimization, Enhancement Support, Documentation, and SLA Management.",
+    question: "Which SAP versions do you support?",
+    answer: "We support SAP S/4HANA and SAP ECC.",
   },
   {
-    question: "Do you provide 24×7 SAP AMS support?",
+    question: "What SLAs do you offer?",
     answer:
-      "Yes. Based on the agreed service model, we provide business-hour, extended-hour, or 24×7 SAP support for critical business operations.",
+      "// TODO: Add detailed SLA response and resolution time commitments for Priority 1 to Priority 4 tickets.",
   },
   {
-    question: "Which SAP modules do you support under AMS?",
+    question: "Can you take over from our current SAP support partner?",
     answer:
-      "We support SAP SD, MM, FI, CO, PP, QM, WM, HCM, PM, Basis coordination, and integrated SAP environments.",
+      "// TODO: Add transition methodology, knowledge transfer timeline, and onboarding details for taking over from an existing SAP support partner.",
   },
   {
-    question: "How are SAP issues managed?",
+    question: "How is SAP AMS priced?",
     answer:
-      "Every issue is logged, prioritized based on business impact, assigned to the appropriate consultant, resolved within SLA timelines, tested with users, and documented before closure.",
-  },
-  {
-    question: "What are the SAP AMS support levels?",
-    answer:
-      "Our support framework includes L1 User Support, L2 Functional Support, L3 Complex Functional & Technical Support, and L4 Strategic Consulting & Business Process Improvements.",
-  },
-  {
-    question: "Can SoftClinch support an SAP system implemented by another vendor?",
-    answer:
-      "Yes. We frequently take over SAP support from existing vendors and ensure a smooth knowledge transition with minimal business disruption.",
-  },
-  {
-    question: "How do you handle SAP change requests?",
-    answer:
-      "We follow a structured process involving requirement gathering, impact analysis, approval, development, testing, deployment, and post-implementation validation.",
-  },
-  {
-    question: "What industries benefit from SAP AMS?",
-    answer:
-      "Manufacturing, Retail, Automotive, Healthcare, Logistics, Consumer Goods, FMCG, Engineering, and Service organizations rely on our SAP AMS services to maintain uninterrupted business operations.",
-  },
-  {
-    question: "Why choose SoftClinch for SAP AMS?",
-    answer:
-      "Our SAP AMS team combines experienced functional consultants, structured support processes, SLA-driven delivery, industry expertise, and business-focused problem solving to keep your SAP landscape running efficiently and reliably.",
+      "// TODO: Add SAP AMS pricing structure (e.g. dedicated monthly retainer, shared resource model, or bucket-hours pricing).",
   },
 ];
 
@@ -206,5 +180,32 @@ export const whatsappAutomationFaq: FaqItem[] = [
     question: "What kind of analytics do you provide?",
     answer:
       "Our dashboard tracks delivery rates, read rates, response times, conversion rates, and custom workflow completion metrics.",
+  },
+];
+
+export const chennaiWebsiteFaq: FaqItem[] = [
+  {
+    question: "How much does a business website cost in Chennai?",
+    answer:
+      // TODO: Replace with official scope-based pricing tiers once approved
+      "Website costs vary based on design complexity, number of pages, CMS features, and e-commerce capabilities. SoftClinch provides transparent, fixed-scope proposals tailored to your specific requirements. Contact us on WhatsApp for a quick estimate.",
+  },
+  {
+    question: "How long will it take to build and launch my website?",
+    answer:
+      // TODO: Confirm standard delivery turnaround timelines
+      "Most standard business websites take between 2 to 4 weeks from discovery to launch, while custom web applications or larger WooCommerce stores may take 4 to 8 weeks depending on content readiness and review rounds.",
+  },
+  {
+    question: "Do you provide WooCommerce and ecommerce development in Chennai?",
+    answer:
+      // TODO: Add list of preferred payment gateways and logistics integrations
+      "Yes. We specialize in high-converting WooCommerce and custom e-commerce stores with secure payment gateway integrations (Razorpay, Cashfree, Stripe), inventory management, and fast mobile checkout experiences.",
+  },
+  {
+    question: "Will my website be optimized for Google Search (SEO)?",
+    answer:
+      // TODO: Detail on-page technical checklist items included
+      "Every website we deliver includes essential technical SEO foundations: responsive mobile design, fast Core Web Vitals performance, semantic HTML5, XML sitemaps, Open Graph metadata, and structured schema markup for Google Search.",
   },
 ];

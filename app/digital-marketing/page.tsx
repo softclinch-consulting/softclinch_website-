@@ -12,19 +12,6 @@ const description =
 export const metadata = buildMetadata({
   title,
   description,
-  keywords: [
-    "performance marketing agency",
-    "b2b performance marketing agency",
-    "roi driven seo services",
-    "google ads agency for lead generation",
-    "meta ads management",
-    "digital marketing company chennai",
-    "lead generation agency",
-    "ai search optimization company",
-    "geo aeo marketing services",
-    "conversion funnel optimization",
-    "b2b digital marketing agency",
-  ],
   canonicalPath,
 });
 

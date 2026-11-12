@@ -30,7 +30,7 @@ export const aiPoweredBusinessSystemsSeo = {
   internalLinkRecommendations: [
     "/services",
     "/custom-application-development",
-    "/whatsapp-automation",
+    "/inaiwazhi-whatsapp-automation/",
     "/digital-marketing",
     "/sap-ams-support",
     "/contact",
