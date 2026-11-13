@@ -1,459 +1,493 @@
 "use client";
 
-import { useReducedMotion, motion } from "framer-motion";
+import React from "react";
+import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
 import {
-  ArrowDown,
   ArrowRight,
-  BadgeCheck,
   BriefcaseBusiness,
   Building2,
   Check,
+  CheckCircle2,
   ChevronDown,
-  ClipboardList,
   Code2,
+  ExternalLink,
+  Globe,
   GraduationCap,
   HeartPulse,
+  Layers,
   MapPin,
   MessageCircle,
+  MessageSquare,
   MonitorSmartphone,
   Palette,
   RefreshCw,
+  Search,
+  ShieldCheck,
   ShoppingBag,
   ShoppingCart,
   Sparkles,
   Utensils,
   Wrench,
+  Zap,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import type { ReactNode } from "react";
-import { CONTACT } from "@/lib/contact";
+import { siteConfig } from "@/lib/siteConfig";
 import type { FaqItem } from "@/lib/faqs";
+import { GoogleReviews } from "@/components/GoogleReviews";
 
-const chatLink = `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(
-  "Hi SoftClinch, I would like to discuss a website development requirement."
-)}`;
+interface WebsiteDevelopmentProps {
+  faqs: FaqItem[];
+}
 
-const services: {
-  title: string;
-  description: string;
-  suitable: string;
-  icon: LucideIcon;
-  number: string;
-}[] = [
-  {
-    title: "Business Website Development",
-    description:
-      "Present your company, services and expertise through a professional website. Make it easy for customers to explore your offering, view your work and contact your team.",
-    suitable: "Small businesses, consultants, service providers and growing companies.",
-    icon: Building2,
-    number: "01",
-  },
-  {
-    title: "Ecommerce Website Development",
-    description:
-      "Build an online store with product categories, search, cart, checkout and order management. Add UPI, card payments, COD, shipping and inventory integrations based on your requirements. We help you choose WooCommerce, Shopify or custom ecommerce development according to your catalogue, budget and operations.",
-    suitable: "Retailers, D2C brands, wholesalers and businesses moving online.",
-    icon: ShoppingCart,
-    number: "02",
-  },
-  {
-    title: "Landing Page Development",
-    description:
-      "Give your advertising campaigns a focused destination with clear messaging, relevant proof and an easy enquiry process. Create dedicated pages for services, offers, product launches and lead generation campaigns.",
-    suitable: "Google Ads, social media campaigns and targeted promotions.",
-    icon: Palette,
-    number: "03",
-  },
-  {
-    title: "Custom Web Application Development",
-    description:
-      "Manage more of your business online with booking systems, customer portals, dashboards and applications built around your workflows. Connect relevant tools and data through integrations defined in your project scope.",
-    suitable: "Businesses with requirements beyond a standard website.",
-    icon: Code2,
-    number: "04",
-  },
-  {
-    title: "Website Redesign",
-    description:
-      "Improve an existing website with clearer navigation, updated design, mobile-friendly layouts and better performance. We review your current pages and plan how to handle existing content and URLs during the redesign.",
-    suitable: "Businesses with outdated or difficult-to-manage websites.",
-    icon: RefreshCw,
-    number: "05",
-  },
-  {
-    title: "Website Maintenance and Support",
-    description:
-      "Keep your website maintained with an agreed plan for updates, backups, monitoring and technical support. Choose support based on your platform, website complexity and frequency of changes.",
-    suitable: "Businesses that need ongoing help after launch.",
-    icon: Wrench,
-    number: "06",
-  },
-];
-
-const benefits = [
-  {
-    title: "Clear Business Messaging",
-    description: "Help visitors quickly understand what you do, who you serve and how to get started.",
-    icon: MessageCircle,
-  },
-  {
-    title: "Mobile-Friendly Experience",
-    description:
-      "Give customers a consistent experience across phones, tablets and desktops, with readable content and accessible contact options.",
-    icon: MonitorSmartphone,
-  },
-  {
-    title: "SEO Foundations",
-    description:
-      "Build with a logical page structure, descriptive titles, internal links and performance considerations. Ongoing SEO can be planned separately to support your search visibility.",
-    icon: Sparkles,
-  },
-  {
-    title: "The Right Platform",
-    description:
-      "Choose a platform based on the features you need, how you will manage content and how your business may grow.",
-    icon: ShoppingBag,
-  },
-  {
-    title: "Practical Content Management",
-    description:
-      "For websites with a content management system, update the agreed text, images, products and other content through an editor, with handover guidance.",
-    icon: ClipboardList,
-  },
-  {
-    title: "Clear Scope and Communication",
-    description:
-      "Understand the deliverables, milestones, revision stages, third-party costs and support terms before development begins.",
-    icon: BadgeCheck,
-  },
-];
-
-const industries: { name: string; features: string; icon: LucideIcon }[] = [
-  { name: "Healthcare", features: "Service pages, doctor profiles, appointment requests and location details", icon: HeartPulse },
-  { name: "Retail and D2C", features: "Product catalogues, online stores, payments and order management", icon: ShoppingBag },
-  { name: "Education and Training", features: "Course pages, batch information, admission enquiries and registrations", icon: GraduationCap },
-  { name: "Restaurants and Hospitality", features: "Menus, galleries, booking enquiries and online ordering", icon: Utensils },
-  { name: "Real Estate", features: "Property listings, enquiry forms and site-visit requests", icon: Building2 },
-  { name: "Professional Services", features: "Service pages, team profiles, case studies and consultation enquiries", icon: BriefcaseBusiness },
-  { name: "Manufacturing and Export", features: "Product specifications, downloadable catalogues and quotation requests", icon: Wrench },
-  { name: "Travel and Tourism", features: "Package listings, itineraries, booking enquiries and customer support options", icon: MapPin },
-];
-
-const process = [
-  {
-    number: "01",
-    title: "Share Your Requirements",
-    description: "Tell us about your business, audience, existing website and the features you need.",
-  },
-  {
-    number: "02",
-    title: "Agree on the Plan",
-    description:
-      "We define the pages, platform, deliverables, timeline and costs. You review the proposed design direction before development progresses.",
-  },
-  {
-    number: "03",
-    title: "Build and Review",
-    description:
-      "We develop the website, add the agreed content and test key layouts, forms and customer journeys across relevant devices.",
-  },
-  {
-    number: "04",
-    title: "Launch and Handover",
-    description:
-      "After approval, we launch your website, provide the agreed access and guidance, and begin any selected maintenance or support plan.",
-  },
-];
-
-function Reveal({
-  children,
-  className = "",
-  delay = 0,
-}: {
-  children: ReactNode;
-  className?: string;
-  delay?: number;
-}) {
+export function WebsiteDevelopment({ faqs }: WebsiteDevelopmentProps) {
   const reduceMotion = useReducedMotion();
-  return (
-    <motion.div
-      className={className}
-      initial={reduceMotion ? false : { opacity: 0, y: 22 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.14 }}
-      transition={{ duration: reduceMotion ? 0 : 0.55, delay: reduceMotion ? 0 : delay, ease: "easeOut" }}
-    >
-      {children}
-    </motion.div>
+  const whatsappHeroUrl = siteConfig.getWhatsAppUrl(
+    "Hi SoftClinch, I need a website for my business"
   );
-}
-
-function SectionHeading({
-  eyebrow,
-  title,
-  description,
-  light = false,
-}: {
-  eyebrow: string;
-  title: string;
-  description?: string;
-  light?: boolean;
-}) {
-  return (
-    <div className="mx-auto max-w-3xl text-center">
-      <p className={`mb-4 text-xs font-bold uppercase tracking-[0.22em] ${light ? "text-orange-200" : "text-[#993300]"}`}>
-        {eyebrow}
-      </p>
-      <h2 className={`text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-[3.25rem] ${light ? "text-white" : "text-[#092744]"}`}>
-        {title}
-      </h2>
-      {description && (
-        <p className={`mx-auto mt-5 max-w-2xl text-base leading-7 sm:text-lg ${light ? "text-blue-100/75" : "text-slate-600"}`}>
-          {description}
-        </p>
-      )}
-    </div>
+  const whatsappClosingUrl = siteConfig.getWhatsAppUrl(
+    "Hi SoftClinch, I would like to discuss a website project"
   );
-}
 
-function PrimaryLink({ children, href = "/contact" }: { children: ReactNode; href?: string }) {
-  return (
-    <Link
-      href={href}
-      className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#993300] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-[#993300]/20 transition hover:-translate-y-0.5 hover:bg-[#7d2a00] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#993300]"
-    >
-      {children}
-      <ArrowRight size={17} className="transition-transform group-hover:translate-x-1" />
-    </Link>
-  );
-}
+  const services = [
+    {
+      title: "Business Websites",
+      description:
+        "Present your company, services, and expertise through a fast, modern corporate website. Make it effortless for prospects to understand your value and contact your team.",
+      suitable: "Small businesses, consultants, service providers, and B2B enterprises.",
+      icon: Building2,
+      features: [
+        "Responsive across all mobile, tablet, and desktop screens",
+        "Fast-loading performance with clean semantic HTML & Next.js",
+        "Built-in lead capture forms & WhatsApp click-to-chat",
+        "Clear content hierarchy and brand storytelling",
+      ],
+    },
+    {
+      title: "WooCommerce & E-Commerce",
+      description:
+        "High-converting online stores built on WooCommerce or custom commerce architectures with secure payment gateways, inventory management, and smooth checkout flows.",
+      suitable: "Retailers, D2C brands, wholesalers, and growing online stores.",
+      icon: ShoppingBag,
+      features: [
+        "Seamless Razorpay, Cashfree & Stripe payment gateways",
+        "Mobile-first product catalogs & one-click checkout",
+        "Automated order confirmations & WhatsApp notifications",
+        "Scalable inventory, category filters, and customer management",
+      ],
+    },
+    {
+      title: "Conversion Landing Pages",
+      description:
+        "Laser-focused campaign landing pages optimized for Google Ads, Meta Ads, and performance marketing with high conversion rates and minimal bounce.",
+      suitable: "Google Ads, social media promotions, and product launches.",
+      icon: Zap,
+      features: [
+        "A/B test ready layout & conversion-focused copywriting",
+        "Ultra-fast loading speed (< 1.5s) to maximize ad ROI",
+        "Frictionless forms and instant WhatsApp enquiry CTA",
+        "Google Analytics 4 & Meta Pixel event tracking built in",
+      ],
+    },
+    {
+      title: "Website Redesign & Modernization",
+      description:
+        "Revamp outdated, slow, or low-converting websites into high-speed, modern digital assets that reflect your evolving business and improve Google rankings.",
+      suitable: "Businesses with aging or difficult-to-maintain websites.",
+      icon: RefreshCw,
+      features: [
+        "Complete UI/UX modernization & responsive design overhaul",
+        "SEO preservation with 301 redirect mapping",
+        "Core Web Vitals performance tuning",
+        "Effortless CMS editor handover for easy text and media updates",
+      ],
+    },
+    {
+      title: "Custom Web Applications",
+      description:
+        "Manage more of your business operations online with customer portals, booking engines, client dashboards, and custom web applications tailored to your exact workflows.",
+      suitable: "Enterprises needing custom workflows beyond standard websites.",
+      icon: Code2,
+      features: [
+        "Secure user authentication and role-based access",
+        "Custom database schemas and REST API integrations",
+        "Interactive dashboards and business workflow automation",
+        "Cloud-native deployment on scalable infrastructure",
+      ],
+    },
+    {
+      title: "Website Maintenance & Support",
+      description:
+        "Keep your digital presence secure, updated, and fast with ongoing technical maintenance, backups, security patches, and on-demand feature enhancements.",
+      suitable: "Businesses wanting peace of mind and dedicated tech support.",
+      icon: Wrench,
+      features: [
+        "Regular security updates, theme and plugin patch management",
+        "Automated daily/weekly cloud backups",
+        "Uptime and performance monitoring",
+        "Fast turn-around support for content and design updates",
+      ],
+    },
+  ];
 
-export function WebsiteDevelopment({ faqs }: { faqs: FaqItem[] }) {
+  // TODO: Replace with 3-4 real project links and case studies once client permissions are finalized
+  const portfolioItems = [
+    {
+      title: "B2B Industrial Equipment Portal",
+      category: "Corporate Business Website",
+      description:
+        "Lead-generation corporate website with comprehensive product specifications, catalog downloads, and WhatsApp inquiry routing.",
+      stats: "3.2x inquiry growth",
+      tags: ["Next.js", "SEO", "WhatsApp Integration"],
+    },
+    {
+      title: "D2C Lifestyle & Apparel Store",
+      category: "WooCommerce E-Commerce",
+      description:
+        "High-volume fashion e-commerce storefront with customized filter navigation, Razorpay payment gateway, and automated order updates.",
+      stats: "48% higher checkout completion",
+      tags: ["WooCommerce", "Razorpay", "Mobile-First"],
+    },
+    {
+      title: "Healthcare Clinic & Diagnostics Network",
+      category: "Medical & Service Booking",
+      description:
+        "Clean, reassuring digital presence with doctor profiles, appointment booking integration, and local SEO optimization.",
+      stats: "Top 3 Google local rankings",
+      tags: ["Local SEO", "Booking System", "Fast Loading"],
+    },
+    {
+      title: "Specialty Manufacturing Exporter",
+      category: "Global Export & Catalog",
+      description:
+        "Multilingual global B2B portal serving buyers across Asia and Europe with interactive product demos and quotation flows.",
+      stats: "100% Core Web Vitals score",
+      tags: ["Enterprise UI", "B2B Catalog", "Global CDN"],
+    },
+  ];
+
+  const industries: { name: string; features: string; icon: LucideIcon }[] = [
+    { name: "Healthcare", features: "Service pages, doctor profiles, appointment requests and location details", icon: HeartPulse },
+    { name: "Retail and D2C", features: "Product catalogues, online stores, payments and order management", icon: ShoppingBag },
+    { name: "Education and Training", features: "Course pages, batch information, admission enquiries and registrations", icon: GraduationCap },
+    { name: "Restaurants and Hospitality", features: "Menus, galleries, booking enquiries and online ordering", icon: Utensils },
+    { name: "Real Estate", features: "Property listings, enquiry forms and site-visit requests", icon: Building2 },
+    { name: "Professional Services", features: "Service pages, team profiles, case studies and consultation enquiries", icon: BriefcaseBusiness },
+    { name: "Manufacturing and Export", features: "Product specifications, downloadable catalogues and quotation requests", icon: Wrench },
+    { name: "Travel and Tourism", features: "Package listings, itineraries, booking enquiries and customer support options", icon: MapPin },
+  ];
+
+  const processSteps = [
+    {
+      step: "01",
+      title: "Discuss on WhatsApp",
+      description:
+        "Start with a straightforward, no-obligation conversation on WhatsApp. We explore your business goals, target audience, page scope, and timeline.",
+      icon: MessageSquare,
+    },
+    {
+      step: "02",
+      title: "Design & Architecture",
+      description:
+        "We create clean, modern UI wireframes and visual prototypes tailored to your brand identity, focusing on user journeys that convert.",
+      icon: Sparkles,
+    },
+    {
+      step: "03",
+      title: "Build & SEO Setup",
+      description:
+        "We engineer responsive, lightweight code with mobile optimization, speed tuning, on-page technical SEO, and schema markup built in.",
+      icon: Search,
+    },
+    {
+      step: "04",
+      title: "Launch & Support",
+      description:
+        "We handle domain configuration, SSL, DNS setup, cross-browser testing, deployment, and provide post-launch support and CMS guidance.",
+      icon: ShieldCheck,
+    },
+  ];
+
   return (
-    <div className="overflow-hidden bg-white text-slate-800">
-      <section className="relative isolate bg-[#071d33] text-white">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_75%_15%,rgba(0,104,161,0.42),transparent_38%),radial-gradient(ellipse_at_0%_100%,rgba(153,51,0,0.24),transparent_38%)]" />
-        <div className="absolute inset-0 -z-10 opacity-[0.08] [background-image:linear-gradient(rgba(255,255,255,.55)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.55)_1px,transparent_1px)] [background-size:46px_46px]" />
-        <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 pt-16 sm:px-8 sm:pb-24 sm:pt-20 lg:grid-cols-[1.05fr_.95fr] lg:px-10 lg:pb-28 lg:pt-24">
-          <div className="relative z-10">
-            <motion.p
-              initial={{ opacity: 0, y: 8 }}
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-800">
+      {/* SECTION 1: HERO */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-brand-navy via-[#0B2545] to-[#061527] text-white pt-32 pb-24 lg:pt-40 lg:pb-32">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(162,59,42,0.18),transparent_60%)] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-slate-50 to-transparent pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-3xl">
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.07] px-4 py-2 text-xs font-semibold tracking-wide text-blue-100"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/15 text-slate-200 text-xs font-semibold uppercase tracking-wider mb-6"
             >
-              <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,.8)]" />
-              Websites made for growing businesses
-            </motion.p>
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              Chennai Development Studio · Serving Businesses Across India
+            </motion.div>
+
             <motion.h1
-              initial={{ opacity: 0, y: 16 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.08 }}
-              className="max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.8rem]"
+              className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white tracking-tight leading-[1.12] mb-6"
             >
-              Website Development Company in India{" "}
+              Website Development Company{" "}
               <span className="bg-gradient-to-r from-orange-200 via-orange-300 to-amber-100 bg-clip-text text-transparent">
                 for Growing Businesses
               </span>
             </motion.h1>
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
+
+            <motion.p
+              initial={reduceMotion ? false : { opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.18 }}
+              transition={{ duration: 0.6, delay: 0.16 }}
+              className="text-lg sm:text-xl text-slate-300 leading-relaxed mb-10 max-w-2xl"
             >
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-blue-100/85 sm:text-xl">
-                Build a website that helps customers understand your business, explore your services and take the next step.
-              </p>
-              <p className="mt-4 max-w-2xl text-sm leading-7 text-blue-100/65 sm:text-base">
-                SoftClinch creates fast, mobile-friendly business websites, ecommerce stores and custom web applications for businesses across India. From your first website to a complete redesign, we build around your goals, customers and daily operations.
-              </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <PrimaryLink>Get a Free Website Quote</PrimaryLink>
-                <Link
-                  href="/case-studies"
-                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/25 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/60 hover:bg-white/10"
-                >
-                  View Our Work <ArrowRight size={16} />
-                </Link>
-              </div>
-              <div className="mt-8 flex flex-wrap gap-x-5 gap-y-3 text-xs font-medium text-blue-100/75 sm:text-sm">
-                {["Mobile-friendly design", "SEO foundations", "WhatsApp integration", "Clear project scope"].map((item) => (
-                  <span key={item} className="inline-flex items-center gap-2">
-                    <Check size={15} className="text-orange-300" /> {item}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          </div>
+              Fast, responsive, SEO-ready business websites and WooCommerce stores engineered to rank on Google, build credibility, and turn visitors into qualified inquiries.
+            </motion.p>
 
-          <Reveal className="relative mx-auto w-full max-w-[540px]">
-            <div className="absolute -inset-8 rounded-[3rem] bg-blue-500/10 blur-3xl" />
-            <Image
-              src="/website-development-hero.svg"
-              alt="Responsive business website preview shown on desktop and mobile screens"
-              width={900}
-              height={680}
-              priority
-              className="relative h-auto w-full drop-shadow-2xl"
-            />
             <motion.div
-              animate={{ y: [0, -7, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-5 -left-3 flex items-center gap-3 rounded-2xl border border-white/70 bg-white px-4 py-3 text-[#0b2742] shadow-xl sm:-left-8"
+              initial={reduceMotion ? false : { opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.24 }}
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4"
             >
-              <span className="grid h-9 w-9 place-items-center rounded-xl bg-emerald-50 text-emerald-700"><Check size={18} /></span>
-              <span><strong className="block text-xs">Every screen, considered</strong><small className="text-[10px] text-slate-500">Responsive by design</small></span>
+              <a
+                href={whatsappHeroUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-900/30 transition-all duration-300 text-base"
+              >
+                <MessageSquare className="w-5 h-5 fill-current" />
+                Chat on WhatsApp
+              </a>
+
+              <a
+                href="#portfolio"
+                className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 text-white border border-white/20 font-semibold px-8 py-4 rounded-xl transition-all duration-300 text-base"
+              >
+                View our work
+                <ArrowRight className="w-4 h-4" />
+              </a>
             </motion.div>
-          </Reveal>
+
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.35 }}
+              className="mt-12 pt-8 border-t border-white/10 grid grid-cols-3 gap-6 text-slate-300 text-xs sm:text-sm font-medium"
+            >
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>SEO & Mobile Ready</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>No Hidden Fees</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>Chennai-Based Team</span>
+              </div>
+            </motion.div>
+          </div>
         </div>
-        <a href="#website-challenges" aria-label="Scroll to website challenges" className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 text-white/50 transition hover:text-white sm:block">
-          <ArrowDown size={20} />
-        </a>
       </section>
 
-      <section id="website-challenges" className="bg-white px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[.8fr_1.2fr] lg:gap-20">
-          <Reveal>
-            <p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-[#993300]">The challenge</p>
-            <h2 className="text-3xl font-bold leading-tight text-[#092744] sm:text-4xl">Your Website Should Make It Easier to Win Business</h2>
-            <p className="mt-5 text-base leading-7 text-slate-600">
-              Visitors need to understand what you offer, why they should choose you and how to contact you. An outdated design, slow pages or confusing navigation can get in the way.
+      {/* SECTION 2: SERVICES */}
+      <section className="py-24 bg-white" id="services">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-brand-terracotta text-xs font-bold uppercase tracking-widest block mb-3">
+              Web Engineering Capabilities
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900 mb-4">
+              Website Solutions Built for Real Business Growth
+            </h2>
+            <p className="text-slate-600 text-base sm:text-lg">
+              Whether launching a new corporate presence or scaling e-commerce transactions, we build modern web architectures that deliver measurable business outcomes.
             </p>
-            <p className="mt-4 text-sm leading-6 text-slate-500">
-              Whether you need a new website or improvements to an existing one, we focus on a clearer customer journey—from the first visit to an enquiry, booking or purchase.
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={idx}
+                  className="bg-slate-50 border border-slate-200/80 rounded-3xl p-8 hover:border-brand-navy/30 hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="w-14 h-14 rounded-2xl bg-brand-navy text-white flex items-center justify-center mb-6 shadow-md shadow-brand-navy/15">
+                      <Icon size={26} />
+                    </div>
+                    <h3 className="text-2xl font-display font-bold text-slate-900 mb-3">
+                      {item.title}
+                    </h3>
+                    <p className="text-slate-600 leading-relaxed mb-6 text-sm">
+                      {item.description}
+                    </p>
+                    <ul className="space-y-3 mb-8">
+                      {item.features.map((feat, fIdx) => (
+                        <li key={fIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
+                          <CheckCircle2 size={16} className="text-emerald-600 shrink-0 mt-0.5" />
+                          <span>{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <a
+                    href={siteConfig.getWhatsAppUrl(
+                      `Hi SoftClinch, I'm interested in ${item.title}`
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-brand-navy hover:text-brand-terracotta font-bold text-sm transition-colors pt-4 border-t border-slate-200"
+                  >
+                    Discuss on WhatsApp
+                    <ArrowRight size={15} />
+                  </a>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 3: PROOF (REVIEWS + PORTFOLIO) */}
+      <section className="bg-slate-50" id="portfolio">
+        {/* Reusable Google Reviews */}
+        <GoogleReviews
+          title="What Our Clients Say About Our Delivery"
+          badge="Verified Client Feedback"
+          subtitle="Real reviews from businesses who trust SoftClinch for web development and digital solutions."
+        />
+
+        {/* Portfolio Showcase */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="text-brand-terracotta text-xs font-bold uppercase tracking-widest block mb-3">
+              Selected Work
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900 mb-4">
+              Recent Website & E-Commerce Projects
+            </h2>
+            <p className="text-slate-600 text-sm sm:text-base">
+              A sample of the high-speed business websites and commerce platforms we build for growing enterprises.
             </p>
-          </Reveal>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {[
-              "Visitors browse but leave without making an enquiry.",
-              "Pages are difficult to use on mobile phones.",
-              "Services and products are hard to find.",
-              "Updating content takes too much time.",
-              "Your website no longer reflects your business.",
-            ].map((item, index) => (
-              <Reveal key={item} delay={index * 0.05} className={`rounded-2xl border border-slate-200 bg-slate-50 p-5 transition hover:-translate-y-1 hover:border-[#c77c59]/50 hover:bg-white hover:shadow-lg ${index === 4 ? "sm:col-span-2" : ""}`}>
-                <span className="mb-4 grid h-9 w-9 place-items-center rounded-xl bg-[#fff0e8] text-sm font-bold text-[#993300]">0{index + 1}</span>
-                <p className="font-semibold leading-6 text-[#173550]">{item}</p>
-              </Reveal>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {portfolioItems.map((item, idx) => (
+              <div
+                key={idx}
+                className="bg-white rounded-3xl border border-slate-200 p-8 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-4 mb-4">
+                    <span className="text-xs font-bold uppercase tracking-wider text-brand-terracotta bg-brand-terracotta/10 px-3 py-1 rounded-full">
+                      {item.category}
+                    </span>
+                    <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200/60">
+                      {item.stats}
+                    </span>
+                  </div>
+
+                  <h3 className="text-2xl font-bold text-slate-900 mb-3">{item.title}</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                    {item.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {item.tags.map((tag, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className="text-xs font-medium text-slate-600 bg-slate-100 px-2.5 py-1 rounded-md"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                  <span>Delivered by SoftClinch</span>
+                  <a
+                    href={whatsappHeroUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-brand-navy hover:text-brand-terracotta font-semibold inline-flex items-center gap-1"
+                  >
+                    Build similar project <ArrowRight size={14} />
+                  </a>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="website-services" className="bg-[#f5f7fa] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
-        <div className="mx-auto max-w-7xl">
-          <Reveal>
-            <SectionHeading
-              eyebrow="What we build"
-              title="Website Development Services Built Around Your Business"
-              description="Choose the kind of website you need today, with a plan that makes sense for the way your business works."
-            />
-          </Reveal>
-          <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {services.map(({ title, description, suitable, icon: Icon, number }, index) => (
-              <Reveal key={title} delay={(index % 3) * 0.06}>
-                <article className="group flex h-full flex-col rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#d8b5a5] hover:shadow-xl sm:p-7">
-                  <div className="flex items-center justify-between">
-                    <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#fff2eb] text-[#993300] transition group-hover:bg-[#993300] group-hover:text-white"><Icon size={22} /></span>
-                    <span className="font-mono text-xs font-semibold tracking-widest text-slate-300">{number}</span>
-                  </div>
-                  <h3 className="mt-6 text-xl font-bold leading-snug text-[#092744]">{title}</h3>
-                  <p className="mt-3 flex-1 text-sm leading-6 text-slate-600">{description}</p>
-                  <div className="mt-5 border-t border-slate-100 pt-4">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#993300]">Suitable for</p>
-                    <p className="mt-1.5 text-sm leading-5 text-slate-600">{suitable}</p>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-          <div className="mt-10 text-center">
-            <PrimaryLink>Discuss Your Website Requirements</PrimaryLink>
-          </div>
-        </div>
-      </section>
-
-      <section className="relative overflow-hidden bg-[#092744] px-5 py-20 text-white sm:px-8 sm:py-24 lg:px-10">
+      {/* SECTION 4: WHATSAPP INTEGRATION VALUE PROP */}
+      <section className="relative overflow-hidden bg-brand-navy px-5 py-20 text-white sm:px-8 sm:py-24 lg:px-10">
         <div className="absolute -right-36 -top-32 h-96 w-96 rounded-full bg-emerald-400/10 blur-3xl" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[.9fr_1.1fr]">
-          <Reveal>
+          <div>
             <p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-emerald-300">A direct way to connect</p>
             <h2 className="text-3xl font-bold leading-tight sm:text-4xl">Turn Website Visits into WhatsApp Conversations</h2>
-            <p className="mt-5 text-base leading-7 text-blue-100/75">
-              Give visitors a simple way to ask about your services, request product details or discuss a requirement. A WhatsApp chat button can open a conversation with a pre-filled message, helping customers contact your team directly from your website.
+            <p className="mt-5 text-base leading-7 text-slate-300">
+              Give visitors a simple way to ask about your services, request product details, or discuss a requirement. A WhatsApp chat button opens an immediate conversation with a pre-filled message, helping customers contact your team directly from your website without filling out lengthy forms.
             </p>
-            <a href={chatLink} target="_blank" rel="noreferrer" className="mt-7 inline-flex min-h-12 items-center gap-2 rounded-full bg-[#21a66a] px-6 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-[#188958]">
-              <MessageCircle size={18} /> Discuss WhatsApp Integration <ArrowRight size={16} />
+            <a
+              href={whatsappHeroUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-xl bg-emerald-600 px-6 py-3.5 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-emerald-500 shadow-lg shadow-emerald-950/40"
+            >
+              <MessageSquare size={18} className="fill-current" /> Discuss WhatsApp Integration <ArrowRight size={16} />
             </a>
-          </Reveal>
-          <Reveal>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-3xl border border-white/10 bg-white/[0.06] p-6">
-                <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-emerald-400/15 text-emerald-300"><MessageCircle size={21} /></div>
-                <h3 className="text-lg font-bold">Start with Website Chat</h3>
-                <ul className="mt-4 space-y-3 text-sm leading-5 text-blue-100/75">
-                  {["Click-to-chat buttons on relevant pages.", "Pre-filled messages for services or products.", "Clear contact options for mobile and desktop visitors."].map((item) => (
-                    <li key={item} className="flex gap-2"><Check size={16} className="mt-0.5 shrink-0 text-emerald-300" />{item}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="rounded-3xl border border-white/10 bg-white/[0.06] p-6">
-                <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-orange-300/15 text-orange-200"><Sparkles size={21} /></div>
-                <h3 className="text-lg font-bold">Add Automation as Your Business Grows</h3>
-                <p className="mt-4 text-sm leading-6 text-blue-100/75">
-                  Optional Inaiwazhi integration can support configured replies, enquiry routing, lead follow-ups and connected workflows.
-                </p>
-              </div>
-            </div>
-            <p className="mt-4 text-xs leading-5 text-blue-100/55">
-              Automation features depend on your selected plan, setup and integrations. Any applicable platform, messaging and implementation charges are explained in your proposal.
-            </p>
-          </Reveal>
-        </div>
-      </section>
+          </div>
 
-      <section className="px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
-        <div className="mx-auto max-w-7xl">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Why SoftClinch"
-              title="A Website Planned for Your Customers and Your Team"
-              description="A considered website should be clear to your customers and practical for the people who manage it."
-            />
-          </Reveal>
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {benefits.map(({ title, description, icon: Icon }, index) => (
-              <Reveal key={title} delay={(index % 3) * 0.05}>
-                <article className="h-full rounded-2xl border border-slate-200 bg-white p-6 transition hover:border-[#d9b8a8] hover:shadow-lg">
-                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-[#f2f6fa] text-[#0d4c77]"><Icon size={20} /></span>
-                  <h3 className="mt-5 text-lg font-bold text-[#092744]">{title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-600">{description}</p>
-                </article>
-              </Reveal>
-            ))}
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="rounded-3xl border border-white/10 bg-white/[0.06] p-6">
+              <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-emerald-400/15 text-emerald-300"><MessageCircle size={21} /></div>
+              <h3 className="text-lg font-bold">Start with Website Chat</h3>
+              <ul className="mt-4 space-y-3 text-sm leading-5 text-slate-300">
+                {["Click-to-chat buttons on relevant service pages.", "Pre-filled messages for products and inquiries.", "Zero friction contact option for mobile & desktop."].map((item) => (
+                  <li key={item} className="flex gap-2"><Check size={16} className="mt-0.5 shrink-0 text-emerald-300" />{item}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-3xl border border-white/10 bg-white/[0.06] p-6">
+              <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-orange-300/15 text-orange-200"><Sparkles size={21} /></div>
+              <h3 className="text-lg font-bold">Scale with Inaiwazhi Automation</h3>
+              <p className="mt-4 text-sm leading-6 text-slate-300">
+                Seamlessly upgrade to official Meta WhatsApp Business API workflows, automated drip campaigns, and CRM synchronization through our Inaiwazhi platform.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-[#f5f7fa] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
+      {/* SECTION 5: INDUSTRIES */}
+      <section className="bg-white px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
         <div className="mx-auto max-w-7xl">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Industries"
-              title="Website Solutions for Different Business Needs"
-              description="Features are selected according to your project requirements."
-            />
-          </Reveal>
-          <div className="mt-12 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-            <div className="hidden grid-cols-[.75fr_1.25fr] bg-[#092744] px-7 py-4 text-xs font-bold uppercase tracking-[0.15em] text-white sm:grid">
-              <span>Industry</span><span>Website features we can build</span>
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="text-brand-terracotta text-xs font-bold uppercase tracking-widest block mb-3">Industries</span>
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900 mb-4">Tailored Solutions for Different Business Needs</h2>
+            <p className="text-slate-600 text-base">We customize features and architectures according to your specific sector and audience.</p>
+          </div>
+
+          <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+            <div className="hidden grid-cols-[.75fr_1.25fr] bg-brand-navy px-7 py-4 text-xs font-bold uppercase tracking-[0.15em] text-white sm:grid">
+              <span>Industry</span><span>Website features we build</span>
             </div>
             {industries.map(({ name, features, icon: Icon }, index) => (
               <div key={name} className={`grid gap-2 px-5 py-5 sm:grid-cols-[.75fr_1.25fr] sm:items-center sm:px-7 ${index > 0 ? "border-t border-slate-100" : ""}`}>
-                <div className="flex items-center gap-3 font-bold text-[#173550]">
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-[#fff2eb] text-[#993300]"><Icon size={17} /></span>
+                <div className="flex items-center gap-3 font-bold text-slate-900">
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-orange-50 text-brand-terracotta"><Icon size={17} /></span>
                   {name}
                 </div>
                 <p className="pl-12 text-sm leading-6 text-slate-600 sm:pl-0">{features}</p>
@@ -463,84 +497,126 @@ export function WebsiteDevelopment({ faqs }: { faqs: FaqItem[] }) {
         </div>
       </section>
 
-      <section className="px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
-        <div className="mx-auto max-w-7xl">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Our process"
-              title="From Your First Discussion to Website Launch"
-              description="A clear, collaborative process from the first conversation through launch and handover."
-            />
-          </Reveal>
-          <div className="relative mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            <div className="absolute left-[12%] right-[12%] top-7 hidden border-t border-dashed border-slate-300 lg:block" />
-            {process.map(({ number, title, description }, index) => (
-              <Reveal key={number} delay={index * 0.07} className="relative">
-                <article className="h-full rounded-2xl border border-slate-200 bg-white p-6 pt-0 shadow-sm">
-                  <span className="relative -top-1 grid h-14 w-14 place-items-center rounded-2xl border-4 border-white bg-[#092744] font-mono text-sm font-bold text-white shadow-md">{number}</span>
-                  <h3 className="mt-4 text-lg font-bold leading-snug text-[#092744]">{title}</h3>
-                  <p className="mt-3 text-sm leading-6 text-slate-600">{description}</p>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-          <div className="mt-10 text-center">
-            <PrimaryLink>Start Your Website Project</PrimaryLink>
-          </div>
-        </div>
-      </section>
+      {/* SECTION 6: 4-STEP PROCESS */}
+      <section className="py-24 bg-brand-navy text-white relative overflow-hidden" id="process">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(162,59,42,0.15),transparent_60%)] pointer-events-none" />
 
-      <section className="relative overflow-hidden bg-[#092744] px-5 py-16 text-white sm:px-8 sm:py-20 lg:px-10">
-        <div className="absolute -left-16 -top-24 h-72 w-72 rounded-full bg-blue-400/10 blur-3xl" />
-        <Reveal className="relative mx-auto flex max-w-7xl flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <div className="max-w-3xl">
-            <p className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-orange-200"><MapPin size={14} /> India-wide service</p>
-            <h2 className="text-3xl font-bold leading-tight sm:text-4xl">Website Development for Businesses Across India</h2>
-            <p className="mt-4 text-sm leading-7 text-blue-100/75 sm:text-base">
-              Work with SoftClinch wherever your business is based in India. We handle discovery, design reviews, project updates and handover through scheduled calls, online meetings and shared feedback. Whether you serve a local community or customers nationwide, we plan your website around the people you want to reach.
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-brand-terracotta text-xs font-bold uppercase tracking-widest block mb-3">
+              Transparent Execution
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-white mb-4">
+              Our 4-Step Website Development Process
+            </h2>
+            <p className="text-slate-300 text-base sm:text-lg">
+              A predictable, agile workflow focused on rapid delivery, clear milestones, and business results.
             </p>
           </div>
-          <PrimaryLink>Talk to Our Team</PrimaryLink>
-        </Reveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {processSteps.map((step, idx) => {
+              const Icon = step.icon;
+              return (
+                <div
+                  key={idx}
+                  className="bg-white/5 border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all duration-300 flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-white">
+                        <Icon size={24} />
+                      </div>
+                      <span className="text-3xl font-display font-bold text-white/30">
+                        {step.step}
+                      </span>
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
+                    <p className="text-slate-300 text-sm leading-relaxed">{step.description}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </section>
 
-      <section className="px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
-        <div className="mx-auto max-w-7xl">
-          <Reveal>
-            <SectionHeading
-              eyebrow="FAQs"
-              title="Frequently Asked Questions About Website Development"
-            />
-          </Reveal>
-          <div className="mt-10 grid gap-3 lg:grid-cols-2 lg:gap-5">
-            {[faqs.slice(0, 6), faqs.slice(6, 12)].map((column, columnIndex) => (
-              <div key={columnIndex} className="space-y-3">
-                {column.map(({ question, answer }, index) => (
-                  <Reveal key={question} delay={index % 3 * 0.035}>
-                    <details className="group rounded-2xl border border-slate-200 bg-white px-5 py-1 transition open:border-[#d8b5a5] open:shadow-md sm:px-6">
-                      <summary className="flex cursor-pointer list-none items-center justify-between gap-5 py-5 text-left font-semibold leading-6 text-[#12334f] marker:hidden [&::-webkit-details-marker]:hidden">
-                        {question}
-                        <ChevronDown size={19} className="shrink-0 text-[#993300] transition-transform group-open:rotate-180" />
-                      </summary>
-                      <p className="border-t border-slate-100 pb-5 pt-4 text-sm leading-7 text-slate-600">{answer}</p>
-                    </details>
-                  </Reveal>
-                ))}
-              </div>
+      {/* SECTION 7: FAQS */}
+      <section className="py-24 bg-white" id="faq">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <span className="text-brand-terracotta text-xs font-bold uppercase tracking-widest block mb-3">
+              Got Questions?
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900 mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-slate-600 text-base">
+              Clear answers regarding our website development services, timelines, platforms, and technical standards.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <details
+                key={index}
+                className="group bg-slate-50 rounded-2xl border border-slate-200/80 p-6 transition-all duration-300 open:bg-white open:shadow-lg open:border-brand-navy/20"
+              >
+                <summary className="flex justify-between items-center cursor-pointer list-none text-base sm:text-lg font-bold text-slate-900 group-hover:text-brand-navy transition-colors">
+                  <span className="pr-4">{faq.question}</span>
+                  <ChevronDown className="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform duration-300 shrink-0" />
+                </summary>
+                <div className="mt-4 pt-4 border-t border-slate-200/60 text-slate-600 text-sm sm:text-base leading-relaxed">
+                  {faq.answer}
+                </div>
+              </details>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#f5f7fa] px-5 py-16 sm:px-8 lg:px-10">
-        <Reveal className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 rounded-[2rem] bg-white p-7 text-center shadow-sm sm:flex-row sm:p-10 sm:text-left">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#993300]">Let’s build your next step</p>
-            <h2 className="mt-2 text-2xl font-bold text-[#092744] sm:text-3xl">Ready to talk about your website?</h2>
-            <p className="mt-2 text-sm text-slate-600">Tell us what you need. We’ll help you work out the right scope.</p>
+      {/* SECTION 8: FINAL CTA */}
+      <section className="py-20 bg-gradient-to-r from-brand-navy via-[#0B2545] to-brand-navy text-white text-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(162,59,42,0.25),transparent_70%)] pointer-events-none" />
+
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-slate-200 text-xs font-semibold uppercase tracking-wider mb-6">
+            <ShieldCheck size={16} className="text-emerald-400" />
+            Serving Businesses Across India · Chennai Development Studio
           </div>
-          <PrimaryLink>Get a Free Website Quote</PrimaryLink>
-        </Reveal>
+
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-white mb-6 leading-tight">
+            Ready to Build a High-Performing Website for Your Business?
+          </h2>
+
+          <p className="text-lg text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Message us directly on WhatsApp to discuss your requirements, see relevant past work, and receive a customized, scope-based project plan.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href={whatsappClosingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-9 py-4 rounded-xl shadow-xl shadow-emerald-950/40 transition-all duration-300 text-base"
+            >
+              <MessageSquare className="w-5 h-5 fill-current" />
+              Chat on WhatsApp Now
+            </a>
+
+            <Link
+              href="/contact"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 text-white border border-white/20 font-semibold px-8 py-4 rounded-xl transition-all duration-300 text-base"
+            >
+              Request a Consultation
+              <ArrowRight size={18} />
+            </Link>
+          </div>
+
+          <p className="mt-8 text-xs text-slate-400">
+            Direct response within business hours · Fixed-scope proposals with milestone delivery
+          </p>
+        </div>
       </section>
     </div>
   );

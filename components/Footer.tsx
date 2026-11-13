@@ -68,9 +68,8 @@ export const Footer = () => {
                             {[
                                 { name: 'SAP Implementation & Rollout', path: '/services/sap-consulting' },
                                 { name: 'SAP AMS Support', path: '/sap-ams-support' },
-                                { name: 'Inaiwazhi WhatsApp Automation', path: '/inaiwazhi-whatsapp-automation' },
+                                { name: 'Inaiwazhi WhatsApp & Workflow Automation', path: '/inaiwazhi-whatsapp-automation' },
                                 { name: 'Website Development', path: '/website-development' },
-                                { name: 'Website Development Chennai', path: '/website-development-chennai' },
                                 { name: 'Commerce Enablement', path: '/commerce-enablement' },
                                 { name: 'Custom App Development', path: '/custom-application-development' },
                                 { name: 'Custom Commerce Engineering', path: '/custom-commerce-development' },

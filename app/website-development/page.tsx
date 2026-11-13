@@ -4,9 +4,9 @@ import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib
 import { buildMetadata } from "@/lib/seo";
 
 const canonicalPath = "/website-development/";
-const title = "Website Development Company in Chennai | SoftClinch";
+const title = "Website Development Company in Chennai & India | SoftClinch";
 const description =
-  "Fast, SEO-ready business websites and WooCommerce stores for small businesses across India. Chennai-based team. Chat with us on WhatsApp for a quick quote.";
+  "Fast, SEO-ready business websites and WooCommerce stores for small businesses and growing enterprises across India. Chennai-based team. Chat with us on WhatsApp for a quick quote.";
 
 const websiteFaq = [
   {
@@ -89,7 +89,7 @@ export default function WebsiteDevelopmentPage() {
             description,
             serviceType:
               "Business Website Development, Ecommerce Website Development, Landing Pages, Web Applications, Website Redesign and Maintenance",
-            areaServed: ["India"],
+            areaServed: ["Chennai", "Tamil Nadu", "Coimbatore", "Madurai", "Bangalore", "India"],
           }),
           breadcrumbJsonLd([
             { name: "Home", path: "/" },

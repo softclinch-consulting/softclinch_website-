@@ -519,10 +519,10 @@ const CoreServices = () => {
       path: '/inaiwazhi-whatsapp-automation'
     },
     {
-      title: 'Website Development in Chennai',
+      title: 'Website Development',
       description: 'Fast, SEO-ready business websites and WooCommerce stores tailored for growing businesses across Chennai and India.',
       icon: <Globe className="text-slate-900" size={24} />,
-      path: '/website-development-chennai'
+      path: '/website-development'
     },
   ];
 

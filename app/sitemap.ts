@@ -77,7 +77,6 @@ const routeLastModifiedMap: Record<string, string> = {
   "/contact": "2026-04-08",
   "/services": "2026-04-05",
   "/website-development": "2026-04-10",
-  "/website-development-chennai": "2026-04-11",
   "/sap-ams-support": "2026-04-11",
   "/services/sap-consulting": "2026-04-05",
   "/custom-application-development": "2026-04-02",
@@ -87,7 +86,6 @@ const routeLastModifiedMap: Record<string, string> = {
   "/inaiwazhi-whatsapp-automation": "2026-04-09",
   "/custom-commerce-development": "2026-03-28",
   "/commerce-enablement": "2026-03-28",
-  "/business-communication": "2026-03-20",
   "/softclinch-ai": "2026-03-20",
   "/case-studies": "2026-03-25",
   "/blog": "2026-04-10",
@@ -104,7 +102,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/contact",
     "/services",
     "/website-development",
-    "/website-development-chennai",
     "/sap-ams-support",
     "/services/sap-consulting",
     "/custom-application-development",
@@ -114,7 +111,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/inaiwazhi-whatsapp-automation",
     "/custom-commerce-development",
     "/commerce-enablement",
-    "/business-communication",
     "/softclinch-ai",
     "/case-studies",
     "/blog",
@@ -149,7 +145,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     } else if (
       route === "/sap-ams-support" ||
       route === "/website-development" ||
-      route === "/website-development-chennai" ||
       route === "/custom-application-development" ||
       route === "/digital-marketing" ||
       route === "/inaiwazhi-whatsapp-automation" ||

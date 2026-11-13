@@ -5,9 +5,9 @@ import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib
 import { whatsappAutomationFaq } from "@/lib/faqs";
 
 const canonicalPath = "/inaiwazhi-whatsapp-automation";
-const title = "Inaiwazhi WhatsApp Automation & AI Chatbots | SoftClinch";
+const title = "Inaiwazhi: WhatsApp Automation & Business Workflow Platform | SoftClinch";
 const description =
-  "Official Meta WhatsApp Business Platform solution. Automate customer support, lead qualification, broadcast campaigns & CRM sync. Book a free demo!";
+  "Official Meta WhatsApp Business Platform solution. Unified WhatsApp chatbots, automated customer communication, ERP/CRM event triggers, and business workflow automation.";
 
 export const metadata = buildMetadata({
   title,
@@ -26,9 +26,9 @@ export default function WhatsAppAutomationPage() {
           }),
           serviceJsonLd({
             canonicalPath,
-            name: "Inaiwazhi Enterprise WhatsApp Automation Platform",
+            name: "Inaiwazhi WhatsApp Automation & Business Communication Platform",
             description,
-            serviceType: "WhatsApp Business API, WhatsApp Chatbot Automation, Customer Support Automation, CRM Integration",
+            serviceType: "WhatsApp Business API, WhatsApp Chatbot Automation, Customer Support Automation, CRM Integration, Enterprise Business Communication Workflows",
             areaServed: [
               "Chennai",
               "Tamil Nadu",

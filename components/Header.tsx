@@ -32,21 +32,13 @@ export const Header = () => {
                 { name: 'SAP AMS Support', path: '/sap-ams-support' },
                 { name: 'Custom App Development', path: '/custom-application-development' },
                 { name: 'Website Development', path: '/website-development' },
-                { name: 'Website Development Chennai', path: '/website-development-chennai' },
                 { name: 'Custom Ecommerce', path: '/custom-commerce-development' },
                 { name: 'AI-Powered Business Systems', path: '/services/ai-powered-business-systems' },
                 { name: 'Commerce Enablement', path: '/commerce-enablement' },
                 { name: 'Digital Marketing', path: '/digital-marketing' },
-            ]
+            ],
         },
-        {
-            name: 'Enterprise',
-            path: '/services/enterprise-software',
-            subLinks: [
-                { name: 'Enterprise Software', path: '/services/enterprise-software' },
-                { name: 'Business Communication', path: '/business-communication' },
-            ]
-        },
+        { name: 'Enterprise', path: '/services/enterprise-software' },
         { name: 'Inaiwazhi', path: '/inaiwazhi-whatsapp-automation' },
         { name: 'Blog', path: '/blog' },
         { name: 'Contact', path: '/contact' },
