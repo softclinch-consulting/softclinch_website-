@@ -160,7 +160,7 @@ const modelPillars = [
   },
 ];
 
-const whySoftclinch = [
+const whySoftClinch = [
   {
     title: "Experienced SAP Pool",
     description: "Deep functional and technical expertise across SAP modules.",
@@ -513,7 +513,7 @@ export function SAPAModelSections() {
               </div>
             </motion.div>
 
-            {whySoftclinch.map(({ title, description, icon: Icon, placement }, index) => (
+            {whySoftClinch.map(({ title, description, icon: Icon, placement }, index) => (
               <motion.article
                 key={title}
                 variants={cardVariants}

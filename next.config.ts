@@ -28,6 +28,21 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/whatsapp-automation",
+        destination: "/inaiwazhi-whatsapp-automation/",
+        permanent: true,
+      },
+      {
+        source: "/website-development-chennai",
+        destination: "/website-development/",
+        permanent: true,
+      },
+      {
+        source: "/business-communication",
+        destination: "/inaiwazhi-whatsapp-automation/",
+        permanent: true,
+      },
+      {
         source: "/privacy",
         destination: "/privacy-policy/",
         permanent: true,

@@ -4,20 +4,9 @@ import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib
 import { buildMetadata } from "@/lib/seo";
 
 const canonicalPath = "/website-development/";
-const title = "Website Development Company in India | SoftClinch";
+const title = "Website Development Company in Chennai & India | SoftClinch";
 const description =
-  "Website development services for businesses across India. Get a mobile-friendly business website, ecommerce store or web app. Request a free quote.";
-
-const keywords = [
-  "website development company in India",
-  "website development services in India",
-  "web design company in India",
-  "business website development",
-  "website development for small businesses",
-  "mobile-friendly website development",
-  "website redesign services",
-  "WhatsApp website integration",
-];
+  "Fast, SEO-ready business websites and WooCommerce stores for small businesses and growing enterprises across India. Chennai-based team. Chat with us on WhatsApp for a quick quote.";
 
 const websiteFaq = [
   {
@@ -85,7 +74,6 @@ const websiteFaq = [
 export const metadata = buildMetadata({
   title,
   description,
-  keywords,
   canonicalPath,
 });
 
@@ -94,14 +82,14 @@ export default function WebsiteDevelopmentPage() {
     <>
       <SeoJsonLd
         data={[
-          webpageJsonLd({ canonicalPath, title, description, keywords }),
+          webpageJsonLd({ canonicalPath, title, description }),
           serviceJsonLd({
             canonicalPath,
             name: "Website Development Services",
             description,
             serviceType:
               "Business Website Development, Ecommerce Website Development, Landing Pages, Web Applications, Website Redesign and Maintenance",
-            areaServed: ["India"],
+            areaServed: ["Chennai", "Tamil Nadu", "Coimbatore", "Madurai", "Bangalore", "India"],
           }),
           breadcrumbJsonLd([
             { name: "Home", path: "/" },

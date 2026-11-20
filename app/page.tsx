@@ -3,25 +3,13 @@ import { Home } from "@/components/Home";
 import { buildMetadata } from "@/lib/seo";
 import { faqJsonLd, localBusinessJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 
+const homeTitle = "SAP Consulting, AMS & Website Development in Chennai | SoftClinch";
+const homeDescription =
+  "SoftClinch is a Chennai-based SAP consulting and software firm. SAP implementation, SAP AMS support, custom apps, websites and WhatsApp automation for businesses across India.";
+
 export const metadata = buildMetadata({
-  title: "Enterprise Technology & Digital Growth Solutions | SoftClinch",
-  description:
-    "Scale your enterprise with custom software, SAP consulting, WhatsApp automation & AI-driven digital marketing. Book your free business consultation today!",
-  keywords: [
-    "enterprise technology consulting",
-    "custom software development company",
-    "custom software company tamil nadu",
-    "sap consulting company chennai",
-    "sap ams support services",
-    "whatsapp automation solutions",
-    "official whatsapp business platform",
-    "ai business automation solutions",
-    "performance marketing agency",
-    "seo services company",
-    "enterprise digital transformation solutions",
-    "saas development company",
-    "b2b custom software developers",
-  ],
+  title: homeTitle,
+  description: homeDescription,
   canonicalPath: "/",
 });
 
@@ -55,7 +43,7 @@ export default function Page() {
         data={[
           webpageJsonLd({
             canonicalPath: "/",
-            title: "Enterprise Technology & Digital Growth Solutions | SoftClinch",
+            title: homeTitle,
           }),
           localBusinessJsonLd("/"),
           serviceJsonLd({

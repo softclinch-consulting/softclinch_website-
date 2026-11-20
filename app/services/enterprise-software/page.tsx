@@ -1,7 +1,7 @@
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { EnterpriseSoftware } from "@/components/EnterpriseSoftware";
 import { buildMetadata } from "@/lib/seo";
-import { faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
+import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 
 const canonicalPath = "/services/enterprise-software";
 const title = "Custom Enterprise Software Development Company | SoftClinch";
@@ -35,28 +35,6 @@ export const metadata = buildMetadata({
   title,
   description,
   canonicalPath,
-  keywords: [
-    "ai application development",
-    "enterprise software development",
-    "custom application development",
-    "ecommerce application development",
-    "enterprise automation software",
-    "saas application development services",
-    "ai chatbot development company",
-    "enterprise digital transformation services",
-    "cloud native application development",
-    "custom software development for ecommerce",
-    "ai powered crm systems",
-    "workflow automation software",
-    "business intelligence dashboards",
-    "enterprise ai solutions",
-    "custom enterprise software",
-    "ai automation systems",
-    "enterprise application development",
-    "cloud automation services",
-    "predictive analytics solutions",
-    "customer engagement systems",
-  ],
 });
 
 export default function EnterpriseSoftwarePage() {
@@ -73,6 +51,11 @@ export default function EnterpriseSoftwarePage() {
             name: "AI-Powered Enterprise & eCommerce Application Development",
             description,
           }),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: "Enterprise Software", path: canonicalPath },
+          ]),
           faqJsonLd(enterpriseFaq),
         ]}
       />

@@ -332,7 +332,7 @@ const globalPoints = [
 
 const relatedLinks = [
   { label: "Custom Application Development", href: "/custom-application-development" },
-  { label: "WhatsApp Automation", href: "/whatsapp-automation" },
+  { label: "WhatsApp Automation", href: "/inaiwazhi-whatsapp-automation/" },
   { label: "Digital Growth Systems", href: "/digital-marketing" },
   { label: "SAP AMS Support", href: "/sap-ams-support" },
   { label: "Contact SoftClinch", href: "/contact" },

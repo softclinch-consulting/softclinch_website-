@@ -397,7 +397,7 @@ export const DigitalMarketing = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <AnimatedCounter end={140} suffix="%" label="Average ROI Growth" />
-            <AnimatedCounter end={2} suffix="x" label="Qualified Lead Increase" />
+            <AnimatedCounter end={2} suffix="X" label="Qualified Lead Increase" />
             <AnimatedCounter end={28} suffix="%" label="Lower CAC" />
           </div>
         </div>
@@ -542,12 +542,15 @@ function FadeInSection({ children, delay = 0 }: { children: React.ReactNode; del
 }
 
 function AnimatedCounter({ end, suffix = "", label }: { end: number; suffix?: string; label: string }) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(end);
   const ref = useRef(null);
   const isInView = useInView(ref as any, { once: true });
+  const hasAnimatedRef = useRef(false);
 
   useEffect(() => {
-    if (!isInView) return;
+    if (!isInView || hasAnimatedRef.current) return;
+    hasAnimatedRef.current = true;
+    setCount(0);
 
     let startTime: number;
     const duration = 2000;

@@ -99,8 +99,9 @@ function ClientLogos() {
     { name: "NTT DATA", logoPath: "/client-logos/sc-clients-003.jpg" },
     { name: "Fujitsu", logoPath: "/client-logos/sc-clients-004.jpg" },
     { name: "Star Eltech", logoPath: "/client-logos/sc-clients-005.jpg" },
-    { name: "Client Logo 007", logoPath: "/client-logos/client-logo-007.jpeg" },
-    { name: "Client Logo 008", logoPath: "/client-logos/client-logo-008.jpeg" },
+    // TODO: Replace with verified real client names once confirmed with client permissions
+    { name: "Digitide", logoPath: "/client-logos/client-logo-007.jpeg" },
+    { name: "Stobay", logoPath: "/client-logos/client-logo-008.jpeg" },
   ];
 
   return (
@@ -125,6 +126,7 @@ function ClientLogos() {
             {[...clients, ...clients].map((client, index) => (
               <div
                 key={`${client.name}-${index}`}
+                aria-hidden={index >= clients.length ? "true" : undefined}
                 className="flex min-w-[180px] items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 px-6 py-5"
               >
                 <img

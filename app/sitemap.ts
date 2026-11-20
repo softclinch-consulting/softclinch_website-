@@ -71,9 +71,30 @@ async function getPublishedCaseStudies(): Promise<SitemapContentItem[]> {
   return [];
 }
 
+const routeLastModifiedMap: Record<string, string> = {
+  "/": "2026-04-10",
+  "/about": "2026-04-05",
+  "/contact": "2026-04-08",
+  "/services": "2026-04-05",
+  "/website-development": "2026-04-10",
+  "/sap-ams-support": "2026-04-11",
+  "/services/sap-consulting": "2026-04-05",
+  "/custom-application-development": "2026-04-02",
+  "/services/ai-powered-business-systems": "2026-04-02",
+  "/services/enterprise-software": "2026-04-02",
+  "/digital-marketing": "2026-04-06",
+  "/inaiwazhi-whatsapp-automation": "2026-04-09",
+  "/custom-commerce-development": "2026-03-28",
+  "/commerce-enablement": "2026-03-28",
+  "/softclinch-ai": "2026-03-20",
+  "/case-studies": "2026-03-25",
+  "/blog": "2026-04-10",
+  "/privacy-policy": "2026-01-15",
+  "/terms-of-use": "2026-01-15",
+};
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = getSiteUrl();
-  const now = new Date();
 
   const staticRoutes = [
     "/",
@@ -90,7 +111,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/inaiwazhi-whatsapp-automation",
     "/custom-commerce-development",
     "/commerce-enablement",
-    "/business-communication",
     "/softclinch-ai",
     "/case-studies",
     "/blog",
@@ -124,6 +144,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority = 1.0;
     } else if (
       route === "/sap-ams-support" ||
+      route === "/website-development" ||
       route === "/custom-application-development" ||
       route === "/digital-marketing" ||
       route === "/inaiwazhi-whatsapp-automation" ||
@@ -142,7 +163,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority = 0.3;
     }
 
-    addEntry(route, now, changeFrequency, priority);
+    const stableDateStr = routeLastModifiedMap[route] || "2026-04-01";
+    const lastModified = new Date(stableDateStr);
+
+    addEntry(route, lastModified, changeFrequency, priority);
   });
 
   const blogEntries = await getPublishedBlogPosts();
@@ -153,7 +177,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     addEntry(
       `/blog/${post.slug}`,
-      post.publishedAt ? new Date(post.publishedAt) : now,
+      post.publishedAt ? new Date(post.publishedAt) : new Date("2026-04-01"),
       "weekly",
       0.7,
     );
@@ -167,7 +191,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     addEntry(
       `/case-studies/${caseStudy.slug}`,
-      caseStudy.publishedAt ? new Date(caseStudy.publishedAt) : now,
+      caseStudy.publishedAt ? new Date(caseStudy.publishedAt) : new Date("2026-04-01"),
       "monthly",
       0.75,
     );

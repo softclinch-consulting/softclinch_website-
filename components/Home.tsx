@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ChevronDown, ChevronRight, MessageSquare, Globe, Cpu, Database, BarChart3, CheckCircle2, Star, Layers, Code } from 'lucide-react';
 import { assetPath } from '@/lib/asset';
 import { reviews } from '@/lib/reviews';
@@ -139,9 +140,12 @@ const Hero = () => {
                 transition={{ duration: 0.6, ease: "easeOut" }}
                 className="relative w-full max-w-[600px] aspect-square lg:aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl border border-white/20"
               >
-                <img
+                <Image
                   src={assetPath(slides[currentSlide].image)}
                   alt={slides[currentSlide].tag}
+                  width={600}
+                  height={450}
+                  priority
                   className="w-full h-full object-cover"
                 />
 
@@ -201,8 +205,9 @@ const ClientLogos = () => {
     { name: 'NTT DATA', logoPath: '/client-logos/sc-clients-003.jpg', bg: 'bg-white' },
     { name: 'Fujitsu', logoPath: '/client-logos/sc-clients-004.jpg', bg: 'bg-white' },
     { name: 'Star Eltech', logoPath: '/client-logos/sc-clients-005.jpg', bg: 'bg-white' },
-    { name: 'Client Logo 007', logoPath: '/client-logos/client-logo-007.jpeg', bg: 'bg-white' },
-    { name: 'Client Logo 008', logoPath: '/client-logos/client-logo-008.jpeg', bg: 'bg-white' },
+    // TODO: Replace with verified real client names once confirmed with client permissions
+    { name: 'Digitide', logoPath: '/client-logos/client-logo-007.jpeg', bg: 'bg-white' },
+    { name: 'Stobay', logoPath: '/client-logos/client-logo-008.jpeg', bg: 'bg-white' },
   ];
 
   return (
@@ -227,6 +232,7 @@ const ClientLogos = () => {
             {[...clients, ...clients].map((client, index) => (
               <div
                 key={`${client.name}-${index}`}
+                aria-hidden={index >= clients.length ? "true" : undefined}
                 className="flex min-w-[180px] items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 px-6 py-5"
               >
                 <img
@@ -360,7 +366,7 @@ const SAPConsultingAMSOverview = () => {
 
             <div className="space-y-4 text-slate-600 text-sm leading-relaxed mb-8 flex-1">
               <p>
-                At SoftClinch, we help organizations unlock the full potential of SAP through strategic consulting, seamless implementations, and successful global rollouts. With decades of industry experience across Manufacturing, Automotive, Consumer Durables, Retail, Garments, Warehousing, and Distribution sectors, our SAP experts deliver solutions that align technology with business objectives.
+                At SoftClinch, we help organizations unlock the full potential of SAP through strategic consulting, seamless implementations, and successful global rollouts. With 10+ years of SAP delivery experience across Manufacturing, Automotive, Consumer Durables, Retail, Garments, Warehousing, and Distribution sectors, our SAP experts deliver solutions that align technology with business objectives.
               </p>
               <p>
                 From business process assessment and solution architecture to SAP S/4HANA implementation, ECC upgrades, system integration, and multi-location rollouts, we ensure every SAP project is executed with precision, transparency, and measurable business value. Our consultants work closely with stakeholders to streamline operations, improve visibility, optimize supply chains, and create scalable digital foundations for future growth.
@@ -463,12 +469,20 @@ const SAPConsultingAMSOverview = () => {
                   &quot;With SoftClinch SAP AMS, your teams can focus on business growth while we ensure your SAP environment operates efficiently, reliably, and without interruption.&quot;
                 </p>
               </div>
-              <a
-                href="mailto:venkat@softclinch.com"
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-brand-terracotta text-white font-bold text-sm rounded-full hover:bg-brand-navy hover:scale-[1.02] transition-all duration-300 w-full sm:w-auto"
-              >
-                Contact AMS Head <ChevronRight size={16} />
-              </a>
+              <div className="flex flex-wrap items-center gap-4">
+                <Link
+                  href="/sap-ams-support/"
+                  className="inline-flex items-center gap-2 font-bold text-brand-navy hover:text-brand-terracotta text-sm transition-colors"
+                >
+                  SAP AMS support services <ChevronRight size={16} />
+                </Link>
+                <a
+                  href="mailto:venkat@softclinch.com"
+                  className="inline-flex items-center justify-center gap-2.5 px-6 py-3 bg-brand-terracotta text-white font-bold text-sm rounded-full hover:bg-brand-navy hover:scale-[1.02] transition-all duration-300 w-full sm:w-auto"
+                >
+                  Contact AMS Head <ChevronRight size={16} />
+                </a>
+              </div>
             </div>
           </motion.div>
 
@@ -504,6 +518,12 @@ const CoreServices = () => {
       icon: <MessageSquare className="text-slate-900" size={24} />,
       path: '/inaiwazhi-whatsapp-automation'
     },
+    {
+      title: 'Website Development',
+      description: 'Fast, SEO-ready business websites and WooCommerce stores tailored for growing businesses across Chennai and India.',
+      icon: <Globe className="text-slate-900" size={24} />,
+      path: '/website-development'
+    },
   ];
 
   return (
@@ -513,7 +533,7 @@ const CoreServices = () => {
           <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900 mb-4">Our Services</h2>
           <p className="text-slate-600 max-w-2xl">SoftClinch helps businesses scale with SAP consulting, WhatsApp automation, SEO, AI-powered marketing, enterprise software development, and digital transformation solutions.</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
           {services.map((service, index) => (
             <Link key={index} href={service.path} className="block group">
               <motion.div
@@ -612,11 +632,14 @@ const ProductAuthority = () => {
                 transition={{ duration: 0.6 }}
                 className="relative w-full flex items-center justify-end"
               >
-                <img
-                  src={assetPath("/WhatsApp_Image_2026-02-17_at_4.11.44_PM-removebg-preview.png")}
-                  alt="Inaiwazhi WhatsApp Automation"
-                  className="drop-shadow-2xl"
-                  style={{ width: '400%', height: '680px', objectFit: 'cover', objectPosition: 'Right center' }}
+                <Image
+                  src={assetPath("/inaiwazhi-whatsapp-automation-dashboard.png")}
+                  alt="Inaiwazhi WhatsApp Automation Dashboard"
+                  width={960}
+                  height={680}
+                  loading="lazy"
+                  className="drop-shadow-2xl object-cover object-right"
+                  style={{ width: '400%', height: '680px', maxWidth: 'none' }}
                 />
                 <div className="absolute inset-0 -z-10 flex items-center justify-center">
                   <div className="w-64 h-64 bg-[#22c55e]/20 blur-[80px] rounded-full animate-pulse"></div>
@@ -880,8 +903,36 @@ const Testimonials = () => {
         `}</style>
         <div className="overflow-hidden w-full">
           <div className="home-marquee-track gap-5 py-3 px-4">
-            {allReviews.map((t, i) => (
-              <div key={`${t.name}-${i}`} className="w-[300px] shrink-0 bg-slate-50 border border-slate-100 rounded-[2rem] px-6 py-5 flex flex-col gap-3 hover:shadow-xl transition-all cursor-default group">
+            {reviews.map((t, i) => (
+              <div key={`home-rev-pri-${t.name}-${i}`} className="w-[300px] shrink-0 bg-slate-50 border border-slate-100 rounded-[2rem] px-6 py-5 flex flex-col gap-3 hover:shadow-xl transition-all cursor-default group">
+                <div className="flex items-center justify-between">
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-base shadow-lg ${["bg-teal-600","bg-emerald-700","bg-rose-600","bg-blue-600","bg-violet-600","bg-amber-600","bg-pink-600","bg-indigo-600","bg-cyan-700"][i % 9]}`}>
+                    {t.name.charAt(0)}
+                  </div>
+                  <div className="flex items-center gap-1 bg-white border border-slate-200/60 px-2 py-0.5 rounded-full text-[10px] font-bold text-slate-400 shadow-sm">
+                    <svg viewBox="0 0 24 24" className="w-3 h-3" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+                      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    </svg>
+                    Google
+                  </div>
+                </div>
+                <div className="flex gap-0.5 text-amber-400">
+                  {[...Array(5)].map((_, s) => <Star key={s} size={13} fill="currentColor" />)}
+                </div>
+                <p className="text-slate-700 text-sm leading-relaxed flex-1">&quot;{t.text}&quot;</p>
+                <div className="flex items-center gap-3 pt-3 border-t border-slate-100">
+                  <div className="font-bold text-slate-900 text-sm">{t.name}</div>
+                  <div className="text-blue-600 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
+                    Verified <CheckCircle2 size={11} />
+                  </div>
+                </div>
+              </div>
+            ))}
+            {reviews.map((t, i) => (
+              <div key={`home-rev-dup-${t.name}-${i}`} aria-hidden="true" className="w-[300px] shrink-0 bg-slate-50 border border-slate-100 rounded-[2rem] px-6 py-5 flex flex-col gap-3 hover:shadow-xl transition-all cursor-default group">
                 <div className="flex items-center justify-between">
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-base shadow-lg ${["bg-teal-600","bg-emerald-700","bg-rose-600","bg-blue-600","bg-violet-600","bg-amber-600","bg-pink-600","bg-indigo-600","bg-cyan-700"][i % 9]}`}>
                     {t.name.charAt(0)}

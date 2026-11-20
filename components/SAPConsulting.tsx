@@ -1,9 +1,10 @@
 "use client";
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Activity, ArrowRight, Sliders, Users } from 'lucide-react';
+import { Activity, ArrowRight, ChevronDown, Sliders, Users } from 'lucide-react';
 import { SAPAModelSections } from "@/components/SAPAModelSections";
 import { ServiceMediaPanel } from "@/components/ServiceMediaPanel";
+import { sapAmsFaq, type FaqItem } from "@/lib/faqs";
 
 const sapSupportCoverage = [
   "S/4HANA On-Premise",
@@ -12,7 +13,7 @@ const sapSupportCoverage = [
   "ECC support coverage",
 ];
 
-export const SAPConsulting = () => {
+export const SAPConsulting = ({ faqs = sapAmsFaq }: { faqs?: FaqItem[] }) => {
   return (
     <div className="min-h-screen bg-[#F8FAFC] overflow-hidden font-sans pt-5">
       {/* Hero Section */}
@@ -44,10 +45,7 @@ export const SAPConsulting = () => {
                 transition={{ delay: 0.2 }}
                 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-[1.12] mb-6 tracking-tight font-display"
               >
-                SAP AMS Support &amp; Managed <br />
-                <span className="bg-gradient-to-r from-brand-navy to-brand-terracotta bg-clip-text text-transparent">
-                  ERP Consulting Services
-                </span>
+                SAP AMS Support Services
               </motion.h1>
 
               <motion.p
@@ -56,7 +54,7 @@ export const SAPConsulting = () => {
                 transition={{ delay: 0.3 }}
                 className="text-lg text-slate-600 mb-10 leading-relaxed font-medium"
               >
-                Softclinch Consulting Services Pvt Ltd specializes in SAP Consulting and Support, providing end-to-end solutions for businesses. This page details the Application Management Support (AMS) process for SAP, covering the support structure, issue resolution methodology, and best practices for efficient operations.
+                SoftClinch Consulting Services Pvt Ltd specializes in SAP Consulting and Support, providing end-to-end solutions for businesses. This page details the Application Management Support (AMS) process for SAP, covering the support structure, issue resolution methodology, and best practices for efficient operations.
               </motion.p>
 
               <motion.div
@@ -151,8 +149,42 @@ export const SAPConsulting = () => {
 
       <SAPAModelSections />
 
+      {/* Frequently Asked Questions Section */}
+      <section className="py-24 bg-slate-50 border-t border-slate-200/80">
+        <div className="max-w-[1200px] mx-auto px-6 sm:px-8">
+          <div className="text-center mb-16">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-brand-terracotta/10 text-brand-terracotta text-xs font-bold uppercase tracking-widest mb-4">
+              Common Questions
+            </span>
+            <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900 mb-4">
+              Frequently Asked Questions About SAP AMS
+            </h2>
+            <p className="text-slate-600 max-w-2xl mx-auto text-base">
+              Clear answers about scope, SAP versions supported, SLA models, and partner transition.
+            </p>
+          </div>
 
-
+          <div className="max-w-3xl mx-auto space-y-4">
+            {faqs.map((faq) => (
+              <details
+                key={faq.question}
+                className="group rounded-2xl border border-slate-200 bg-white px-6 py-2 transition open:border-brand-navy/30 open:shadow-md"
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-5 py-5 text-left font-bold text-slate-900 marker:hidden [&::-webkit-details-marker]:hidden">
+                  <span>{faq.question}</span>
+                  <ChevronDown
+                    size={20}
+                    className="shrink-0 text-brand-terracotta transition-transform duration-300 group-open:rotate-180"
+                  />
+                </summary>
+                <div className="border-t border-slate-100 pb-6 pt-4 text-sm leading-relaxed text-slate-600">
+                  {faq.answer}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

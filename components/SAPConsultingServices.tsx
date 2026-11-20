@@ -81,8 +81,9 @@ const ClientLogos = () => {
     { name: 'NTT DATA', logoPath: '/client-logos/sc-clients-003.jpg', bg: 'bg-white' },
     { name: 'Fujitsu', logoPath: '/client-logos/sc-clients-004.jpg', bg: 'bg-white' },
     { name: 'Star Eltech', logoPath: '/client-logos/sc-clients-005.jpg', bg: 'bg-white' },
-    { name: 'Client Logo 007', logoPath: '/client-logos/client-logo-007.jpeg', bg: 'bg-white' },
-    { name: 'Client Logo 008', logoPath: '/client-logos/client-logo-008.jpeg', bg: 'bg-white' },
+    // TODO: Replace with verified real client names once confirmed with client permissions
+    { name: 'Digitide', logoPath: '/client-logos/client-logo-007.jpeg', bg: 'bg-white' },
+    { name: 'Stobay', logoPath: '/client-logos/client-logo-008.jpeg', bg: 'bg-white' },
   ];
 
   return (
@@ -107,6 +108,7 @@ const ClientLogos = () => {
             {[...clients, ...clients].map((client, index) => (
               <div
                 key={`${client.name}-${index}`}
+                aria-hidden={index >= clients.length ? "true" : undefined}
                 className="flex min-w-[180px] items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 px-6 py-5"
               >
                 <img
@@ -657,7 +659,7 @@ export const SAPConsultingServices = () => {
               Client Case Study
             </h2>
             <p className="text-slate-600 max-w-3xl mx-auto text-sm leading-relaxed font-semibold">
-              Softclinch Consulting Services Pvt Ltd specializes in SAP Consulting and Support, offering comprehensive solutions that streamline business operations and drive digital transformation. Our expertise spans across SAP implementations, upgrades, and ongoing support, ensuring clients maximize the value of their SAP investments.
+              SoftClinch Consulting Services Pvt Ltd specializes in SAP Consulting and Support, offering comprehensive solutions that streamline business operations and drive digital transformation. Our expertise spans across SAP implementations, upgrades, and ongoing support, ensuring clients maximize the value of their SAP investments.
             </p>
           </div>
 

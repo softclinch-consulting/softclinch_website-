@@ -34,7 +34,6 @@ export function buildMetadata({
     metadataBase: new URL(siteUrl),
     title: pageTitle,
     description: pageDescription,
-    keywords,
     alternates: { canonical: canonicalUrl },
     robots: noIndex ? { index: false, follow: false } : { index: true, follow: true },
     openGraph: {
