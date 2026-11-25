@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Clock } from "lucide-react";
 import ReCAPTCHA from "react-google-recaptcha";
 import React, { useEffect, useState } from "react";
 import { CONTACT } from "@/lib/contact";
@@ -158,6 +158,15 @@ export const Contact = () => {
                 <div>
                   <h4 className="font-bold text-slate-900">Visit Us</h4>
                   <p className="text-slate-600">{CONTACT.address}</p>
+                </div>
+              </div>
+              <div className="flex gap-6">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-slate-900">
+                  <Clock size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900">Business Hours</h4>
+                  <p className="text-slate-600">Mon–Fri 10 AM–6 PM, Sat 10 AM–2 PM, Sunday closed</p>
                 </div>
               </div>
             </div>

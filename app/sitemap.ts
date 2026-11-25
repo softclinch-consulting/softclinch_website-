@@ -8,6 +8,7 @@ export const revalidate = 3600;
 interface SitemapContentItem {
   slug: string;
   publishedAt?: string | Date;
+  dateModified?: string | Date;
   isDraft?: boolean;
   isPrivate?: boolean;
 }
@@ -55,40 +56,38 @@ function buildEntry(
 }
 
 async function getPublishedBlogPosts(): Promise<SitemapContentItem[]> {
-  // TODO: Replace this placeholder with a real CMS or database query.
   return blogPosts
     .filter((post) => Boolean(post.publishedDate))
     .map((post) => ({
       slug: post.slug,
       publishedAt: post.publishedDate,
+      dateModified: post.dateModified || post.publishedDate,
       isDraft: false,
       isPrivate: false,
     }));
 }
 
 async function getPublishedCaseStudies(): Promise<SitemapContentItem[]> {
-  // TODO: Replace this placeholder with a real CMS or database query.
+  // Case studies are currently in curation and noindexed
   return [];
 }
 
 const routeLastModifiedMap: Record<string, string> = {
-  "/": "2026-04-10",
-  "/about": "2026-04-05",
-  "/contact": "2026-04-08",
-  "/services": "2026-04-05",
-  "/website-development": "2026-04-10",
-  "/sap-ams-support": "2026-04-11",
-  "/services/sap-consulting": "2026-04-05",
-  "/custom-application-development": "2026-04-02",
-  "/services/ai-powered-business-systems": "2026-04-02",
-  "/services/enterprise-software": "2026-04-02",
-  "/digital-marketing": "2026-04-06",
-  "/inaiwazhi-whatsapp-automation": "2026-04-09",
-  "/custom-commerce-development": "2026-03-28",
-  "/commerce-enablement": "2026-03-28",
-  "/softclinch-ai": "2026-03-20",
-  "/case-studies": "2026-03-25",
-  "/blog": "2026-04-10",
+  "/": "2026-11-25",
+  "/about": "2026-11-20",
+  "/contact": "2026-11-20",
+  "/services": "2026-11-20",
+  "/website-development": "2026-11-25",
+  "/sap-ams-support": "2026-11-25",
+  "/services/sap-consulting": "2026-11-25",
+  "/custom-application-development": "2026-11-25",
+  "/services/ai-powered-business-systems": "2026-11-25",
+  "/services/enterprise-software": "2026-11-25",
+  "/digital-marketing": "2026-11-25",
+  "/inaiwazhi-whatsapp-automation": "2026-11-25",
+  "/custom-commerce-development": "2026-11-25",
+  "/commerce-enablement": "2026-11-20",
+  "/softclinch-ai": "2026-11-25",
   "/privacy-policy": "2026-01-15",
   "/terms-of-use": "2026-01-15",
 };
@@ -112,7 +111,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/custom-commerce-development",
     "/commerce-enablement",
     "/softclinch-ai",
-    "/case-studies",
     "/blog",
     "/privacy-policy",
     "/terms-of-use",
@@ -155,7 +153,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     } else if (route.startsWith("/services")) {
       changeFrequency = "weekly";
       priority = 0.9;
-    } else if (route === "/blog" || route === "/case-studies") {
+    } else if (route === "/blog") {
       changeFrequency = "daily";
       priority = 0.85;
     } else if (route === "/privacy-policy" || route === "/terms-of-use") {
@@ -163,8 +161,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority = 0.3;
     }
 
+    const newestPostDate = blogPosts.reduce((latest, post) => {
+      const postDate = new Date(post.dateModified || post.publishedDate);
+      return postDate > latest ? postDate : latest;
+    }, new Date("2026-04-01"));
+
     const stableDateStr = routeLastModifiedMap[route] || "2026-04-01";
-    const lastModified = new Date(stableDateStr);
+    const lastModified = route === "/blog" ? newestPostDate : new Date(stableDateStr);
 
     addEntry(route, lastModified, changeFrequency, priority);
   });
@@ -175,9 +178,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       return;
     }
 
+    const postLastMod = post.dateModified
+      ? new Date(post.dateModified)
+      : post.publishedAt
+      ? new Date(post.publishedAt)
+      : new Date("2026-04-01");
+
     addEntry(
       `/blog/${post.slug}`,
-      post.publishedAt ? new Date(post.publishedAt) : new Date("2026-04-01"),
+      postLastMod,
       "weekly",
       0.7,
     );

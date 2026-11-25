@@ -54,7 +54,7 @@ export const SAPConsulting = ({ faqs = sapAmsFaq }: { faqs?: FaqItem[] }) => {
                 transition={{ delay: 0.3 }}
                 className="text-lg text-slate-600 mb-10 leading-relaxed font-medium"
               >
-                SoftClinch Consulting Services Pvt Ltd specializes in SAP Consulting and Support, providing end-to-end solutions for businesses. This page details the Application Management Support (AMS) process for SAP, covering the support structure, issue resolution methodology, and best practices for efficient operations.
+                SoftClinch provides SLA-based SAP AMS support for S/4HANA and ECC from its Chennai team. We handle incident management, enhancements and continuous improvement for businesses across India that need dependable SAP application support without building a large in-house team.
               </motion.p>
 
               <motion.div
@@ -99,7 +99,7 @@ export const SAPConsulting = ({ faqs = sapAmsFaq }: { faqs?: FaqItem[] }) => {
               <ServiceMediaPanel
                 title="SAP Support Command Center"
                 subtitle="A structured visual space for monitoring, support workflows, governance, and enterprise SAP performance visibility."
-                imageSrc="/sap_consulting_hero_v2.png"
+                imageSrc="/sap_consulting_hero_v2.webp"
                 imageAlt="SAP AMS support service preview"
                 points={[
                   "Monitoring and incident management",

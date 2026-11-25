@@ -1,10 +1,10 @@
 import { CustomDevelopment } from "@/components/CustomDevelopment";
 import { SeoJsonLd } from "@/components/SeoJsonLd";
+import { RelatedReading } from "@/components/RelatedReading";
 import { buildMetadata } from "@/lib/seo";
 import {
   breadcrumbJsonLd,
   faqJsonLd,
-  professionalServiceJsonLd,
   serviceJsonLd,
   webpageJsonLd,
 } from "@/lib/schema";
@@ -84,7 +84,7 @@ export default function CustomDevelopmentPage() {
             title,
             description,
             keywords: highIntentKeywords,
-            image: "https://softclinch.com/custom_app_dev_hero.png",
+            image: "https://softclinch.com/custom_app_dev_hero.webp",
           }),
           serviceJsonLd({
             canonicalPath,
@@ -210,25 +210,6 @@ export default function CustomDevelopmentPage() {
               ],
             },
           }),
-          professionalServiceJsonLd({
-            canonicalPath,
-            name: "SoftClinch - Custom Application Development Company",
-            description:
-              "Bespoke software and custom application development company serving businesses in Chennai, Coimbatore, Madurai, Salem, Hosur, and across Tamil Nadu.",
-            priceRange: "₹₹",
-            areaServed: [
-              "Tamil Nadu",
-              "Chennai",
-              "Coimbatore",
-              "Madurai",
-              "Salem",
-              "Tiruppur",
-              "Erode",
-              "Hosur",
-              "Vellore",
-              "Tiruchirappalli",
-            ],
-          }),
           breadcrumbJsonLd([
             { name: "Home", path: "/" },
             { name: "Services", path: "/services/" },
@@ -238,6 +219,13 @@ export default function CustomDevelopmentPage() {
         ]}
       />
       <CustomDevelopment />
+      <RelatedReading
+        slugs={[
+          "off-the-shelf-software-vs-custom-applications-2026",
+          "switching-to-ai-powered-custom-applications-2026",
+          "seo-vs-geo-vs-aeo-traffic-2026",
+        ]}
+      />
     </>
   );
 }

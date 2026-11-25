@@ -9,7 +9,7 @@ import { faqJsonLd } from "@/lib/schema";
 export function FaqSection({
   title = "Frequently Asked Questions",
   items,
-  includeSEO = true,
+  includeSEO = false,
 }: {
   title?: string;
   items: FaqItem[];

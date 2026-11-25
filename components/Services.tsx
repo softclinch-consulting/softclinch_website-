@@ -225,7 +225,7 @@ export const Services = () => {
       // TODO: Add real client name/industry for this case study
       title: "E-commerce Platform Transformation",
       description: "Complete digital overhaul for a retail client, resulting in 300% increase in online sales and improved customer experience.",
-      image: "/custom_app_dev_hero.png",
+      image: "/custom_app_dev_hero.webp",
       results: [
         { value: "300%", label: "Sales Growth" },
         { value: "50%", label: "Faster Load Times" },

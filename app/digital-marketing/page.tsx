@@ -1,11 +1,12 @@
 import { DigitalMarketing } from "@/components/DigitalMarketing";
 import { SeoJsonLd } from "@/components/SeoJsonLd";
+import { RelatedReading } from "@/components/RelatedReading";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 import { digitalMarketingFaq } from "@/lib/faqs";
 
 const canonicalPath = "/digital-marketing";
-const title = "Performance Marketing, SEO & Google Ads | SoftClinch";
+const title = "Digital Marketing & SEO Services in Chennai | SoftClinch";
 const description =
   "Generate qualified B2B leads & scalable revenue with AI-driven SEO, Google Ads, Meta Ads & conversion funnels. Claim your free marketing growth audit now!";
 
@@ -48,6 +49,13 @@ export default function DigitalMarketingPage() {
         ]}
       />
       <DigitalMarketing />
+      <RelatedReading
+        slugs={[
+          "google-ai-search-seo-business-websites",
+          "why-businesses-lose-leads-after-enquiries",
+          "meta-ads-vs-google-ads-comparison",
+        ]}
+      />
     </>
   );
 }

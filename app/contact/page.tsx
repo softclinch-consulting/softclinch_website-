@@ -1,7 +1,7 @@
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { Contact } from "@/components/Contact";
 import { buildMetadata } from "@/lib/seo";
-import { breadcrumbJsonLd, localBusinessJsonLd, webpageJsonLd } from "@/lib/schema";
+import { breadcrumbJsonLd, webpageJsonLd } from "@/lib/schema";
 
 const title = "Contact SoftClinch | Book a Free Tech Consultation";
 const description =
@@ -30,7 +30,6 @@ export default function ContactPage() {
             canonicalPath: "/contact",
             title,
           }),
-          localBusinessJsonLd("/contact"),
           breadcrumbJsonLd([
             { name: "Home", path: "/" },
             { name: "Contact", path: "/contact" },

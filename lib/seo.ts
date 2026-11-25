@@ -17,12 +17,14 @@ export function buildMetadata({
   canonicalPath,
   keywords,
   noIndex,
+  robots,
 }: {
   title?: string;
   description?: string;
   canonicalPath: string;
   keywords?: string[];
   noIndex?: boolean;
+  robots?: Metadata["robots"];
 }): Metadata {
   const siteUrl = getSiteUrl();
   const pageTitle = title ?? DEFAULT_TITLE;
@@ -35,7 +37,7 @@ export function buildMetadata({
     title: pageTitle,
     description: pageDescription,
     alternates: { canonical: canonicalUrl },
-    robots: noIndex ? { index: false, follow: false } : { index: true, follow: true },
+    robots: robots ?? (noIndex ? { index: false, follow: false } : { index: true, follow: true }),
     openGraph: {
       title: pageTitle,
       description: pageDescription,

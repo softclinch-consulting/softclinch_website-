@@ -4,7 +4,6 @@ import { buildMetadata } from "@/lib/seo";
 import {
   breadcrumbJsonLd,
   faqJsonLd,
-  professionalServiceJsonLd,
   serviceJsonLd,
   webpageJsonLd,
 } from "@/lib/schema";
@@ -67,7 +66,7 @@ export default function CustomDevelopmentPage() {
             title,
             description,
             keywords: highIntentKeywords,
-            image: "https://softclinch.com/custom_app_dev_hero.png",
+            image: "https://softclinch.com/custom_app_dev_hero.webp",
           }),
           serviceJsonLd({
             canonicalPath,
@@ -96,13 +95,6 @@ export default function CustomDevelopmentPage() {
               availability: "https://schema.org/InStock",
               url: `https://softclinch.com${canonicalPath}`,
             },
-          }),
-          professionalServiceJsonLd({
-            canonicalPath,
-            name: "SoftClinch - Custom Application Development Company",
-            description:
-              "Bespoke software and custom application development company serving businesses in Chennai, Coimbatore, Madurai, Salem, Hosur, and across Tamil Nadu.",
-            priceRange: "₹₹",
           }),
           breadcrumbJsonLd([
             { name: "Home", path: "/" },

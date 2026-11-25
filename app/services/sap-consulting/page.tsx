@@ -1,12 +1,13 @@
 import { SAPConsultingServices } from '@/components/SAPConsultingServices';
 import { SeoJsonLd } from "@/components/SeoJsonLd";
+import { RelatedReading } from "@/components/RelatedReading";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 import { SITE_NAME } from "@/lib/site";
 import { sapConsultingFaq } from "@/lib/faqs";
 
 const canonicalPath = "/services/sap-consulting";
-const title = "SAP Implementation & Rollout Services | SoftClinch";
+const title = "SAP S/4HANA Implementation Partner in Chennai | SoftClinch";
 const description =
   "Seamless SAP S/4HANA implementations, global rollouts & enterprise integrations. Reduce project risk & accelerate ROI. Talk to our SAP solutions architect!";
 
@@ -45,6 +46,12 @@ export default function SAPConsultingPage() {
         ]}
       />
       <SAPConsultingServices />
+      <RelatedReading
+        slugs={[
+          "how-sap-helps-enterprises-scale-2026",
+          "enterprise-digital-transformation-strategies-2026",
+        ]}
+      />
     </>
   );
 }

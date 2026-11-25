@@ -360,14 +360,11 @@ export function AIPoweredBusinessSystems() {
               </div>
               
               <h1 className="mt-6 text-3xl sm:text-4xl lg:text-5xl font-display font-black leading-tight text-slate-950 tracking-tight">
-                Enterprise Applications Built for Scale Automation & Growth
+                AI Business Automation & Custom AI Agents
               </h1>
               
               <p className="mt-6 text-lg sm:text-xl leading-relaxed text-slate-600 font-normal">
-                Custom enterprise software, SaaS platforms, cloud-native
-                applications, and AI-powered business systems engineered to
-                streamline operations, improve efficiency, and accelerate
-                digital transformation.
+                SoftClinch delivers AI business automation services and custom AI agents from Chennai for modern organizations across India. We design intelligent workflows, autonomous support agents, and predictive business systems for companies seeking to eliminate repetitive manual work, connect disparate enterprise tools, and accelerate operational productivity.
               </p>
               
               <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-500 font-medium">

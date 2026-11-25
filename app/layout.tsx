@@ -5,7 +5,7 @@ import "./globals.css";
 import { AppShell } from "@/components/AppShell";
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, SITE_NAME, getSiteUrl } from "@/lib/site";
-import { organizationJsonLd, sitewideProfessionalServiceJsonLd, websiteJsonLd } from "@/lib/schema";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/schema";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -86,7 +86,7 @@ export default function RootLayout({
             })(window, document, "clarity", "script", "sn0ywdf2ed");
           `}
         </Script>
-        <SeoJsonLd data={[organizationJsonLd(), websiteJsonLd(), sitewideProfessionalServiceJsonLd()]} />
+        <SeoJsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
         <AppShell>{children}</AppShell>
       </body>
     </html>

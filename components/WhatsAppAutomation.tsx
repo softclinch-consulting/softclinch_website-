@@ -325,7 +325,7 @@ export const WhatsAppAutomation = () => {
                 Inaiwazhi: Enterprise WhatsApp &amp; Workflow Automation Platform
               </h1>
               <p className="text-lg sm:text-xl text-slate-600 mb-8 leading-relaxed">
-                Connect your customers, sales teams, operations, and ERP systems into one seamless communication layer. Built on the official Meta WhatsApp Business API for scalable, automated business interactions.
+                SoftClinch provides the Inaiwazhi WhatsApp automation platform from Chennai, built on the official Meta WhatsApp Business API. We deliver automated customer support, broadcast marketing, ERP/CRM event triggers, and conversational chatbots for businesses across India that need reliable, high-volume customer communication without manual messaging delays.
               </p>
               <div className="flex gap-4 flex-wrap">
                 <a

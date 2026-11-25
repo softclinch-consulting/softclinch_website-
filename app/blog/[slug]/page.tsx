@@ -57,6 +57,22 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     ? post.image
     : `${siteUrl}${post.image.startsWith("/") ? post.image : `/${post.image}`}`;
 
+  const isNamedPerson =
+    Boolean(post.author) &&
+    post.author !== "SoftClinch" &&
+    post.author !== "SoftClinch Consulting Services" &&
+    post.author !== SITE_NAME;
+
+  const authorSchema = isNamedPerson
+    ? {
+        "@type": "Person",
+        name: post.author,
+        url: `${siteUrl}/about/`,
+      }
+    : {
+        "@id": "https://softclinch.com/#organization",
+      };
+
   return (
     <>
       <SeoJsonLd
@@ -68,19 +84,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             description: post.metaDescription,
             image: postImage,
             datePublished: post.publishedDate,
-            author: {
-              "@type": "Organization",
-              name: post.author,
-              url: siteUrl,
-            },
+            dateModified: post.dateModified || post.publishedDate,
+            author: authorSchema,
             publisher: {
-              "@type": "Organization",
-              name: SITE_NAME,
-              url: siteUrl,
-              logo: {
-                "@type": "ImageObject",
-                url: `${siteUrl}/logo.png`,
-              },
+              "@id": "https://softclinch.com/#organization",
             },
             mainEntityOfPage: {
               "@type": "WebPage",

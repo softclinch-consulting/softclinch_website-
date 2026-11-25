@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, type ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -94,14 +95,14 @@ function SectionHeading({
 
 function ClientLogos() {
   const clients = [
-    { name: "Prenora Investment Holding", logoPath: "/client-logos/sc-clients-001.jpg" },
-    { name: "Rane", logoPath: "/client-logos/sc-clients-002.jpg" },
-    { name: "NTT DATA", logoPath: "/client-logos/sc-clients-003.jpg" },
-    { name: "Fujitsu", logoPath: "/client-logos/sc-clients-004.jpg" },
-    { name: "Star Eltech", logoPath: "/client-logos/sc-clients-005.jpg" },
+    { name: "Prenora Investment Holding", logoPath: "/client-logos/sc-clients-001.webp" },
+    { name: "Rane", logoPath: "/client-logos/sc-clients-002.webp" },
+    { name: "NTT DATA", logoPath: "/client-logos/sc-clients-003.webp" },
+    { name: "Fujitsu", logoPath: "/client-logos/sc-clients-004.webp" },
+    { name: "Star Eltech", logoPath: "/client-logos/sc-clients-005.webp" },
     // TODO: Replace with verified real client names once confirmed with client permissions
-    { name: "Digitide", logoPath: "/client-logos/client-logo-007.jpeg" },
-    { name: "Stobay", logoPath: "/client-logos/client-logo-008.jpeg" },
+    { name: "Digitide", logoPath: "/client-logos/client-logo-007.webp" },
+    { name: "Stobay", logoPath: "/client-logos/client-logo-008.webp" },
   ];
 
   return (
@@ -129,9 +130,12 @@ function ClientLogos() {
                 aria-hidden={index >= clients.length ? "true" : undefined}
                 className="flex min-w-[180px] items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 px-6 py-5"
               >
-                <img
+                <Image
                   src={assetPath(client.logoPath)}
-                  alt={client.name}
+                  alt={index >= clients.length ? "" : client.name}
+                  width={112}
+                  height={56}
+                  loading="lazy"
                   className="h-14 w-28 object-contain"
                 />
               </div>

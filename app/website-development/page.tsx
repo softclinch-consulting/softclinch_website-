@@ -1,12 +1,13 @@
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { WebsiteDevelopment } from "@/components/WebsiteDevelopment";
+import { RelatedReading } from "@/components/RelatedReading";
 import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
 const canonicalPath = "/website-development/";
 const title = "Website Development Company in Chennai & India | SoftClinch";
 const description =
-  "Fast, SEO-ready business websites and WooCommerce stores for small businesses and growing enterprises across India. Chennai-based team. Chat with us on WhatsApp for a quick quote.";
+  "SEO-ready business websites and WooCommerce stores, built by a Chennai team for businesses across India. Chat on WhatsApp for a quick quote.";
 
 const websiteFaq = [
   {
@@ -100,6 +101,13 @@ export default function WebsiteDevelopmentPage() {
         ]}
       />
       <WebsiteDevelopment faqs={websiteFaq} />
+      <RelatedReading
+        slugs={[
+          "google-ai-search-seo-business-websites",
+          "google-ai-rd-innovations-business-websites",
+          "digital-marketing-get-more-leads-customers-sales-online",
+        ]}
+      />
     </>
   );
 }

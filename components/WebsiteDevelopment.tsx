@@ -245,7 +245,7 @@ export function WebsiteDevelopment({ faqs }: WebsiteDevelopmentProps) {
               transition={{ duration: 0.6, delay: 0.16 }}
               className="text-lg sm:text-xl text-slate-300 leading-relaxed mb-10 max-w-2xl"
             >
-              Fast, responsive, SEO-ready business websites and WooCommerce stores engineered to rank on Google, build credibility, and turn visitors into qualified inquiries.
+              SoftClinch provides business website development and WooCommerce store solutions from its Chennai development studio. We build fast, mobile-friendly, SEO-ready websites and conversion landing pages for small businesses and growing enterprises across India looking to improve search visibility, establish digital credibility, and convert website visitors into qualified customer inquiries.
             </motion.p>
 
             <motion.div

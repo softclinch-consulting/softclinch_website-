@@ -1,7 +1,7 @@
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { About } from "@/components/About";
 import { buildMetadata } from "@/lib/seo";
-import { breadcrumbJsonLd, localBusinessJsonLd, webpageJsonLd } from "@/lib/schema";
+import { breadcrumbJsonLd, webpageJsonLd } from "@/lib/schema";
 import { SITE_NAME } from "@/lib/site";
 
 const title = "About SoftClinch | Enterprise Tech & Consulting Partner";
@@ -30,7 +30,6 @@ export default function AboutPage() {
             canonicalPath: "/about",
             title,
           }),
-          localBusinessJsonLd("/about"),
           breadcrumbJsonLd([
             { name: "Home", path: "/" },
             { name: "About Us", path: "/about" },

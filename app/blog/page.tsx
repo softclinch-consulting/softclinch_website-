@@ -7,7 +7,7 @@ import { SITE_NAME } from "@/lib/site";
 
 const title = "Technology, SAP & AI Automation Blog | SoftClinch";
 const description =
-  "Actionable technology insights for business leaders: Google AI search R&D, AI agents, custom software engineering, SAP rollout strategies, WhatsApp automation & modern SEO/AEO.";
+  "Insights for business leaders on SAP, AI agents, custom software, WhatsApp automation and SEO/AEO from SoftClinch's Chennai team.";
 
 export const metadata = buildMetadata({
   title,

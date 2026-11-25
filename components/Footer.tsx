@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Mail, Phone, MapPin, ChevronRight, Instagram, Facebook, Linkedin } from "lucide-react";
+import { Mail, Phone, MapPin, ChevronRight, Instagram, Facebook, Linkedin, Clock } from "lucide-react";
 import { CONTACT, siteConfig } from "@/lib/siteConfig";
 import { assetPath } from "@/lib/asset";
 
@@ -33,8 +33,8 @@ export const Footer = () => {
                                 alt="SoftClinch Logo"
                                 width={150}
                                 height={60}
+                                loading="lazy"
                                 className="object-contain"
-                                priority
                             />
                         </Link>
                         <p className="text-slate-400 leading-relaxed mb-8">
@@ -126,6 +126,10 @@ export const Footer = () => {
                             <div className="flex gap-4 items-center">
                                 <Phone size={20} className="text-brand-terracotta flex-shrink-0" />
                                 <p className="text-slate-400 text-sm">{CONTACT.phone}</p>
+                            </div>
+                            <div className="flex gap-4 items-start">
+                                <Clock size={20} className="text-brand-terracotta flex-shrink-0" />
+                                <p className="text-slate-400 text-sm">Mon–Fri 10 AM–6 PM, Sat 10 AM–2 PM, Sunday closed</p>
                             </div>
                         </div>
                     </div>

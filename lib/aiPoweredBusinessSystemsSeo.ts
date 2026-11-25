@@ -5,7 +5,7 @@ export const aiPoweredBusinessSystemsSeo = {
   seoTitle:
     "AI Business Automation & Enterprise Systems | SoftClinch",
   metaTitle:
-    "AI Business Automation & Enterprise Systems | SoftClinch",
+    "AI Business Automation Services in Chennai | SoftClinch",
   metaDescription:
     "Automate repetitive business workflows with custom AI agents, CRM integrations & intelligent process automation. Schedule a consultation with our AI team!",
   focusKeywords: [

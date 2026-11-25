@@ -1,5 +1,6 @@
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { EnterpriseSoftware } from "@/components/EnterpriseSoftware";
+import { RelatedReading } from "@/components/RelatedReading";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 
@@ -60,6 +61,12 @@ export default function EnterpriseSoftwarePage() {
         ]}
       />
       <EnterpriseSoftware />
+      <RelatedReading
+        slugs={[
+          "enterprise-digital-transformation-strategies-2026",
+          "off-the-shelf-software-vs-custom-applications-2026",
+        ]}
+      />
     </>
   );
 }

@@ -1,11 +1,11 @@
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { Home } from "@/components/Home";
 import { buildMetadata } from "@/lib/seo";
-import { faqJsonLd, localBusinessJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
+import { faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 
 const homeTitle = "SAP Consulting, AMS & Website Development in Chennai | SoftClinch";
 const homeDescription =
-  "SoftClinch is a Chennai-based SAP consulting and software firm. SAP implementation, SAP AMS support, custom apps, websites and WhatsApp automation for businesses across India.";
+  "Chennai-based SAP consulting and software firm. SAP implementation, SAP AMS, custom apps, websites and WhatsApp automation for businesses across India.";
 
 export const metadata = buildMetadata({
   title: homeTitle,
@@ -45,7 +45,6 @@ export default function Page() {
             canonicalPath: "/",
             title: homeTitle,
           }),
-          localBusinessJsonLd("/"),
           serviceJsonLd({
             canonicalPath: "/",
             name: "SAP Consulting, Custom Software and Enterprise Automation Services",

@@ -11,6 +11,10 @@ export const metadata = buildMetadata({
   title,
   description,
   canonicalPath,
+  robots: {
+    index: false,
+    follow: true,
+  },
   keywords: [
     "software development case studies",
     "sap implementation success stories",

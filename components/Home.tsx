@@ -21,7 +21,7 @@ const Hero = () => {
         </>
       ),
       subtitle: "Accelerate business growth with SAP consulting, AMS support, workflow optimization, enterprise automation, and scalable digital transformation solutions.",
-      image: "/sap_consulting_hero_v2.png",
+      image: "/sap_consulting_hero_v2.webp",
       tag: "SAP Consulting",
       accent: "#A23B2A"
     },
@@ -34,7 +34,7 @@ const Hero = () => {
         </>
       ),
       subtitle: "Automate customer engagement, lead nurturing, support workflows, and marketing campaigns using WhatsApp Business API and AI-powered automation.",
-      image: "/whatsapp_automation_hero_v2.png",
+      image: "/whatsapp_automation_hero_v2.webp",
       tag: "WhatsApp Automation",
       accent: "#22c55e"
     },
@@ -47,7 +47,7 @@ const Hero = () => {
         </>
       ),
       subtitle: "Improve rankings, generate leads, and grow your business with SEO, GEO, AEO, PPC, AI search optimization, and performance marketing strategies.",
-      image: "/digital_marketing_hero_v2.png",
+      image: "/digital_marketing_hero_v2.webp",
       tag: "Digital Growth",
       accent: "#0f172a"
     },
@@ -60,7 +60,7 @@ const Hero = () => {
         </>
       ),
       subtitle: "Scale your business with SAP consulting, WhatsApp automation, AI-powered marketing, SEO services, and custom software solutions built for modern enterprises.",
-      image: "/custom_app_dev_hero.png",
+      image: "/custom_app_dev_hero.webp",
       tag: "Enterprise Solutions",
       accent: "#3b82f6"
     }
@@ -145,7 +145,7 @@ const Hero = () => {
                   alt={slides[currentSlide].tag}
                   width={600}
                   height={450}
-                  priority
+                  priority={currentSlide === 0}
                   className="w-full h-full object-cover"
                 />
 
@@ -200,14 +200,14 @@ const Stats = () => (
 
 const ClientLogos = () => {
   const clients = [
-    { name: 'Prenora Investment Holding', logoPath: '/client-logos/sc-clients-001.jpg', bg: 'bg-white' },
-    { name: 'Rane', logoPath: '/client-logos/sc-clients-002.jpg', bg: 'bg-white' },
-    { name: 'NTT DATA', logoPath: '/client-logos/sc-clients-003.jpg', bg: 'bg-white' },
-    { name: 'Fujitsu', logoPath: '/client-logos/sc-clients-004.jpg', bg: 'bg-white' },
-    { name: 'Star Eltech', logoPath: '/client-logos/sc-clients-005.jpg', bg: 'bg-white' },
+    { name: 'Prenora Investment Holding', logoPath: '/client-logos/sc-clients-001.webp', bg: 'bg-white' },
+    { name: 'Rane', logoPath: '/client-logos/sc-clients-002.webp', bg: 'bg-white' },
+    { name: 'NTT DATA', logoPath: '/client-logos/sc-clients-003.webp', bg: 'bg-white' },
+    { name: 'Fujitsu', logoPath: '/client-logos/sc-clients-004.webp', bg: 'bg-white' },
+    { name: 'Star Eltech', logoPath: '/client-logos/sc-clients-005.webp', bg: 'bg-white' },
     // TODO: Replace with verified real client names once confirmed with client permissions
-    { name: 'Digitide', logoPath: '/client-logos/client-logo-007.jpeg', bg: 'bg-white' },
-    { name: 'Stobay', logoPath: '/client-logos/client-logo-008.jpeg', bg: 'bg-white' },
+    { name: 'Digitide', logoPath: '/client-logos/client-logo-007.webp', bg: 'bg-white' },
+    { name: 'Stobay', logoPath: '/client-logos/client-logo-008.webp', bg: 'bg-white' },
   ];
 
   return (
@@ -235,9 +235,12 @@ const ClientLogos = () => {
                 aria-hidden={index >= clients.length ? "true" : undefined}
                 className="flex min-w-[180px] items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 px-6 py-5"
               >
-                <img
+                <Image
                   src={assetPath(client.logoPath)}
-                  alt={client.name}
+                  alt={index >= clients.length ? "" : client.name}
+                  width={112}
+                  height={56}
+                  loading="lazy"
                   className="h-14 w-28 object-contain"
                 />
               </div>
@@ -261,14 +264,35 @@ const AboutSoftClinch = () => (
             Enterprise Technology &amp; Growth Solutions
           </h2>
           <p className="text-slate-600 leading-relaxed mb-6 font-semibold text-slate-800">
-            At SoftClinch, we provide expert SAP Consulting services to integrate, optimize, and scale enterprise environments for maximum operational efficiency and seamless digital transformation.
+            At SoftClinch, we provide expert{" "}
+            <Link href="/services/sap-consulting/" className="text-brand-navy underline hover:text-brand-terracotta">
+              SAP consulting and S/4HANA implementation services
+            </Link>{" "}
+            to integrate, optimize, and scale enterprise environments for maximum operational efficiency and seamless digital transformation.
           </p>
           <p className="text-slate-600 leading-relaxed mb-6">
-            We help businesses automate operations, improve customer engagement, and accelerate growth with enterprise-grade digital solutions, AI automation, and performance-driven marketing strategies.
+            We help businesses automate operations, improve customer engagement, and accelerate growth with enterprise-grade digital solutions,{" "}
+            <Link href="/services/ai-powered-business-systems/" className="text-brand-navy underline hover:text-brand-terracotta">
+              AI-powered business systems
+            </Link>
+            , and performance-driven marketing strategies.
           </p>
-          <p className="text-slate-600 leading-relaxed">
-            From workflow automation to SEO and custom application development — we build scalable systems designed for long-term business success.
+          <p className="text-slate-600 leading-relaxed mb-6">
+            From workflow automation to SEO,{" "}
+            <Link href="/custom-commerce-development/" className="text-brand-navy underline hover:text-brand-terracotta">
+              custom eCommerce development
+            </Link>
+            , and custom application engineering — we build scalable systems designed for long-term business success.
           </p>
+          <div>
+            <Link
+              href="/blog/"
+              className="inline-flex items-center gap-1.5 text-sm font-bold text-brand-navy hover:text-brand-terracotta transition-colors"
+            >
+              <span>Explore our technology & business insights on our blog</span>
+              <ChevronRight size={16} />
+            </Link>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:pt-14">
@@ -633,7 +657,7 @@ const ProductAuthority = () => {
                 className="relative w-full flex items-center justify-end"
               >
                 <Image
-                  src={assetPath("/inaiwazhi-whatsapp-automation-dashboard.png")}
+                  src={assetPath("/inaiwazhi-whatsapp-automation-dashboard.webp")}
                   alt="Inaiwazhi WhatsApp Automation Dashboard"
                   width={960}
                   height={680}
@@ -685,9 +709,12 @@ const Industries = () => (
         </div>
         <div className="relative">
           <div className="aspect-square bg-brand-navy rounded-[3rem] overflow-hidden">
-            <img
-              src="/about_hero_industries.png"
+            <Image
+              src="/about_hero_industries.webp"
               alt="Enterprise Solutions"
+              width={500}
+              height={500}
+              loading="lazy"
               className="w-full h-full object-cover"
             />
           </div>
@@ -878,7 +905,6 @@ const Process = () => {
 };
 
 const Testimonials = () => {
-  const allReviews = [...reviews, ...reviews];
   return (
     <section className="py-24 bg-white overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center mb-12">

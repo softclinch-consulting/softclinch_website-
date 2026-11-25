@@ -1,6 +1,7 @@
 "use client";
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Shield, Cpu, Database, MessageSquare, CheckCircle2, Plug, TrendingUp, Settings, Zap, ArrowRight, MessageCircle } from 'lucide-react';
 import { assetPath } from '@/lib/asset';
 
@@ -142,13 +143,13 @@ const Values = () => {
 
 const ClientLogos = () => {
   const clients = [
-    { name: 'Prenora Investment Holding', logoPath: '/client-logos/sc-clients-001.jpg', bg: 'bg-white' },
-    { name: 'Rane', logoPath: '/client-logos/sc-clients-002.jpg', bg: 'bg-white' },
-    { name: 'NTT DATA', logoPath: '/client-logos/sc-clients-003.jpg', bg: 'bg-white' },
-    { name: 'Fujitsu', logoPath: '/client-logos/sc-clients-004.jpg', bg: 'bg-white' },
+    { name: 'Prenora Investment Holding', logoPath: '/client-logos/sc-clients-001.webp', bg: 'bg-white' },
+    { name: 'Rane', logoPath: '/client-logos/sc-clients-002.webp', bg: 'bg-white' },
+    { name: 'NTT DATA', logoPath: '/client-logos/sc-clients-003.webp', bg: 'bg-white' },
+    { name: 'Fujitsu', logoPath: '/client-logos/sc-clients-004.webp', bg: 'bg-white' },
     // TODO: Replace with verified real client names once confirmed with client permissions
-    { name: 'Digitide', logoPath: '/client-logos/client-logo-007.jpeg', bg: 'bg-white' },
-    { name: 'Stobay', logoPath: '/client-logos/client-logo-008.jpeg', bg: 'bg-white' },
+    { name: 'Digitide', logoPath: '/client-logos/client-logo-007.webp', bg: 'bg-white' },
+    { name: 'Stobay', logoPath: '/client-logos/client-logo-008.webp', bg: 'bg-white' },
   ];
 
   return (
@@ -176,9 +177,12 @@ const ClientLogos = () => {
                 aria-hidden={index >= clients.length ? "true" : undefined}
                 className="flex min-w-[180px] items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 px-6 py-5"
               >
-                <img
+                <Image
                   src={assetPath(client.logoPath)}
-                  alt={client.name}
+                  alt={index >= clients.length ? "" : client.name}
+                  width={112}
+                  height={56}
+                  loading="lazy"
                   className="h-14 w-28 object-contain"
                 />
               </div>
@@ -436,9 +440,12 @@ export const About = () => {
           {/* Left: Image Visual */}
           <div className="relative">
             <div className="aspect-square bg-brand-navy rounded-[3rem] overflow-hidden">
-              <img
-                src={assetPath("/about_hero_industries.png")}
+              <Image
+                src={assetPath("/about_hero_industries.webp")}
                 alt="SoftClinch — AI-powered solutions across Healthcare, Finance, Manufacturing & Real Estate"
+                width={500}
+                height={500}
+                loading="lazy"
                 className="w-full h-full object-cover"
               />
             </div>

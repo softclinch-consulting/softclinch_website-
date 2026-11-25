@@ -22,6 +22,21 @@ export default function robots(): MetadataRoute.Robots {
           "/draft/",
         ],
       },
+      {
+        userAgent: [
+          "Googlebot",
+          "Bingbot",
+          "OAI-SearchBot",
+          "ChatGPT-User",
+          "PerplexityBot",
+          "Claude-SearchBot",
+        ],
+        allow: ["/"],
+      },
+      {
+        userAgent: ["GPTBot", "CCBot", "anthropic-ai", "ClaudeBot", "Bytespider"],
+        disallow: ["/"],
+      },
     ],
     host: siteUrl,
     sitemap: `${siteUrl}/sitemap.xml`,

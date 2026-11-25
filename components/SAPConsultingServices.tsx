@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   Users,
   Target,
@@ -76,14 +77,14 @@ const floatVariants = (yOffset: number, duration: number): any => ({
 
 const ClientLogos = () => {
   const clients = [
-    { name: 'Prenora Investment Holding', logoPath: '/client-logos/sc-clients-001.jpg', bg: 'bg-white' },
-    { name: 'Rane', logoPath: '/client-logos/sc-clients-002.jpg', bg: 'bg-white' },
-    { name: 'NTT DATA', logoPath: '/client-logos/sc-clients-003.jpg', bg: 'bg-white' },
-    { name: 'Fujitsu', logoPath: '/client-logos/sc-clients-004.jpg', bg: 'bg-white' },
-    { name: 'Star Eltech', logoPath: '/client-logos/sc-clients-005.jpg', bg: 'bg-white' },
+    { name: 'Prenora Investment Holding', logoPath: '/client-logos/sc-clients-001.webp', bg: 'bg-white' },
+    { name: 'Rane', logoPath: '/client-logos/sc-clients-002.webp', bg: 'bg-white' },
+    { name: 'NTT DATA', logoPath: '/client-logos/sc-clients-003.webp', bg: 'bg-white' },
+    { name: 'Fujitsu', logoPath: '/client-logos/sc-clients-004.webp', bg: 'bg-white' },
+    { name: 'Star Eltech', logoPath: '/client-logos/sc-clients-005.webp', bg: 'bg-white' },
     // TODO: Replace with verified real client names once confirmed with client permissions
-    { name: 'Digitide', logoPath: '/client-logos/client-logo-007.jpeg', bg: 'bg-white' },
-    { name: 'Stobay', logoPath: '/client-logos/client-logo-008.jpeg', bg: 'bg-white' },
+    { name: 'Digitide', logoPath: '/client-logos/client-logo-007.webp', bg: 'bg-white' },
+    { name: 'Stobay', logoPath: '/client-logos/client-logo-008.webp', bg: 'bg-white' },
   ];
 
   return (
@@ -111,9 +112,12 @@ const ClientLogos = () => {
                 aria-hidden={index >= clients.length ? "true" : undefined}
                 className="flex min-w-[180px] items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 px-6 py-5"
               >
-                <img
+                <Image
                   src={assetPath(client.logoPath)}
-                  alt={client.name}
+                  alt={index >= clients.length ? "" : client.name}
+                  width={112}
+                  height={56}
+                  loading="lazy"
                   className="h-14 w-28 object-contain"
                 />
               </div>
@@ -267,9 +271,9 @@ export const SAPConsultingServices = () => {
                 variants={itemVariants}
                 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-brand-navy leading-[1.12] font-display"
               >
-                SAP Consulting <br />
+                SAP S/4HANA <br />
                 <span className="text-brand-terracotta">
-                  Implementation & Rollout
+                  Implementation & Rollout Services
                 </span>
               </motion.h1>
 
@@ -277,7 +281,7 @@ export const SAPConsultingServices = () => {
                 variants={itemVariants}
                 className="text-lg text-slate-600 leading-relaxed font-semibold"
               >
-                Maximize the value of your SAP investments. We deliver end-to-end implementation, rollout, and optimization services tailored for enterprise growth.
+                SoftClinch delivers end-to-end SAP S/4HANA implementation and rollout services from Chennai. Our consultants specialize in business process optimization, S/4HANA migration, global rollouts, and multi-system integration for enterprise organizations across India that require structured ERP deployments, predictable timelines, and measurable return on investment.
               </motion.p>
 
               {/* Quick Module Tags */}
@@ -341,9 +345,12 @@ export const SAPConsultingServices = () => {
                 transition={{ duration: 0.8, type: "spring" }}
                 className="relative w-full h-[400px] rounded-[2.5rem] border border-slate-200/50 shadow-2xl overflow-hidden bg-slate-900 flex items-center justify-center"
               >
-                <img
-                  src={assetPath("/sap_consulting_hero_v2.png")}
+                <Image
+                  src={assetPath("/sap_consulting_hero_v2.webp")}
                   alt="SAP Consulting Services"
+                  width={600}
+                  height={400}
+                  loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover z-10"
                 />
 

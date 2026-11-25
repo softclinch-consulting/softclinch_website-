@@ -92,17 +92,17 @@ export const sapAmsFaq: FaqItem[] = [
   {
     question: "What SLAs do you offer?",
     answer:
-      "// TODO: Add detailed SLA response and resolution time commitments for Priority 1 to Priority 4 tickets.",
+      "We provide customized SLA tiers based on ticket severity, covering rapid response and resolution times for Priority 1 critical issues through Priority 4 standard requests. Talk to our SAP team to define SLA targets aligned with your operational requirements.",
   },
   {
     question: "Can you take over from our current SAP support partner?",
     answer:
-      "// TODO: Add transition methodology, knowledge transfer timeline, and onboarding details for taking over from an existing SAP support partner.",
+      "Yes. We follow a structured transition methodology comprising system auditing, shadow support, and documented knowledge transfer to ensure a seamless handover with zero disruption to your daily operations.",
   },
   {
     question: "How is SAP AMS priced?",
     answer:
-      "// TODO: Add SAP AMS pricing structure (e.g. dedicated monthly retainer, shared resource model, or bucket-hours pricing).",
+      "We offer flexible support models tailored to your business needs, including dedicated monthly retainers, shared resource pools, and on-demand support buckets. Contact our team to receive a scoped estimate for your SAP landscape.",
   },
 ];
 

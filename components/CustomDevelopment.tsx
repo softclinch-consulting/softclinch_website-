@@ -78,10 +78,10 @@ const heroSlides = [
     tag: "Custom Business Software",
     badge: "Serving Businesses Across Tamil Nadu",
     badgeIcon: MapPin,
-    title: "Your Business Has a Problem. We Can Build the Solution.",
-    subtitle: "Custom Software, Websites & Apps Built Around Your Business",
+    title: "Custom Software & App Development for Growing Businesses",
+    subtitle: "Your Business Has a Problem. We Can Build the Solution.",
     description:
-      "Still managing work manually? Using multiple tools? Or unable to find software that fits the way your business works?",
+      "SoftClinch engineers custom software and application development solutions from Chennai for growing businesses across Tamil Nadu and India. We build tailored SaaS platforms, internal tools, customer portals, and mobile apps for companies that have outgrown off-the-shelf software and need secure, scalable systems aligned with their operational workflows.",
     highlight:
       "Tell us what you need. We'll help you turn your requirement into a practical digital solution.",
     primaryCta: "Discuss Your Requirement",
@@ -94,7 +94,7 @@ const heroSlides = [
       "✓ Designed for your team",
       "✓ Ready to grow with you",
     ],
-    image: "/custom_app_dev_hero.png",
+    image: "/custom_app_dev_hero.webp",
     imageAlt: "Custom Software and SaaS Platform Architecture",
     imageBadge: "Tailored Architecture Preview",
     dial: {

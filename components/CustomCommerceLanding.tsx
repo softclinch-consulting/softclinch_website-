@@ -166,13 +166,13 @@ export function CustomCommerceLanding() {
           <div className="max-w-xl">
             <SectionBadge>CUSTOM COMMERCE ENGINEERING</SectionBadge>
             <h1 className="mt-6 text-4xl font-black leading-[1.08] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
-              Your eCommerce Business Has Grown. Has Your Technology?
+              Custom eCommerce Development Services
             </h1>
-            <p className="mt-6 text-lg leading-relaxed text-slate-600 sm:text-xl">
-              Custom eCommerce platforms and applications built around the way your business actually operates.
+            <p className="mt-6 text-lg leading-relaxed text-slate-600 sm:text-xl font-bold text-brand-navy">
+              Your eCommerce Business Has Grown. Has Your Technology?
             </p>
             <p className="mt-4 text-base leading-relaxed text-slate-700">
-              Build a new commerce platform. Upgrade your existing store. Connect ERP, CRM, inventory and payments. Automate WhatsApp. Add AI where it creates real business value.
+              SoftClinch delivers custom eCommerce development and commerce engineering services from Chennai for growing brands across India. We build headless commerce platforms, custom B2B portals, and ERP/CRM integrations for businesses that have outgrown off-the-shelf templates and need tailored checkouts, inventory synchronisation, and automated WhatsApp order communication.
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <ButtonPrimary href="/contact" className="rounded-full px-7 py-4 text-base">Book a Free eCommerce Consultation</ButtonPrimary>

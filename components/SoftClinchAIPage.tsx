@@ -625,6 +625,31 @@ export function SoftClinchAIPage() {
             ))}
           </div>
 
+          {/* ─── Main Heading & Description for SEO / AEO ─── */}
+          <div style={{ textAlign: 'center', maxWidth: '640px', padding: '0 12px' }}>
+            <h1 style={{
+              fontSize: 'clamp(24px, 4vw, 36px)',
+              fontWeight: 800,
+              letterSpacing: '-0.02em',
+              lineHeight: 1.25,
+              background: 'linear-gradient(135deg, #ffffff 30%, #38bdf8 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              marginBottom: '12px',
+            }}>
+              SoftClinch AI: Connected Enterprise Intelligence Platform
+            </h1>
+            <p style={{
+              fontSize: '14px',
+              lineHeight: '1.6',
+              color: '#94a3b8',
+              maxWidth: '580px',
+              margin: '0 auto',
+            }}>
+              Explore the SoftClinch AI platform designed to unify digital marketing, enterprise SaaS, custom AI agents, and instant messaging into one connected ecosystem. We help businesses automate multi-channel operations and scale customer communication across India.
+            </p>
+          </div>
+
           {/* ─── AI assistant panel ─── */}
           <div style={{
             width: '100%', maxWidth: '520px',

@@ -2,22 +2,17 @@ import { CONTACT } from "./contact";
 import { SITE_NAME, getSiteUrl } from "./site";
 
 export function organizationJsonLd() {
-  const siteUrl = getSiteUrl();
   return {
     "@context": "https://schema.org",
-    "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
-    "@id": `${siteUrl}/#organization`,
-    name: SITE_NAME,
-    url: siteUrl,
-    logo: {
-      "@type": "ImageObject",
-      url: `${siteUrl}/logo.png`,
-      width: 512,
-      height: 512,
-    },
-    image: `${siteUrl}/logo.png`,
-    email: CONTACT.email,
-    telephone: CONTACT.phone,
+    "@type": "ProfessionalService",
+    "@id": "https://softclinch.com/#organization",
+    name: "SoftClinch Consulting Services Pvt. Ltd.",
+    alternateName: "SoftClinch",
+    url: "https://softclinch.com/",
+    logo: "https://softclinch.com/logo.png",
+    image: "https://softclinch.com/logo.png",
+    email: "info@softclinch.com",
+    telephone: "+91 94456 79878",
     priceRange: "₹₹",
     address: {
       "@type": "PostalAddress",
@@ -27,91 +22,40 @@ export function organizationJsonLd() {
       postalCode: "600083",
       addressCountry: "IN",
     },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: "13.0368",
-      longitude: "80.2114",
-    },
+    geo: { "@type": "GeoCoordinates", latitude: 13.0338042, longitude: 80.215171 },
+    hasMap: "https://maps.google.com/?cid=7661002000908063696",
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "10:00",
+        closes: "18:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Saturday",
+        opens: "10:00",
+        closes: "14:00",
+      },
+    ],
     areaServed: [
       { "@type": "City", name: "Chennai" },
-      { "@type": "City", name: "Coimbatore" },
       { "@type": "AdministrativeArea", name: "Tamil Nadu" },
       { "@type": "Country", name: "India" },
     ],
     sameAs: [
+      "https://www.linkedin.com/company/softclinch",
       "https://www.facebook.com/profile.php?id=61585112649434",
-      "https://www.instagram.com/softclinch/?hl=en",
-      "https://www.threads.com/@softclinch?xmt=AQG0YGTQNLGQmWquCThvASSNbce7sVucAGgXk2vRRy9dXOE",
-    ],
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-        ],
-        opens: "09:00",
-        closes: "19:00",
-      },
+      "https://www.instagram.com/softclinch",
+      "https://www.threads.com/@softclinch",
+      "https://www.crunchbase.com/organization/softclinch-consulting-services",
     ],
   };
 }
 
-export function localBusinessJsonLd(canonicalPath = "/contact/") {
-  const siteUrl = getSiteUrl();
-  return {
-    "@context": "https://schema.org",
-    "@type": ["LocalBusiness", "ProfessionalService"],
-    "@id": `${siteUrl}${canonicalPath}#localbusiness`,
-    name: `${SITE_NAME} - Chennai`,
-    url: `${siteUrl}${canonicalPath}`,
-    telephone: CONTACT.phone,
-    email: CONTACT.email,
-    priceRange: "₹₹",
-    image: `${siteUrl}/logo.png`,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "No: 30, 53rd St, opposite to Anjaneyar Temple, Ashok Nagar",
-      addressLocality: "Chennai",
-      addressRegion: "Tamil Nadu",
-      postalCode: "600083",
-      addressCountry: "IN",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: "13.0368",
-      longitude: "80.2114",
-    },
-    areaServed: [
-      "Chennai",
-      "Tamil Nadu",
-      "Coimbatore",
-      "Madurai",
-      "Salem",
-      "Tiruppur",
-      "Hosur",
-      "India",
-    ],
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-        ],
-        opens: "09:00",
-        closes: "19:00",
-      },
-    ],
-  };
+export function localBusinessJsonLd(_canonicalPath = "/contact/") {
+  // Merged into single sitewide #organization entity per Schema standardization
+  return organizationJsonLd();
 }
 
 export function websiteJsonLd() {
@@ -123,8 +67,8 @@ export function websiteJsonLd() {
     url: siteUrl,
     name: SITE_NAME,
     alternateName: ["SoftClinch", "SoftClinch Consulting", "SoftClinch IT Services"],
-    inLanguage: "en-US",
-    publisher: { "@id": `${siteUrl}/#organization` },
+    inLanguage: "en-IN",
+    publisher: { "@id": "https://softclinch.com/#organization" },
   };
 }
 
@@ -151,9 +95,9 @@ export function webpageJsonLd({
     ...(description ? { description } : {}),
     ...(keywords && keywords.length > 0 ? { keywords: keywords.join(", ") } : {}),
     ...(image ? { primaryImageOfPage: image } : {}),
-    inLanguage: "en-US",
+    inLanguage: "en-IN",
     isPartOf: { "@id": `${siteUrl}/#website` },
-    about: { "@id": `${siteUrl}/#organization` },
+    about: { "@id": "https://softclinch.com/#organization" },
   };
 }
 
@@ -194,7 +138,7 @@ export function serviceJsonLd({
     "@id": `${siteUrl}${canonicalPath}#service`,
     name,
     description,
-    provider: { "@id": `${siteUrl}/#organization` },
+    provider: { "@id": "https://softclinch.com/#organization" },
     ...(serviceType ? { serviceType } : {}),
     areaServed: areas,
     url: `${siteUrl}${canonicalPath}`,
@@ -204,112 +148,25 @@ export function serviceJsonLd({
 }
 
 export function sitewideProfessionalServiceJsonLd() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "@id": "https://softclinch.com/#professionalservice",
-    name: "SoftClinch Consulting Services",
-    url: "https://softclinch.com/",
-    logo: "https://softclinch.com/logo.png",
-    image: "https://softclinch.com/logo.png",
-    telephone: "+91-94456-79878",
-    email: "info@softclinch.com",
-    foundingDate: "2016",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "No: 30, 53rd St, Ashok Nagar",
-      addressLocality: "Chennai",
-      addressRegion: "Tamil Nadu",
-      postalCode: "600083",
-      addressCountry: "IN",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: "13.0368",
-      longitude: "80.2114",
-    },
-    areaServed: {
-      "@type": "Country",
-      name: "IN",
-    },
-    sameAs: [
-      "https://www.instagram.com/softclinch",
-      "https://www.facebook.com/profile.php?id=61585112649434",
-      "https://www.linkedin.com/company/softclinch", // TODO: Add real LinkedIn company page URL
-    ],
-    priceRange: "₹₹",
-  };
+  // Merged into single sitewide #organization entity per Schema standardization
+  return organizationJsonLd();
 }
 
 export function professionalServiceJsonLd({
-  canonicalPath,
-  name,
-  description,
-  priceRange = "₹₹",
-  areaServed = [
-    "Tamil Nadu",
-    "Chennai",
-    "Coimbatore",
-    "Madurai",
-    "Salem",
-    "Tiruppur",
-    "Erode",
-    "Hosur",
-    "Vellore",
-    "Tiruchirappalli",
-  ],
+  canonicalPath: _canonicalPath,
+  name: _name,
+  description: _description,
+  priceRange: _priceRange = "₹₹",
+  areaServed: _areaServed,
 }: {
-  canonicalPath: string;
-  name: string;
-  description: string;
+  canonicalPath?: string;
+  name?: string;
+  description?: string;
   priceRange?: string;
   areaServed?: string[];
-}) {
-  const siteUrl = getSiteUrl();
-  return {
-    "@context": "https://schema.org",
-    "@type": ["ProfessionalService", "LocalBusiness"],
-    "@id": `${siteUrl}${canonicalPath}#professionalservice`,
-    name,
-    description,
-    url: `${siteUrl}${canonicalPath}`,
-    telephone: CONTACT.phone,
-    email: CONTACT.email,
-    priceRange,
-    image: `${siteUrl}/logo.png`,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: CONTACT.address,
-      addressLocality: "Chennai",
-      addressRegion: "Tamil Nadu",
-      postalCode: "600083",
-      addressCountry: "IN",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: "13.0368",
-      longitude: "80.2114",
-    },
-    areaServed: areaServed.map((area) => ({
-      "@type": "AdministrativeArea",
-      name: area,
-    })),
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-        ],
-        opens: "09:00",
-        closes: "19:00",
-      },
-    ],
-  };
+} = {}) {
+  // Merged into single sitewide #organization entity per Schema standardization
+  return organizationJsonLd();
 }
 
 export function faqJsonLd(

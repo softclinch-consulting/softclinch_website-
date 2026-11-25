@@ -422,10 +422,10 @@ export function EnterpriseSoftware() {
                 AI applications, enterprise software, automation, and eCommerce systems
               </div>
               <h1 className="max-w-5xl text-4xl font-display font-bold tracking-tight text-slate-955 md:text-5xl lg:text-6xl leading-tight">
-                AI-Powered Enterprise & eCommerce Application Development
+                Custom Enterprise Software & SaaS Development
               </h1>
               <p className="mt-6 max-w-4xl text-base sm:text-lg leading-relaxed text-slate-600 font-medium">
-                Build scalable AI applications, enterprise software, automation systems, and custom eCommerce platforms designed to accelerate business growth, automate operations, and improve customer experience.
+                SoftClinch delivers custom enterprise software and SaaS development from its Chennai engineering team. We architect secure cloud-native platforms, ERP extensions, CRM systems, and workflow automation for growing enterprises across India needing robust software tailored to complex operations, multi-user permissions, and scalable business processes.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">

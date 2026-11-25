@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { blogPosts } from '@/lib/blog';
+import { blogPosts, type BlogPost } from '@/lib/blog';
 import { Breadcrumbs } from './Breadcrumbs';
 import { SocialShare } from './SocialShare';
 import { motion } from 'framer-motion';
@@ -13,26 +13,36 @@ interface BlogDetailProps {
 
 export const BlogDetail = ({ slug }: BlogDetailProps) => {
   const post = blogPosts.find(p => p.slug === slug);
-  const [relatedPosts, setRelatedPosts] = useState(blogPosts.slice(0, 3));
+
+  const getRelatedPosts = (currentPost?: BlogPost) => {
+    if (!currentPost) return blogPosts.slice(0, 3);
+    const others = blogPosts.filter(p => p.slug !== currentPost.slug);
+
+    const scored = others.map(p => {
+      let score = 0;
+      if (p.category === currentPost.category) score += 3;
+      const sharedKeywords = (p.keywords || []).filter(kw =>
+        (currentPost.keywords || []).some((ckw: string) => ckw.toLowerCase() === kw.toLowerCase())
+      );
+      score += sharedKeywords.length;
+      return { post: p, score };
+    });
+
+    scored.sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      return new Date(b.post.publishedDate).getTime() - new Date(a.post.publishedDate).getTime();
+    });
+
+    return scored.slice(0, 3).map(s => s.post);
+  };
+
+  const [relatedPosts, setRelatedPosts] = useState(() => (post ? getRelatedPosts(post) : blogPosts.slice(0, 3)));
   const [blogUrl, setBlogUrl] = useState('');
 
   useEffect(() => {
     setBlogUrl(`${window.location.origin}/blog/${slug}`);
     if (post) {
-      // Get 2 other posts from the same category
-      const related = blogPosts
-        .filter(p => p.category === post.category && p.id !== post.id)
-        .slice(0, 2);
-      
-      // If not enough, add posts from other categories
-      if (related.length < 2) {
-        const additional = blogPosts
-          .filter(p => p.id !== post.id && !related.find(r => r.id === p.id))
-          .slice(0, 2 - related.length);
-        setRelatedPosts([...related, ...additional]);
-      } else {
-        setRelatedPosts(related);
-      }
+      setRelatedPosts(getRelatedPosts(post));
     }
   }, [post, slug]);
 
@@ -276,7 +286,7 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
             <BookOpen size={20} className="text-brand-navy" />
             <h2 className="text-3xl font-display font-bold text-slate-900">Related Articles</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {relatedPosts.map((relatedPost) => (
               <Link
                 key={relatedPost.id}
@@ -320,7 +330,9 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
 function parseMarkdownToHtml(markdown: string): string {
   if (!markdown) return '';
   
-  const lines = markdown.split(/\r?\n/);
+  // Strip leading # Title from article body to avoid duplicate H1 with page header
+  const cleanMarkdown = markdown.replace(/^#\s+[^\r\n]+[\r\n]*/, '');
+  const lines = cleanMarkdown.split(/\r?\n/);
   let html = '';
   
   let currentListType: 'ul' | 'ol' | null = null;
@@ -367,10 +379,10 @@ function parseMarkdownToHtml(markdown: string): string {
       continue;
     }
     
-    // Headings
+    // Headings (render body H1s as H2 to enforce exactly one <h1> per page)
     if (line.startsWith('# ')) {
       closeAll();
-      html += `<h1>${parseInlineMarkdown(line.substring(2))}</h1>`;
+      html += `<h2>${parseInlineMarkdown(line.substring(2))}</h2>`;
     } else if (line.startsWith('## ')) {
       closeAll();
       html += `<h2>${parseInlineMarkdown(line.substring(3))}</h2>`;

@@ -2,6 +2,7 @@ import { buildMetadata } from "@/lib/seo";
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { breadcrumbJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 import { CustomCommerceLanding } from "@/components/CustomCommerceLanding";
+import { RelatedReading } from "@/components/RelatedReading";
 
 const title = "Custom eCommerce Development & Engineering | SoftClinch";
 const description =
@@ -43,6 +44,12 @@ export default function CustomCommerceDevelopmentPage() {
         ]}
       />
       <CustomCommerceLanding />
+      <RelatedReading
+        slugs={[
+          "off-the-shelf-software-vs-custom-applications-2026",
+          "switching-to-ai-powered-custom-applications-2026",
+        ]}
+      />
     </>
   );
 }

@@ -69,7 +69,7 @@ export const DigitalMarketing = () => {
               </h1>
 
               <p className="text-xl text-slate-600 mb-8 leading-relaxed">
-                Generate qualified leads, increase revenue, and scale faster with SEO, Google Ads, AI search optimization, conversion funnels, automation, and performance marketing strategies built for modern businesses.
+                SoftClinch delivers performance-driven digital marketing and SEO services from Chennai for B2B enterprises and growing brands across India. We combine search engine optimization, Google Ads management, Meta Ads, and AI search visibility (GEO/AEO) for businesses wanting to generate qualified sales inquiries, lower customer acquisition costs, and build predictable digital pipelines.
               </p>
 
               <div className="flex gap-4 flex-wrap">
@@ -107,7 +107,7 @@ export const DigitalMarketing = () => {
               <ServiceMediaPanel
                 title="Growth Campaign Dashboard"
                 subtitle="SEO, paid media, attribution, and conversion performance working together in one decision layer."
-                imageSrc="/digital_marketing_hero_v2.png"
+                imageSrc="/digital_marketing_hero_v2.webp"
                 imageAlt="Digital marketing service preview"
                 points={[
                   "SEO + GEO + AEO strategy",

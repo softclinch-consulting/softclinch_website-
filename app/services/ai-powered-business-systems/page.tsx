@@ -1,5 +1,6 @@
 import { AIPoweredBusinessSystems } from "@/components/AIPoweredBusinessSystems";
 import { SeoJsonLd } from "@/components/SeoJsonLd";
+import { RelatedReading } from "@/components/RelatedReading";
 import {
   aiPoweredBusinessSystemsFaq,
   aiPoweredBusinessSystemsSeo,
@@ -45,6 +46,13 @@ export default function AIPoweredBusinessSystemsPage() {
         ]}
       />
       <AIPoweredBusinessSystems />
+      <RelatedReading
+        slugs={[
+          "switching-to-ai-powered-custom-applications-2026",
+          "ai-agents-vs-ai-chatbots",
+          "ai-chatbots-for-customer-support-2026",
+        ]}
+      />
     </>
   );
 }

@@ -1,17 +1,17 @@
 import { SAPConsulting } from "@/components/SAPConsulting";
 import { SeoJsonLd } from "@/components/SeoJsonLd";
+import { RelatedReading } from "@/components/RelatedReading";
 import { buildMetadata } from "@/lib/seo";
 import {
   breadcrumbJsonLd,
   faqJsonLd,
-  professionalServiceJsonLd,
   serviceJsonLd,
   webpageJsonLd,
 } from "@/lib/schema";
 import { sapAmsFaq } from "@/lib/faqs";
 
 const canonicalPath = "/sap-ams-support";
-const title = "SAP AMS Support Services in India | SLA-Based | SoftClinch";
+const title = "SAP AMS Support Services in Chennai & India | SoftClinch";
 const description =
   "SLA-driven SAP AMS support for S/4HANA and ECC. Incident management, enhancements and continuous improvement from a Chennai-based SAP team. Talk to us today.";
 
@@ -43,11 +43,6 @@ export default function SAPAmsSupportPage() {
               "India",
             ],
           }),
-          professionalServiceJsonLd({
-            canonicalPath,
-            name: "SAP AMS Support & ERP Consulting Services - Chennai",
-            description,
-          }),
           breadcrumbJsonLd([
             { name: "Home", path: "/" },
             { name: "Services", path: "/services" },
@@ -57,6 +52,12 @@ export default function SAPAmsSupportPage() {
         ]}
       />
       <SAPConsulting faqs={sapAmsFaq} />
+      <RelatedReading
+        slugs={[
+          "how-sap-helps-enterprises-scale-2026",
+          "seo-vs-geo-vs-aeo-traffic-2026",
+        ]}
+      />
     </>
   );
 }
