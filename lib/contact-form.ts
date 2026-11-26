@@ -4,7 +4,15 @@ export type ContactFormData = {
   email: string;
   phone: string;
   service: string;
-  message: string;
+  message?: string;
+  gclid?: string;
+  wbraid?: string;
+  gbraid?: string;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_term?: string;
+  utm_content?: string;
 };
 
 export type ContactSubmissionInput = Partial<ContactFormData> & {
@@ -44,7 +52,15 @@ export function normalizeContactFormData(
     email: collapseWhitespace(stripHtmlLikeChars(input.email ?? "")).toLowerCase(),
     phone: collapseWhitespace(stripHtmlLikeChars(input.phone ?? "")),
     service: collapseWhitespace(stripHtmlLikeChars(input.service ?? "")),
-    message: normalizeMultiline(input.message ?? ""),
+    message: input.message ? normalizeMultiline(input.message) : "",
+    gclid: input.gclid ? collapseWhitespace(input.gclid) : undefined,
+    wbraid: input.wbraid ? collapseWhitespace(input.wbraid) : undefined,
+    gbraid: input.gbraid ? collapseWhitespace(input.gbraid) : undefined,
+    utm_source: input.utm_source ? collapseWhitespace(input.utm_source) : undefined,
+    utm_medium: input.utm_medium ? collapseWhitespace(input.utm_medium) : undefined,
+    utm_campaign: input.utm_campaign ? collapseWhitespace(input.utm_campaign) : undefined,
+    utm_term: input.utm_term ? collapseWhitespace(input.utm_term) : undefined,
+    utm_content: input.utm_content ? collapseWhitespace(input.utm_content) : undefined,
   };
 }
 
@@ -72,12 +88,10 @@ export function validateContactFormData(
 
   const digitCount = data.phone.replace(/\D/g, "").length;
   if (!PHONE_REGEX.test(data.phone) || digitCount < 7 || digitCount > 15) {
-    errors.phone = "Please enter a valid phone number.";
+    errors.phone = "Please enter a valid phone or WhatsApp number.";
   }
 
-  if (data.message.length < 10) {
-    errors.message = "Please tell us a bit more about your project.";
-  } else if (data.message.length > 2000) {
+  if (data.message && data.message.length > 2000) {
     errors.message = "Message must be 2000 characters or fewer.";
   }
 

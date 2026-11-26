@@ -38,6 +38,7 @@ import {
 import Link from "next/link";
 import { FaqSection } from "@/components/FaqSection";
 import { whatsappAutomationFaq } from "@/lib/faqs";
+import { trackDemoRequest, trackWhatsAppClick, trackCtaClick } from "@/lib/analytics";
 import { siteConfig } from "@/lib/siteConfig";
 
 const WhatsAppCampaignsWithoutManualWorkSection = () => {
@@ -332,6 +333,11 @@ export const WhatsAppAutomation = () => {
                   href={siteConfig.getWhatsAppUrl("Hi SoftClinch, I would like to book a demo of the Inaiwazhi platform")}
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-location="inaiwazhi_hero_demo"
+                  onClick={() => {
+                    trackDemoRequest({ cta_location: "inaiwazhi_hero_demo", cta_text: "Book Free Demo" });
+                    trackWhatsAppClick({ cta_location: "inaiwazhi_hero_demo", cta_text: "Book Free Demo" });
+                  }}
                   className="bg-emerald-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-emerald-500 transition-all shadow-lg shadow-emerald-950/20 inline-flex items-center gap-2 text-base"
                 >
                   <MessageSquare size={18} className="fill-current" />
@@ -339,6 +345,7 @@ export const WhatsAppAutomation = () => {
                 </a>
                 <Link
                   href="/contact"
+                  onClick={() => trackCtaClick("Talk to Our Team", "inaiwazhi_hero_cta")}
                   className="border border-slate-300 bg-white text-slate-800 px-8 py-4 rounded-xl font-semibold hover:border-emerald-500 hover:text-emerald-600 transition-all inline-flex items-center text-base"
                 >
                   Talk to Our Team

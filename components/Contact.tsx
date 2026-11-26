@@ -4,6 +4,7 @@ import { Mail, Phone, MapPin, Send, Clock } from "lucide-react";
 import ReCAPTCHA from "react-google-recaptcha";
 import React, { useEffect, useState } from "react";
 import { CONTACT } from "@/lib/contact";
+import { getTrafficAttribution, trackLeadGenerated } from "@/lib/analytics";
 import {
   validateContactFormData,
   type ContactFormData,
@@ -67,6 +68,7 @@ export const Contact = () => {
     setFieldErrors({});
 
     try {
+      const attribution = getTrafficAttribution();
       const response = await fetch("/api/contact/", {
         method: "POST",
         headers: {
@@ -74,6 +76,7 @@ export const Contact = () => {
         },
         body: JSON.stringify({
           ...validation.data,
+          ...attribution,
           captchaToken,
           website,
           formStartedAt,
@@ -94,6 +97,13 @@ export const Contact = () => {
 
         throw new Error(data.error || "Unable to submit your request right now.");
       }
+
+      // Fire generate_lead conversion event strictly after server confirms success
+      trackLeadGenerated({
+        formId: "contact_page_form",
+        service: validation.data.service || "Unspecified",
+        leadType: "contact",
+      });
 
       setSubmitted(true);
       setFormData(INITIAL_FORM_DATA);

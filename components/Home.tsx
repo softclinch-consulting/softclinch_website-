@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { ChevronDown, ChevronRight, MessageSquare, Globe, Cpu, Database, BarChart3, CheckCircle2, Star, Layers, Code } from 'lucide-react';
 import { assetPath } from '@/lib/asset';
 import { reviews } from '@/lib/reviews';
+import { trackCtaClick, trackDemoRequest, trackWhatsAppClick } from '@/lib/analytics';
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -105,6 +106,7 @@ const Hero = () => {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link
                     href="/contact"
+                    onClick={() => trackCtaClick("Request Consultation", "home_hero_primary")}
                     className="bg-brand-navy text-white px-8 py-4 rounded-full text-lg font-semibold
                     hover:bg-gradient-to-r hover:from-brand-navy hover:to-[#A23B2A]
                     transition-all duration-300 text-center"
@@ -113,6 +115,7 @@ const Hero = () => {
                   </Link>
                   <Link
                     href="/services"
+                    onClick={() => trackCtaClick("Explore Services", "home_hero_secondary")}
                     className="bg-[#A23B2A] text-white border border-[#A23B2A]
                     px-8 py-4 rounded-full text-lg font-semibold text-center
                     transition-all duration-300
@@ -630,6 +633,10 @@ const ProductAuthority = () => {
                 <div className="flex flex-wrap gap-6">
                   <Link
                     href="/contact"
+                    onClick={() => {
+                      trackDemoRequest({ cta_location: "home_inaiwazhi_card", cta_text: "Request Demo" });
+                      trackCtaClick("Request Demo", "home_inaiwazhi_card");
+                    }}
                     className="px-10 py-4 bg-[#22c55e] text-black font-black rounded-full hover:bg-white hover:scale-105 transition-all duration-300 shadow-xl shadow-[#22c55e]/20"
                   >
                     Request Demo

@@ -2,7 +2,7 @@ type ContactReplyTemplateInput = {
   name: string;
   company: string;
   phone: string;
-  message: string;
+  message?: string;
   industry?: string;
   service?: string;
   timeline?: string;
@@ -72,10 +72,14 @@ export function buildCustomerReplyEmailContent(
                 ${renderOptionalHtmlRow("Timeline", input.timeline)}
                 ${renderOptionalHtmlRow("Budget", input.budget)}
               </table>
-              <div style="margin: 20px 0 24px; padding: 18px 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px;">
+              ${
+                input.message
+                  ? `<div style="margin: 20px 0 24px; padding: 18px 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px;">
                 <p style="margin: 0 0 8px; color: #475569; font-size: 14px;"><strong>Your message</strong></p>
                 <p style="margin: 0; color: #0f172a; font-size: 15px; line-height: 1.7;">${escapeHtml(input.message).replace(/\n/g, "<br />")}</p>
-              </div>
+              </div>`
+                  : ""
+              }
               <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.7;">
                 Our team will get back to you as soon as possible.
               </p>
@@ -102,9 +106,7 @@ export function buildCustomerReplyEmailContent(
     renderOptionalTextRow("Service", input.service),
     renderOptionalTextRow("Timeline", input.timeline),
     renderOptionalTextRow("Budget", input.budget),
-    "",
-    "Message:",
-    input.message,
+    ...(input.message ? ["", "Message:", input.message] : []),
     "",
     "Regards,",
     "SoftClinch Consulting Services",

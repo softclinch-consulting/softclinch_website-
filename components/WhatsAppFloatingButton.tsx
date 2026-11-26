@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { MessageCircle, X } from "lucide-react";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 export function WhatsAppFloatingButton() {
   const [showTooltip, setShowTooltip] = useState(true);
@@ -37,6 +38,14 @@ export function WhatsAppFloatingButton() {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
+        data-location="floating_widget"
+        onClick={() => {
+          trackWhatsAppClick({
+            cta_location: "floating_widget",
+            cta_text: "Chat on WhatsApp Floating Button",
+            link_url: whatsappUrl,
+          });
+        }}
         aria-label="Chat with SoftClinch on WhatsApp (+91 94456 79878)"
         className="group relative flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white shadow-xl transition-all duration-300 hover:scale-110 active:scale-95"
       >

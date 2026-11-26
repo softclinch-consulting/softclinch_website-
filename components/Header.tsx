@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { assetPath } from "@/lib/asset";
+import { trackCtaClick } from "@/lib/analytics";
 
 export const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -120,6 +121,7 @@ export const Header = () => {
                         <div className="flex items-center">
                             <Link
                                 href="/contact"
+                                onClick={() => trackCtaClick("Request Consultation", "header_desktop")}
                                 className="bg-brand-navy text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-navy/90 transition-all shadow-md hover:shadow-lg"
                             >
                                 Request Consultation
@@ -210,7 +212,10 @@ export const Header = () => {
                                 <Link
                                     href="/contact"
                                     className="w-full bg-brand-navy text-white py-4 rounded-xl text-center font-bold block"
-                                    onClick={() => setIsOpen(false)}
+                                    onClick={() => {
+                                        trackCtaClick("Request Consultation", "header_mobile");
+                                        setIsOpen(false);
+                                    }}
                                 >
                                     Request Consultation
                                 </Link>

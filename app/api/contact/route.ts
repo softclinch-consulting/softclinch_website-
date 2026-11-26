@@ -41,6 +41,14 @@ type ReferenceSubmissionInput = {
   website?: string;
   formStartedAt?: number;
   debugEmailMode?: "template" | "html";
+  gclid?: string;
+  wbraid?: string;
+  gbraid?: string;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_term?: string;
+  utm_content?: string;
 };
 
 type ParsedSubmission = {
@@ -153,6 +161,14 @@ function parseSubmissionInput(
     phone: input.phone,
     service: input.service,
     message: input.message,
+    gclid: input.gclid,
+    wbraid: input.wbraid,
+    gbraid: input.gbraid,
+    utm_source: input.utm_source,
+    utm_medium: input.utm_medium,
+    utm_campaign: input.utm_campaign,
+    utm_term: input.utm_term,
+    utm_content: input.utm_content,
   });
 
   const resolvedName = combinedName || payload.name;
@@ -235,7 +251,7 @@ function buildDuplicateKey(formId: SupportedFormId, payload: ContactFormData) {
     String(formId),
     payload.email,
     payload.phone.replace(/\s+/g, ""),
-    payload.message.replace(/\s+/g, " ").toLowerCase(),
+    (payload.message || "").replace(/\s+/g, " ").toLowerCase(),
   ].join("|");
 }
 
