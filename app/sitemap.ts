@@ -30,8 +30,10 @@ function isIndexablePath(path: string): boolean {
     "/register",
     "/preview",
     "/draft",
+    "/lp",
+    "/thank-you",
   ];
-  const forbiddenPaths = ["/404", "/500", "/_next", "/_static"];
+  const forbiddenPaths = ["/404", "/500", "/_next", "/_static", "/thank-you"];
 
   if (forbiddenPaths.includes(normalizedPath)) {
     return false;
@@ -111,6 +113,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/custom-commerce-development",
     "/commerce-enablement",
     "/softclinch-ai",
+    "/case-studies",
     "/blog",
     "/privacy-policy",
     "/terms-of-use",

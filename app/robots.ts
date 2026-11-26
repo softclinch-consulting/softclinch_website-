@@ -20,6 +20,9 @@ export default function robots(): MetadataRoute.Robots {
           "/register",
           "/preview/",
           "/draft/",
+          "/lp/",
+          "/thank-you",
+          "/thank-you/",
         ],
       },
       {
