@@ -159,18 +159,25 @@ export function trackLeadGenerated(details: {
   }
 }
 
+export type TrackClickInput =
+  | string
+  | {
+      cta_location?: string;
+      cta_text?: string;
+      link_url?: string;
+      phone_number?: string;
+      email_address?: string;
+    };
+
 /**
  * 2. WhatsApp Click tracking.
  */
-export function trackWhatsAppClick(details: {
-  cta_location?: string;
-  cta_text?: string;
-  link_url?: string;
-} = {}) {
+export function trackWhatsAppClick(details?: TrackClickInput) {
+  const d = typeof details === "string" ? { cta_location: details } : (details || {});
   const payload = {
-    cta_location: details.cta_location || "unknown",
-    cta_text: details.cta_text || "WhatsApp",
-    link_url: details.link_url || "https://wa.me/919445679878",
+    cta_location: d.cta_location || "unknown",
+    cta_text: d.cta_text || "WhatsApp",
+    link_url: d.link_url || "https://wa.me/919445679878",
   };
 
   trackEvent("click_whatsapp", payload);
@@ -183,15 +190,12 @@ export function trackWhatsAppClick(details: {
 /**
  * 3. Phone Call Click tracking.
  */
-export function trackPhoneClick(details: {
-  cta_location?: string;
-  cta_text?: string;
-  phone_number?: string;
-} = {}) {
+export function trackPhoneClick(details?: TrackClickInput) {
+  const d = typeof details === "string" ? { cta_location: details } : (details || {});
   const payload = {
-    cta_location: details.cta_location || "unknown",
-    cta_text: details.cta_text || "Call Us",
-    phone_number: details.phone_number || "+91 94456 79878",
+    cta_location: d.cta_location || "unknown",
+    cta_text: d.cta_text || "Call Us",
+    phone_number: d.phone_number || "+91 94456 79878",
   };
 
   trackEvent("click_phone", payload);
@@ -204,15 +208,12 @@ export function trackPhoneClick(details: {
 /**
  * 4. Email Click tracking.
  */
-export function trackEmailClick(details: {
-  cta_location?: string;
-  cta_text?: string;
-  email_address?: string;
-} = {}) {
+export function trackEmailClick(details?: TrackClickInput) {
+  const d = typeof details === "string" ? { cta_location: details } : (details || {});
   const payload = {
-    cta_location: details.cta_location || "unknown",
-    cta_text: details.cta_text || "Email Us",
-    email_address: details.email_address || "info@softclinch.com",
+    cta_location: d.cta_location || "unknown",
+    cta_text: d.cta_text || "Email Us",
+    email_address: d.email_address || "info@softclinch.com",
   };
 
   trackEvent("click_email", payload);

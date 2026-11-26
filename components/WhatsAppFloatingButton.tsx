@@ -12,7 +12,7 @@ export function WhatsAppFloatingButton() {
 
   return (
     <div
-      className="fixed left-6 bottom-6 z-50 flex items-center gap-2"
+      className="fixed left-6 bottom-20 sm:bottom-6 z-40 flex items-center gap-2"
       style={{ filter: "drop-shadow(0 10px 25px rgba(34, 197, 94, 0.35))" }}
     >
       {/* Tooltip on desktop */}

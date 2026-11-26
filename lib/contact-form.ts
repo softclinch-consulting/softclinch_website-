@@ -76,9 +76,7 @@ export function validateContactFormData(
     errors.name = "Name must be 80 characters or fewer.";
   }
 
-  if (data.company.length < 2) {
-    errors.company = "Please enter your company name.";
-  } else if (data.company.length > 120) {
+  if (data.company && data.company.length > 120) {
     errors.company = "Company name must be 120 characters or fewer.";
   }
 

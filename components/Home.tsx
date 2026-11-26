@@ -17,13 +17,26 @@ const Hero = () => {
       title: (
         <>
           SAP Consulting &amp;<br />
-          Enterprise Digital<br />
-          Transformation
+          AMS Support for<br />
+          Mid-Size Enterprises
         </>
       ),
-      subtitle: "Accelerate business growth with SAP consulting, AMS support, workflow optimization, enterprise automation, and scalable digital transformation solutions.",
+      subtitle: "Accelerate business operations with SLA-driven SAP AMS support, S/4HANA migrations, ECC rollouts, and enterprise system integration — Chennai & Global.",
       image: "/sap_consulting_hero_v2.webp",
-      tag: "SAP Consulting",
+      tag: "SAP Consulting & AMS",
+      accent: "#A23B2A"
+    },
+    {
+      title: (
+        <>
+          SLA-Driven SAP AMS &amp;<br />
+          Enterprise Support<br />
+          Management
+        </>
+      ),
+      subtitle: "Maintain business continuity with incident management, change requests, user support, and configuration enhancements across your entire SAP landscape.",
+      image: "/sap_consulting_hero_v2.webp",
+      tag: "SAP AMS Support",
       accent: "#A23B2A"
     },
     {
@@ -42,27 +55,14 @@ const Hero = () => {
     {
       title: (
         <>
-          SEO, GEO &amp;<br />
-          AI-Powered Digital<br />
-          Growth Solutions
+          Custom Software &amp;<br />
+          Digital Growth<br />
+          Solutions
         </>
       ),
-      subtitle: "Improve rankings, generate leads, and grow your business with SEO, GEO, AEO, PPC, AI search optimization, and performance marketing strategies.",
-      image: "/digital_marketing_hero_v2.webp",
-      tag: "Digital Growth",
-      accent: "#0f172a"
-    },
-    {
-      title: (
-        <>
-          SAP Consulting,<br />
-          AI Automation &amp;<br />
-          Digital Growth Solutions
-        </>
-      ),
-      subtitle: "Scale your business with SAP consulting, WhatsApp automation, AI-powered marketing, SEO services, and custom software solutions built for modern enterprises.",
+      subtitle: "Scale your business with high-performance web engineering, custom eCommerce systems, and AI search optimization (SEO, GEO & AEO).",
       image: "/custom_app_dev_hero.webp",
-      tag: "Enterprise Solutions",
+      tag: "Enterprise Engineering",
       accent: "#3b82f6"
     }
   ];
@@ -106,26 +106,24 @@ const Hero = () => {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link
                     href="/contact"
-                    onClick={() => trackCtaClick("Request Consultation", "home_hero_primary")}
-                    className="bg-brand-navy text-white px-8 py-4 rounded-full text-lg font-semibold
+                    onClick={() => trackCtaClick("Book a Free SAP Assessment", "home_hero_primary")}
+                    className="bg-brand-navy text-white px-8 py-4 rounded-full text-base sm:text-lg font-semibold
                     hover:bg-gradient-to-r hover:from-brand-navy hover:to-[#A23B2A]
-                    transition-all duration-300 text-center"
+                    transition-all duration-300 text-center shadow-lg"
                   >
-                    Request Consultation
+                    Book a Free SAP Assessment
                   </Link>
-                  <Link
-                    href="/services"
-                    onClick={() => trackCtaClick("Explore Services", "home_hero_secondary")}
-                    className="bg-[#A23B2A] text-white border border-[#A23B2A]
-                    px-8 py-4 rounded-full text-lg font-semibold text-center
-                    transition-all duration-300
-                    hover:bg-gradient-to-r
-                    hover:from-[#A23B2A]/90
-                    hover:to-brand-navy/90
-                    hover:border-transparent"
+                  <a
+                    href="https://wa.me/919445679878?text=Hello%20SoftClinch%2C%20I%20would%20like%20to%20discuss%20SAP%20consulting%20and%20AMS%20support."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => trackWhatsAppClick("home_hero_secondary")}
+                    className="bg-emerald-600 text-white px-7 py-4 rounded-full text-base sm:text-lg font-semibold text-center
+                    transition-all duration-300 hover:bg-emerald-700 flex items-center justify-center gap-2 shadow-md"
                   >
-                    Explore Services
-                  </Link>
+                    <MessageSquare size={18} />
+                    <span>Talk on WhatsApp (+91 94456 79878)</span>
+                  </a>
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -174,33 +172,6 @@ const Hero = () => {
   );
 };
 
-const Stats = () => (
-  <section className="py-24 bg-brand-navy">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-        {[
-          { label: 'Years of Technology & Consulting Experience', value: '10+' },
-          { label: 'Successful Enterprise & Digital Projects', value: '150+' },
-          { label: 'Reliable Automation & Messaging Infrastructure', value: '99.9%' },
-          { label: 'Experts in SAP, Automation & Digital Growth', value: '45+' }
-        ].map((stat, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className="bg-white/10 border border-white/20 p-10 rounded-[2.5rem] shadow-xl hover:shadow-2xl hover:-translate-y-1 hover:bg-white/15 transition-all duration-300"
-          >
-            <div className="text-4xl lg:text-5xl font-display font-bold text-white mb-2">{stat.value}</div>
-            <div className="text-white/70 text-xs uppercase tracking-widest font-bold">{stat.label}</div>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
 const ClientLogos = () => {
   const clients = [
     { name: 'Prenora Investment Holding', logoPath: '/client-logos/sc-clients-001.webp', bg: 'bg-white' },
@@ -214,14 +185,23 @@ const ClientLogos = () => {
   ];
 
   return (
-    <section className="py-24 bg-slate-50">
+    <section className="py-16 bg-slate-50 border-b border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <p className="text-sm uppercase tracking-[0.3em] text-slate-500 font-bold mb-4">Trusted by leading clients</p>
-          <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900">Our Trusted Clients</h2>
-          <p className="text-slate-600 max-w-2xl mx-auto mt-4">
-            Organizations across enterprise technology, manufacturing, finance, and digital transformation rely on SoftClinch for secure, scalable delivery.
-          </p>
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 shadow-sm mb-4">
+            <div className="flex text-amber-400">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={14} fill="currentColor" />
+              ))}
+            </div>
+            <span className="text-xs font-bold text-slate-800">5.0 Google Rating</span>
+            <span className="text-xs text-slate-300">•</span>
+            <span className="text-xs font-medium text-slate-600">Enterprise Verified Reviews</span>
+          </div>
+          <p className="text-xs uppercase tracking-[0.25em] text-slate-500 font-bold mb-2">Trusted By Enterprise Leaders</p>
+          <h2 className="text-2xl lg:text-3xl font-display font-bold text-slate-900">
+            Proven SAP &amp; Digital Engineering for Growing Enterprises
+          </h2>
         </div>
 
         <div className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white/80 py-5 shadow-sm">
@@ -254,6 +234,33 @@ const ClientLogos = () => {
     </section>
   );
 };
+
+const Stats = () => (
+  <section className="py-20 bg-brand-navy">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+        {[
+          { label: 'Years of Enterprise SAP & Tech Consulting', value: '10+' },
+          { label: 'Successful Enterprise & Digital Projects', value: '150+' },
+          { label: 'Enterprise System Uptime Commitment', value: '{{ENTERPRISE_SYSTEM_UPTIME_SLA}}' },
+          { label: 'SAP, Tech & Digital Growth Specialists', value: '45+' }
+        ].map((stat, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1 }}
+            className="bg-white/10 border border-white/20 p-8 sm:p-10 rounded-[2.5rem] shadow-xl hover:shadow-2xl hover:-translate-y-1 hover:bg-white/15 transition-all duration-300"
+          >
+            <div className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-white mb-2">{stat.value}</div>
+            <div className="text-white/70 text-xs uppercase tracking-widest font-bold">{stat.label}</div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
 
 const AboutSoftClinch = () => (
   <section className="py-24 bg-white">
@@ -427,6 +434,7 @@ const SAPConsultingAMSOverview = () => {
               </div>
               <a
                 href="mailto:venkat@softclinch.com"
+                onClick={() => trackCtaClick("Contact SAP Director", "home_sap_director")}
                 className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-brand-navy text-white font-bold text-sm rounded-full hover:bg-brand-terracotta hover:scale-[1.02] transition-all duration-300 w-full sm:w-auto"
               >
                 Contact SAP Director <ChevronRight size={16} />
@@ -505,6 +513,7 @@ const SAPConsultingAMSOverview = () => {
                 </Link>
                 <a
                   href="mailto:venkat@softclinch.com"
+                  onClick={() => trackCtaClick("Contact AMS Head", "home_ams_head")}
                   className="inline-flex items-center justify-center gap-2.5 px-6 py-3 bg-brand-terracotta text-white font-bold text-sm rounded-full hover:bg-brand-navy hover:scale-[1.02] transition-all duration-300 w-full sm:w-auto"
                 >
                   Contact AMS Head <ChevronRight size={16} />
@@ -520,36 +529,45 @@ const SAPConsultingAMSOverview = () => {
 };
 
 const CoreServices = () => {
-  const services = [
+  const sapServices = [
     {
-      title: 'SAP Consulting & AMS Support',
-      description: 'Enterprise SAP consulting services focused on implementation, AMS support, workflow optimization, SAP migration, and scalable business transformation solutions.',
-      icon: <Database className="text-slate-900" size={24} />,
-      path: '/sap-ams-support'
+      title: 'SAP S/4HANA Migration & Implementation',
+      description: 'End-to-end SAP consulting, S/4HANA transitions, ECC implementations, business process optimization, and multi-location global rollouts.',
+      icon: <Database className="text-brand-navy" size={24} />,
+      path: '/services/sap-consulting/'
     },
     {
-      title: 'Digital Marketing & Performance Growth',
-      description: 'Grow your business with SEO, GEO, AEO, PPC, and analytics-driven marketing strategies optimized for Google Search, AI search engines, and modern digital platforms.',
-      icon: <Globe className="text-slate-900" size={24} />,
-      path: '/digital-marketing'
+      title: 'SAP AMS Support Services',
+      description: 'SLA-backed Application Management Services (L1–L4 support), continuous incident resolution, system enhancements, and performance optimization.',
+      icon: <Cpu className="text-brand-navy" size={24} />,
+      path: '/sap-ams-support/'
     },
     {
-      title: 'Custom Application Development',
-      description: 'Build scalable SaaS platforms, enterprise web applications, mobile apps, dashboards, and secure API integrations tailored to your business workflows.',
-      icon: <Cpu className="text-slate-900" size={24} />,
-      path: '/custom-application-development'
+      title: 'SAP Custom Applications & Integrations',
+      description: 'Secure custom web applications, executive dashboards, and cloud integrations connecting SAP systems with modern enterprise workflows.',
+      icon: <Code className="text-brand-navy" size={24} />,
+      path: '/custom-application-development/'
     },
-    {
-      title: 'WhatsApp Automation Solutions',
-      description: 'Automate customer communication, support workflows, lead nurturing, and marketing campaigns with enterprise-grade WhatsApp Business API automation solutions.',
-      icon: <MessageSquare className="text-slate-900" size={24} />,
-      path: '/inaiwazhi-whatsapp-automation'
-    },
+  ];
+
+  const digitalServices = [
     {
       title: 'Website Development',
-      description: 'Fast, SEO-ready business websites and WooCommerce stores tailored for growing businesses across Chennai and India.',
-      icon: <Globe className="text-slate-900" size={24} />,
-      path: '/website-development'
+      description: 'Fast, secure, SEO-ready business websites built on Next.js and modern stacks designed for conversions and visibility.',
+      icon: <Globe className="text-brand-terracotta" size={24} />,
+      path: '/website-development/'
+    },
+    {
+      title: 'Custom Commerce Development',
+      description: 'High-converting custom eCommerce stores, multi-channel commerce architectures, and seamless ERP/inventory integrations.',
+      icon: <Layers className="text-brand-terracotta" size={24} />,
+      path: '/custom-commerce-development/'
+    },
+    {
+      title: 'Digital Marketing & AI Search (SEO / AEO)',
+      description: 'Result-oriented SEO, GEO, AEO, PPC, and AI search visibility strategies optimized to drive qualified B2B enterprise leads.',
+      icon: <BarChart3 className="text-brand-terracotta" size={24} />,
+      path: '/digital-marketing/'
     },
   ];
 
@@ -557,27 +575,89 @@ const CoreServices = () => {
     <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-16">
-          <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900 mb-4">Our Services</h2>
-          <p className="text-slate-600 max-w-2xl">SoftClinch helps businesses scale with SAP consulting, WhatsApp automation, SEO, AI-powered marketing, enterprise software development, and digital transformation solutions.</p>
+          <span className="inline-block px-4 py-1.5 rounded-full bg-slate-100 text-slate-900 text-xs font-bold uppercase tracking-widest mb-4">
+            Enterprise Solutions
+          </span>
+          <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900 mb-4">
+            Enterprise SAP &amp; Digital Solutions
+          </h2>
+          <p className="text-slate-600 max-w-2xl">
+            From enterprise SAP implementations and 24x7 AMS support to custom web software and digital growth systems, SoftClinch engineers high-reliability solutions for modern businesses.
+          </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-          {services.map((service, index) => (
-            <Link key={index} href={service.path} className="block group">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-slate-50 p-8 rounded-2xl border border-[#A23B2A] hover:shadow-lg transition-all h-full"
-              >
-                <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-navy group-hover:text-white transition-colors">
-                  {service.icon}
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-brand-navy transition-colors">{service.title}</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">{service.description}</p>
-              </motion.div>
+
+        {/* Group 1: SAP Services First */}
+        <div className="mb-14">
+          <div className="flex items-center justify-between mb-6 pb-2 border-b border-slate-100">
+            <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-brand-navy" />
+              SAP Enterprise Services
+            </h3>
+            <Link
+              href="/services"
+              className="text-sm font-semibold text-brand-navy hover:text-brand-terracotta transition-colors flex items-center gap-1"
+            >
+              View all services <ChevronRight size={14} />
             </Link>
-          ))}
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {sapServices.map((service, index) => (
+              <Link key={index} href={service.path} className="block group">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-slate-50 p-8 rounded-2xl border border-slate-200 hover:border-brand-navy hover:shadow-lg transition-all h-full flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-navy group-hover:text-white transition-colors shadow-sm">
+                      {service.icon}
+                    </div>
+                    <h4 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-brand-navy transition-colors">{service.title}</h4>
+                    <p className="text-slate-600 text-sm leading-relaxed mb-6">{service.description}</p>
+                  </div>
+                  <div className="text-xs font-bold text-brand-navy group-hover:text-brand-terracotta flex items-center gap-1">
+                    Learn more <ChevronRight size={14} />
+                  </div>
+                </motion.div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Group 2: Digital Growth Services */}
+        <div>
+          <div className="flex items-center justify-between mb-6 pb-2 border-b border-slate-100">
+            <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-brand-terracotta" />
+              Digital Growth &amp; Engineering Services
+            </h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {digitalServices.map((service, index) => (
+              <Link key={index} href={service.path} className="block group">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-slate-50 p-8 rounded-2xl border border-slate-200 hover:border-brand-terracotta hover:shadow-lg transition-all h-full flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-terracotta group-hover:text-white transition-colors shadow-sm">
+                      {service.icon}
+                    </div>
+                    <h4 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-brand-terracotta transition-colors">{service.title}</h4>
+                    <p className="text-slate-600 text-sm leading-relaxed mb-6">{service.description}</p>
+                  </div>
+                  <div className="text-xs font-bold text-brand-terracotta group-hover:text-brand-navy flex items-center gap-1">
+                    Learn more <ChevronRight size={14} />
+                  </div>
+                </motion.div>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -585,102 +665,67 @@ const CoreServices = () => {
 };
 
 const ProductAuthority = () => {
-  const features = [
-    { title: 'Automated Broadcast Campaigns', icon: <MessageSquare size={20} /> },
-    { title: 'Lead Management & Tagging', icon: <CheckCircle2 size={20} /> },
-    { title: 'CRM & ERP Integration', icon: <Database size={20} /> },
-    { title: 'AI-Powered Chat Automation', icon: <Cpu size={20} /> },
-    { title: 'Analytics Dashboard', icon: <BarChart3 size={20} /> }
-  ];
-
   return (
-    <section className="py-24 bg-white overflow-hidden">
+    <section className="py-16 bg-slate-50 border-t border-b border-slate-200/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative group">
-          <div className="absolute -inset-1 bg-gradient-to-r from-[#22c55e] to-[#10b981] rounded-[3rem] blur opacity-20 group-hover:opacity-30 transition duration-1000 group-hover:duration-200"></div>
+        <div className="relative rounded-[2.5rem] overflow-hidden bg-gradient-to-r from-slate-950 via-slate-900 to-emerald-950 p-8 sm:p-12 lg:p-14 text-white shadow-xl border border-white/10">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-8 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-widest mb-4">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                Enterprise Product • Inaiwazhi
+              </div>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold mb-4 leading-tight">
+                Inaiwazhi — Enterprise WhatsApp Automation Platform
+              </h2>
+              <p className="text-slate-300 text-base leading-relaxed mb-6 max-w-2xl">
+                Built on the official Meta WhatsApp Cloud API. Automate customer broadcasts, integrate CRM &amp; ERP systems (including SAP), and deploy 24x7 intelligent support workflows.
+              </p>
+              <div className="flex flex-wrap gap-4 items-center">
+                <a
+                  href="https://inaiwazhi.com/?utm_source=softclinch.com&utm_medium=referral&utm_campaign=home_card"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackCtaClick("Visit Inaiwazhi", "home_inaiwazhi_card")}
+                  className="px-6 py-3.5 bg-emerald-500 text-black font-bold rounded-full hover:bg-white hover:scale-105 transition-all duration-300 text-sm shadow-lg shadow-emerald-500/20 flex items-center gap-2"
+                >
+                  <span>Visit inaiwazhi.com</span>
+                  <ChevronRight size={16} />
+                </a>
+                <Link
+                  href="/contact"
+                  onClick={() => {
+                    trackDemoRequest({ cta_location: "home_inaiwazhi_card", cta_text: "Request WhatsApp Demo" });
+                    trackCtaClick("Request WhatsApp Demo", "home_inaiwazhi_card");
+                  }}
+                  className="px-6 py-3.5 bg-white/10 text-white font-semibold rounded-full hover:bg-white/20 transition-all duration-300 text-sm"
+                >
+                  Request Platform Demo
+                </Link>
+                <Link
+                  href="/inaiwazhi-whatsapp-automation/"
+                  className="text-xs text-slate-400 hover:text-white underline underline-offset-4 transition-colors"
+                >
+                  View feature details
+                </Link>
+              </div>
+            </div>
 
-          <div className="relative rounded-[3rem] overflow-hidden flex flex-col lg:flex-row border border-white/10 shadow-2xl" style={{ backgroundImage: 'linear-gradient(to right, #0a0f18 0%, #0d1f18 40%, #0b3d20 70%, #0e5c2a 100%)' }}>
-            <div className="p-10 lg:p-20 lg:w-7/12 relative z-10">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-              >
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#22c55e]/10 border border-[#22c55e]/20 text-[#22c55e] text-xs font-bold uppercase tracking-widest mb-8">
-                  <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse"></span>
-                  Inaiwazhi
-                </div>
-
-                <h2 className="text-4xl lg:text-5xl font-display font-bold text-white mb-8 leading-tight">
-                  Inaiwazhi - Enterprise WhatsApp Automation Platform
-                </h2>
-
-                <p className="text-slate-400 text-lg mb-12 leading-relaxed max-w-xl">
-                  Inaiwazhi is an enterprise WhatsApp automation platform built for scalable customer engagement, campaign automation, CRM integration, AI chatbot workflows, and real-time business communication.
-                </p>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
-                  {features.map((f, i) => (
-                    <div key={i} className="flex items-center gap-4 group/item">
-                      <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#22c55e] group-hover/item:bg-[#22c55e] group-hover/item:text-white transition-all duration-300">
-                        {f.icon}
-                      </div>
-                      <span className="text-slate-300 font-medium group-hover/item:text-white transition-colors">{f.title}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex flex-wrap gap-6">
-                  <Link
-                    href="/contact"
-                    onClick={() => {
-                      trackDemoRequest({ cta_location: "home_inaiwazhi_card", cta_text: "Request Demo" });
-                      trackCtaClick("Request Demo", "home_inaiwazhi_card");
-                    }}
-                    className="px-10 py-4 bg-[#22c55e] text-black font-black rounded-full hover:bg-white hover:scale-105 transition-all duration-300 shadow-xl shadow-[#22c55e]/20"
-                  >
-                    Request Demo
-                  </Link>
-                  <Link
-                    href="/inaiwazhi-whatsapp-automation"
-                    className="px-10 py-4 bg-white/10 text-white font-bold rounded-full hover:bg-white/20 transition-all duration-300"
-                  >
-                    Explore Platform
-                  </Link>
-                  <div className="flex items-center gap-3">
-                    <span className="text-slate-500 font-mono text-xs uppercase tracking-widest italic">Scalable Messaging Infrastructure</span>
-                    <div className="w-8 h-[1px] bg-white/10"></div>
+            <div className="grid grid-cols-2 gap-3 text-sm">
+              {[
+                { title: "Broadcast Campaigns", desc: "Automated bulk messaging with verified templates" },
+                { title: "ERP & SAP Webhooks", desc: "Real-time dispatch and order notifications" },
+                { title: "AI Chat Automation", desc: "Intelligent multi-lingual conversational bots" },
+                { title: "Analytics Dashboard", desc: "Delivery, read rates, and conversion tracking" },
+              ].map((item, idx) => (
+                <div key={idx} className="bg-white/5 border border-white/10 rounded-2xl p-4">
+                  <div className="text-emerald-400 font-bold text-xs mb-1 flex items-center gap-1.5">
+                    <CheckCircle2 size={13} /> {item.title}
                   </div>
+                  <div className="text-slate-400 text-xs leading-snug">{item.desc}</div>
                 </div>
-              </motion.div>
+              ))}
             </div>
-
-            <div className="lg:w-5/12 relative flex items-center justify-center p-10 lg:p-12 min-h-[400px]">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="relative w-full flex items-center justify-end"
-              >
-                <Image
-                  src={assetPath("/inaiwazhi-whatsapp-automation-dashboard.webp")}
-                  alt="Inaiwazhi WhatsApp Automation Dashboard"
-                  width={960}
-                  height={680}
-                  loading="lazy"
-                  className="drop-shadow-2xl object-cover object-right"
-                  style={{ width: '400%', height: '680px', maxWidth: 'none' }}
-                />
-                <div className="absolute inset-0 -z-10 flex items-center justify-center">
-                  <div className="w-64 h-64 bg-[#22c55e]/20 blur-[80px] rounded-full animate-pulse"></div>
-                </div>
-              </motion.div>
-
-              <div className="absolute top-1/4 -right-12 w-24 h-24 border border-white/5 rounded-full"></div>
-              <div className="absolute bottom-1/4 -left-12 w-48 h-48 border border-white/5 rounded-full"></div>
-            </div>
-
           </div>
         </div>
       </div>
@@ -1101,8 +1146,8 @@ export const Home = () => {
   return (
     <>
       <Hero />
-      <Stats />
       <ClientLogos />
+      <Stats />
       <AboutSoftClinch />
       <SAPConsultingAMSOverview />
       <CoreServices />

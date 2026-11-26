@@ -8,12 +8,13 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SoftClinchAIWidget } from "@/components/SoftClinchAIWidget";
 import { WhatsAppFloatingButton } from "@/components/WhatsAppFloatingButton";
+import { MobileStickyBar } from "@/components/MobileStickyBar";
 
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col pb-16 md:pb-0">
       <Header />
       <main className="flex-grow pt-[132px] md:pt-[132px]">{children}</main>
       {pathname !== "/contact" && (
@@ -35,6 +36,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       <Footer />
       <SoftClinchAIWidget />
       <WhatsAppFloatingButton />
+      <MobileStickyBar />
     </div>
   );
 }

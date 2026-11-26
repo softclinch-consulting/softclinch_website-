@@ -3,6 +3,7 @@
 import { Mail, Phone, MapPin, Send, Clock } from "lucide-react";
 import ReCAPTCHA from "react-google-recaptcha";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { CONTACT } from "@/lib/contact";
 import { getTrafficAttribution, trackLeadGenerated } from "@/lib/analytics";
 import {
@@ -27,6 +28,7 @@ type ContactApiResponse = {
 };
 
 export const Contact = () => {
+  const router = useRouter();
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [captchaToken, setCaptchaToken] = useState("");
@@ -41,7 +43,7 @@ export const Contact = () => {
   }, []);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData((current) => ({ ...current, [name]: value }));
@@ -110,6 +112,7 @@ export const Contact = () => {
       setCaptchaToken("");
       setWebsite("");
       setFormStartedAt(Date.now());
+      router.push("/thank-you");
     } catch (err) {
       setError(
         err instanceof Error
@@ -192,9 +195,7 @@ export const Contact = () => {
                   Request Received
                 </h3>
                 <p className="text-slate-200">
-                  Thank you for contacting SoftClinch. Your details were sent
-                  successfully, and a confirmation email should reach your inbox
-                  shortly.
+                  Thank you for contacting SoftClinch. We will respond within 2 business hours.
                 </p>
                 <button
                   onClick={() => setSubmitted(false)}
@@ -221,7 +222,7 @@ export const Contact = () => {
                       htmlFor="contact-name"
                       className="mb-2 block text-sm font-semibold text-white"
                     >
-                      Name
+                      Full Name
                     </label>
                     <input
                       id="contact-name"
@@ -231,7 +232,7 @@ export const Contact = () => {
                       value={formData.name}
                       onChange={handleChange}
                       className={`${inputClassName} ${getInputStateClassName(fieldErrors.name)}`}
-                      placeholder="John Doe"
+                      placeholder="Rajesh Kumar"
                       aria-invalid={Boolean(fieldErrors.name)}
                       aria-describedby={
                         fieldErrors.name ? "contact-name-error" : undefined
@@ -248,42 +249,10 @@ export const Contact = () => {
                   </div>
                   <div>
                     <label
-                      htmlFor="contact-company"
-                      className="mb-2 block text-sm font-semibold text-white"
-                    >
-                      Company
-                    </label>
-                    <input
-                      id="contact-company"
-                      name="company"
-                      type="text"
-                      required
-                      value={formData.company}
-                      onChange={handleChange}
-                      className={`${inputClassName} ${getInputStateClassName(fieldErrors.company)}`}
-                      placeholder="Enterprise Inc."
-                      aria-invalid={Boolean(fieldErrors.company)}
-                      aria-describedby={
-                        fieldErrors.company ? "contact-company-error" : undefined
-                      }
-                    />
-                    {fieldErrors.company ? (
-                      <p
-                        id="contact-company-error"
-                        className="mt-2 text-sm text-red-200"
-                      >
-                        {fieldErrors.company}
-                      </p>
-                    ) : null}
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                  <div>
-                    <label
                       htmlFor="contact-email"
                       className="mb-2 block text-sm font-semibold text-white"
                     >
-                      Email
+                      Work Email
                     </label>
                     <input
                       id="contact-email"
@@ -293,7 +262,7 @@ export const Contact = () => {
                       value={formData.email}
                       onChange={handleChange}
                       className={`${inputClassName} ${getInputStateClassName(fieldErrors.email)}`}
-                      placeholder="john@company.com"
+                      placeholder="rajesh@company.com"
                       aria-invalid={Boolean(fieldErrors.email)}
                       aria-describedby={
                         fieldErrors.email ? "contact-email-error" : undefined
@@ -308,12 +277,14 @@ export const Contact = () => {
                       </p>
                     ) : null}
                   </div>
+                </div>
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                   <div>
                     <label
                       htmlFor="contact-phone"
                       className="mb-2 block text-sm font-semibold text-white"
                     >
-                      Phone
+                      Phone / WhatsApp
                     </label>
                     <input
                       id="contact-phone"
@@ -323,7 +294,7 @@ export const Contact = () => {
                       value={formData.phone}
                       onChange={handleChange}
                       className={`${inputClassName} ${getInputStateClassName(fieldErrors.phone)}`}
-                      placeholder="+91 98765 43210"
+                      placeholder="+91 94456 79878"
                       aria-invalid={Boolean(fieldErrors.phone)}
                       aria-describedby={
                         fieldErrors.phone ? "contact-phone-error" : undefined
@@ -338,52 +309,56 @@ export const Contact = () => {
                       </p>
                     ) : null}
                   </div>
-                </div>
-                <div>
-                  <label
-                    htmlFor="contact-service"
-                    className="mb-2 block text-sm font-semibold text-white"
-                  >
-                    Service
-                  </label>
-                  <input
-                    id="contact-service"
-                    name="service"
-                    type="text"
-                    value={formData.service}
-                    onChange={handleChange}
-                    className={`${inputClassName} ${getInputStateClassName(fieldErrors.service)}`}
-                    placeholder="SEO, SAP support, automation, custom app..."
-                    aria-invalid={Boolean(fieldErrors.service)}
-                    aria-describedby={
-                      fieldErrors.service ? "contact-service-error" : undefined
-                    }
-                  />
-                  {fieldErrors.service ? (
-                    <p
-                      id="contact-service-error"
-                      className="mt-2 text-sm text-red-200"
+                  <div>
+                    <label
+                      htmlFor="contact-service"
+                      className="mb-2 block text-sm font-semibold text-white"
                     >
-                      {fieldErrors.service}
-                    </p>
-                  ) : null}
+                      Service Required
+                    </label>
+                    <select
+                      id="contact-service"
+                      name="service"
+                      value={formData.service}
+                      onChange={handleChange}
+                      className={`${inputClassName} ${getInputStateClassName(fieldErrors.service)}`}
+                      aria-invalid={Boolean(fieldErrors.service)}
+                      aria-describedby={
+                        fieldErrors.service ? "contact-service-error" : undefined
+                      }
+                    >
+                      <option value="">Select a service</option>
+                      <option value="SAP Consulting">SAP Consulting</option>
+                      <option value="SAP AMS Support">SAP AMS Support</option>
+                      <option value="Custom Software">Custom Software</option>
+                      <option value="Inaiwazhi WhatsApp">Inaiwazhi WhatsApp Automation</option>
+                      <option value="Other">Other</option>
+                    </select>
+                    {fieldErrors.service ? (
+                      <p
+                        id="contact-service-error"
+                        className="mt-2 text-sm text-red-200"
+                      >
+                        {fieldErrors.service}
+                      </p>
+                    ) : null}
+                  </div>
                 </div>
                 <div>
                   <label
                     htmlFor="contact-message"
                     className="mb-2 block text-sm font-semibold text-white"
                   >
-                    Message
+                    Project Brief <span className="font-normal text-slate-300">(Optional)</span>
                   </label>
                   <textarea
                     id="contact-message"
                     name="message"
-                    rows={5}
-                    required
+                    rows={3}
                     value={formData.message}
                     onChange={handleChange}
                     className={`${inputClassName} resize-y ${getInputStateClassName(fieldErrors.message)}`}
-                    placeholder="Tell us about your project..."
+                    placeholder="Brief overview of your requirements or timeline..."
                     aria-invalid={Boolean(fieldErrors.message)}
                     aria-describedby={
                       fieldErrors.message ? "contact-message-error" : undefined
