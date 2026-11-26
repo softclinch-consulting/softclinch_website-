@@ -11,13 +11,19 @@ import {
 import { sapAmsFaq } from "@/lib/faqs";
 
 const canonicalPath = "/sap-ams-support";
-const title = "SAP AMS Support Services in Chennai & India | SoftClinch";
+const title = "SAP AMS Support in Chennai | SLA-Based 24x7 – SoftClinch";
 const description =
-  "SLA-driven SAP AMS support for S/4HANA and ECC. Incident management, enhancements and continuous improvement from a Chennai-based SAP team. Talk to us today.";
+  "Ensure 99.9% SAP uptime with SLA-based AMS support in Chennai. Incident resolution, enhancements & L1-L4 support. Contact our AMS head today.";
 
 export const metadata = buildMetadata({
   title,
   description,
+  ogTitle: "24x7 SAP AMS Support Services in Chennai | SoftClinch",
+  ogDescription:
+    "Enterprise SAP AMS support in Chennai with guaranteed SLA response times, functional monitoring & user training. Schedule your AMS review.",
+  twitterTitle: "SAP AMS Support in Chennai | SLA-Based 24x7 – SoftClinch",
+  twitterDescription:
+    "24x7 SLA-backed SAP AMS support, incident management & ECC/S4HANA enhancements in Chennai.",
   canonicalPath,
 });
 

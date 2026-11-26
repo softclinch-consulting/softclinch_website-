@@ -7,13 +7,19 @@ import { SITE_NAME } from "@/lib/site";
 import { sapConsultingFaq } from "@/lib/faqs";
 
 const canonicalPath = "/services/sap-consulting";
-const title = "SAP S/4HANA Implementation Partner in Chennai | SoftClinch";
+const title = "SAP Consulting in Chennai | S/4HANA Implementation";
 const description =
-  "Seamless SAP S/4HANA implementations, global rollouts & enterprise integrations. Reduce project risk & accelerate ROI. Talk to our SAP solutions architect!";
+  "Scale enterprise efficiency with SAP S/4HANA implementation, global rollouts & ECC migrations in Chennai. Accelerate ROI—consult our SAP team.";
 
 export const metadata = buildMetadata({
   title,
   description,
+  ogTitle: "Enterprise SAP Consulting in Chennai | SoftClinch",
+  ogDescription:
+    "End-to-end SAP S/4HANA implementation, architecture design & ERP rollout services in Chennai. Talk to our senior SAP consulting practice.",
+  twitterTitle: title,
+  twitterDescription:
+    "End-to-end SAP S/4HANA implementation, ECC migration & global rollouts from Chennai.",
   keywords: [
     "sap implementation services",
     "sap rollout partner india",

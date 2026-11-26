@@ -4,13 +4,19 @@ import { breadcrumbJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 import { CustomCommerceLanding } from "@/components/CustomCommerceLanding";
 import { RelatedReading } from "@/components/RelatedReading";
 
-const title = "Custom eCommerce Development & Engineering | SoftClinch";
+const title = "Custom Ecommerce Development in Chennai | SoftClinch";
 const description =
-  "Scale online sales with custom eCommerce engineering, ERP/CRM integrations, headless stores & WhatsApp automation. Book your free eCommerce tech audit!";
+  "Scale your online store with custom eCommerce development in Chennai. High-converting checkout, ERP sync & headless speed. Get a store audit.";
 
 export const metadata = buildMetadata({
   title,
   description,
+  ogTitle: "Enterprise Custom Ecommerce Engineering | SoftClinch Chennai",
+  ogDescription:
+    "Build high-speed, secure e-commerce systems with integrated ERP/CRM inventory sync and payment automation. Consult our e-commerce engineers.",
+  twitterTitle: title,
+  twitterDescription:
+    "Build headless e-commerce stores, custom checkout and ERP-connected shopping platforms in Chennai.",
   canonicalPath: "/custom-commerce-development",
   keywords: [
     "custom ecommerce development company",

@@ -13,12 +13,12 @@ import { customDevelopmentFaq } from "@/lib/faqs";
 // Primary Canonical Path & Slug
 const canonicalPath = "/custom-application-development/";
 
-// High-Intent Search Query Meta Title (High-CTR Commercial Intent)
-const title = "Custom Software & App Development in Tamil Nadu | SoftClinch";
+// High-Intent Search Query Meta Title (≤60 chars)
+const title = "Custom Software Development in Chennai | SoftClinch";
 
-// High-Intent Search Query Meta Description (High CTR & Action Oriented)
+// High-Intent Search Query Meta Description (≤155 chars)
 const description =
-  "Build custom business software, ERP, CRM & mobile apps tailored to your workflows. Eliminate manual spreadsheets. Get your free discovery consultation today!";
+  "Build scalable web, mobile & cloud SaaS applications in Chennai. Modernize workflows with secure custom software. Request a project proposal.";
 
 // High-Intent Search Query Clusters (Commercial, Transactional & Local Tamil Nadu Intent for Maximum Clicks)
 const highIntentKeywords = [
@@ -70,6 +70,12 @@ const highIntentKeywords = [
 export const metadata = buildMetadata({
   title,
   description,
+  ogTitle: "Custom Web & Mobile Application Engineering in Chennai",
+  ogDescription:
+    "Engineer robust enterprise applications, SaaS platforms and modern APIs tailored to your business operations. Start your project with SoftClinch.",
+  twitterTitle: title,
+  twitterDescription:
+    "Build bespoke business software, SaaS platforms & mobile apps in Chennai with SoftClinch.",
   keywords: highIntentKeywords,
   canonicalPath,
 });

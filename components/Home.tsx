@@ -240,7 +240,7 @@ const ClientLogos = () => {
               >
                 <Image
                   src={assetPath(client.logoPath)}
-                  alt={index >= clients.length ? "" : client.name}
+                  alt={index >= clients.length ? "" : `${client.name} client logo`}
                   width={112}
                   height={56}
                   loading="lazy"
@@ -1005,28 +1005,28 @@ const FAQ = () => {
 
   const faqs = [
     {
-      q: "Do you provide SAP AMS support?",
-      a: "Yes. We provide SAP AMS support, implementation, migration assistance, and enterprise SAP consulting services."
+      q: "Do you provide SAP AMS support in Chennai?",
+      a: "Yes. SoftClinch provides SLA-driven SAP AMS support, S/4HANA migrations, ECC rollouts, and functional consulting across Chennai, India, and global locations with 24x7 coverage."
     },
     {
-      q: "What services does SoftClinch provide?",
-      a: "SoftClinch provides SAP consulting, WhatsApp automation, SEO services, AI automation solutions, custom software development, and enterprise digital transformation services."
+      q: "What core technology services does SoftClinch offer?",
+      a: "We specialize in SAP consulting and AMS support, custom web and mobile application engineering, high-performance website development, custom eCommerce, and performance digital marketing."
     },
     {
-      q: "What is WhatsApp automation for businesses?",
-      a: "WhatsApp automation helps businesses automate customer communication, lead nurturing, support workflows, and campaign messaging using WhatsApp Business APIs."
+      q: "What is Inaiwazhi WhatsApp automation?",
+      a: "Inaiwazhi is SoftClinch's enterprise communication platform powered by the official Meta Cloud API, enabling broadcast campaigns, CRM webhook integrations, and automated customer support workflows."
     },
     {
-      q: "Can you build custom SaaS applications?",
-      a: "Yes. We develop SaaS platforms, enterprise applications, CRM systems, dashboards, and scalable web and mobile applications."
+      q: "Can SoftClinch integrate custom applications with enterprise SAP systems?",
+      a: "Yes. Our engineering practice specializes in connecting custom web applications, customer portals, and WhatsApp messaging pipelines with SAP S/4HANA, ECC, and relational databases."
     },
     {
-      q: "How does SEO and AI search optimization help businesses?",
-      a: "SEO, GEO, and AEO improve business visibility across Google Search, AI search engines, and answer engines to generate traffic and leads."
+      q: "What are your support SLAs and response times?",
+      a: "We deliver structured SLA frameworks with defined response windows (L1 to L4 support tiers) tailored to enterprise business criticality {{VERIFY_SLA_TIERS}}."
     },
     {
-      q: "Can you integrate your solutions with our existing ERP or CRM systems?",
-      a: "Yes. We specialize in connecting our custom applications, WhatsApp automation platforms, and digital growth systems with existing enterprise ERPs (including SAP), CRMs, databases, and third-party APIs."
+      q: "Where is SoftClinch located, and how can we schedule an assessment?",
+      a: "Our corporate office is located at 30, 53rd St, Ashok Nagar, Chennai 600083. You can call +91 94456 79878 or submit our consultation form to book an assessment."
     }
   ];
 
@@ -1045,6 +1045,8 @@ const FAQ = () => {
       <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
         <button
           onClick={() => setOpenIndex(isOpen ? null : index)}
+          aria-expanded={isOpen}
+          aria-controls={`faq-answer-${index}`}
           className="w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none"
         >
           <span className="font-bold text-slate-900 leading-tight">{faq.q}</span>
@@ -1053,20 +1055,20 @@ const FAQ = () => {
             size={20}
           />
         </button>
-        <AnimatePresence initial={false}>
-          {isOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-            >
-              <div className="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-50 pt-4">
-                {faq.a}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Always rendered in server HTML for SEO and screen readers; toggled smoothly via CSS grid */}
+        <div
+          id={`faq-answer-${index}`}
+          className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${
+            isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+          }`}
+          aria-hidden={!isOpen}
+        >
+          <div className="overflow-hidden">
+            <div className="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-50 pt-4">
+              {faq.a}
+            </div>
+          </div>
+        </div>
       </div>
     );
   };

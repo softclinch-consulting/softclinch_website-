@@ -9,12 +9,19 @@ import { buildMetadata } from "@/lib/seo";
 import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 
 const canonicalPath = aiPoweredBusinessSystemsSeo.slug;
-const title = aiPoweredBusinessSystemsSeo.metaTitle;
-const description = aiPoweredBusinessSystemsSeo.metaDescription;
+const title = "AI Business Automation in Chennai | SoftClinch";
+const description =
+  "Automate repetitive workflows and customer communication with custom AI agents and business systems in Chennai. Book a free AI discovery call.";
 
 export const metadata = buildMetadata({
   title,
   description,
+  ogTitle: "Autonomous AI Agents & Enterprise Automation | SoftClinch",
+  ogDescription:
+    "Integrate AI-driven process automation and intelligent chatbots directly with your CRM and enterprise databases. Explore AI solutions.",
+  twitterTitle: title,
+  twitterDescription:
+    "Deploy custom AI agents, automated workflow pipelines & intelligent CRM systems in Chennai.",
   canonicalPath,
 });
 

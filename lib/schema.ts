@@ -4,7 +4,7 @@ import { SITE_NAME, getSiteUrl } from "./site";
 export function organizationJsonLd() {
   return {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
+    "@type": ["Organization", "ProfessionalService"],
     "@id": "https://softclinch.com/#organization",
     name: "SoftClinch Consulting Services Pvt. Ltd.",
     alternateName: "SoftClinch",
@@ -218,6 +218,58 @@ export function blogCollectionJsonLd(
         name: post.title,
         url: `${siteUrl}/blog/${post.slug}`,
       })),
+    },
+  };
+}
+
+export function blogPostingJsonLd({
+  title,
+  description,
+  url,
+  image,
+  datePublished,
+  dateModified,
+  author,
+}: {
+  title: string;
+  description: string;
+  url: string;
+  image?: string;
+  datePublished: string;
+  dateModified?: string;
+  author: string;
+}) {
+  const siteUrl = getSiteUrl();
+  const isNamedPerson =
+    Boolean(author) &&
+    author !== "SoftClinch" &&
+    author !== "SoftClinch Consulting Services" &&
+    author !== SITE_NAME;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: title,
+    description,
+    url,
+    ...(image ? { image } : {}),
+    datePublished,
+    dateModified: dateModified || datePublished,
+    author: isNamedPerson
+      ? {
+          "@type": "Person",
+          name: author,
+          url: `${siteUrl}/about/`,
+        }
+      : {
+          "@id": "https://softclinch.com/#organization",
+        },
+    publisher: {
+      "@id": "https://softclinch.com/#organization",
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": url,
     },
   };
 }

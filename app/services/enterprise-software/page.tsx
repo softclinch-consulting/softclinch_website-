@@ -5,9 +5,9 @@ import { buildMetadata } from "@/lib/seo";
 import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 
 const canonicalPath = "/services/enterprise-software";
-const title = "Custom Enterprise Software Development Company | SoftClinch";
+const title = "Enterprise Software Development in Chennai – SoftClinch";
 const description =
-  "Develop secure, scalable enterprise software, cloud-native applications & SaaS platforms built for complex business operations. Request an architecture review!";
+  "Modernize legacy infrastructure with scalable enterprise software in Chennai. Cloud-native architectures & ERP integrations. Talk to our team.";
 
 const enterpriseFaq = [
   {
@@ -35,6 +35,12 @@ const enterpriseFaq = [
 export const metadata = buildMetadata({
   title,
   description,
+  ogTitle: "Secure Scalable Enterprise Software Engineering | Chennai",
+  ogDescription:
+    "Custom enterprise platforms, microservices architecture, and legacy modernization engineered for high availability. Schedule an architect call.",
+  twitterTitle: title,
+  twitterDescription:
+    "Modernize enterprise infrastructure with custom software and cloud systems in Chennai.",
   canonicalPath,
 });
 

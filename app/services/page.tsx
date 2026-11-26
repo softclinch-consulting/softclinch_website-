@@ -4,13 +4,19 @@ import { buildMetadata } from "@/lib/seo";
 import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib/schema";
 import { SITE_NAME } from "@/lib/site";
 
-const title = "Enterprise Technology & Software Services | SoftClinch";
+const title = "Enterprise IT & SAP Services in Chennai | SoftClinch";
 const description =
-  "Explore our end-to-end technology services: SAP consulting, bespoke software development, WhatsApp automation & performance marketing. Book a free consultation.";
+  "Accelerate enterprise growth with SAP consulting, AMS support, custom apps & digital growth services in Chennai. Explore our services today.";
 
 export const metadata = buildMetadata({
   title,
   description,
+  ogTitle: "Full-Suite Enterprise IT & SAP Services | SoftClinch Chennai",
+  ogDescription:
+    "Discover SoftClinch's integrated enterprise services: SAP implementations, custom software development, WhatsApp automation & performance SEO.",
+  twitterTitle: title,
+  twitterDescription:
+    "End-to-end enterprise IT: SAP consulting, custom software, WhatsApp automation & digital marketing in Chennai.",
   canonicalPath: "/services",
 });
 

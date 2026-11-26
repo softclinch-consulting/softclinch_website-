@@ -5,13 +5,19 @@ import { breadcrumbJsonLd, webpageJsonLd, blogCollectionJsonLd } from "@/lib/sch
 import { blogPosts } from "@/lib/blog";
 import { SITE_NAME } from "@/lib/site";
 
-const title = "Technology, SAP & AI Automation Blog | SoftClinch";
+const title = "SAP, AI & Tech Growth Blog | SoftClinch Insights";
 const description =
-  "Insights for business leaders on SAP, AI agents, custom software, WhatsApp automation and SEO/AEO from SoftClinch's Chennai team.";
+  "Read expert engineering guides on SAP S/4HANA, AI chatbots, enterprise software, and SEO in Chennai. Practical playbooks for business leaders.";
 
 export const metadata = buildMetadata({
   title,
   description,
+  ogTitle: "SoftClinch Tech & Enterprise Consulting Insights",
+  ogDescription:
+    "In-depth articles and real-world architectures on SAP modernization, agentic AI, digital marketing, and automation. Read the latest posts.",
+  twitterTitle: title,
+  twitterDescription:
+    "Practical engineering guides on SAP, AI chatbots, and software engineering from SoftClinch.",
   keywords: [
     "Google AI search research",
     "enterprise technology blog",

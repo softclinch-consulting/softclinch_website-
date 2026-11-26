@@ -73,8 +73,15 @@ const websiteFaq = [
 ];
 
 export const metadata = buildMetadata({
-  title,
-  description,
+  title: "Web Development Company in Chennai | Next.js Experts",
+  description:
+    "Get high-speed, SEO-optimized business websites and web platforms in Chennai. Drive leads with modern Next.js architecture. Book a free quote.",
+  ogTitle: "High-Performance Business Web Development | Chennai",
+  ogDescription:
+    "Fast, mobile-first business websites engineered for top Core Web Vitals, Google search visibility and lead conversion. Get in touch with us.",
+  twitterTitle: "Web Development Company in Chennai | Next.js Experts",
+  twitterDescription:
+    "Modern, high-converting business websites engineered with Next.js and SEO in Chennai.",
   canonicalPath,
 });
 

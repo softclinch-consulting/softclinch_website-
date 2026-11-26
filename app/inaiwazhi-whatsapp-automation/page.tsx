@@ -6,13 +6,19 @@ import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib
 import { whatsappAutomationFaq } from "@/lib/faqs";
 
 const canonicalPath = "/inaiwazhi-whatsapp-automation";
-const title = "Inaiwazhi WhatsApp Automation Platform | SoftClinch";
+const title = "WhatsApp Business API Automation in Chennai – Inaiwazhi";
 const description =
-  "Official WhatsApp Business Platform solution: chatbots, automated customer messages, ERP/CRM triggers and workflow automation. Book a demo.";
+  "Automate lead qualification, alerts & support in Chennai with Meta Cloud WhatsApp API. Zero ban risk & CRM sync. Request your live demo now.";
 
 export const metadata = buildMetadata({
   title,
   description,
+  ogTitle: "Inaiwazhi: Enterprise WhatsApp Automation Platform",
+  ogDescription:
+    "Deliver broadcast campaigns, automated drip sequences, and 24/7 AI-assisted customer communication on official WhatsApp Cloud APIs.",
+  twitterTitle: title,
+  twitterDescription:
+    "Enterprise WhatsApp Business API automation and broadcast campaigns with CRM sync in Chennai.",
   canonicalPath,
 });
 

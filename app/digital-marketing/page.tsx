@@ -6,13 +6,19 @@ import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, webpageJsonLd } from "@/lib
 import { digitalMarketingFaq } from "@/lib/faqs";
 
 const canonicalPath = "/digital-marketing";
-const title = "Digital Marketing & SEO Services in Chennai | SoftClinch";
+const title = "Digital Marketing & SEO in Chennai | SoftClinch";
 const description =
-  "Generate qualified B2B leads & scalable revenue with AI-driven SEO, Google Ads, Meta Ads & conversion funnels. Claim your free marketing growth audit now!";
+  "Generate qualified B2B leads with SEO, GEO, AEO & performance PPC marketing in Chennai. Outrank competitors. Get a free digital marketing audit.";
 
 export const metadata = buildMetadata({
   title,
   description,
+  ogTitle: "Data-Driven Performance Marketing & SEO Agency in Chennai",
+  ogDescription:
+    "Proven search visibility and lead generation strategies for enterprise tech, manufacturing and growing brands. Request your performance strategy.",
+  twitterTitle: title,
+  twitterDescription:
+    "Data-driven SEO, Google Ads, and AI-search optimization in Chennai with SoftClinch.",
   canonicalPath,
 });
 
