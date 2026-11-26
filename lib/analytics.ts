@@ -244,13 +244,34 @@ export function trackDemoRequest(details: {
  * 6. Primary CTA click tracking.
  */
 export function trackCtaClick(
-  cta_text: string,
-  cta_location: string,
+  cta_text_or_details:
+    | string
+    | {
+        cta_text?: string;
+        cta_name?: string;
+        cta_location?: string;
+        page_path?: string;
+      },
+  cta_location?: string,
   page_path?: string
 ) {
+  let text = "CTA Click";
+  let location = "unknown";
+  let path = typeof window !== "undefined" ? window.location.pathname : "";
+
+  if (typeof cta_text_or_details === "string") {
+    text = cta_text_or_details;
+    if (cta_location) location = cta_location;
+    if (page_path) path = page_path;
+  } else if (cta_text_or_details) {
+    text = cta_text_or_details.cta_text || cta_text_or_details.cta_name || text;
+    location = cta_text_or_details.cta_location || location;
+    path = cta_text_or_details.page_path || path;
+  }
+
   trackEvent("cta_click", {
-    cta_text,
-    cta_location,
-    page_path: page_path || (typeof window !== "undefined" ? window.location.pathname : ""),
+    cta_text: text,
+    cta_location: location,
+    page_path: path,
   });
 }

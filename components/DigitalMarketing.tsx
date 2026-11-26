@@ -17,6 +17,7 @@ import { FaqSection } from "@/components/FaqSection";
 import { ServiceMediaPanel } from "@/components/ServiceMediaPanel";
 import { digitalMarketingFaq } from "@/lib/faqs";
 import { reviews } from "@/lib/reviews";
+import { trackCtaClick } from "@/lib/analytics";
 
 const Card = ({ children, className }: { children: React.ReactNode; className: string }) => {
   return <div className={className}>{children}</div>;
@@ -61,10 +62,10 @@ export const DigitalMarketing = () => {
                 AI SEO, GEO, AEO & Performance Marketing
               </motion.div>
 
-              <h1 className="text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-6">
-                AI-Powered Digital Marketing, SEO &{" "}
+              <h1 className="text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-6 font-display">
+                Digital Marketing &amp; SEO in{" "}
                 <span className="bg-gradient-to-r from-brand-navy to-brand-terracotta bg-clip-text text-transparent">
-                  Performance Growth Solutions
+                  Chennai &amp; India
                 </span>
               </h1>
 
@@ -76,6 +77,7 @@ export const DigitalMarketing = () => {
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link
                     href="/contact"
+                    onClick={() => trackCtaClick("Book Free Growth Consultation", "digital_marketing_hero")}
                     className="bg-brand-navy hover:bg-brand-navy/90 text-white px-8 py-4 text-base rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center font-semibold"
                   >
                     Book Free Growth Consultation
@@ -85,6 +87,7 @@ export const DigitalMarketing = () => {
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link
                     href="/case-studies"
+                    onClick={() => trackCtaClick("View Success Stories", "digital_marketing_hero_case_studies")}
                     className="border-2 border-slate-200 text-slate-700 font-semibold px-8 py-4 text-base rounded-lg hover:bg-slate-50 hover:border-brand-navy transition-all duration-300 inline-flex"
                   >
                     View Success Stories
@@ -123,17 +126,17 @@ export const DigitalMarketing = () => {
             {[
               {
                 icon: TrendingUp,
-                title: "140%",
+                title: "{{CASE_STUDY_ROI_GROWTH}}",
                 description: "Average ROI Growth",
               },
               {
                 icon: Target,
-                title: "2X",
+                title: "{{CASE_STUDY_LEAD_INCREASE}}",
                 description: "Increase in Qualified Leads",
               },
               {
                 icon: BarChart,
-                title: "28%",
+                title: "{{CASE_STUDY_CAC_REDUCTION}}",
                 description: "Lower Customer Acquisition Cost",
               },
               {

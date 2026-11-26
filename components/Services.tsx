@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Globe, Cpu, Database, ChevronRight, ArrowRight, CheckCircle, Zap, Users, Code, Smartphone, Cloud, Building2, MessageSquare } from 'lucide-react';
+import { trackCtaClick } from '@/lib/analytics';
 
 const ServiceCard = ({ title, description, icon: Icon, path, index }: any) => (
   <motion.div
@@ -130,15 +131,33 @@ export const Services = () => {
     },
     {
       title: "SAP AMS Support",
-      description: "Expert guidance and operational support for SAP implementation, migration, and application management services.",
+      description: "SLA-backed Application Management Services (L1–L4 support), continuous incident resolution, system enhancements, and performance optimization.",
       icon: Database,
       path: "/sap-ams-support"
+    },
+    {
+      title: "Enterprise Software",
+      description: "Custom enterprise software, SaaS platforms, and cloud-native applications engineered for scale and reliability.",
+      icon: Building2,
+      path: "/services/enterprise-software"
     },
     {
       title: "Custom App Development",
       description: "Engineering robust, scalable software solutions including SaaS platforms, web apps, and mobile applications.",
       icon: Cpu,
       path: "/custom-application-development"
+    },
+    {
+      title: "Website Development",
+      description: "Fast, secure, SEO-ready business websites built on Next.js and modern stacks designed for conversions and visibility.",
+      icon: Globe,
+      path: "/website-development"
+    },
+    {
+      title: "Custom Ecommerce Development",
+      description: "High-converting custom eCommerce stores, multi-channel commerce architectures, and seamless ERP/inventory integrations.",
+      icon: Code,
+      path: "/custom-commerce-development"
     },
     {
       title: "AI-Powered Business Systems",
@@ -157,12 +176,6 @@ export const Services = () => {
       description: "Data-driven performance marketing focused on measurable ROI, SEO, GEO, and AEO strategies for modern search landscapes.",
       icon: Globe,
       path: "/digital-marketing"
-    },
-    {
-      title: "Enterprise Software",
-      description: "Custom enterprise software, SaaS platforms, and cloud-native applications engineered for scale and reliability.",
-      icon: Building2,
-      path: "/services/enterprise-software"
     }
   ];
 
@@ -198,8 +211,8 @@ export const Services = () => {
       title: "Enterprise-Grade Solutions",
       description: "Built for scale with robust architecture, security, and performance optimization.",
       metrics: [
-        { value: "99.9%", label: "Uptime SLA" },
-        { value: "24/7", label: "Support" }
+        { value: "{{ENTERPRISE_SYSTEM_UPTIME_SLA}}", label: "Uptime SLA" },
+        { value: "24/7", label: "SLA Support" }
       ]
     },
     {
@@ -207,14 +220,14 @@ export const Services = () => {
       description: "Iterative approach with regular feedback loops and rapid deployment cycles.",
       metrics: [
         { value: "2-4", label: "Week Sprints" },
-        { value: "50+", label: "Projects" }
+        { value: "150+", label: "Projects" }
       ]
     },
     {
       title: "Cross-Platform Expertise",
       description: "Full-stack development across web, mobile, and cloud platforms.",
       metrics: [
-        { value: "15+", label: "Technologies" },
+        { value: "10+", label: "Years Experience" },
         { value: "100%", label: "Responsive" }
       ]
     }
@@ -222,25 +235,23 @@ export const Services = () => {
 
   const caseStudies = [
     {
-      // TODO: Add real client name/industry for this case study
-      title: "E-commerce Platform Transformation",
-      description: "Complete digital overhaul for a retail client, resulting in 300% increase in online sales and improved customer experience.",
+      title: "Enterprise Commerce Platform Overhaul",
+      description: "Complete digital overhaul for a retail client, modernizing store architecture and optimizing catalog discovery.",
       image: "/custom_app_dev_hero.webp",
       results: [
-        { value: "300%", label: "Sales Growth" },
-        { value: "50%", label: "Faster Load Times" },
-        { value: "95%", label: "Customer Satisfaction" }
+        { value: "{{CASE_STUDY_1_SALES_GROWTH}}", label: "Sales Impact" },
+        { value: "{{CASE_STUDY_1_LOAD_TIME}}", label: "Performance Gain" },
+        { value: "{{CASE_STUDY_1_SATISFACTION}}", label: "Customer CSAT" }
       ]
     },
     {
-      // TODO: Add real client name/industry for this case study
-      title: "SAP Implementation Success",
-      description: "End-to-end SAP deployment for manufacturing company, streamlining operations and reducing costs by 40%.",
-      image: "/sap_consulting_hero.png",
+      title: "Manufacturing SAP S/4HANA Migration",
+      description: "End-to-end SAP deployment for manufacturing client, streamlining core supply chain workflows and system accuracy.",
+      image: "/sap_consulting_hero_v2.webp",
       results: [
-        { value: "40%", label: "Cost Reduction" },
-        { value: "60%", label: "Process Efficiency" },
-        { value: "99%", label: "System Accuracy" }
+        { value: "{{CASE_STUDY_2_COST_SAVINGS}}", label: "Cost Efficiency" },
+        { value: "{{CASE_STUDY_2_PROCESS_SPEED}}", label: "Process Speed" },
+        { value: "{{CASE_STUDY_2_ACCURACY}}", label: "System Accuracy" }
       ]
     }
   ];
@@ -428,7 +439,10 @@ export const Services = () => {
               Let's discuss how our enterprise solutions can drive your digital transformation and accelerate growth.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Link href="/contact">
+              <Link
+                href="/contact"
+                onClick={() => trackCtaClick("Get Started Today", "services_hub_cta")}
+              >
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}

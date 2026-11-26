@@ -30,6 +30,7 @@ import {
 import { assetPath } from "@/lib/asset";
 import { FaqSection } from "@/components/FaqSection";
 import { sapConsultingFaq } from "@/lib/faqs";
+import { trackCtaClick } from "@/lib/analytics";
 
 // FadeInSection component for scroll-based animations
 const FadeInSection = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => (
@@ -205,7 +206,7 @@ export const SAPConsultingServices = () => {
       ],
       challenge: "Inefficient inventory management and process bottlenecks.",
       solution: "Implemented SAP ERP for real-time inventory tracking, financial automation, and supply chain optimization.",
-      result: "Increased operational efficiency by 30%, enhanced reporting, and seamless process integration."
+      result: "Increased operational efficiency by {{CASE_STUDY_RESULT}}, enhanced reporting, and seamless process integration."
     },
     {
       title: "Reliable SAP AMS Support for Business Continuity",
@@ -221,7 +222,7 @@ export const SAPConsultingServices = () => {
       ],
       challenge: "Frequent SAP downtimes affecting production and service delivery.",
       solution: "Implemented a proactive monitoring system with regular performance tuning and security enhancements.",
-      result: "99.9% system uptime, faster response times, and improved business operations."
+      result: "{{ENTERPRISE_SYSTEM_UPTIME_SLA}} system uptime, faster response times, and improved business operations."
     }
   ];
 
@@ -271,9 +272,9 @@ export const SAPConsultingServices = () => {
                 variants={itemVariants}
                 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-brand-navy leading-[1.12] font-display"
               >
-                SAP S/4HANA <br />
+                SAP Consulting &amp; S/4HANA <br />
                 <span className="text-brand-terracotta">
-                  Implementation & Rollout Services
+                  Implementation in Chennai &amp; India
                 </span>
               </motion.h1>
 
@@ -316,18 +317,20 @@ export const SAPConsultingServices = () => {
                 variants={itemVariants}
                 className="flex flex-wrap gap-4 pt-2"
               >
-                <a
-                  href="#services-pillars"
-                  className="bg-brand-navy text-white hover:bg-[#081b33] px-6 py-3 rounded-full font-bold text-sm transition-all shadow-md shadow-brand-navy/15 flex items-center gap-2 group"
+                <Link
+                  href="/contact"
+                  onClick={() => trackCtaClick("Book a Free SAP Assessment", "sap_consulting_hero")}
+                  className="bg-brand-navy text-white hover:bg-[#081b33] px-6 py-3.5 rounded-full font-bold text-sm transition-all shadow-md shadow-brand-navy/15 flex items-center gap-2 group"
                 >
-                  Explore Services
+                  Book a Free SAP Assessment
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </a>
+                </Link>
                 <a
-                  href="#contact-consultation"
-                  className="bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 px-6 py-3 rounded-full font-bold text-sm transition-all"
+                  href="mailto:venkat@softclinch.com?subject=SAP%20Consulting%20Director%20Inquiry"
+                  onClick={() => trackCtaClick("Contact SAP Director", "sap_consulting_hero_director")}
+                  className="bg-white border border-brand-terracotta text-brand-terracotta hover:bg-brand-terracotta/5 px-6 py-3.5 rounded-full font-bold text-sm transition-all"
                 >
-                  Get In Touch
+                  Contact SAP Director
                 </a>
               </motion.div>
             </motion.div>
@@ -856,10 +859,11 @@ export const SAPConsultingServices = () => {
                     </p>
 
                     <a
-                      href="mailto:venkat@softclinch.com"
+                      href="mailto:venkat@softclinch.com?subject=SAP%20Lead%20Inquiry"
+                      onClick={() => trackCtaClick("Contact SAP Director", "sap_consulting_bottom_director")}
                       className="w-full py-3 bg-white text-brand-navy hover:bg-orange-50 rounded-2xl font-bold text-xs transition-all duration-300 flex items-center justify-center gap-2 border border-white/15"
                     >
-                      Connect Direct <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+                      Contact SAP Director <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
                     </a>
                   </div>
                 </div>

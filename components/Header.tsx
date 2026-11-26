@@ -33,7 +33,7 @@ export const Header = () => {
                 { name: 'SAP AMS Support', path: '/sap-ams-support' },
                 { name: 'Custom App Development', path: '/custom-application-development' },
                 { name: 'Website Development', path: '/website-development' },
-                { name: 'Custom Ecommerce', path: '/custom-commerce-development' },
+                { name: 'Custom Ecommerce Development', path: '/custom-commerce-development' },
                 { name: 'AI-Powered Business Systems', path: '/services/ai-powered-business-systems' },
                 { name: 'Commerce Enablement', path: '/commerce-enablement' },
                 { name: 'Digital Marketing', path: '/digital-marketing' },
@@ -78,13 +78,14 @@ export const Header = () => {
                         {navLinks.map((link) => (
                             <div key={link.name} className="relative group">
                                 {link.subLinks ? (
-                                    <span
-                                        className={`flex items-center gap-1 text-sm font-semibold transition-colors cursor-pointer ${isNavLinkActive(link) ? 'text-brand-navy' : 'text-slate-600 hover:text-brand-navy'
+                                    <Link
+                                        href={link.path}
+                                        className={`flex items-center gap-1 text-sm font-semibold transition-colors ${isNavLinkActive(link) ? 'text-brand-navy' : 'text-slate-600 hover:text-brand-navy'
                                             }`}
                                     >
                                         {link.name}
                                         <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
-                                    </span>
+                                    </Link>
                                 ) : (
                                     <Link
                                         href={link.path}

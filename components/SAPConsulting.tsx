@@ -5,6 +5,7 @@ import { Activity, ArrowRight, ChevronDown, Sliders, Users } from 'lucide-react'
 import { SAPAModelSections } from "@/components/SAPAModelSections";
 import { ServiceMediaPanel } from "@/components/ServiceMediaPanel";
 import { sapAmsFaq, type FaqItem } from "@/lib/faqs";
+import { trackCtaClick } from "@/lib/analytics";
 
 const sapSupportCoverage = [
   "S/4HANA On-Premise",
@@ -45,7 +46,7 @@ export const SAPConsulting = ({ faqs = sapAmsFaq }: { faqs?: FaqItem[] }) => {
                 transition={{ delay: 0.2 }}
                 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-[1.12] mb-6 tracking-tight font-display"
               >
-                SAP AMS Support Services
+                SAP AMS Support in Chennai &amp; India
               </motion.h1>
 
               <motion.p
@@ -54,7 +55,7 @@ export const SAPConsulting = ({ faqs = sapAmsFaq }: { faqs?: FaqItem[] }) => {
                 transition={{ delay: 0.3 }}
                 className="text-lg text-slate-600 mb-10 leading-relaxed font-medium"
               >
-                SoftClinch provides SLA-based SAP AMS support for S/4HANA and ECC from its Chennai team. We handle incident management, enhancements and continuous improvement for businesses across India that need dependable SAP application support without building a large in-house team.
+                SoftClinch provides SLA-based SAP AMS support for S/4HANA and ECC from its Chennai engineering team. We handle incident management, functional enhancements, and continuous optimization for mid-size enterprises across India and globally.
               </motion.p>
 
               <motion.div
@@ -65,16 +66,18 @@ export const SAPConsulting = ({ faqs = sapAmsFaq }: { faqs?: FaqItem[] }) => {
               >
                 <Link
                   href="/contact"
+                  onClick={() => trackCtaClick("Connect with AMS Head", "sap_ams_hero")}
                   className="inline-flex items-center gap-2 rounded-2xl bg-brand-navy px-8 py-4 font-bold text-white shadow-lg shadow-brand-navy/20 transition hover:bg-[#07192F] hover:shadow-xl hover:-translate-y-0.5"
                 >
                   Connect with AMS Head
                   <ArrowRight className="h-5 w-5" />
                 </Link>
                 <a
-                  href="mailto:venkat@softclinch.com?subject=SAP%20AMS%20Support%20Request"
+                  href="mailto:venkat@softclinch.com?subject=SAP%20AMS%20Director%20Inquiry"
+                  onClick={() => trackCtaClick("Contact SAP Director", "sap_ams_hero_director")}
                   className="inline-flex items-center gap-2 rounded-2xl border border-brand-terracotta bg-white px-8 py-4 font-bold text-brand-terracotta transition hover:bg-brand-terracotta/5 hover:-translate-y-0.5"
                 >
-                  Email Support Team
+                  Contact SAP Director
                 </a>
               </motion.div>
             </div>
@@ -88,7 +91,7 @@ export const SAPConsulting = ({ faqs = sapAmsFaq }: { faqs?: FaqItem[] }) => {
               {/* Floating tech badges */}
               <div className="bg-white/95 backdrop-blur-md border border-slate-200/80 px-4 py-2.5 rounded-2xl shadow-lg flex items-center gap-2 absolute -top-5 -left-8 z-20 text-xs font-bold text-brand-navy">
                 <Sliders className="w-4.5 h-4.5 text-brand-terracotta animate-spin" style={{ animationDuration: '6s' }} />
-                <span>99.9% Uptime SLA</span>
+                <span>{"{{ENTERPRISE_SYSTEM_UPTIME_SLA}} Uptime SLA"}</span>
               </div>
 
               <div className="bg-brand-terracotta border border-brand-terracotta px-4 py-2.5 rounded-2xl shadow-lg flex items-center gap-2 absolute -bottom-5 -right-8 z-20 text-xs font-bold text-white">
@@ -149,6 +152,53 @@ export const SAPConsulting = ({ faqs = sapAmsFaq }: { faqs?: FaqItem[] }) => {
 
       <SAPAModelSections />
 
+      {/* Case Study Proof Section */}
+      <section className="py-20 bg-white border-t border-slate-200/80">
+        <div className="max-w-[1200px] mx-auto px-6 sm:px-8">
+          <div className="text-center mb-12">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-brand-navy/5 text-brand-navy text-xs font-bold uppercase tracking-widest mb-3">
+              Proven Delivery
+            </span>
+            <h2 className="text-3xl font-display font-bold text-slate-900">
+              Enterprise SAP AMS Case Study
+            </h2>
+          </div>
+          <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 sm:p-12 max-w-4xl mx-auto shadow-sm">
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-200">
+              <div>
+                <span className="text-xs uppercase tracking-wider text-slate-500 font-bold block mb-1">Industry</span>
+                <span className="text-lg font-bold text-brand-navy">{"{{CASE_STUDY_CLIENT_INDUSTRY}}"}</span>
+              </div>
+              <div>
+                <span className="text-xs uppercase tracking-wider text-slate-500 font-bold block mb-1">Scope</span>
+                <span className="text-base font-semibold text-slate-700">{"{{CASE_STUDY_ERP_SCOPE}}"}</span>
+              </div>
+              <div>
+                <span className="text-xs uppercase tracking-wider text-slate-500 font-bold block mb-1">Uptime SLA</span>
+                <span className="text-lg font-bold text-emerald-600">{"{{CASE_STUDY_RESULT}}"}</span>
+              </div>
+            </div>
+            <p className="text-slate-600 text-sm leading-relaxed mb-6">
+              {"{{CASE_STUDY_SUMMARY}}"}
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+              <div className="bg-white p-4 rounded-xl border border-slate-200/80">
+                <div className="text-2xl font-bold text-brand-navy mb-1">{"{{CASE_STUDY_METRIC_1}}"}</div>
+                <div className="text-xs text-slate-500">Incident Resolution Time</div>
+              </div>
+              <div className="bg-white p-4 rounded-xl border border-slate-200/80">
+                <div className="text-2xl font-bold text-brand-navy mb-1">{"{{CASE_STUDY_METRIC_2}}"}</div>
+                <div className="text-xs text-slate-500">System Availability SLA</div>
+              </div>
+              <div className="bg-white p-4 rounded-xl border border-slate-200/80">
+                <div className="text-2xl font-bold text-brand-navy mb-1">{"{{CASE_STUDY_METRIC_3}}"}</div>
+                <div className="text-xs text-slate-500">User Ticket Backlog</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Frequently Asked Questions Section */}
       <section className="py-24 bg-slate-50 border-t border-slate-200/80">
         <div className="max-w-[1200px] mx-auto px-6 sm:px-8">
@@ -182,6 +232,34 @@ export const SAPConsulting = ({ faqs = sapAmsFaq }: { faqs?: FaqItem[] }) => {
                 </div>
               </details>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Bottom CTA Banner */}
+      <section className="py-20 bg-brand-navy text-white text-center">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-3xl sm:text-4xl font-display font-bold mb-4">
+            Need SLA-Backed SAP AMS Support?
+          </h2>
+          <p className="text-slate-300 text-lg mb-8 max-w-2xl mx-auto">
+            Get in touch with our AMS engineering leads in Chennai to schedule a landscape review and support assessment.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Link
+              href="/contact"
+              onClick={() => trackCtaClick("Connect with AMS Head", "sap_ams_bottom_cta")}
+              className="px-8 py-4 rounded-full bg-brand-terracotta text-white font-bold text-base hover:bg-white hover:text-brand-navy transition-all shadow-lg"
+            >
+              Connect with AMS Head
+            </Link>
+            <a
+              href="mailto:venkat@softclinch.com?subject=SAP%20AMS%20Director%20Inquiry"
+              onClick={() => trackCtaClick("Contact SAP Director", "sap_ams_bottom_director")}
+              className="px-8 py-4 rounded-full bg-white/10 text-white font-bold text-base hover:bg-white/20 transition-all border border-white/20"
+            >
+              Contact SAP Director
+            </a>
           </div>
         </div>
       </section>

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, ChevronDown, MapPin, MessageSquareText, Sparkles } from "lucide-react";
 import { assetPath } from "@/lib/asset";
+import { trackCtaClick, trackWhatsAppClick } from "@/lib/analytics";
 
 const solutions = [
   {
@@ -124,6 +125,7 @@ function ButtonPrimary({ children, href = "/contact", className = "" }: { childr
   return (
     <Link
       href={href}
+      onClick={() => trackCtaClick(typeof children === 'string' ? children : 'Consultation', 'custom_commerce_page')}
       className={`inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-bold text-white transition hover:bg-blue-700 ${className}`}
     >
       {children}
@@ -138,6 +140,7 @@ function ButtonSecondary({ children, href = "https://wa.me/919445679878", classN
       href={href}
       target="_blank"
       rel="noreferrer"
+      onClick={() => trackWhatsAppClick('custom_commerce_page')}
       className={`inline-flex items-center justify-center gap-2 rounded-xl border border-blue-200 bg-white px-6 py-3.5 text-sm font-bold text-blue-700 transition hover:bg-blue-50 ${className}`}
     >
       <MessageSquareText className="h-4 w-4" />
@@ -166,7 +169,7 @@ export function CustomCommerceLanding() {
           <div className="max-w-xl">
             <SectionBadge>CUSTOM COMMERCE ENGINEERING</SectionBadge>
             <h1 className="mt-6 text-4xl font-black leading-[1.08] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
-              Custom eCommerce Development Services
+              Custom eCommerce Development in Chennai &amp; India
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-slate-600 sm:text-xl font-bold text-brand-navy">
               Your eCommerce Business Has Grown. Has Your Technology?

@@ -30,11 +30,12 @@ import {
   Utensils,
   Wrench,
   Zap,
+  type LucideIcon,
 } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 import { siteConfig } from "@/lib/siteConfig";
 import type { FaqItem } from "@/lib/faqs";
 import { GoogleReviews } from "@/components/GoogleReviews";
+import { trackCtaClick, trackWhatsAppClick } from "@/lib/analytics";
 
 interface WebsiteDevelopmentProps {
   faqs: FaqItem[];
@@ -137,7 +138,7 @@ export function WebsiteDevelopment({ faqs }: WebsiteDevelopmentProps) {
       category: "Corporate Business Website",
       description:
         "Lead-generation corporate website with comprehensive product specifications, catalog downloads, and WhatsApp inquiry routing.",
-      stats: "3.2x inquiry growth",
+      stats: "{{CASE_STUDY_INQUIRY_GROWTH}}",
       tags: ["Next.js", "SEO", "WhatsApp Integration"],
     },
     {
@@ -145,7 +146,7 @@ export function WebsiteDevelopment({ faqs }: WebsiteDevelopmentProps) {
       category: "WooCommerce E-Commerce",
       description:
         "High-volume fashion e-commerce storefront with customized filter navigation, Razorpay payment gateway, and automated order updates.",
-      stats: "48% higher checkout completion",
+      stats: "{{CASE_STUDY_CHECKOUT_COMPLETION}}",
       tags: ["WooCommerce", "Razorpay", "Mobile-First"],
     },
     {
@@ -153,7 +154,7 @@ export function WebsiteDevelopment({ faqs }: WebsiteDevelopmentProps) {
       category: "Medical & Service Booking",
       description:
         "Clean, reassuring digital presence with doctor profiles, appointment booking integration, and local SEO optimization.",
-      stats: "Top 3 Google local rankings",
+      stats: "{{CASE_STUDY_LOCAL_RANKINGS}}",
       tags: ["Local SEO", "Booking System", "Fast Loading"],
     },
     {
@@ -161,7 +162,7 @@ export function WebsiteDevelopment({ faqs }: WebsiteDevelopmentProps) {
       category: "Global Export & Catalog",
       description:
         "Multilingual global B2B portal serving buyers across Asia and Europe with interactive product demos and quotation flows.",
-      stats: "100% Core Web Vitals score",
+      stats: "{{CASE_STUDY_CWV_SCORE}}",
       tags: ["Enterprise UI", "B2B Catalog", "Global CDN"],
     },
   ];
@@ -233,9 +234,9 @@ export function WebsiteDevelopment({ faqs }: WebsiteDevelopmentProps) {
               transition={{ duration: 0.6, delay: 0.08 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white tracking-tight leading-[1.12] mb-6"
             >
-              Website Development Company{" "}
+              Website Development in{" "}
               <span className="bg-gradient-to-r from-orange-200 via-orange-300 to-amber-100 bg-clip-text text-transparent">
-                for Growing Businesses
+                Chennai &amp; India
               </span>
             </motion.h1>
 
@@ -258,19 +259,21 @@ export function WebsiteDevelopment({ faqs }: WebsiteDevelopmentProps) {
                 href={whatsappHeroUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackWhatsAppClick("website_dev_hero")}
                 className="inline-flex items-center justify-center gap-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-900/30 transition-all duration-300 text-base"
               >
                 <MessageSquare className="w-5 h-5 fill-current" />
                 Chat on WhatsApp
               </a>
 
-              <a
-                href="#portfolio"
+              <Link
+                href="/contact"
+                onClick={() => trackCtaClick("Request Website Quote", "website_dev_hero")}
                 className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 text-white border border-white/20 font-semibold px-8 py-4 rounded-xl transition-all duration-300 text-base"
               >
-                View our work
+                Request Quote
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </Link>
             </motion.div>
 
             <motion.div
