@@ -2,7 +2,7 @@ import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { BlogDetail } from "@/components/BlogDetail";
 import { buildMetadata } from "@/lib/seo";
 import { blogPosts } from "@/lib/blog";
-import { breadcrumbJsonLd } from "@/lib/schema";
+import { breadcrumbJsonLd, blogPostingJsonLd } from "@/lib/schema";
 import { SITE_NAME, getSiteUrl } from "@/lib/site";
 
 interface BlogPostPageProps {
@@ -57,45 +57,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     ? post.image
     : `${siteUrl}${post.image.startsWith("/") ? post.image : `/${post.image}`}`;
 
-  const isNamedPerson =
-    Boolean(post.author) &&
-    post.author !== "SoftClinch" &&
-    post.author !== "SoftClinch Consulting Services" &&
-    post.author !== SITE_NAME;
-
-  const authorSchema = isNamedPerson
-    ? {
-        "@type": "Person",
-        name: post.author,
-        url: `${siteUrl}/about/`,
-      }
-    : {
-        "@id": "https://softclinch.com/#organization",
-      };
-
   return (
     <>
       <SeoJsonLd
         data={[
-          {
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            headline: post.title,
+          blogPostingJsonLd({
+            title: post.title,
             description: post.metaDescription,
+            url: blogUrl,
             image: postImage,
             datePublished: post.publishedDate,
             dateModified: post.dateModified || post.publishedDate,
-            author: authorSchema,
-            publisher: {
-              "@id": "https://softclinch.com/#organization",
-            },
-            mainEntityOfPage: {
-              "@type": "WebPage",
-              "@id": blogUrl,
-            },
-            keywords: post.keywords.join(", "),
-            url: blogUrl,
-          },
+            author: "SoftClinch Enterprise Architecture Team",
+          }),
           breadcrumbJsonLd([
             { name: "Home", path: "/" },
             { name: "Blog", path: "/blog" },

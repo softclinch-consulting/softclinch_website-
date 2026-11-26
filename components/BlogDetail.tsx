@@ -5,11 +5,53 @@ import { Breadcrumbs } from './Breadcrumbs';
 import { SocialShare } from './SocialShare';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Calendar, Clock, User, ArrowRight, BookOpen, Sparkles, MessageCircle } from 'lucide-react';
+import { Calendar, Clock, User, ArrowRight, BookOpen, Sparkles, MessageCircle, CheckCircle2 } from 'lucide-react';
+import { trackCtaClick, trackWhatsAppClick } from '@/lib/analytics';
 
 interface BlogDetailProps {
   slug: string;
 }
+
+const RELATED_SERVICES: Record<
+  BlogPost['category'],
+  { title: string; desc: string; link: string; ctaText: string; bullets: string[] }
+> = {
+  'SAP': {
+    title: 'Enterprise SAP S/4HANA & 24/7 AMS Support',
+    desc: 'Keep your mission-critical ERP running with guaranteed incident SLAs, proactive BASIS monitoring, and dedicated functional leads in Chennai.',
+    link: '/sap-ams-support/',
+    ctaText: 'Explore SAP AMS Support',
+    bullets: ['Guaranteed incident response SLAs', 'Full FICO, MM, SD, PP, ABAP coverage', 'Zero-downtime cutover transitions'],
+  },
+  'Digital Marketing': {
+    title: 'Digital Marketing & AI Search (AEO) Optimization',
+    desc: 'Scale high-intent organic leads with technical SEO, Google AI Overviews optimization, and data-driven B2B acquisition funnels.',
+    link: '/digital-marketing/',
+    ctaText: 'Explore Digital Marketing',
+    bullets: ['AI Search & Answer Engine Optimization', 'Transparent monthly lead reporting', 'Multi-channel acquisition funnels'],
+  },
+  'Custom Development': {
+    title: 'Custom Application & Enterprise Software Development',
+    desc: 'Build scalable web platforms, internal workflow automation systems, and high-performance custom software tailored to your workflows.',
+    link: '/custom-application-development/',
+    ctaText: 'Explore Custom App Dev',
+    bullets: ['Tailored to exact enterprise processes', 'Modern Next.js, Node & Cloud stacks', 'Full ownership with zero recurring seat fees'],
+  },
+  'WhatsApp Automation': {
+    title: 'Inaiwazhi WhatsApp Business Automation Platform',
+    desc: 'Automate sales lead capture, instant customer support routing, and broadcast notifications with official WhatsApp Business API.',
+    link: '/inaiwazhi-whatsapp-automation/',
+    ctaText: 'Explore Inaiwazhi Platform',
+    bullets: ['Automated multi-agent shared inbox', 'Instant CRM & payment integration', 'Verified WhatsApp Business API green tick'],
+  },
+  'AI & Customer Experience': {
+    title: 'Agentic AI Systems & Customer Experience Automation',
+    desc: 'Deploy intelligent autonomous agents and AI knowledge bases connected directly to your enterprise database and CRM.',
+    link: '/services/ai-powered-business-systems/',
+    ctaText: 'Explore AI Business Systems',
+    bullets: ['RAG-based enterprise knowledge assistants', 'Autonomous agent multi-step actions', 'Seamless human escalation protocols'],
+  },
+};
 
 export const BlogDetail = ({ slug }: BlogDetailProps) => {
   const post = blogPosts.find(p => p.slug === slug);
@@ -187,8 +229,59 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
             >
               <div dangerouslySetInnerHTML={{ __html: parseMarkdownToHtml(post.content) }} />
 
+              {/* Related Service CTA Box */}
+              {RELATED_SERVICES[post.category] && (() => {
+                const related = RELATED_SERVICES[post.category];
+                return (
+                  <div className="mt-12 not-prose rounded-3xl border border-brand-navy/20 bg-slate-50 p-6 sm:p-8 shadow-sm">
+                    <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                      <span className="text-xs uppercase font-bold tracking-widest text-brand-blue">
+                        Related Service & Solution
+                      </span>
+                      <span className="text-xs font-semibold text-slate-500">
+                        Ashok Nagar, Chennai Delivery
+                      </span>
+                    </div>
+                    <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2">
+                      {related.title}
+                    </h3>
+                    <p className="text-sm text-slate-600 mb-4 leading-relaxed">
+                      {related.desc}
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-6">
+                      {related.bullets.map((b, idx) => (
+                        <div key={idx} className="flex items-center gap-2 text-xs text-slate-700 bg-white rounded-lg p-2.5 border border-slate-200">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                          <span>{b}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="flex flex-wrap items-center gap-3">
+                      <Link
+                        href={related.link}
+                        onClick={() => trackCtaClick(related.ctaText, "blog_related_service_cta")}
+                        className="inline-flex items-center gap-2 rounded-xl bg-brand-navy hover:bg-slate-800 text-white px-5 py-2.5 text-xs sm:text-sm font-semibold transition"
+                      >
+                        <span>{related.ctaText}</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                      <a
+                        href={`https://wa.me/919445679878?text=Hi%20SoftClinch%2C%20I%20read%20your%20article%20on%20${encodeURIComponent(post.title)}%20and%20would%20like%20to%20discuss%20${encodeURIComponent(related.title)}.`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => trackWhatsAppClick({ cta_location: "blog_related_service_whatsapp" })}
+                        className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-slate-800 px-4 py-2.5 text-xs sm:text-sm font-semibold transition"
+                      >
+                        <MessageCircle className="w-4 h-4 text-emerald-600" />
+                        <span>Chat on WhatsApp</span>
+                      </a>
+                    </div>
+                  </div>
+                );
+              })()}
+
               {/* In-Article Conversion Card */}
-              <div className="mt-14 not-prose p-8 rounded-3xl bg-gradient-to-br from-slate-900 via-brand-navy to-slate-950 text-white shadow-2xl border border-white/10">
+              <div className="mt-12 not-prose p-8 rounded-3xl bg-gradient-to-br from-slate-900 via-brand-navy to-slate-950 text-white shadow-2xl border border-white/10">
                 <span className="inline-block px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold uppercase tracking-wider mb-3">
                   Free Technology Consultation
                 </span>
@@ -196,13 +289,14 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
                   Ready to Implement This in Your Business?
                 </h3>
                 <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-6 max-w-2xl">
-                  Connect directly with our engineering team at SoftClinch. We evaluate your existing setup, architect the right solution, and ensure seamless delivery with guaranteed business ROI.
+                  Connect directly with our engineering team at SoftClinch in Chennai. We evaluate your existing setup, architect the right solution, and ensure seamless delivery with guaranteed business ROI.
                 </p>
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                   <a
                     href={`https://wa.me/919445679878?text=Hi%20SoftClinch%2C%20I%20read%20your%20article%20on%20${encodeURIComponent(post.title)}%20and%20would%20like%20to%20discuss%20a%20requirement.`}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackWhatsAppClick({ cta_location: "blog_in_article_whatsapp" })}
                     className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold px-6 py-3.5 rounded-full text-sm shadow-lg transition-transform hover:scale-105 active:scale-95"
                   >
                     <MessageCircle size={18} />
@@ -210,6 +304,7 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
                   </a>
                   <Link
                     href="/contact"
+                    onClick={() => trackCtaClick("Request Discovery Call", "blog_in_article_cta")}
                     className="inline-flex items-center justify-center gap-2 bg-white text-brand-navy hover:bg-slate-100 font-bold px-6 py-3.5 rounded-full text-sm shadow-lg transition-transform hover:scale-105 active:scale-95"
                   >
                     <span>Request Discovery Call</span>
@@ -228,16 +323,16 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
               <div className="bg-white border border-slate-200/80 rounded-2xl p-6 shadow-sm">
                 <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 pb-2 border-b border-slate-100">About the Author</h3>
                 <div className="flex items-center gap-3.5 mb-4">
-                  <div className="w-12 h-12 rounded-full bg-slate-950 text-white flex items-center justify-center font-bold text-sm shadow-inner">
-                    {getInitials(post.author)}
+                  <div className="w-12 h-12 rounded-full bg-brand-navy text-white flex items-center justify-center font-bold text-sm shadow-inner">
+                    SE
                   </div>
                   <div>
-                    <div className="text-sm font-bold text-slate-900">{post.author}</div>
-                    <div className="text-[10px] text-slate-500 uppercase tracking-wider">Expert Writer</div>
+                    <div className="text-sm font-bold text-slate-900">SoftClinch Enterprise Architecture Team</div>
+                    <div className="text-[10px] text-slate-500 uppercase tracking-wider">Enterprise Systems &amp; Solutions</div>
                   </div>
                 </div>
                 <p className="text-slate-600 text-sm leading-relaxed">
-                  {post.author} is a senior engineering contributor and technology consultant at SoftClinch, focusing on {post.category.toLowerCase()} implementations.
+                  The SoftClinch Enterprise Architecture Team comprises certified SAP specialists, senior software engineers, and digital transformation consultants based in Ashok Nagar, Chennai, Tamil Nadu.
                 </p>
               </div>
 
@@ -259,6 +354,7 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
                     href={`https://wa.me/919445679878?text=Hi%20SoftClinch%2C%20I%20would%20like%20to%20discuss%20a%20requirement.`}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackWhatsAppClick({ cta_location: "blog_sidebar_whatsapp" })}
                     className="w-full bg-[#25D366] hover:bg-[#20ba59] text-white py-3 px-4 rounded-xl text-center text-xs font-bold flex items-center justify-center gap-1.5 transition-colors shadow-md"
                   >
                     <MessageCircle size={15} />
@@ -266,6 +362,7 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
                   </a>
                   <Link
                     href="/contact"
+                    onClick={() => trackCtaClick("Schedule Consultation", "blog_sidebar_cta")}
                     className="w-full bg-white text-brand-navy py-3 px-4 rounded-xl text-center text-xs font-bold block hover:bg-slate-100 transition-colors shadow-md"
                   >
                     Schedule Consultation
@@ -291,6 +388,7 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
               <Link
                 key={relatedPost.id}
                 href={`/blog/${relatedPost.slug}`}
+                onClick={() => trackCtaClick(relatedPost.title, "blog_related_articles_card")}
                 className="group"
               >
                 <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-brand-navy/30 hover:shadow-xl transition-all duration-300 h-full flex flex-col">

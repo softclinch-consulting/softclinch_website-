@@ -3,7 +3,8 @@ import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { blogPosts, BlogPost } from '@/lib/blog';
-import { ArrowRight, Calendar, Clock, Search, X, Sparkles, MessageCircle, BookOpen } from 'lucide-react';
+import { ArrowRight, Calendar, Clock, Search, X, Sparkles, MessageCircle, BookOpen, ChevronLeft, ChevronRight } from 'lucide-react';
+import { trackCtaClick, trackWhatsAppClick } from '@/lib/analytics';
 
 type BlogCategory = 'SAP' | 'Digital Marketing' | 'Custom Development' | 'WhatsApp Automation' | 'AI & Customer Experience' | 'All';
 
@@ -53,13 +54,34 @@ export const Blog = () => {
     });
   }, [selectedCategory, searchQuery]);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const POSTS_PER_PAGE = 6;
+
   const isDefaultView = selectedCategory === 'All' && !searchQuery.trim();
   const featuredPost: BlogPost | null = isDefaultView && filteredPosts.length > 0 ? filteredPosts[0] : null;
   const displayPosts: BlogPost[] = isDefaultView ? filteredPosts.slice(1) : filteredPosts;
 
+  const totalPages = Math.max(1, Math.ceil(displayPosts.length / POSTS_PER_PAGE));
+  const currentPageValidated = Math.min(Math.max(1, currentPage), totalPages);
+  const paginatedPosts = displayPosts.slice(
+    (currentPageValidated - 1) * POSTS_PER_PAGE,
+    currentPageValidated * POSTS_PER_PAGE
+  );
+
+  const handleCategorySelect = (category: BlogCategory) => {
+    setSelectedCategory(category);
+    setCurrentPage(1);
+  };
+
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query);
+    setCurrentPage(1);
+  };
+
   const handleClearFilters = () => {
     setSelectedCategory('All');
     setSearchQuery('');
+    setCurrentPage(1);
   };
 
   return (
@@ -86,14 +108,14 @@ export const Blog = () => {
               <input
                 type="text"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => handleSearchChange(e.target.value)}
                 placeholder="Search topics (e.g. Google AI, SAP, WhatsApp, Leads, CRM)..."
                 className="w-full pl-12 pr-12 py-3.5 bg-white border border-slate-200 rounded-full text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-navy focus:border-brand-navy shadow-sm transition-all"
               />
               {searchQuery && (
                 <button
                   type="button"
-                  onClick={() => setSearchQuery('')}
+                  onClick={() => handleSearchChange('')}
                   aria-label="Clear search query"
                   className="absolute right-4 text-slate-400 hover:text-slate-600 transition-colors"
                 >
@@ -112,7 +134,7 @@ export const Blog = () => {
             return (
               <motion.button
                 key={category}
-                onClick={() => setSelectedCategory(category)}
+                onClick={() => handleCategorySelect(category)}
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.96 }}
                 className={`flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 ${
@@ -236,67 +258,125 @@ export const Blog = () => {
         )}
 
         {/* Blog Grid */}
-        {displayPosts.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {displayPosts.map((post, index) => (
-              <motion.article
-                key={post.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: (index % 6) * 0.08 }}
-                viewport={{ once: true }}
-                className="group h-full flex flex-col bg-white border border-slate-200/90 rounded-2xl overflow-hidden hover:border-brand-navy/40 hover:shadow-xl transition-all duration-300"
-              >
-                {/* Image */}
-                <div className="relative h-56 overflow-hidden bg-slate-100">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold shadow-sm border ${categoryColors[post.category] || 'bg-white text-slate-800'}`}>
-                      {post.category}
-                    </span>
+        {paginatedPosts.length > 0 ? (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {paginatedPosts.map((post, index) => (
+                <motion.article
+                  key={post.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: (index % 6) * 0.08 }}
+                  viewport={{ once: true }}
+                  className="group h-full flex flex-col bg-white border border-slate-200/90 rounded-2xl overflow-hidden hover:border-brand-navy/40 hover:shadow-xl transition-all duration-300"
+                >
+                  {/* Image */}
+                  <div className="relative h-56 overflow-hidden bg-slate-100">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold shadow-sm border ${categoryColors[post.category] || 'bg-white text-slate-800'}`}>
+                        {post.category}
+                      </span>
+                    </div>
                   </div>
-                </div>
 
-                {/* Content */}
-                <div className="p-7 flex flex-col flex-grow">
-                  <h3 className="text-lg sm:text-xl font-display font-bold text-slate-900 mb-3 group-hover:text-brand-navy transition-colors line-clamp-2">
-                    <Link href={`/blog/${post.slug}`}>
-                      {post.title}
+                  {/* Content */}
+                  <div className="p-7 flex flex-col flex-grow">
+                    <h3 className="text-lg sm:text-xl font-display font-bold text-slate-900 mb-3 group-hover:text-brand-navy transition-colors line-clamp-2">
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        onClick={() => trackCtaClick(post.title, "blog_index_title_link")}
+                      >
+                        {post.title}
+                      </Link>
+                    </h3>
+
+                    <p className="text-slate-600 text-sm leading-relaxed mb-6 flex-grow line-clamp-2">
+                      {post.excerpt}
+                    </p>
+
+                    {/* Meta Info */}
+                    <div className="flex items-center gap-4 text-xs text-slate-500 mb-6 pb-6 border-t border-slate-100 pt-6">
+                      <div className="flex items-center gap-1">
+                        <Calendar size={14} />
+                        <span>{new Date(post.publishedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Clock size={14} />
+                        <span>{post.readTime} min read</span>
+                      </div>
+                    </div>
+
+                    {/* CTA */}
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      onClick={() => trackCtaClick(post.title, "blog_index_read_article")}
+                      className="inline-flex items-center gap-2 text-brand-navy font-semibold text-sm group/link hover:gap-3 transition-all"
+                    >
+                      Read Article
+                      <ArrowRight size={16} className="group-hover/link:translate-x-1 transition-transform" />
                     </Link>
-                  </h3>
+                  </div>
+                </motion.article>
+              ))}
+            </div>
 
-                  <p className="text-slate-600 text-sm leading-relaxed mb-6 flex-grow line-clamp-2">
-                    {post.excerpt}
-                  </p>
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div className="mt-14 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200 pt-8">
+                <p className="text-xs text-slate-500">
+                  Showing <span className="font-semibold text-slate-800">{(currentPageValidated - 1) * POSTS_PER_PAGE + 1}</span> to{" "}
+                  <span className="font-semibold text-slate-800">
+                    {Math.min(currentPageValidated * POSTS_PER_PAGE, displayPosts.length)}
+                  </span>{" "}
+                  of <span className="font-semibold text-slate-800">{displayPosts.length}</span> articles
+                </p>
 
-                  {/* Meta Info */}
-                  <div className="flex items-center gap-4 text-xs text-slate-500 mb-6 pb-6 border-t border-slate-100 pt-6">
-                    <div className="flex items-center gap-1">
-                      <Calendar size={14} />
-                      <span>{new Date(post.publishedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Clock size={14} />
-                      <span>{post.readTime} min read</span>
-                    </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    disabled={currentPageValidated === 1}
+                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                    className="inline-flex items-center gap-1 px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition"
+                  >
+                    <ChevronLeft size={16} />
+                    <span>Previous</span>
+                  </button>
+
+                  <div className="flex items-center gap-1">
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                      <button
+                        key={page}
+                        type="button"
+                        onClick={() => setCurrentPage(page)}
+                        className={`w-9 h-9 rounded-xl text-xs font-semibold transition ${
+                          page === currentPageValidated
+                            ? "bg-brand-navy text-white shadow-sm"
+                            : "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                        }`}
+                      >
+                        {page}
+                      </button>
+                    ))}
                   </div>
 
-                  {/* CTA */}
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="inline-flex items-center gap-2 text-brand-navy font-semibold text-sm group/link hover:gap-3 transition-all"
+                  <button
+                    type="button"
+                    disabled={currentPageValidated === totalPages}
+                    onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                    className="inline-flex items-center gap-1 px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition"
                   >
-                    Read Article
-                    <ArrowRight size={16} className="group-hover/link:translate-x-1 transition-transform" />
-                  </Link>
+                    <span>Next</span>
+                    <ChevronRight size={16} />
+                  </button>
                 </div>
-              </motion.article>
-            ))}
-          </div>
+              </div>
+            )}
+          </>
         ) : (
           <div className="text-center py-20 bg-white rounded-3xl border border-slate-200 shadow-sm max-w-xl mx-auto px-6">
             <div className="w-14 h-14 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -333,6 +413,7 @@ export const Blog = () => {
                 href="https://wa.me/919445679878?text=Hi%20SoftClinch%2C%20I%20would%20like%20to%20discuss%20our%20website%20and%20AI%20strategy."
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackWhatsAppClick({ cta_location: "blog_index_bottom_whatsapp" })}
                 className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold px-7 py-3.5 rounded-full text-sm shadow-lg transition-transform hover:scale-105 active:scale-95"
               >
                 <MessageCircle size={18} />
@@ -340,6 +421,7 @@ export const Blog = () => {
               </a>
               <Link
                 href="/contact"
+                onClick={() => trackCtaClick("Request Technical Audit", "blog_index_bottom_cta")}
                 className="inline-flex items-center justify-center gap-2 bg-white text-brand-navy hover:bg-slate-100 font-bold px-7 py-3.5 rounded-full text-sm shadow-lg transition-transform hover:scale-105 active:scale-95"
               >
                 <span>Request Technical Audit</span>

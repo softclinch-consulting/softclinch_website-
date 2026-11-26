@@ -15,7 +15,7 @@ export interface BlogPost {
   keywords: string[];
 }
 
-export const blogPosts: BlogPost[] = [
+const RAW_BLOG_POSTS: BlogPost[] = [
   {
     id: '16',
     slug: 'ai-chatbots-2027-business-automation',
@@ -3673,3 +3673,7 @@ Enterprise growth today depends on more than scale. It depends on how effectivel
 By combining automation, AI, custom applications, cloud infrastructure, and connected business systems, enterprises can improve efficiency, increase agility, and create sustainable growth.`
   },
 ];
+
+export const blogPosts: BlogPost[] = RAW_BLOG_POSTS.slice().sort(
+  (a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime()
+);
